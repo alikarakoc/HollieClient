@@ -1,0 +1,1 @@
+export { RoomTypeComponent } from './room-type/room-type.component';

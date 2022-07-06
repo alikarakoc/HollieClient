@@ -8,11 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AllFormsModule, MaterialModule, CdkModule } from "./modules";
 
 import { NavbarComponent } from "./components";
+import { RoomTypeComponent } from "./pages";
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    RoomTypeComponent
   ],
   imports: [
     BrowserModule,
