@@ -1,26 +1,20 @@
 <div class="header">
-    <h1>Room Types</h1>
+    <h1>Countries</h1>
     <span class="spacer"></span>
-    <div *ngIf="!(isHandset$ | async); else forMobile">
-        <button mat-flat-button color="primary" class="new-button" (click)="createNewRoomType()">Add New Room
-            Type</button>
-    </div>
+    <button mat-flat-button color="primary" class="new-button" (click)="createNewCountry()">
+        Add New Country
+    </button>
 </div>
 
-<table mat-table [dataSource]="roomTypeService.rooms">
+<table mat-table [dataSource]="countryService.countries">
     <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <th mat-header-cell *matHeaderCellDef>Country Name</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
         <td mat-cell *matCellDef="let element">
-            <!-- <button class="mx-2" mat-flat-button color="accent" (click)="update(element)">Edit</button>
-            <button class="mx-2" mat-flat-button color="warn">
-                <mat-icon>delete</mat-icon>
-                Delete
-            </button> -->
             <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ element }">
                 <mat-icon>more_vert</mat-icon>
             </button>
@@ -28,14 +22,8 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr mat-row *matRowDef="let row; columns: columns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
 </table>
-
-<ng-template #forMobile>
-    <button mat-fab color="primary">
-        <mat-icon>add</mat-icon>
-    </button>
-</ng-template>
 
 <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-element="element">

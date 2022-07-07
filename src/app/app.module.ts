@@ -7,14 +7,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AllFormsModule, MaterialModule, CdkModule } from "./modules";
 
-import { NavbarComponent } from "./components";
-import { RoomTypeComponent } from "./pages";
+import { CountryAddDialogComponent, CountryUpdateDialogComponent, NavbarComponent, RoomTypeAddDialogComponent, RoomTypeUpdateDialogComponent } from "./components";
+
+// Modules
+import { CountryComponent, RoomTypeComponent } from "./pages";
+
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    RoomTypeComponent
+
+    RoomTypeComponent,
+    RoomTypeUpdateDialogComponent,
+    RoomTypeAddDialogComponent,
+
+    CountryComponent,
+    CountryAddDialogComponent,
+    CountryUpdateDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,9 +34,18 @@ import { RoomTypeComponent } from "./pages";
     BrowserAnimationsModule,
     AllFormsModule,
     MaterialModule,
-    CdkModule
+    CdkModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: { duration: 3000 }
+    },
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: "outline" }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

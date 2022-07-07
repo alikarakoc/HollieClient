@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Update Room Type</h1>
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Room Type Name" [value]="dialogData.element.name" [(ngModel)]="newType">
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" (click)="updateRoomType()">Update</button>
+    <button mat-flat-button color="warn">
+        <mat-icon>delete</mat-icon>
+        Delete
+    </button>
+    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+</div>

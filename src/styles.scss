@@ -2,6 +2,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+@import '@angular/material/theming';
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -25,15 +26,18 @@ $HollieClient-theme: mat.define-light-theme((
     primary: $HollieClient-primary,
     accent: $HollieClient-accent,
     warn: $HollieClient-warn,
-  )
+  ),
 ));
+
+$HollieClient-typography: mat-typography-config($font-family: "'Kanit', sans-serif");
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 @include mat.all-component-themes($HollieClient-theme);
+@include angular-material-typography($HollieClient-typography);
 
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; }
