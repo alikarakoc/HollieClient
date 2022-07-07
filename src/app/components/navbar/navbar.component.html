@@ -1,26 +1,3 @@
-<!-- <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [mode]="'side'" opened>
-    <mat-toolbar>Hollie</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item (click)="drawer.toggle()" href="#">Link 1</a>
-      <a mat-list-item (click)="drawer.toggle()" href="#">Link 2</a>
-      <a mat-list-item (click)="drawer.toggle()" href="#">Link 3</a>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-      <span>Hollie</span>
-      <span class="spacer"></span>
-    </mat-toolbar>
-    <div class="grid-container">
-      <ng-content></ng-content>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container> -->
-
 <mat-toolbar color="primary">
   <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
     <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
@@ -32,9 +9,9 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav class="sidenav" #drawer opened mode="side">
     <mat-nav-list>
-      <a mat-list-item (click)="drawer.toggle()" href="#">Link 1</a>
-      <a mat-list-item (click)="drawer.toggle()" href="#">Link 2</a>
-      <a mat-list-item (click)="drawer.toggle()" href="#">Link 3</a>
+      <a mat-list-item routerLink="/">Home</a>
+      <a mat-list-item routerLink="/room-types">Room Types</a>
+      <a mat-list-item routerLink="/countries">Countries</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

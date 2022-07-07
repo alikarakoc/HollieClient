@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AllFormsModule, MaterialModule, CdkModule } from "./modules";
 
-import { CountryAddDialogComponent, CountryUpdateDialogComponent, NavbarComponent, RoomTypeAddDialogComponent, RoomTypeUpdateDialogComponent } from "./components";
+import { CountryAddDialogComponent, CountryDeleteDialogComponent, CountryUpdateDialogComponent, NavbarComponent, RoomTypeAddDialogComponent, RoomTypeDeleteDialogComponent, RoomTypeUpdateDialogComponent } from "./components";
 
 // Modules
 import { CountryComponent, RoomTypeComponent } from "./pages";
@@ -23,10 +23,12 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
     RoomTypeComponent,
     RoomTypeUpdateDialogComponent,
     RoomTypeAddDialogComponent,
+    RoomTypeDeleteDialogComponent,
 
     CountryComponent,
     CountryAddDialogComponent,
     CountryUpdateDialogComponent,
+    CountryDeleteDialogComponent
   ],
   imports: [
     BrowserModule,

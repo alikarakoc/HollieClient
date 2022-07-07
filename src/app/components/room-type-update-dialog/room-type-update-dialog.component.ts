@@ -1,11 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatTable } from "@angular/material/table";
 import { RoomType } from "src/app/interfaces";
 import { RoomTypeService } from "src/app/services";
 
 interface DialogData {
   element: RoomType;
+  table: MatTable<any>;
 }
 
 @Component({
@@ -38,6 +40,7 @@ export class RoomTypeUpdateDialogComponent implements OnInit {
     }
     this.snackBar.open(`${this.dialogData.element.name} room type successfully updated to ${this.newType}`);
     this.dialogData.element.name = this.newType;
+    this.dialogData.table.renderRows();
     this.closeDialog();
   }
 }

@@ -40,6 +40,6 @@
 <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-element="element">
         <button mat-menu-item (click)="update(element)">Edit</button>
-        <button mat-menu-item>Delete</button>
+        <button mat-menu-item (click)="delete(element)">Delete</button>
     </ng-template>
 </mat-menu>
