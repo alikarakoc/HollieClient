@@ -24,13 +24,13 @@ export class RoomTypeService {
   constructor() { }
 
   addRoomType(type: RoomType) {
-    this.rooms.push(type);
+    // this.rooms.push(type);
   }
 
   deleteRoomType(roomType: RoomType) {
     const index = this.rooms.indexOf(roomType);
     if (index > -1) {
-      this.rooms.splice(index, 1);
+      // this.rooms.splice(index, 1);
     }
   }
 }

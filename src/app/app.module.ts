@@ -5,19 +5,32 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AllFormsModule, MaterialModule, CdkModule } from "./modules";
+import { AllFormsModule, MaterialModule, CdkModule } from './modules';
 
-import { CountryAddDialogComponent, CountryDeleteDialogComponent, CountryUpdateDialogComponent, NavbarComponent, RoomTypeAddDialogComponent, RoomTypeDeleteDialogComponent, RoomTypeUpdateDialogComponent } from "./components";
+import {
+  AgencyAddDialogComponent,
+  AgencyDeleteDialogComponent,
+  AgencyUpdateDialogComponent,
+  CountryAddDialogComponent,
+  CountryDeleteDialogComponent,
+  CountryUpdateDialogComponent,
+  NavbarComponent,
+  RoomTypeAddDialogComponent,
+  RoomTypeDeleteDialogComponent,
+  RoomTypeUpdateDialogComponent,
+} from './components';
 
 // Modules
-import { CountryComponent, RoomTypeComponent } from "./pages";
+import { AgencyComponent, CountryComponent, ErrorComponent, RoomTypeComponent } from './pages';
 
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from "@angular/material/snack-bar";
-import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     NavbarComponent,
 
     RoomTypeComponent,
@@ -28,7 +41,14 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
     CountryComponent,
     CountryAddDialogComponent,
     CountryUpdateDialogComponent,
-    CountryDeleteDialogComponent
+    CountryDeleteDialogComponent,
+
+    AgencyComponent,
+    AgencyAddDialogComponent,
+    AgencyDeleteDialogComponent,
+    AgencyUpdateDialogComponent,
+
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,13 +61,13 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from "@angular/material/form-field";
   providers: [
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
-      useValue: { duration: 3000 }
+      useValue: { duration: 3000 },
     },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: "outline" }
-    }
+      useValue: { appearance: 'outline' },
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

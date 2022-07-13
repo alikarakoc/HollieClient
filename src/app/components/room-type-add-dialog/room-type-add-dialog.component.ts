@@ -34,10 +34,10 @@ export class RoomTypeAddDialogComponent implements OnInit {
       this.clearInputs();
       return;
     }
-    this.roomTypeService.addRoomType({
-      name: this.roomTypeName,
-      code: "3903232"
-    });
+    // this.roomTypeService.addRoomType({
+    //   name: this.roomTypeName,
+    //   code: "3903232"
+    // });
     this.snackBar.open(`${this.roomTypeName} successfully added to your room type table.`);
     this.closeDialog();
     this.data.table.renderRows();

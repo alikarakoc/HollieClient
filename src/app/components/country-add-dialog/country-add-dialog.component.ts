@@ -36,10 +36,10 @@ export class CountryAddDialogComponent implements OnInit {
       this.snackBar.open("Please type another country name", "OK");
       return;
     }
-    this.countryService.addNewCountry({
-      name: this.countryName,
-      code: "434"
-    });
+    // this.countryService.addNewCountry({
+    //   name: this.countryName,
+    //   code: "434"
+    // });
     this.snackBar.open(`${this.countryName} successfully added to your country table.`);
     this.closeDialog();
     this.data.table.renderRows();

@@ -1,8 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CountryComponent, RoomTypeComponent } from "./pages";
+import { AgencyComponent, CountryComponent, ErrorComponent, RoomTypeComponent } from "./pages";
+import { HomeComponent } from "./pages/home/home.component";
 
 const routes: Routes = [
+  {
+    path: "",
+    component: HomeComponent
+  },
+  {
+    path: "home",
+    redirectTo: ""
+  },
   {
     path: "room-types",
     component: RoomTypeComponent
@@ -12,8 +21,12 @@ const routes: Routes = [
     component: CountryComponent
   },
   {
+    path: "agencies",
+    component: AgencyComponent
+  },
+  {
     path: "**",
-    redirectTo: "/"
+    component: ErrorComponent
   }
 ];
 

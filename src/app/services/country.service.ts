@@ -29,13 +29,13 @@ export class CountryService {
   ];
 
   addNewCountry(country: Country) {
-    this.countries.push(country);
+    // this.countries.push(country);
   }
 
   deleteCountry(country: Country) {
     const index = this.countries.indexOf(country);
     if (index < -1) {
-      this.countries.splice(index, 1);
+      // this.countries.splice(index, 1);
     }
   }
 

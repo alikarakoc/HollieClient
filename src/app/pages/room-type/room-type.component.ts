@@ -30,7 +30,7 @@ export class RoomTypeComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private dialog: MatDialog,
     public roomTypeService: RoomTypeService
-  ) {}
+  ) { }
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -39,7 +39,7 @@ export class RoomTypeComponent implements OnInit {
       shareReplay()
     );
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   update(element: RoomType) {
     this.dialog.open(RoomTypeUpdateDialogComponent, { data: { element, table: this.table } });

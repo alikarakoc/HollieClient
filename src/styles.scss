@@ -1,4 +1,3 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
@@ -21,13 +20,11 @@ $HollieClient-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$HollieClient-theme: mat.define-light-theme((
-  color: (
-    primary: $HollieClient-primary,
-    accent: $HollieClient-accent,
-    warn: $HollieClient-warn,
-  ),
-));
+$HollieClient-theme: mat.define-light-theme((color: (primary: $HollieClient-primary,
+        accent: $HollieClient-accent,
+        warn: $HollieClient-warn,
+      ),
+    ));
 
 $HollieClient-typography: mat-typography-config($font-family: "'Kanit', sans-serif");
 
@@ -39,5 +36,44 @@ $HollieClient-typography: mat-typography-config($font-family: "'Kanit', sans-ser
 
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; }
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+table {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.new-button {
+  margin-bottom: 15px;
+}
+
+textarea {
+  resize: none !important;
+  height: 4vw;
+}
+
+mat-form-field {
+  width: 20vw;
+}
+
+::ng-deep {
+  .mat-column-actions {
+    text-align: center;
+  }
+}

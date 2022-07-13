@@ -8,6 +8,7 @@ import { RoomTypeService } from 'src/app/services';
 interface DialogData {
   element: RoomType;
   table: MatTable<any>;
+  dialogRef: MatDialogRef<any>;
 }
 
 @Component({
@@ -21,14 +22,15 @@ export class RoomTypeDeleteDialogComponent implements OnInit {
     private roomTypeService: RoomTypeService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<RoomTypeDeleteDialogComponent>
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   delete() {
     this.snackBar.open(`${this.data.element.name} successfully deleted.`);
-    this.roomTypeService.deleteRoomType(this.data.element);
+    // this.roomTypeService.deleteRoomType(this.data.element);
     this.dialogRef.close();
+    this.data.dialogRef.close();
     this.data.table.renderRows();
   }
 }
