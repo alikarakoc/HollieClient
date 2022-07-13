@@ -1,9 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  Validators
-} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
@@ -40,13 +36,6 @@ export class AgencyAddDialogComponent implements OnInit {
   agencyPhone: string;
   agencyEmail: string;
 
-  formGroup: FormGroup<FormData> = new FormGroup<FormData>({
-    name: new FormControl<string>('', [Validators.required]),
-    address: new FormControl<string>('', [Validators.required]),
-    phone: new FormControl<string>('', [Validators.required]),
-    email: new FormControl<string>('', [Validators.required, Validators.email]),
-  });
-
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
@@ -57,14 +46,18 @@ export class AgencyAddDialogComponent implements OnInit {
   ngOnInit(): void { }
 
   add() {
-    const agency: Agency = {
+    const agency = {
       name: this.agencyName,
       address: this.agencyAddress,
       phone: this.agencyPhone,
       email: this.agencyEmail,
-      code: '0',
     };
-    const condition = this.agencyService.agencies.some((a) => a === agency);
+    const predicate = (a: Agency) =>
+      a.name === agency.name &&
+      a.address === agency.address &&
+      a.phone === agency.phone &&
+      a.email === agency.email;
+    const condition = this.agencyService.agencies.some(predicate);
 
     if (
       !this.agencyName ||
@@ -93,5 +86,3 @@ export class AgencyAddDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 }
-
-/* For Telephone Input */

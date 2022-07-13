@@ -1,4 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatTable } from "@angular/material/table";
+import { Agency } from "src/app/interfaces";
+
+interface DialogData {
+  element: Agency;
+  table: MatTable<any>;
+  dialogRef: MatDialogRef<any>;
+}
 
 @Component({
   selector: 'app-agency-delete-dialog',
@@ -7,9 +17,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgencyDeleteDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private dialogRef: MatDialogRef<AgencyDeleteDialogComponent>,
+    private snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  delete() {
+    this.snackBar.open(`${this.data.element.name} successfully deleted.`);
+    this.dialogRef.close();
+    this.data.dialogRef.close();
   }
 
 }

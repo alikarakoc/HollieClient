@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from '@angular/material/table';
 import { Country } from 'src/app/interfaces';
-import { CountryUpdateDialogComponent } from '../country-update-dialog/country-update-dialog.component';
 
 interface DialogData {
   element: Country;
@@ -30,6 +29,5 @@ export class CountryDeleteDialogComponent implements OnInit {
     this.snackBar.open(`${this.data.element.name} successfully deleted.`);
     this.dialogRef.close();
     this.data.dialogRef.close();
-    console.log("closed");
   }
 }

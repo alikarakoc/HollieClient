@@ -27,9 +27,9 @@ export class CountryUpdateDialogComponent implements OnInit {
     private countryService: CountryService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   public get otherCountries(): Country[] {
     const countries = this.countryService.countries;
@@ -47,7 +47,6 @@ export class CountryUpdateDialogComponent implements OnInit {
     const condition = this.otherCountries.some(
       (c) => c.name === this.newCountryName
     );
-    console.log(this.otherCountries);
     if (!this.newCountryName) {
       this.snackBar.open('Please type the blank areas', 'OK');
       return;

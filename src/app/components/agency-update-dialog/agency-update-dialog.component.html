@@ -1,1 +1,39 @@
-<p>agency-update-dialog works!</p>
+<h1 mat-dialog-title>Update Country</h1>
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Agency Name" [(ngModel)]="newName">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label>Address</mat-label>
+        <textarea matInput placeholder="Agency Address" [(ngModel)]="newAddress"></textarea>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label>Phone</mat-label>
+        <input matInput type="tel" placeholder="Agency Phone" [(ngModel)]="newPhone">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="Agency Email" [(ngModel)]="newEmail">
+    </mat-form-field>
+</div>
+
+
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" (click)="update()">Update</button>
+    <button mat-flat-button color="warn" (click)="delete()">
+        <mat-icon>delete</mat-icon>
+        Delete
+    </button>
+    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+</div>
