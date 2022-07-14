@@ -28,20 +28,10 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  predicate = (c: HotelCategory) => c.name === this.newCategoryName;
-
-  public get otherCategories(): HotelCategory[] {
-    const categories = this.hotelCategoryService.categories;
-    const category = categories.find(this.predicate);
-    const index = categories.indexOf(category!);
-
-    return categories
-      .slice(0, index)
-      .concat(categories.slice(index + 1, categories.length));
-  }
-
+  
   update() {
-    const condition = this.otherCategories.some(this.predicate);
+    const predicate = (c: HotelCategory) => c.name === this.newCategoryName;
+    const condition = this.hotelCategoryService.categories.some(predicate);
 
     if (condition) {
       this.snackBar.open("Please type another hotel category data.", "OK");
@@ -54,7 +44,7 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       return;
     }
 
-    this.snackBar.open(`${this.data.element.name} successfully update`);
+    this.snackBar.open(`${this.data.element.name} successfully updated.`);
     this.closeDialog();
   }
 
