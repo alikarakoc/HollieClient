@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Create A New Hotel Category</h1>
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Category Name" [(ngModel)]="categoryName">
+    </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" (click)="add()">Add</button>
+    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+</div>

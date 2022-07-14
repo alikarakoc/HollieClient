@@ -5,6 +5,7 @@
 <div class="row">
     <mat-card class="col-md-4 mx-2">
         <mat-card-title>Countries</mat-card-title>
+        <mat-card-subtitle>Total Countries: {{ countryService.countries.length }}</mat-card-subtitle>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem"
@@ -20,6 +21,7 @@
     </mat-card>
     <mat-card class="col-md-3 mx-2">
         <mat-card-title>Room Types</mat-card-title>
+        <mat-card-subtitle>Total Room Types: {{ roomTypeService.rooms.length }}</mat-card-subtitle>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem" *ngFor="let item of roomTypeService.rooms | slice:0:3; let last = last;">
@@ -34,9 +36,11 @@
     </mat-card>
     <mat-card class="col-md-4 mx-2">
         <mat-card-title>Agencies</mat-card-title>
+        <mat-card-subtitle>Total Agencies: {{ agencyService.agencies.length }}</mat-card-subtitle>
         <mat-card-content>
             <mat-list role="list">
-                <mat-list-item role="listitem" *ngFor="let item of agencyService.agencies | slice:0:3; let last = last;">
+                <mat-list-item role="listitem"
+                    *ngFor="let item of agencyService.agencies | slice:0:3; let last = last;">
                     {{ item.name }}
                     <mat-divider *ngIf="!last"></mat-divider>
                 </mat-list-item>
@@ -45,5 +49,51 @@
         <mat-card-actions>
             <button mat-flat-button color="accent" routerLink="/agencies">See More...</button>
         </mat-card-actions>
+    </mat-card>
+</div>
+
+<mat-divider class="my-3"></mat-divider>
+
+<div class="row">
+    <mat-card class="col-md-4 mx-2">
+        <mat-card-content>
+            <div class="media d-flex">
+                <div class="align-self-center">
+                    <!-- <i class="icon-globe font-large-2 float-left"></i> -->
+                    <mat-icon class="icon">public</mat-icon>
+                </div>
+                <div class="media-body text-right">
+                    <mat-card-title>{{ countryService.countries.length }}</mat-card-title>
+                    <mat-card-subtitle>Countries</mat-card-subtitle>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="col-md-3 mx-2">
+        <mat-card-content>
+            <div class="media d-flex">
+                <div class="align-self-center">
+                    <!-- <i class="icon-globe font-large-2 float-left"></i> -->
+                    <mat-icon class="icon">bed</mat-icon>
+                </div>
+                <div class="media-body text-right">
+                    <mat-card-title>{{ roomTypeService.rooms.length }}</mat-card-title>
+                    <mat-card-subtitle>Room Types</mat-card-subtitle>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="col-md-4 mx-2">
+        <mat-card-content>
+            <div class="media d-flex">
+                <div class="align-self-center">
+                    <mat-icon class="icon">work</mat-icon>
+                </div>
+                <div class="media-body text-right">
+                    <mat-card-title>{{ agencyService.agencies.length }}</mat-card-title>
+                    <mat-card-subtitle>Agencies</mat-card-subtitle>
+                </div>
+            </div>
+        </mat-card-content>
     </mat-card>
 </div>

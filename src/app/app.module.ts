@@ -14,6 +14,9 @@ import {
   CountryAddDialogComponent,
   CountryDeleteDialogComponent,
   CountryUpdateDialogComponent,
+  HotelCategoryAddDialogComponent,
+  HotelCategoryDeleteDialogComponent,
+  HotelCategoryUpdateDialogComponent,
   NavbarComponent,
   RoomTypeAddDialogComponent,
   RoomTypeDeleteDialogComponent,
@@ -21,11 +24,13 @@ import {
 } from './components';
 
 // Modules
-import { AgencyComponent, CountryComponent, ErrorComponent, RoomTypeComponent } from './pages';
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent } from './pages';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { HomeComponent } from './pages/home/home.component';
+import { HotelAddDialogComponent } from "./components/hotel-add-dialog/hotel-add-dialog.component";
+import { HotelDeleteDialogComponent } from "./components/hotel-delete-dialog/hotel-delete-dialog.component";
 
 @NgModule({
   declarations: [
@@ -47,6 +52,11 @@ import { HomeComponent } from './pages/home/home.component';
     AgencyAddDialogComponent,
     AgencyDeleteDialogComponent,
     AgencyUpdateDialogComponent,
+
+    HotelCategoryComponent,
+    HotelCategoryAddDialogComponent,
+    HotelCategoryDeleteDialogComponent,
+    HotelCategoryUpdateDialogComponent,
 
     ErrorComponent,
   ],
@@ -70,4 +80,4 @@ import { HomeComponent } from './pages/home/home.component';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

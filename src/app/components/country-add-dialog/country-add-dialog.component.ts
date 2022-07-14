@@ -34,6 +34,7 @@ export class CountryAddDialogComponent implements OnInit {
     }
     if (condition) {
       this.snackBar.open("Please type another country name", "OK");
+      this.countryName = "";
       return;
     }
     // this.countryService.addNewCountry({

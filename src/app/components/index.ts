@@ -11,3 +11,7 @@ export { CountryDeleteDialogComponent } from './country-delete-dialog/country-de
 export { AgencyAddDialogComponent } from './agency-add-dialog/agency-add-dialog.component';
 export { AgencyUpdateDialogComponent } from './agency-update-dialog/agency-update-dialog.component';
 export { AgencyDeleteDialogComponent } from './agency-delete-dialog/agency-delete-dialog.component';
+
+export { HotelCategoryAddDialogComponent } from './hotel-category-add-dialog/hotel-category-add-dialog.component';
+export { HotelCategoryUpdateDialogComponent } from './hotel-category-update-dialog/hotel-category-update-dialog.component';
+export { HotelCategoryDeleteDialogComponent } from './hotel-category-delete-dialog/hotel-category-delete-dialog.component';
