@@ -31,20 +31,8 @@ export class CountryUpdateDialogComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  public get otherCountries(): Country[] {
-    const countries = this.countryService.countries;
-    const country = countries.find((c) => c.name === this.newCountryName);
-    const index = countries.indexOf(country!);
-
-    const otherCountries = countries
-      .slice(0, index)
-      .concat(countries.slice(index + 1, countries.length));
-
-    return otherCountries;
-  }
-
   update() {
-    const condition = this.otherCountries.some(
+    const condition = this.countryService.countries.some(
       (c) => c.name === this.newCountryName
     );
     if (!this.newCountryName) {

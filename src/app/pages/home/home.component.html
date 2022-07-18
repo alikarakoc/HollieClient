@@ -2,10 +2,9 @@
 
 <h3>Welcome to <strong>Hollie</strong>!</h3>
 
-<div class="row">
+<div class="row my-2">
     <mat-card class="col-md-4 mx-2">
         <mat-card-title>Countries</mat-card-title>
-        <mat-card-subtitle>Total Countries: {{ countryService.countries.length }}</mat-card-subtitle>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem"
@@ -19,9 +18,8 @@
             <button mat-flat-button color="accent" routerLink="/countries">See More...</button>
         </mat-card-actions>
     </mat-card>
-    <mat-card class="col-md-3 mx-2">
+    <mat-card class="col-md-4 mx-2">
         <mat-card-title>Room Types</mat-card-title>
-        <mat-card-subtitle>Total Room Types: {{ roomTypeService.rooms.length }}</mat-card-subtitle>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem" *ngFor="let item of roomTypeService.rooms | slice:0:3; let last = last;">
@@ -36,7 +34,6 @@
     </mat-card>
     <mat-card class="col-md-4 mx-2">
         <mat-card-title>Agencies</mat-card-title>
-        <mat-card-subtitle>Total Agencies: {{ agencyService.agencies.length }}</mat-card-subtitle>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem"
@@ -48,6 +45,54 @@
         </mat-card-content>
         <mat-card-actions>
             <button mat-flat-button color="accent" routerLink="/agencies">See More...</button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+
+<div class="row my-2">
+    <mat-card class="col-md-4 mx-2">
+        <mat-card-title>Hotel Categories</mat-card-title>
+        <mat-card-content>
+            <mat-list role="list">
+                <mat-list-item role="listitem"
+                    *ngFor="let item of hotelCategoryService.categories | slice:0:3; let last = last">
+                    {{ item.name }}
+                    <mat-divider *ngIf="!last"></mat-divider>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-flat-button color="accent" routerLink="/hotel-categories">See More...</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="col-md-4 mx-2">
+        <mat-card-title>Hotel Categories</mat-card-title>
+        <mat-card-content>
+            <mat-list role="list">
+                <mat-list-item role="listitem"
+                    *ngFor="let item of hotelCategoryService.categories | slice:0:3; let last = last">
+                    {{ item.name }}
+                    <mat-divider *ngIf="!last"></mat-divider>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-flat-button color="accent" routerLink="/hotel-categories">See More...</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="col-md-4 mx-2">
+        <mat-card-title>Hotel Categories</mat-card-title>
+        <mat-card-content>
+            <mat-list role="list">
+                <mat-list-item role="listitem"
+                    *ngFor="let item of hotelCategoryService.categories | slice:0:3; let last = last">
+                    {{ item.name }}
+                    <mat-divider *ngIf="!last"></mat-divider>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-flat-button color="accent" routerLink="/hotel-categories">See More...</button>
         </mat-card-actions>
     </mat-card>
 </div>
@@ -69,7 +114,7 @@
             </div>
         </mat-card-content>
     </mat-card>
-    <mat-card class="col-md-3 mx-2">
+    <mat-card class="col-md-4 mx-2">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">

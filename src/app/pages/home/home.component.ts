@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CountryService, RoomTypeService } from "src/app/services";
+import { CountryService, HotelCategoryService, RoomTypeService } from "src/app/services";
 import { AgencyService } from "src/app/services/agency.service";
 
 @Component({
@@ -12,7 +12,8 @@ export class HomeComponent implements OnInit {
   constructor(
     public countryService: CountryService,
     public roomTypeService: RoomTypeService,
-    public agencyService: AgencyService
+    public agencyService: AgencyService,
+    public hotelCategoryService: HotelCategoryService
   ) { }
 
   ngOnInit(): void {

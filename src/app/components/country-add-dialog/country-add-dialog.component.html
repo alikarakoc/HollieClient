@@ -3,7 +3,7 @@
 <div mat-dialog-content>
     <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput placeholder="Country Name" [(ngModel)]="countryName">
+        <input matInput placeholder="Country Name" [(ngModel)]="countryName" (keyup.enter)="add()">
     </mat-form-field>
 </div>
 

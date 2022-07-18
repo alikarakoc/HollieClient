@@ -3,7 +3,7 @@
 <div mat-dialog-content>
     <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput placeholder="Room Type Name" [value]="dialogData.element.name" [(ngModel)]="newType">
+        <input matInput placeholder="Room Type Name" [(ngModel)]="newType" (keyup.enter)="updateRoomType()">
     </mat-form-field>
 </div>
 

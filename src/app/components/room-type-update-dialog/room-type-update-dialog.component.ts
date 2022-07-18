@@ -29,29 +29,16 @@ export class RoomTypeUpdateDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private roomTypeService: RoomTypeService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   closeDialog() {
     this.dialogRef.close();
   }
 
-  public get otherRoomTypes(): RoomType[] {
-    const roomTypes = this.roomTypeService.rooms;
-    const roomType = roomTypes.find((c) => c.name === this.newType);
-
-    const index = roomTypes.indexOf(roomType!);
-
-    const otherRoomTypes = roomTypes
-      .slice(0, index)
-      .concat(roomTypes.slice(index + 1, roomTypes.length));
-
-    return otherRoomTypes;
-  }
-
   updateRoomType() {
-    const condition = this.otherRoomTypes.some(
+    const condition = this.roomTypeService.rooms.some(
       (r) => r.name === this.newType
     );
     if (!this.newType) {

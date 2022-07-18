@@ -1,33 +1,35 @@
-<h1 mat-dialog-title>Update Country</h1>
+<h1 mat-dialog-title>Update Agency</h1>
 
 <div mat-dialog-content>
-    <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Agency Name" [(ngModel)]="newName">
-    </mat-form-field>
+    <form [formGroup]="formGroup">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Agency Name" formControlName="name" (keyup.enter)="update()">
+        </mat-form-field>
 
-    <br>
+        <br>
 
-    <mat-form-field>
-        <mat-label>Address</mat-label>
-        <textarea matInput placeholder="Agency Address" [(ngModel)]="newAddress"></textarea>
-    </mat-form-field>
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <textarea matInput placeholder="Agency Address" formControlName="address"
+                (keyup.enter)="update()"></textarea>
+        </mat-form-field>
 
-    <br>
+        <br>
 
-    <mat-form-field>
-        <mat-label>Phone</mat-label>
-        <input matInput type="tel" placeholder="Agency Phone" [(ngModel)]="newPhone">
-    </mat-form-field>
+        <mat-form-field>
+            <mat-label>Phone</mat-label>
+            <input matInput type="tel" placeholder="Agency Phone" formControlName="phone" (keyup.enter)="update()">
+        </mat-form-field>
 
-    <br>
+        <br>
 
-    <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input matInput type="email" placeholder="Agency Email" [(ngModel)]="newEmail">
-    </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Agency Email" formControlName="email" (keyup.enter)="update()">
+        </mat-form-field>
+    </form>
 </div>
-
 
 <div mat-dialog-actions>
     <button mat-flat-button color="primary" (click)="update()">Update</button>

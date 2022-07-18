@@ -3,7 +3,7 @@
 <div mat-dialog-content>
     <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput placeholder="Category Name" [(ngModel)]="newCategoryName">
+        <input matInput placeholder="Category Name" [(ngModel)]="newCategoryName" (keyup.enter)="update()">
     </mat-form-field>
 </div>
 
