@@ -15,6 +15,10 @@ export class HotelCategoryComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
 
   hotels: HotelCategory[] = [];
+  hotel : HotelCategory ={
+    id:'',
+    name: ''
+  }
 
   constructor(
     public hotelCategoryService: HotelCategoryService,
@@ -40,8 +44,16 @@ export class HotelCategoryComponent implements OnInit {
   }
 
   update(element: HotelCategory) {
-    this.dialog.open(HotelCategoryUpdateDialogComponent, { data: { element } });
-    this.ngOnInit();
+    const dialog = this.dialog.open(HotelCategoryUpdateDialogComponent, { data: { element } });
+
+    dialog.afterClosed().subscribe(() => {
+      this.hotelCategoryService.updateCategory(element).subscribe(res=>{
+        this.hotel.name = element.name;
+        this.hotel.id = element.id;
+        console.log("res data checkec");
+        console.log(res.data);
+      });
+    });
   }
 
   delete(element: HotelCategory) {

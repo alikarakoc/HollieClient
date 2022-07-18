@@ -1,12 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { MatTable } from '@angular/material/table';
 import { HotelCategory } from "src/app/interfaces";
 import { HotelCategoryService } from "src/app/services";
 import { HotelCategoryDeleteDialogComponent } from "../hotel-category-delete-dialog/hotel-category-delete-dialog.component";
 
 interface DialogData {
   element: HotelCategory;
+  table: MatTable<any>;
+  dialogRef: MatDialogRef<any>;
 }
 
 @Component({
@@ -30,8 +33,12 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
 
   
   update() {
+    console.log("newCategoryName "+this.newCategoryName);
     const predicate = (c: HotelCategory) => c.name === this.newCategoryName;
+
     const condition = this.hotelCategoryService.categories.some(predicate);
+    console.log("condition: " + condition);
+
 
     if (condition) {
       this.snackBar.open("Please type another hotel category data.", "OK");
@@ -45,6 +52,12 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
     }
 
     this.snackBar.open(`${this.data.element.name} successfully updated.`);
+    this.dialogRef.close({isUpdated: true});
+    this.data.dialogRef?.close();
+    this.data.element.name = this.newCategoryName;
+    this.hotelCategoryService.updateCategory(this.data.element);
+    console.log(this.data.element);
+    this.data.table?.renderRows();
     this.closeDialog();
   }
 
@@ -57,4 +70,5 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       data: { element: this.data.element, dialogRef: this.dialogRef }
     });
   }
+
 }
