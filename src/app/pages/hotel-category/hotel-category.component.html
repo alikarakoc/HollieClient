@@ -1,3 +1,4 @@
+<!-- 
 <div class="header">
     <h1>Hotel Categories</h1>
     <span class="spacer"></span>
@@ -30,4 +31,17 @@
         <button mat-menu-item (click)="update(element)">Edit</button>
         <button mat-menu-item (click)="delete(element)">Delete</button>
     </ng-template>
-</mat-menu>
+</mat-menu> -->
+
+
+ 
+<div>
+    <div *ngFor="let hotel of hotels">
+      <div class="card-row-details">
+        <span>{{hotel.id}}</span>
+        <span> </span>
+        <span>{{hotel.name}}</span>
+      </div>
+    </div>
+  </div>
+

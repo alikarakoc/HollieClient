@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AllFormsModule, MaterialModule, CdkModule } from './modules';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   AgencyAddDialogComponent,
@@ -67,6 +68,7 @@ import { HotelDeleteDialogComponent } from "./components/hotel-delete-dialog/hot
     AllFormsModule,
     MaterialModule,
     CdkModule,
+    HttpClientModule
   ],
   providers: [
     {

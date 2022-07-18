@@ -1,24 +1,39 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HotelCategory } from "../interfaces";
+import { ListResponseModel } from '../interfaces/listResponseModel';
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class HotelCategoryService {
+
+  baseUrl = 'https://localhost:5001/api/HotelCategory/AllHotelCategory';
   categories: HotelCategory[] = [
     {
-      code: "1",
+      id: "1",
       name: "Resort Hotel"
     },
     {
-      code: "2",
+      id: "2",
       name: "City Hotel"
     },
     {
-      code: "3",
+      id: "3",
       name: "B&B"
     }
   ];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+
+
+  getAllHotels() :  Observable<ListResponseModel<HotelCategory>>{
+    console.log("listResponseModel working");
+     return this.http.get<ListResponseModel<HotelCategory>>(this.baseUrl);
+ 
+   }
 }

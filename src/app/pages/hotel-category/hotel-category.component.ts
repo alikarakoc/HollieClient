@@ -14,9 +14,19 @@ export class HotelCategoryComponent implements OnInit {
   columns: string[] = ["name", "actions"];
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
 
-  constructor(public hotelCategoryService: HotelCategoryService, private dialog: MatDialog) { }
+  hotels: HotelCategory[] =[];
+  hotel : HotelCategory ={
+    id:'',
+    name: ''
+  }
+
+  constructor(
+    public hotelCategoryService: HotelCategoryService, 
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
+    console.log(this.hotelCategoryService.getAllHotels());
+    console.log(this.getHotels());
   }
 
   create() {
@@ -30,5 +40,27 @@ export class HotelCategoryComponent implements OnInit {
   delete(element: HotelCategory) {
     this.dialog.open(HotelCategoryDeleteDialogComponent, { data: { element } });
   }
+
+  // getAllHotels(){
+  //   console.log("service call inside getAll");
+  //   this.hotelCategoryService.getAllHotels()
+  //   .subscribe(
+  //     response => {
+  //       this.hotels = response;
+  //       console.log(this.hotels);
+  //     }
+  //   );
+  //   console.log("get all hotels worked")
+
+  // }
+
+  getHotels(){
+    this.hotelCategoryService.getAllHotels().subscribe((res) => {
+      this.hotels = res.data;
+    },)
+    console.log(this.hotels);
+  }
+
+
 
 }
