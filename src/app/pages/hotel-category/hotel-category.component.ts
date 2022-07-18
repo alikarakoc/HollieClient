@@ -36,7 +36,7 @@ export class HotelCategoryComponent implements OnInit {
       });
     });
 
- 
+
   }
 
   update(element: HotelCategory) {
@@ -46,9 +46,13 @@ export class HotelCategoryComponent implements OnInit {
 
   delete(element: HotelCategory) {
     const dialog = this.dialog.open(HotelCategoryDeleteDialogComponent, { data: { element } });
-    this.hotelCategoryService.deleteCategory(element).subscribe((res) => {
-      console.log(element);
-      this.ngOnInit();
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isDeleted) {
+        this.hotelCategoryService.deleteCategory(element).subscribe((res) => {
+          console.log(element);
+          this.ngOnInit();
+        });
+      }
     });
   }
 }
