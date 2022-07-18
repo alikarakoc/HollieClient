@@ -29,6 +29,7 @@ export class AgencyService {
     },
   ];
 
+  // Buyrun efenim
   addNewAgency() { }
 
   deleteAgency() { }

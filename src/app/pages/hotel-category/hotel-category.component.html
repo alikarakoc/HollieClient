@@ -1,4 +1,4 @@
-<!-- 
+
 <div class="header">
     <h1>Hotel Categories</h1>
     <span class="spacer"></span>
@@ -7,7 +7,7 @@
     </button>
 </div>
 
-<table mat-table [dataSource]="hotelCategoryService.categories">
+<table mat-table [dataSource]="hotels">
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef>Category Name</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
@@ -31,17 +31,4 @@
         <button mat-menu-item (click)="update(element)">Edit</button>
         <button mat-menu-item (click)="delete(element)">Delete</button>
     </ng-template>
-</mat-menu> -->
-
-
- 
-<div>
-    <div *ngFor="let hotel of hotels">
-      <div class="card-row-details">
-        <span>{{hotel.id}}</span>
-        <span> </span>
-        <span>{{hotel.name}}</span>
-      </div>
-    </div>
-  </div>
-
+</mat-menu>
