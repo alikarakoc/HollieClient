@@ -8,22 +8,25 @@ import { ListResponseModel } from '../interfaces/listResponseModel';
 @Injectable({
   providedIn: 'root'
 })
-
 export class HotelCategoryService {
-
   baseUrl = `${environment.baseUrl}/HotelCategory`;
   categories: HotelCategory[] = [];
 
   constructor(private http: HttpClient) { }
 
   getAllHotels(): Observable<ListResponseModel<HotelCategory>> {
-    console.log("listResponseModel working");
     return this.http.get<ListResponseModel<HotelCategory>>(`${this.baseUrl}/AllHotelCategory`);
   }
 
-  addCategory() { }
+  addCategory(category: Partial<HotelCategory>) {
+    return this.http.post<ListResponseModel<HotelCategory>>(`${this.baseUrl}/add`, category);
+  }
 
-  deleteCategory() { }
+  deleteCategory(category: Partial<HotelCategory>) {
+    return this.http.delete<ListResponseModel<HotelCategory>>(`${this.baseUrl}/delete?Id=${category.id}`);
+  }
 
-  updateCategory() { }
+  updateCategory(category: Partial<HotelCategory>) {
+    return this.http.put<ListResponseModel<HotelCategory>>(`${this.baseUrl}/update?Id=${category.id}`, category);
+  }
 }

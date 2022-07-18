@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { HotelCategory } from 'src/app/interfaces';
+import { HotelCategoryService } from "src/app/services";
 
 interface DialogData {
   element: HotelCategory;
@@ -19,7 +20,8 @@ export class HotelCategoryDeleteDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<HotelCategoryDeleteDialogComponent>,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private hotelCategoryService: HotelCategoryService
   ) { }
 
   ngOnInit(): void { }
@@ -27,6 +29,8 @@ export class HotelCategoryDeleteDialogComponent implements OnInit {
   delete() {
     this.snackBar.open(`${this.data.element.name} successfully deleted.`);
     this.dialogRef.close();
-    this.data.dialogRef.close();
+    this.data.dialogRef?.close();
+    this.hotelCategoryService.deleteCategory(this.data.element);
+    this.data.table?.renderRows();
   }
 }

@@ -14,53 +14,36 @@ export class HotelCategoryComponent implements OnInit {
   columns: string[] = ["name", "actions"];
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
 
-  hotels: HotelCategory[] =[];
-  hotel : HotelCategory ={
-    id:'',
-    name: ''
-  }
+  hotels: HotelCategory[] = [];
 
   constructor(
-    public hotelCategoryService: HotelCategoryService, 
+    public hotelCategoryService: HotelCategoryService,
     private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    console.log(this.hotelCategoryService.getAllHotels());
-    console.log(this.getHotels());
+    this.hotelCategoryService.getAllHotels().subscribe(res => {
+      this.hotels = res.data;
+    });
+    console.log("on init");
   }
 
   create() {
-    this.dialog.open(HotelCategoryAddDialogComponent, { data: { table: this.table } });
+    const dialog = this.dialog.open(HotelCategoryAddDialogComponent, { data: { table: this.table } });
+
+    dialog.afterClosed().subscribe(() => {
+      this.hotelCategoryService.getAllHotels().subscribe(res => {
+        this.hotels = res.data;
+      });
+    });
   }
 
   update(element: HotelCategory) {
     this.dialog.open(HotelCategoryUpdateDialogComponent, { data: { element } });
+    this.ngOnInit();
   }
 
   delete(element: HotelCategory) {
     this.dialog.open(HotelCategoryDeleteDialogComponent, { data: { element } });
+    this.ngOnInit();
   }
-
-  // getAllHotels(){
-  //   console.log("service call inside getAll");
-  //   this.hotelCategoryService.getAllHotels()
-  //   .subscribe(
-  //     response => {
-  //       this.hotels = response;
-  //       console.log(this.hotels);
-  //     }
-  //   );
-  //   console.log("get all hotels worked")
-
-  // }
-
-  getHotels(){
-    this.hotelCategoryService.getAllHotels().subscribe((res) => {
-      this.hotels = res.data;
-    },)
-    console.log(this.hotels);
-  }
-
-
-
 }
