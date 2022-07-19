@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CountryService, HotelCategoryService, RoomTypeService } from "src/app/services";
+import { CountryService, HotelCategoryService, HotelService, RoomTypeService } from "src/app/services";
 import { AgencyService } from "src/app/services/agency.service";
 
 @Component({
@@ -13,7 +13,8 @@ export class HomeComponent implements OnInit {
     public countryService: CountryService,
     public roomTypeService: RoomTypeService,
     public agencyService: AgencyService,
-    public hotelCategoryService: HotelCategoryService
+    public hotelCategoryService: HotelCategoryService,
+    public hotelService: HotelService
   ) { }
 
   ngOnInit(): void {

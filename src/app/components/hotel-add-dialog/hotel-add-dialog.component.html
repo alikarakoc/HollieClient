@@ -1,1 +1,36 @@
-<p>hotel-add-dialog works!</p>
+<h1 mat-dialog-title>Create A New Agency</h1>
+
+<div mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Hotel Name" formControlName="name" (keyup.enter)="add()">
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+            <mat-label>Address</mat-label>
+            <textarea matInput placeholder="Hotel Address" formControlName="address" (keyup.enter)="add()"></textarea>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+            <mat-label>Phone</mat-label>
+            <input matInput type="tel" placeholder="Hotel Phone" formControlName="phone" (keyup.enter)="add()">
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="email" placeholder="Hotel Email" formControlName="email" (keyup.enter)="add()">
+        </mat-form-field>
+    </form>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" (click)="add()">Add</button>
+    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+</div>

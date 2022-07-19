@@ -1,3 +1,5 @@
+import { from } from 'rxjs';
+
 export { NavbarComponent } from './navbar/navbar.component';
 
 export { RoomTypeUpdateDialogComponent } from './room-type-update-dialog/room-type-update-dialog.component';
@@ -15,3 +17,7 @@ export { AgencyDeleteDialogComponent } from './agency-delete-dialog/agency-delet
 export { HotelCategoryAddDialogComponent } from './hotel-category-add-dialog/hotel-category-add-dialog.component';
 export { HotelCategoryUpdateDialogComponent } from './hotel-category-update-dialog/hotel-category-update-dialog.component';
 export { HotelCategoryDeleteDialogComponent } from './hotel-category-delete-dialog/hotel-category-delete-dialog.component';
+
+export { HotelAddDialogComponent } from './hotel-add-dialog/hotel-add-dialog.component';
+export { HotelDeleteDialogComponent } from './hotel-delete-dialog/hotel-delete-dialog.component';
+export { HotelUpdateDialogComponent } from './hotel-update-dialog/hotel-update-dialog.component';

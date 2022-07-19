@@ -9,6 +9,9 @@ import { AllFormsModule, MaterialModule, CdkModule } from './modules';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
+  HotelAddDialogComponent,
+  HotelDeleteDialogComponent,
+  HotelUpdateDialogComponent,
   AgencyAddDialogComponent,
   AgencyDeleteDialogComponent,
   AgencyUpdateDialogComponent,
@@ -25,13 +28,12 @@ import {
 } from './components';
 
 // Modules
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent } from './pages';
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent } from './pages';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { HomeComponent } from './pages/home/home.component';
-import { HotelAddDialogComponent } from "./components/hotel-add-dialog/hotel-add-dialog.component";
-import { HotelDeleteDialogComponent } from "./components/hotel-delete-dialog/hotel-delete-dialog.component";
+
 
 @NgModule({
   declarations: [
@@ -53,6 +55,11 @@ import { HotelDeleteDialogComponent } from "./components/hotel-delete-dialog/hot
     AgencyAddDialogComponent,
     AgencyDeleteDialogComponent,
     AgencyUpdateDialogComponent,
+
+    HotelComponent,
+    HotelAddDialogComponent,
+    HotelDeleteDialogComponent,
+    HotelUpdateDialogComponent,
 
     HotelCategoryComponent,
     HotelCategoryAddDialogComponent,

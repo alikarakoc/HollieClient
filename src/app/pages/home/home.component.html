@@ -51,18 +51,18 @@
 
 <div class="row my-2">
     <mat-card class="col-md-4 mx-2">
-        <mat-card-title>Hotel Categories</mat-card-title>
+        <mat-card-title>Hotel</mat-card-title>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem"
-                    *ngFor="let item of hotelCategoryService.categories | slice:0:3; let last = last">
+                    *ngFor="let item of hotelService.hotels | slice:0:3; let last = last">
                     {{ item.name }}
                     <mat-divider *ngIf="!last"></mat-divider>
                 </mat-list-item>
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/hotel-categories">See More...</button>
+            <button mat-flat-button color="accent" routerLink="/hotels">See More...</button>
         </mat-card-actions>
     </mat-card>
     <mat-card class="col-md-4 mx-2">
