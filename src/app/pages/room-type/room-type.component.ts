@@ -20,37 +20,58 @@ import { RoomTypeService } from 'src/app/services';
 })
 export class RoomTypeComponent implements OnInit {
   columns: string[] = ['name', 'actions'];
-  dataSource = [...this.roomTypeService.rooms];
 
   @ViewChild(MatTable) table: MatTable<RoomType>;
+  roomTypes: RoomType[] = [];
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
     private dialog: MatDialog,
     public roomTypeService: RoomTypeService
-  ) { }
+  ) {}
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
-
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.roomTypeService.getAllRoomTypes().subscribe((res) => {
+      this.roomTypes = res.data;
+    });
+  }
 
   update(element: RoomType) {
-    this.dialog.open(RoomTypeUpdateDialogComponent, { data: { element, table: this.table } });
+    const dialog = this.dialog.open(RoomTypeUpdateDialogComponent, {
+      data: { element, table: this.table },
+    });
+
+    dialog.afterClosed().subscribe(() => {
+      this.roomTypeService.updateRoomType(element); /* .subscribe(); */
+    });
   }
 
   createNewRoomType() {
-    this.dialog.open(RoomTypeAddDialogComponent, {
+    const dialog = this.dialog.open(RoomTypeAddDialogComponent, {
       data: { table: this.table },
     });
-    // this.table.renderRows();
+
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isAdded) {
+        this.roomTypeService
+          .addRoomType({ name: result.elementName })
+          .subscribe(() => {
+            this.ngOnInit();
+          });
+      }
+    });
   }
 
   delete(element: RoomType) {
-    this.dialog.open(RoomTypeDeleteDialogComponent, { data: { element, table: this.table } });
+    const dialog = this.dialog.open(RoomTypeDeleteDialogComponent, {
+      data: { element, table: this.table },
+    });
+
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isDeleted) {
+        this.roomTypeService
+          .deleteRoomType(element)
+          .subscribe(() => this.ngOnInit());
+      }
+    });
   }
 }

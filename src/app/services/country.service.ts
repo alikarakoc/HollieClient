@@ -5,28 +5,7 @@ import { Country } from "../interfaces";
   providedIn: 'root'
 })
 export class CountryService {
-  countries: Country[] = [
-    {
-      name: "Turkey",
-      code: "1"
-    },
-    {
-      name: "America",
-      code: "2"
-    },
-    {
-      name: "Holland",
-      code: "3"
-    },
-    {
-      name: "Greece",
-      code: "4"
-    },
-    {
-      name: "France",
-      code: "5"
-    },
-  ];
+  countries: Country[] = [];
 
   addNewCountry(country: Country) {
   }

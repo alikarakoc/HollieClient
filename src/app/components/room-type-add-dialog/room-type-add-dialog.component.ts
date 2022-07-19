@@ -22,37 +22,41 @@ export class RoomTypeAddDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<RoomTypeAddDialogComponent>,
     private snackBar: MatSnackBar,
     private roomTypeService: RoomTypeService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   add() {
-    const condition = this.roomTypeService.rooms.some(
-      (r) => r.name === this.roomTypeName.toLowerCase()
-    );
     if (!this.roomTypeName) {
       this.snackBar.open('Please type the blank areas', 'OK');
       this.clearInputs();
       return;
     }
-    if (condition) {
-      this.snackBar.open('Please type another room type name', 'OK');
-      this.clearInputs();
-      return;
-    }
+
+    this.roomTypeService.getAllRoomTypes().subscribe(res => {
+      if (res.data.some(c => c.name === this.roomTypeName)) {
+        this.snackBar.open('Please type another room type name', 'OK');
+        this.clearInputs();
+        return;
+      }
+    });
+
+    this.snackBar.open(`${this.roomTypeName} successfully added to your table.`);
+
+    this.closeDialog();
+    this.data.table.renderRows();
+
     // this.roomTypeService.addRoomType({
     //   name: this.roomTypeName,
     //   code: "3903232"
     // });
-    this.snackBar.open(
-      `${this.roomTypeName} successfully added to your room type table.`
-    );
-    this.closeDialog();
-    this.data.table.renderRows();
   }
 
   closeDialog() {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      isAdded: true,
+      elementName: this.roomTypeName
+    });
   }
 
   clearInputs() {

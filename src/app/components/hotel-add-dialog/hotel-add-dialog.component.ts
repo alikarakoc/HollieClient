@@ -64,7 +64,7 @@ export class HotelAddDialogComponent implements OnInit {
       phoneControl: this.formGroup.controls.phone,
     };
 
-    const predicate = (a: Agency) =>
+    const predicate = (a: Omit<Agency, 'id'>) =>
       a.name === name &&
       a.address === address &&
       a.phone === phone &&

@@ -28,25 +28,21 @@ export class HotelCategoryAddDialogComponent implements OnInit {
   }
 
   add() {
-    let categories: HotelCategory[] = [];
-    this.hotelCategoryService.getAllHotels().subscribe(data => {
-      categories = data.data;
-      console.log("Categories initialized");
-      console.log(data);
-    });
-
-    console.log(categories);
+    // let categories: HotelCategory[] = [];
 
     if (!this.categoryName) {
       this.snackBar.open("Please type the blank areas", "OK");
       return;
     }
 
-    if (categories.some(c => c.name === this.categoryName)) {
-      this.snackBar.open("Please type another hotel category name", "OK");
-      this.categoryName = "";
-      return;
-    }
+    this.hotelCategoryService.getAllHotels().subscribe((res) => {
+      // categories = res.data;
+      if (res.data.some(c => c.name === this.categoryName)) {
+        this.snackBar.open("Please type another hotel category name", "OK");
+        this.categoryName = "";
+        return;
+      }
+    });
 
     this.snackBar.open(`${this.categoryName} successfully added to your table.`);
 

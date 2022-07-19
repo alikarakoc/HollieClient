@@ -31,28 +31,24 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  
   update() {
-    console.log("newCategoryName "+this.newCategoryName);
-    const predicate = (c: HotelCategory) => c.name === this.newCategoryName;
-
-    const condition = this.hotelCategoryService.categories.some(predicate);
-    console.log("condition: " + condition);
-
-
-    if (condition) {
-      this.snackBar.open("Please type another hotel category data.", "OK");
-      this.newCategoryName = "";
-      return;
-    }
-
     if (!this.newCategoryName) {
       this.snackBar.open("Please type the blank areas", "OK");
       return;
     }
 
+    this.hotelCategoryService.getAllHotels().subscribe(res => {
+      console.log(res.data);
+      if (res.data.some(c => c.name === this.newCategoryName)) {  
+        console.log(this.newCategoryName);
+        this.snackBar.open("Please type another hotel category data.", "OK");
+        this.newCategoryName = "";
+        return;
+      }
+    });
+
     this.snackBar.open(`${this.data.element.name} successfully updated.`);
-    this.dialogRef.close({isUpdated: true});
+    this.dialogRef.close({ isUpdated: true });
     this.data.dialogRef?.close();
     this.data.element.name = this.newCategoryName;
     this.hotelCategoryService.updateCategory(this.data.element);
