@@ -1,0 +1,11 @@
+{
+    "home_title": "Homepage",
+    "agency_title": "Agencies",
+    "country_title": "Countries",
+    "hotel_title": "Hotels",
+    "hotel_category_title": "Hotel Categories",
+    "room_type_title": "Oda Tipleri",
+    "home": {
+        "home_paragraph": "Hollie'ye hoşgeldiniz!"
+    }
+}

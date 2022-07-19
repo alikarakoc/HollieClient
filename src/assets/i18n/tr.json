@@ -1,0 +1,11 @@
+{
+    "home_title": "Anasayfa",
+    "agency_title": "Acentalar",
+    "country_title": "Ülkeler",
+    "hotel_title": "Oteller",
+    "hotel_category_title": "Otel Türleri",
+    "room_type_title": "Oda Tipleri",
+    "home": {
+        "home_paragraph": "Hollie'ye hoşgeldiniz!"
+    }
+}
