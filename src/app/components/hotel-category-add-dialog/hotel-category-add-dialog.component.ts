@@ -51,14 +51,17 @@ export class HotelCategoryAddDialogComponent implements OnInit {
     this.snackBar.open(`${this.categoryName} successfully added to your table.`);
 
     // O an...
-    this.hotelCategoryService.addCategory({ name: this.categoryName });
+    // this.hotelCategoryService.addCategory({ name: this.categoryName });
 
     this.closeDialog();
     this.data.table.renderRows();
   }
 
   closeDialog() {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      isAdded: true,
+      elementName: this.categoryName
+    });
   }
 
 }

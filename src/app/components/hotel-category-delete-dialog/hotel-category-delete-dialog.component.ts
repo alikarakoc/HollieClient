@@ -28,11 +28,15 @@ export class HotelCategoryDeleteDialogComponent implements OnInit {
 
   delete() {
     this.snackBar.open(`${this.data.element.name} successfully deleted.`);
-    this.dialogRef.close({ isDeleted: true });
+    this.closeDialog({ isDeleted: true });
     this.data.dialogRef?.close();
     this.hotelCategoryService.deleteCategory(this.data.element);
-    console.log("deleted category")
-    console.log(this.data.element)
+    console.log("deleted category");
+    console.log(this.data.element);
     this.data.table?.renderRows();
+  }
+
+  closeDialog({ isDeleted }: { isDeleted: boolean; }) {
+    this.dialogRef.close({ isDeleted });
   }
 }

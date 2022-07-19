@@ -6,5 +6,5 @@
 
 <div mat-dialog-actions>
     <button mat-flat-button color="warn" (click)="delete()">Delete</button>
-    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="accent" (click)="closeDialog({ isDeleted: false })">Cancel</button>
 </div>

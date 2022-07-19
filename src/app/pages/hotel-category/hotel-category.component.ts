@@ -15,10 +15,10 @@ export class HotelCategoryComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
 
   hotels: HotelCategory[] = [];
-  hotel : HotelCategory ={
-    id:'',
+  hotel: HotelCategory = {
+    id: '',
     name: ''
-  }
+  };
 
   constructor(
     public hotelCategoryService: HotelCategoryService,
@@ -34,20 +34,21 @@ export class HotelCategoryComponent implements OnInit {
   create() {
     const dialog = this.dialog.open(HotelCategoryAddDialogComponent, { data: { table: this.table } });
 
-    dialog.afterClosed().subscribe(() => {
-      this.hotelCategoryService.getAllHotels().subscribe(res => {
-        this.hotels = res.data;
-      });
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isAdded) {
+        console.log(result);
+        this.hotelCategoryService.addCategory({ name: result.elementName }).subscribe(() => {
+          this.ngOnInit();
+        });
+      }
     });
-
-
   }
 
   update(element: HotelCategory) {
     const dialog = this.dialog.open(HotelCategoryUpdateDialogComponent, { data: { element } });
 
     dialog.afterClosed().subscribe(() => {
-      this.hotelCategoryService.updateCategory(element).subscribe(res=>{
+      this.hotelCategoryService.updateCategory(element).subscribe(res => {
         this.hotel.name = element.name;
         this.hotel.id = element.id;
         console.log("res data checkec");
