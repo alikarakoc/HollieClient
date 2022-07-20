@@ -15,7 +15,7 @@ export class AgencyService {
   constructor(private http: HttpClient) { }
 
   getAllAgencies():Observable<ListResponseModel<Agency>>{
-    return this.http.get<ListResponseModel<Agency>>(`${this.baseUrl}/AllAgency`);
+    return this.http.get<ListResponseModel<Agency>>(`${this.baseUrl}/AllAgencies`);
   }
 
   addAgency(agency: Partial<Agency>) {

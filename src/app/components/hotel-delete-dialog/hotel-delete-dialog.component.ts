@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from "@angular/material/table";
 import { Hotel } from "src/app/interfaces";
+import { HotelService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
@@ -22,6 +23,7 @@ export class HotelDeleteDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<HotelDeleteDialogComponent>,
     private snackBar: MatSnackBar,
+    private hotelService: HotelService,
     public translocoService: TranslocoService
   ) { }
 
@@ -30,8 +32,16 @@ export class HotelDeleteDialogComponent implements OnInit {
 
   delete() {
     this.snackBar.open(this.translocoService.translate('dialogs.delete_success', { elementName: this.data.element.name }));
-    this.dialogRef.close();
-    this.data.dialogRef.close();
+    this.closeDialog({ isDeleted: true });
+    this.data.dialogRef?.close();
+    this.hotelService.deleteHotel(this.data.element);
+    console.log("deleted hotel");
+    console.log(this.data.element);
+    this.data.table?.renderRows();
+  }
+
+  closeDialog({ isDeleted }: { isDeleted: boolean; }) {
+    this.dialogRef.close({ isDeleted });
   }
 
 }

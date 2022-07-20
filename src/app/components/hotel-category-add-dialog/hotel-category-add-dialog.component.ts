@@ -64,5 +64,4 @@ export class HotelCategoryAddDialogComponent implements OnInit {
       elementCode: this.categoryCode
     });
   }
-
 }
