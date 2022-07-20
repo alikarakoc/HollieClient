@@ -1,5 +1,5 @@
 export interface Market {
-    id : number;
-    code : string;
-    name : string;
+    id: string;
+    name: string;
 }
+

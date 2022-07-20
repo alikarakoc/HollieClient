@@ -1,33 +1,38 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 import { environment } from "src/environments/environment";
 import { Market } from "../interfaces";
-import { ListResponseModel } from "../interfaces/listResponseModel";
+import { ListResponseModel } from '../interfaces/listResponseModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MarketService {
-
-  rooms: Market[] = [];
   baseUrl = `${environment.baseUrl}/Market`;
+  categories: Market[] = [];
+  
+  constructor(private http: HttpClient) { }
 
-  constructor(private httpClient: HttpClient) { }
-
-  getAllRoomTypes(): Observable<ListResponseModel<Market>> {
-    return this.httpClient.get<ListResponseModel<Market>>(`${this.baseUrl}/AllMarket`);
+  getMarket(): Observable<ListResponseModel<Market>> {
+    return this.http.get<ListResponseModel<Market>>(`${this.baseUrl}/AllMarkets`);
   }
 
-  addRoomType(market: Partial<Market>) {
-    return this.httpClient.post<ListResponseModel<Market>>(`${this.baseUrl}/AddMarket`, market);
+  getAllMarkets(): Observable<ListResponseModel<Market>> {
+    return this.http.get<ListResponseModel<Market>>(`${this.baseUrl}/AllMarket`);
   }
 
-  deleteRoomType(market: Partial<Market>) {
-    return this.httpClient.delete<ListResponseModel<Market>>(`${this.baseUrl}/DeleteMarket?Id=${market.id}`)
+  addMarket(market: Partial<Market>) {
+    return this.http.post<ListResponseModel<Market>>(`${this.baseUrl}/add`, market);
   }
 
-  updateRoomType(market: Partial<Market>) {
-    return this.httpClient.put<ListResponseModel<Market>>(`${this.baseUrl}/UpdateMarket?Id=${market.id}`, market);
+  deleteMarket(market: Partial<Market>) {
+    return this.http.delete<ListResponseModel<Market>>(`${this.baseUrl}/delete?Id=${market.id}`);
+  }
+
+  updateMarket(market: Partial<Market>) {
+    return this.http.put<ListResponseModel<Market>>(`${this.baseUrl}/update?Id=${market.id}`, market);
   }
 }
+
+
