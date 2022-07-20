@@ -62,5 +62,4 @@ export class HotelCategoryAddDialogComponent implements OnInit {
       elementName: this.categoryName
     });
   }
-
 }

@@ -26,25 +26,11 @@ interface FormData {
   styleUrls: ['./hotel-add-dialog.component.scss']
 })
 export class HotelAddDialogComponent implements OnInit {
-  formGroup: FormGroup<FormData> = new FormGroup<FormData>({
-    name: new FormControl<string>('', [
-      Validators.required,
-      Validators.maxLength(50),
-    ]),
-    address: new FormControl<string>('', [
-      Validators.required,
-      Validators.maxLength(200),
-    ]),
-    phone: new FormControl<string>('', [
-      Validators.required,
-      Validators.maxLength(20),
-    ]),
-    email: new FormControl<string>('', [
-      Validators.required,
-      Validators.email,
-      Validators.maxLength(50),
-    ]),
-  });
+
+  hotelName: string;
+  hotelPhone: string;
+  hotelEmail: string;
+  hotelAddress: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -57,33 +43,27 @@ export class HotelAddDialogComponent implements OnInit {
   ngOnInit(): void { }
 
   add() {
-    const { address, email, name, phone } = this.formGroup.value;
 
-    const controls = {
-      nameControl: this.formGroup.controls.name,
-      emailControl: this.formGroup.controls.email,
-      addressControl: this.formGroup.controls.email,
-      phoneControl: this.formGroup.controls.phone,
-    };
-
-    const predicate = (a: Omit<Agency, 'id'>) =>
-      a.name === name &&
-      a.address === address &&
-      a.phone === phone &&
-      a.email === email;
+    const predicate = (a: Omit<Hotel, 'id'>) =>
+      a.name === this.hotelName &&
+      a.address === this.hotelAddress &&
+      a.phone === this.hotelPhone &&
+      a.email === this.hotelEmail;
 
     const condition = this.hotelService.hotels.some(predicate);
 
-    if (controls.emailControl!.hasError('email')) {
-      this.snackBar.open(this.translocoService.translate('dialogs.error_email'), 'OK');
-      return;
-    }
-
-    for (const control of Object.values(controls)) {
-      if (control.hasError('required')) {
-        this.snackBar.open(this.translocoService.translate('dialogs.error_required'), 'OK');
+    this.hotelService.getAllHotels().subscribe((res) => {
+      // categories = res.data;
+      if (res.data.some(c => c.name === this.hotelName)) {
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel türü' }), "OK");
+        this.hotelName = "";
         return;
       }
+    });
+
+    if (!this.hotelName || !this.hotelPhone || !this.hotelAddress || !this.hotelEmail) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
+      return;
     }
 
     if (condition) {
@@ -98,6 +78,16 @@ export class HotelAddDialogComponent implements OnInit {
   }
 
   closeDialog() {
-    this.dialogRef.close();
+
+    this.dialogRef.close({
+      isAdded: true,
+      element: {
+        name: this.hotelName,
+        phone: this.hotelPhone,
+        email: this.hotelEmail,
+        address: this.hotelAddress
+      }
+    });
+
   }
 }

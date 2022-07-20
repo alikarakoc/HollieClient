@@ -47,19 +47,34 @@ export class AgencyComponent implements OnInit {
               this.ngOnInit();
             });
         }
-      });    
-
-
-
-
-    
+      });     
   }
 
   update(element: Agency) {
-    this.dialog.open(AgencyUpdateDialogComponent, { data: { element } });
+    const dialog = this.dialog.open(AgencyUpdateDialogComponent, {
+       data: { element } 
+      });
+
+      dialog.afterClosed().subscribe(() => {
+        this.agencyService.updateAgency(element).subscribe((res) => {
+          console.log('res data checked');
+          console.log(res.data);
+        });
+      })
   }
 
   delete(element: Agency) {
-    this.dialog.open(AgencyDeleteDialogComponent, { data: { element } });
+    const dialog = this.dialog.open(AgencyDeleteDialogComponent, {
+       data: { element } 
+      });
+      dialog.afterClosed().subscribe((result) => {
+        if (result.isDeleted){
+          this.agencyService.deleteAgency(element).subscribe((res) => {
+            console.log(element);
+            this.ngOnInit();
+            
+          });
+        } 
+      })
   }
 }

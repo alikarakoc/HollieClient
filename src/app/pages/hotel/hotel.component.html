@@ -6,7 +6,7 @@
   </button>
 </div>
 
-<table mat-table [dataSource]="hotelService.hotels">
+<table mat-table [dataSource]="hotels">
   <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>{{ 'name' | transloco }}</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>
