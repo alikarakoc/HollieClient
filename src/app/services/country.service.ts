@@ -18,7 +18,7 @@ export class CountryService {
     return this.http.get<ListResponseModel<Country>>(`${this.baseUrl}/AllCountry`);
   }
 
-  addNewCountry(country: Partial<Country>) {
+  addCountry(country: Partial<Country>) {
     return this.http.post<ListResponseModel<Country>>(`${this.baseUrl}/add`, country);
   }
 
