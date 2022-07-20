@@ -9,26 +9,13 @@ import { ListResponseModel } from '../interfaces/listResponseModel';
   providedIn: 'root'
 })
 export class HotelService {
-  baseUrl = `${environment.baseUrl}/Hotel`;
-  hotels: Hotel[] = [
-    {
-      name: "Barut",
-      code: "1",
-      address: "lARA",
-      email: "info@Bbarut.com",
-      phone: "555 323 2323"
-    },
-    {
-      name: "hotel",
-      code: "2",
-      address: "konyaaltı",
-      email: "hotel@info",
-      phone: "555 555 55 55"
-    },
-  ];
+  baseUrl = `${environment.baseUrl}/Hotels`;
+  hotels: Hotel[] = [];
+
+  constructor(private http: HttpClient) { }
 
   getAllHotels(): Observable<ListResponseModel<Hotel>> {
-    return this.http.get<ListResponseModel<Hotel>>(`${this.baseUrl}/AllHotel`);
+    return this.http.get<ListResponseModel<Hotel>>(`${this.baseUrl}/AllHotels`);
   }
 
   addHotel(hotel: Partial<Hotel>) {
@@ -43,5 +30,5 @@ export class HotelService {
     return this.http.put<ListResponseModel<Hotel>>(`${this.baseUrl}/update?Id=${hotel.id}`, hotel);
   }
 
-  constructor(private http: HttpClient) { }
+
 }
