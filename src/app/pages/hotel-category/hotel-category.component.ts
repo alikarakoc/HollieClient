@@ -46,7 +46,7 @@ export class HotelCategoryComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.hotelCategoryService
-          .addCategory({ name: result.elementName })
+          .addCategory({ name: result.elementName, code: result.elementCode })
           .subscribe(() => {
             this.ngOnInit();
           });

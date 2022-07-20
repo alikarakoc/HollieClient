@@ -17,6 +17,7 @@ interface DialogData {
 })
 export class HotelCategoryAddDialogComponent implements OnInit {
   categoryName: string;
+  categoryCode: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -59,7 +60,8 @@ export class HotelCategoryAddDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close({
       isAdded: true,
-      elementName: this.categoryName
+      elementName: this.categoryName,
+      elementCode: this.categoryCode
     });
   }
 

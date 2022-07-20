@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from '@angular/material/table';
-import { HotelCategory } from "src/app/interfaces";
+import { Hotel, HotelCategory } from "src/app/interfaces";
 import { HotelCategoryService } from "src/app/services";
 import { HotelCategoryDeleteDialogComponent } from "../hotel-category-delete-dialog/hotel-category-delete-dialog.component";
 import { TranslocoService } from '@ngneat/transloco';
@@ -20,6 +20,7 @@ interface DialogData {
 })
 export class HotelCategoryUpdateDialogComponent implements OnInit {
   newCategoryName: string = this.data.element.name;
+  newCategoryCode: string = this.data.element.code;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -35,7 +36,6 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       this.hotels = res.data;
     });
   }
-
   hotels: HotelCategory[] = [];
 
   update() {
@@ -44,17 +44,23 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       return;
     }
 
-    if (this.hotels.some(c => c.name === this.newCategoryName)) {
+    const otherHotelCategories = this.hotels.filter(c => c.name !== this.newCategoryName && c.code !== this.newCategoryCode);
+
+    console.log(this.hotels);
+    console.log(otherHotelCategories);
+    if (otherHotelCategories.some(c => c.name === this.newCategoryName && c.code === this.newCategoryCode)) {
       console.log(this.newCategoryName);
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
       this.newCategoryName = "";
+      this.ngOnInit();
       return;
     }
 
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCategoryName }));
     this.dialogRef.close({ isUpdated: true });
     this.data.dialogRef?.close();
     this.data.element.name = this.newCategoryName;
+    this.data.element.code = this.newCategoryCode;
     this.hotelCategoryService.updateCategory(this.data.element);
     console.log(this.data.element);
     this.data.table?.renderRows();
@@ -72,7 +78,7 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result.isDeleted) {
-        this.hotelCategoryService.deleteCategory({ name: this.newCategoryName }).subscribe(() => {
+        this.hotelCategoryService.deleteCategory({ name: this.newCategoryName, code: this.newCategoryCode }).subscribe(() => {
           this.ngOnInit();
         });
       }
@@ -80,3 +86,5 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
   }
 
 }
+
+
