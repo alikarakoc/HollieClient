@@ -18,7 +18,7 @@ export class AgencyService {
     return this.http.get<ListResponseModel<Agency>>(`${this.baseUrl}/AllAgency`);
   }
 
-  addNewAgency(agency: Partial<Agency>) {
+  addAgency(agency: Partial<Agency>) {
     return this.http.post<ListResponseModel<Agency>>(`${this.baseUrl}/add`, agency);
    }
 

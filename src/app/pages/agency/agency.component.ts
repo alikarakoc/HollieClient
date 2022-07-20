@@ -19,16 +19,40 @@ export class AgencyComponent implements OnInit {
   columns: string[] = ['name', 'address', 'phone', 'email', 'actions'];
   @ViewChild(MatTable) table: MatTable<Agency>;
 
+  agencies : Agency [] = [];
+
   constructor(
     public agencyService: AgencyService,
     private dialog: MatDialog,
     public translocoService: TranslocoService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.agencyService.getAllAgencies().subscribe((res) => {
+      this.agencies = res.data;
+    });
+    console.log('on init');
+    
+   }
 
   create() {
-    this.dialog.open(AgencyAddDialogComponent, { data: { table: this.table } });
+    const dialog = this.dialog.open(AgencyAddDialogComponent, {
+      data: { table: this.table } });
+    
+      dialog.afterClosed().subscribe((result) => {
+        if (result.isAdded) {
+          this.agencyService
+            .addAgency({ name: result.elementName })
+            .subscribe(() => {
+              this.ngOnInit();
+            });
+        }
+      });    
+
+
+
+
+    
   }
 
   update(element: Agency) {
