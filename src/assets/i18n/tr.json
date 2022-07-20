@@ -5,7 +5,34 @@
     "hotel_title": "Oteller",
     "hotel_category_title": "Otel Türleri",
     "room_type_title": "Oda Tipleri",
+    "navbar": {
+        "change_language": "Dili Değiştir"
+    },
     "home": {
-        "home_paragraph": "Hollie'ye hoşgeldiniz!"
-    }
+        "home_paragraph": "Hollie'ye hoşgeldiniz!",
+        "see_more": "Daha fazla..."
+    },
+    "error": {
+        "error_text": "Aradığınız sayfa bulunamadı.",
+        "error_go_home": "Anasayfa"
+    },
+    "languages": {
+        "tr": "Türkçe",
+        "en": "İngilizce"
+    },
+    "dialogs": {
+        "delete": "Sil",
+        "cancel": "İptal",
+        "update": "Güncelle",
+        "edit": "Değiştir",
+        "add": "Ekle",
+        "add_button": "Yeni {{ name }} Ekle",
+        "delete_title": "\"{{ elementName }}\" adlı nesneyi silmek istediğinizden emin misiniz?",
+        "delete_text": "Bu işlem nesnenin bütün verilerini siler ve geri alınamaz."
+    },
+    "name": "İsim",
+    "address": "Adres",
+    "phone": "Telefon",
+    "email": "Email",
+    "actions": "İşlemler"
 }

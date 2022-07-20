@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from '@angular/material/table';
 import { Country } from 'src/app/interfaces';
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   element: Country;
@@ -20,7 +21,8 @@ export class CountryDeleteDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     // private updateDialogRef: MatDialogRef<CountryUpdateDialogComponent>,
     private dialogRef: MatDialogRef<CountryDeleteDialogComponent>,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void { }

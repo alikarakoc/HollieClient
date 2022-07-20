@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { HotelCategory } from 'src/app/interfaces';
 import { HotelCategoryService } from "src/app/services";
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   element: HotelCategory;
@@ -21,7 +22,8 @@ export class HotelCategoryDeleteDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<HotelCategoryDeleteDialogComponent>,
     private snackBar: MatSnackBar,
-    private hotelCategoryService: HotelCategoryService
+    private hotelCategoryService: HotelCategoryService,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void { }

@@ -29,7 +29,12 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.hotelCategoryService.getAllHotels().subscribe(res => {
+      this.hotels = res.data;
+    });
   }
+
+  hotels: HotelCategory[] = [];
 
   update() {
     if (!this.newCategoryName) {
@@ -37,15 +42,12 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       return;
     }
 
-    this.hotelCategoryService.getAllHotels().subscribe(res => {
-      console.log(res.data);
-      if (res.data.some(c => c.name === this.newCategoryName)) {  
-        console.log(this.newCategoryName);
-        this.snackBar.open("Please type another hotel category data.", "OK");
-        this.newCategoryName = "";
-        return;
-      }
-    });
+    if (this.hotels.some(c => c.name === this.newCategoryName)) {
+      console.log(this.newCategoryName);
+      this.snackBar.open("Please type another hotel category data.", "OK");
+      this.newCategoryName = "";
+      return;
+    }
 
     this.snackBar.open(`${this.data.element.name} successfully updated.`);
     this.dialogRef.close({ isUpdated: true });
@@ -62,8 +64,16 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
   }
 
   delete() {
-    this.dialog.open(HotelCategoryDeleteDialogComponent, {
+    const dialog = this.dialog.open(HotelCategoryDeleteDialogComponent, {
       data: { element: this.data.element, dialogRef: this.dialogRef }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      if (result.isDeleted) {
+        this.hotelCategoryService.deleteCategory({ name: this.newCategoryName }).subscribe(() => {
+          this.ngOnInit();
+        });
+      }
     });
   }
 

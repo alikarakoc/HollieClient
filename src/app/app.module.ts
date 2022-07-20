@@ -33,6 +33,7 @@ import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryCompone
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { HomeComponent } from './pages/home/home.component';
+import { TranslocoRootModule } from './transloco-root.module';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { HomeComponent } from './pages/home/home.component';
     AllFormsModule,
     MaterialModule,
     CdkModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslocoRootModule
   ],
   providers: [
     {

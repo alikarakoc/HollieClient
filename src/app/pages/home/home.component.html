@@ -1,10 +1,10 @@
-<h1>Homepage</h1>
+<h1>{{ 'home_title' | transloco }}</h1>
 
-<h3>Welcome to <strong>Hollie</strong>!</h3>
+<h3>{{ 'home.home_paragraph' | transloco }}</h3>
 
 <div class="row my-2">
     <mat-card class="col-md-4 mx-2">
-        <mat-card-title>Countries</mat-card-title>
+        <mat-card-title>{{ 'country_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem"
@@ -15,11 +15,11 @@
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/countries">See More...</button>
+            <button mat-flat-button color="accent" routerLink="/countries">{{ 'home.see_more' | transloco }}</button>
         </mat-card-actions>
     </mat-card>
     <mat-card class="col-md-4 mx-2">
-        <mat-card-title>Room Types</mat-card-title>
+        <mat-card-title>{{ 'room_type_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem" *ngFor="let item of roomTypeService.rooms | slice:0:3; let last = last;">
@@ -29,11 +29,11 @@
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/room-types">See More...</button>
+            <button mat-flat-button color="accent" routerLink="/room-types">{{ 'home.see_more' | transloco }}</button>
         </mat-card-actions>
     </mat-card>
     <mat-card class="col-md-4 mx-2">
-        <mat-card-title>Agencies</mat-card-title>
+        <mat-card-title>{{ 'agency_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem"
@@ -44,14 +44,14 @@
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/agencies">See More...</button>
+            <button mat-flat-button color="accent" routerLink="/agencies">{{ 'home.see_more' | transloco }}</button>
         </mat-card-actions>
     </mat-card>
 </div>
 
 <div class="row my-2">
     <mat-card class="col-md-4 mx-2">
-        <mat-card-title>Hotel</mat-card-title>
+        <mat-card-title>{{ 'hotel_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem"
@@ -62,11 +62,26 @@
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/hotels">See More...</button>
+            <button mat-flat-button color="accent" routerLink="/hotels">{{ 'home.see_more' | transloco }}</button>
         </mat-card-actions>
     </mat-card>
     <mat-card class="col-md-4 mx-2">
-        <mat-card-title>Hotel Categories</mat-card-title>
+        <mat-card-title>{{ 'hotel_category_title' | transloco }}</mat-card-title>
+        <mat-card-content>
+            <mat-list role="list">
+                <mat-list-item role="listitem"
+                    *ngFor="let item of hotelCategories | slice:0:3; let last = last">
+                    {{ item.name }}
+                    <mat-divider *ngIf="!last"></mat-divider>
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-flat-button color="accent" routerLink="/hotel-categories">{{ 'home.see_more' | transloco }}</button>
+        </mat-card-actions>
+    </mat-card>
+    <mat-card class="col-md-4 mx-2">
+        <mat-card-title>{{ 'hotel_category_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list">
                 <mat-list-item role="listitem"
@@ -77,22 +92,7 @@
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/hotel-categories">See More...</button>
-        </mat-card-actions>
-    </mat-card>
-    <mat-card class="col-md-4 mx-2">
-        <mat-card-title>Hotel Categories</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list">
-                <mat-list-item role="listitem"
-                    *ngFor="let item of hotelCategoryService.categories | slice:0:3; let last = last">
-                    {{ item.name }}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/hotel-categories">See More...</button>
+            <button mat-flat-button color="accent" routerLink="/hotel-categories">{{ 'home.see_more' | transloco }}</button>
         </mat-card-actions>
     </mat-card>
 </div>
@@ -109,7 +109,7 @@
                 </div>
                 <div class="media-body text-right">
                     <mat-card-title>{{ countryService.countries.length }}</mat-card-title>
-                    <mat-card-subtitle>Countries</mat-card-subtitle>
+                    <mat-card-subtitle>{{ 'country_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
         </mat-card-content>
@@ -122,8 +122,8 @@
                     <mat-icon class="icon">bed</mat-icon>
                 </div>
                 <div class="media-body text-right">
-                    <mat-card-title>{{ roomTypeService.rooms.length }}</mat-card-title>
-                    <mat-card-subtitle>Room Types</mat-card-subtitle>
+                    <mat-card-title>{{ roomTypes.length }}</mat-card-title>
+                    <mat-card-subtitle>{{ 'room_type_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
         </mat-card-content>
@@ -132,11 +132,11 @@
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">
-                    <mat-icon class="icon">work</mat-icon>
+                    <mat-icon class="icon">beach_access</mat-icon>
                 </div>
                 <div class="media-body text-right">
-                    <mat-card-title>{{ agencyService.agencies.length }}</mat-card-title>
-                    <mat-card-subtitle>Agencies</mat-card-subtitle>
+                    <mat-card-title>{{ hotelCategories.length }}</mat-card-title>
+                    <mat-card-subtitle>{{ 'hotel_category_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
         </mat-card-content>

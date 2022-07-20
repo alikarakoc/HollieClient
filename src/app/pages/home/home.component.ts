@@ -17,7 +17,20 @@ export class HomeComponent implements OnInit {
     public hotelService: HotelService
   ) { }
 
+  countries: any[] = [];
+  roomTypes: any[] = [];
+  agencies = [];
+  hotelCategories: any[] = [];
+  hotels: any[] = [];
+
   ngOnInit(): void {
+    this.roomTypeService.getAllRoomTypes().subscribe((res) => {
+      this.roomTypes = res.data;
+    });
+
+    this.hotelCategoryService.getAllHotels().subscribe((res) => {
+      this.hotelCategories = res.data;
+    });
   }
 
 }

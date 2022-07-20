@@ -4,8 +4,35 @@
     "country_title": "Countries",
     "hotel_title": "Hotels",
     "hotel_category_title": "Hotel Categories",
-    "room_type_title": "Oda Tipleri",
+    "room_type_title": "Room Types",
+    "navbar": {
+        "change_language": "Change Language"
+    },
     "home": {
-        "home_paragraph": "Hollie'ye hoşgeldiniz!"
-    }
+        "home_paragraph": "Welcome to Hollie!",
+        "see_more": "See More..."
+    },
+    "error": {
+        "error_text": "The page you are looking for cannot be found.",
+        "error_go_home": "Homepage"
+    },
+    "languages": {
+        "tr": "Turkish",
+        "en": "English"
+    },
+    "dialogs": {
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "update": "Update",
+        "edit": "Edit",
+        "add": "Add",
+        "add_button": "Add New {{ name }}",
+        "delete_title": "Are you sure to delete the \"{{ elementName }}\" element?",
+        "delete_text": "This will delete all the element's datas and cannot be undone."
+    },
+    "name": "Name",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "actions": "Actions"
 }
