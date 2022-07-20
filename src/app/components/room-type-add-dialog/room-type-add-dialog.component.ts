@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { RoomType } from 'src/app/interfaces';
 import { RoomTypeService } from 'src/app/services';
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   table: MatTable<RoomType>;
@@ -21,27 +22,28 @@ export class RoomTypeAddDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
     private dialogRef: MatDialogRef<RoomTypeAddDialogComponent>,
     private snackBar: MatSnackBar,
-    private roomTypeService: RoomTypeService
+    private roomTypeService: RoomTypeService,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void { }
 
   add() {
     if (!this.roomTypeName) {
-      this.snackBar.open('Please type the blank areas', 'OK');
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), 'OK');
       this.clearInputs();
       return;
     }
 
     this.roomTypeService.getAllRoomTypes().subscribe(res => {
       if (res.data.some(c => c.name === this.roomTypeName)) {
-        this.snackBar.open('Please type another room type name', 'OK');
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'room type' : 'oda tipi' }), 'OK');
         this.clearInputs();
         return;
       }
     });
 
-    this.snackBar.open(`${this.roomTypeName} successfully added to your table.`);
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.roomTypeName }));
 
     this.closeDialog();
     this.data.table.renderRows();

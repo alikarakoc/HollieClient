@@ -5,6 +5,7 @@ import { MatTable } from '@angular/material/table';
 import { HotelCategory } from "src/app/interfaces";
 import { HotelCategoryService } from "src/app/services";
 import { HotelCategoryDeleteDialogComponent } from "../hotel-category-delete-dialog/hotel-category-delete-dialog.component";
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   element: HotelCategory;
@@ -25,7 +26,8 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<HotelCategoryUpdateDialogComponent>,
     private hotelCategoryService: HotelCategoryService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void {
@@ -38,18 +40,18 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
 
   update() {
     if (!this.newCategoryName) {
-      this.snackBar.open("Please type the blank areas", "OK");
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
 
     if (this.hotels.some(c => c.name === this.newCategoryName)) {
       console.log(this.newCategoryName);
-      this.snackBar.open("Please type another hotel category data.", "OK");
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
       this.newCategoryName = "";
       return;
     }
 
-    this.snackBar.open(`${this.data.element.name} successfully updated.`);
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
     this.dialogRef.close({ isUpdated: true });
     this.data.dialogRef?.close();
     this.data.element.name = this.newCategoryName;

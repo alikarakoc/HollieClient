@@ -1,41 +1,40 @@
-<h1 mat-dialog-title>Update Agency</h1>
+<h1 mat-dialog-title>{{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Agency' : 'Acenta' }) }}</h1>
 
 <div mat-dialog-content>
     <form [formGroup]="formGroup">
         <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput placeholder="Agency Name" formControlName="name" (keyup.enter)="update()">
+            <mat-label>{{ 'name' | transloco }}</mat-label>
+            <input matInput formControlName="name" (keyup.enter)="update()">
         </mat-form-field>
 
         <br>
 
         <mat-form-field>
-            <mat-label>Address</mat-label>
-            <textarea matInput placeholder="Agency Address" formControlName="address"
-                (keyup.enter)="update()"></textarea>
+            <mat-label>{{ 'address' | transloco }}</mat-label>
+            <textarea matInput formControlName="address" (keyup.enter)="update()"></textarea>
         </mat-form-field>
 
         <br>
 
         <mat-form-field>
-            <mat-label>Phone</mat-label>
-            <input matInput type="tel" placeholder="Agency Phone" formControlName="phone" (keyup.enter)="update()">
+            <mat-label>{{ 'phone' | transloco }}</mat-label>
+            <input matInput type="tel" formControlName="phone" (keyup.enter)="update()">
         </mat-form-field>
 
         <br>
 
         <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput type="email" placeholder="Agency Email" formControlName="email" (keyup.enter)="update()">
+            <mat-label>{{ 'email' | transloco }}</mat-label>
+            <input matInput type="email" formControlName="email" (keyup.enter)="update()">
         </mat-form-field>
     </form>
 </div>
 
 <div mat-dialog-actions>
-    <button mat-flat-button color="primary" (click)="update()">Update</button>
+    <button mat-flat-button color="primary" (click)="update()">{{ 'dialogs.update' | transloco }}</button>
     <button mat-flat-button color="warn" (click)="delete()">
         <mat-icon>delete</mat-icon>
-        Delete
+        {{ 'dialogs.delete' | transloco }}
     </button>
-    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
 </div>

@@ -29,7 +29,7 @@ export class HotelDeleteDialogComponent implements OnInit {
   }
 
   delete() {
-    this.snackBar.open(`${this.data.element.name} successfully deleted.`);
+    this.snackBar.open(this.translocoService.translate('dialogs.delete_success', { elementName: this.data.element.name }));
     this.dialogRef.close();
     this.data.dialogRef.close();
   }

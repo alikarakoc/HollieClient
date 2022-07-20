@@ -4,6 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from "@angular/material/table";
 import { HotelCategory } from "src/app/interfaces";
 import { HotelCategoryService } from "src/app/services";
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   table: MatTable<HotelCategory>;
@@ -21,30 +22,32 @@ export class HotelCategoryAddDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<HotelCategoryAddDialogComponent>,
-    private hotelCategoryService: HotelCategoryService
+    private hotelCategoryService: HotelCategoryService,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void {
+    console.log(this.translocoService.getActiveLang());
   }
 
   add() {
     // let categories: HotelCategory[] = [];
 
     if (!this.categoryName) {
-      this.snackBar.open("Please type the blank areas", "OK");
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
 
     this.hotelCategoryService.getAllHotels().subscribe((res) => {
       // categories = res.data;
       if (res.data.some(c => c.name === this.categoryName)) {
-        this.snackBar.open("Please type another hotel category name", "OK");
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel türü' }), "OK");
         this.categoryName = "";
         return;
       }
     });
 
-    this.snackBar.open(`${this.categoryName} successfully added to your table.`);
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.categoryName }));
 
     // O an...
     // this.hotelCategoryService.addCategory({ name: this.categoryName });

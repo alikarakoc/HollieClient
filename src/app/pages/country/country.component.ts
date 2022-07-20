@@ -4,6 +4,7 @@ import { MatTable } from "@angular/material/table";
 import { CountryAddDialogComponent, CountryDeleteDialogComponent, CountryUpdateDialogComponent } from "src/app/components";
 import { Country } from "src/app/interfaces";
 import { CountryService } from "src/app/services";
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-country',
@@ -14,7 +15,7 @@ export class CountryComponent implements OnInit {
   columns: string[] = ["name", "actions"];
   @ViewChild(MatTable) table: MatTable<Country>;
 
-  constructor(public countryService: CountryService, private dialog: MatDialog) { }
+  constructor(public countryService: CountryService, private dialog: MatDialog, public translocoService: TranslocoService) { }
 
   ngOnInit(): void {
   }

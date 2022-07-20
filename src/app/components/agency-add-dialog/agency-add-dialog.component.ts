@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { Agency } from 'src/app/interfaces';
 import { AgencyService } from 'src/app/services/agency.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   table: MatTable<Agency>;
@@ -49,10 +50,11 @@ export class AgencyAddDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<AgencyAddDialogComponent>,
-    private agencyService: AgencyService
-  ) {}
+    private agencyService: AgencyService,
+    public translocoService: TranslocoService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   add() {
     const { address, email, name, phone } = this.formGroup.value;
@@ -73,23 +75,23 @@ export class AgencyAddDialogComponent implements OnInit {
     const condition = this.agencyService.agencies.some(predicate);
 
     if (controls.emailControl!.hasError('email')) {
-      this.snackBar.open('Please type a valid email', 'OK');
+      this.snackBar.open(this.translocoService.translate('dialogs.error_email'), 'OK');
       return;
     }
 
     for (const control of Object.values(controls)) {
       if (control.hasError('required')) {
-        this.snackBar.open('Please type the blank areas', 'OK');
+        this.snackBar.open(this.translocoService.translate('dialogs.error_required'), 'OK');
         return;
       }
     }
 
     if (condition) {
-      this.snackBar.open('Please type another agency name', 'OK');
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'agency' : 'acenta' }), 'OK');
       return;
     }
 
-    this.snackBar.open(`${name} successfully added to your agency table.`);
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: name }));
 
     this.closeDialog();
     this.data.table.renderRows();

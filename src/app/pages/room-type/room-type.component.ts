@@ -1,17 +1,14 @@
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
-import { map, Observable, shareReplay } from 'rxjs';
-
 import {
   RoomTypeAddDialogComponent,
   RoomTypeDeleteDialogComponent,
   RoomTypeUpdateDialogComponent,
 } from 'src/app/components';
-
 import { RoomType } from 'src/app/interfaces';
 import { RoomTypeService } from 'src/app/services';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-room-type',
@@ -26,8 +23,9 @@ export class RoomTypeComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    public roomTypeService: RoomTypeService
-  ) {}
+    public roomTypeService: RoomTypeService,
+    public translocoService: TranslocoService
+  ) { }
 
   ngOnInit(): void {
     this.roomTypeService.getAllRoomTypes().subscribe((res) => {

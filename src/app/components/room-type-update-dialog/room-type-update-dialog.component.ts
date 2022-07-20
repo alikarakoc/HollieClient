@@ -9,6 +9,7 @@ import { MatTable } from '@angular/material/table';
 import { RoomType } from 'src/app/interfaces';
 import { RoomTypeService } from 'src/app/services';
 import { RoomTypeDeleteDialogComponent } from '..';
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   element: RoomType;
@@ -28,7 +29,8 @@ export class RoomTypeUpdateDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<RoomTypeUpdateDialogComponent>,
     private snackBar: MatSnackBar,
     private roomTypeService: RoomTypeService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void { }
@@ -42,17 +44,15 @@ export class RoomTypeUpdateDialogComponent implements OnInit {
       (r) => r.name === this.newType
     );
     if (!this.newType) {
-      this.snackBar.open('Please type the blank areas', 'OK');
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), 'OK');
       return;
     }
     if (condition) {
-      this.snackBar.open('Please type another room type name', 'OK');
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === "en" ? 'room type' : 'oda tipi' }), 'OK');
       this.newType = '';
       return;
     }
-    this.snackBar.open(
-      `${this.dialogData.element.name} room type successfully updated to ${this.newType}`
-    );
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.dialogData.element.name }));
     // this.dialogData.element.name = this.newType;
     this.dialogData.table.renderRows();
     this.closeDialog();

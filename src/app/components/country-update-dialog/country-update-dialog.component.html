@@ -1,17 +1,17 @@
-<h1 mat-dialog-title>Update Country</h1>
+<h1 mat-dialog-title>{{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Country' : 'Ülke' }) }}</h1>
 
 <div mat-dialog-content>
     <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Country Name" [(ngModel)]="newCountryName" (keyup.enter)="update()">
+        <mat-label>{{ 'name' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="newCountryName" (keyup.enter)="update()">
     </mat-form-field>
 </div>
 
 <div mat-dialog-actions>
-    <button mat-flat-button color="primary" (click)="update()">Update</button>
+    <button mat-flat-button color="primary" (click)="update()">{{ 'dialogs.update' | transloco }}</button>
     <button mat-flat-button color="warn" (click)="delete()">
         <mat-icon>delete</mat-icon>
-        Delete
+        {{ 'dialogs.delete' | transloco }}
     </button>
-    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
 </div>
