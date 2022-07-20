@@ -28,6 +28,8 @@ const routes: Routes = [
     path: "hotels",
     component: HotelComponent
   },
+  
+
   {
     path: "hotel-categories",
     component: HotelCategoryComponent
