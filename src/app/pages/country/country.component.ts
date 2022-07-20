@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { MatTable } from "@angular/material/table";
-import { 
+import {
   CountryAddDialogComponent,
   CountryDeleteDialogComponent,
-  CountryUpdateDialogComponent 
+  CountryUpdateDialogComponent
   } from "src/app/components";
 import { Country } from "src/app/interfaces";
 import { CountryService } from "src/app/services";
@@ -39,8 +39,10 @@ export class CountryComponent implements OnInit {
   }
 
 
-  
-  createCountry() {
+
+
+  create() {
+
     const dialog = this.dialog.open(CountryAddDialogComponent, {
       data: { table: this.table },
     });
