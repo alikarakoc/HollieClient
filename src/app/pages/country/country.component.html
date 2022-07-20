@@ -1,7 +1,7 @@
 <div class="header">
     <h1>{{ 'country_title' | transloco }}</h1>
     <span class="spacer"></span>
-    <button mat-flat-button color="primary" class="new-button" (click)="createCountry()">
+    <button mat-flat-button color="primary" class="new-button" (click)="create()">
         {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Country' : 'Ülke' }) }}
     </button>
 </div>
