@@ -21,3 +21,9 @@ export { HotelCategoryDeleteDialogComponent } from './hotel-category-delete-dial
 export { HotelAddDialogComponent } from './hotel-add-dialog/hotel-add-dialog.component';
 export { HotelDeleteDialogComponent } from './hotel-delete-dialog/hotel-delete-dialog.component';
 export { HotelUpdateDialogComponent } from './hotel-update-dialog/hotel-update-dialog.component';
+
+
+export { MarketAddDialogComponent } from './market-add-dialog/market-add-dialog.component';
+export { MarketDeleteDialogComponent } from './market-delete-dialog/market-delete-dialog.component';
+export { MarketUpdateDialogComponent } from './market-update-dialog/market-update-dialog.component';
+ 
