@@ -3,7 +3,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatTable } from "@angular/material/table";
 import { HotelAddDialogComponent, HotelDeleteDialogComponent, HotelUpdateDialogComponent } from "src/app/components";
 import { Hotel } from "src/app/interfaces";
-import { HotelService } from "src/app/services/hotel.service";
+import { HotelService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
@@ -17,7 +17,11 @@ export class HotelComponent implements OnInit {
 
   hotels:Hotel[]=[];
 
-  constructor(public hotelService: HotelService, private dialog: MatDialog, public translocoService: TranslocoService) { }
+  constructor(
+    public hotelService: HotelService,
+    private dialog: MatDialog,
+    public translocoService: TranslocoService
+    ) { }
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe((res) => {
@@ -46,7 +50,17 @@ export class HotelComponent implements OnInit {
   }
 
   delete(element: Hotel) {
-    this.dialog.open(HotelDeleteDialogComponent, { data: { element } });
+    const dialog = this.dialog.open(HotelDeleteDialogComponent, {
+      data: { element },
+    });
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isDeleted) {
+        this.hotelService.deleteHotel(element).subscribe((res) => {
+          console.log(element);
+          this.ngOnInit();
+        });
+      }
+    });
   }
 
 }
