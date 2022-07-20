@@ -46,7 +46,7 @@ export class HotelCategoryComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.hotelCategoryService
-          .addCategory({ name: result.elementName })
+          .addCategory({ name: result.elementName, code: result.elementCode })
           .subscribe(() => {
             this.ngOnInit();
           });
@@ -63,7 +63,7 @@ export class HotelCategoryComponent implements OnInit {
       this.hotelCategoryService.updateCategory(element).subscribe((res) => {
         // this.hotel.name = element.name;
         // this.hotel.id = element.id;
-        console.log('res data checkec');
+        console.log('res data checked');
         console.log(res.data);
       });
     });

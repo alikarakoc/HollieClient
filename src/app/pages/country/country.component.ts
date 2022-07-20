@@ -40,7 +40,9 @@ export class CountryComponent implements OnInit {
 
 
 
+
   createNewCountry() {
+
     const dialog = this.dialog.open(CountryAddDialogComponent, {
       data: { table: this.table },
     });
