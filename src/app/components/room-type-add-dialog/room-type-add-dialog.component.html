@@ -1,13 +1,15 @@
-<h1 mat-dialog-title>Create A New Room Type</h1>
+<h1 mat-dialog-title>
+    {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Room Type' : 'Oda Tipi' }) }}
+</h1>
 
 <div mat-dialog-actions>
     <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Room Type Name" [(ngModel)]="roomTypeName" (keyup.enter)="add()">
+        <mat-label>{{ 'name' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="roomTypeName" (keyup.enter)="add()">
     </mat-form-field>
 </div>
 
 <div mat-dialog-actions>
-    <button mat-flat-button color="primary" (click)="add()">Add</button>
-    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="primary" (click)="add()">{{ 'dialogs.add' | transloco }}</button>
+    <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
 </div>

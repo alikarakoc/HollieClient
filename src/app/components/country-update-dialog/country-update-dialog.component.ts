@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Country } from 'src/app/interfaces';
 import { CountryService } from 'src/app/services';
 import { CountryDeleteDialogComponent } from '../country-delete-dialog/country-delete-dialog.component';
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   element: Country;
@@ -26,7 +27,8 @@ export class CountryUpdateDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<CountryUpdateDialogComponent>,
     private countryService: CountryService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void { }
@@ -36,17 +38,15 @@ export class CountryUpdateDialogComponent implements OnInit {
       (c) => c.name === this.newCountryName
     );
     if (!this.newCountryName) {
-      this.snackBar.open('Please type the blank areas', 'OK');
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), 'OK');
       return;
     }
     if (condition) {
-      this.snackBar.open('Please type another country name', 'OK');
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'country' : 'ülke' }), 'OK');
       this.newCountryName = '';
       return;
     }
-    this.snackBar.open(
-      `${this.data.element.name} successfully updated to ${this.newCountryName}`
-    );
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.data.element.name }));
     // this.data.element.name = this.newCountryName;
     this.closeDialog();
   }

@@ -1,13 +1,15 @@
-<h1 mat-dialog-title>Create A New Hotel Category</h1>
+<h1 mat-dialog-title>
+    {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Hotel Category' : 'Otel Türü' }) }}
+</h1>
 
 <div mat-dialog-content>
     <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Category Name" (keyup.enter)="add()" [(ngModel)]="categoryName">
+        <mat-label>{{ 'name' | transloco }}</mat-label>
+        <input matInput (keyup.enter)="add()" [(ngModel)]="categoryName">
     </mat-form-field>
 </div>
 
 <div mat-dialog-actions>
-    <button mat-flat-button color="primary" (click)="add()">Add</button>
-    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="primary" (click)="add()">{{ 'dialogs.add' | transloco }}</button>
+    <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
 </div>

@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Agency } from 'src/app/interfaces';
 import { AgencyService } from 'src/app/services/agency.service';
 import { AgencyDeleteDialogComponent } from '../agency-delete-dialog/agency-delete-dialog.component';
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   element: Agency;
@@ -54,7 +55,8 @@ export class AgencyUpdateDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<AgencyUpdateDialogComponent>,
     private agencyService: AgencyService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void { }
@@ -76,24 +78,24 @@ export class AgencyUpdateDialogComponent implements OnInit {
     const condition = this.agencyService.agencies.some(predicate);
 
     if (condition) {
-      this.snackBar.open('Please type another agency data', 'OK');
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'agency' : 'acenta' }), "OK");
       this.clearAreas();
       return;
     }
 
     if (controls.emailControl!.hasError('email')) {
-      this.snackBar.open('Please type a valid email', 'OK');
+      this.snackBar.open(this.translocoService.translate('dialogs.error_email'), 'OK');
       return;
     }
 
     for (const control of Object.values(controls)) {
       if (control.hasError('required')) {
-        this.snackBar.open("Please type the blank areas", "OK");
+        this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
         return;
       }
     }
 
-    this.snackBar.open(`${this.data.element.name} successfully updated`);
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.data.element.name }));
     this.closeDialog();
   }
 

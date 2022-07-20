@@ -8,6 +8,7 @@ import {
 } from 'src/app/components';
 import { HotelCategory } from 'src/app/interfaces';
 import { HotelCategoryService } from 'src/app/services';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-hotel-category',
@@ -26,8 +27,9 @@ export class HotelCategoryComponent implements OnInit {
 
   constructor(
     public hotelCategoryService: HotelCategoryService,
-    private dialog: MatDialog
-  ) {}
+    private dialog: MatDialog,
+    public translocoService: TranslocoService
+  ) { }
 
   ngOnInit(): void {
     this.hotelCategoryService.getAllHotels().subscribe((res) => {

@@ -28,7 +28,14 @@
         "add": "Ekle",
         "add_button": "Yeni {{ name }} Ekle",
         "delete_title": "\"{{ elementName }}\" adlı nesneyi silmek istediğinizden emin misiniz?",
-        "delete_text": "Bu işlem nesnenin bütün verilerini siler ve geri alınamaz."
+        "delete_text": "Bu işlem nesnenin bütün verilerini siler ve geri alınamaz.",
+        "edit_title": "{{ name }} Değiştir",
+        "error_same": "Lütfen başka bir {{ name }} verisi girin",
+        "error_email": "Lütfen geçerli bir Email adresi girin",
+        "error_required": "Lütfen boşlukları doldurun",
+        "update_success": "{{ elementName }} başarıyla güncellendi.",
+        "add_success": "{{ elementName }} başarıyla tablonuza eklendi.",
+        "delete_success": "{{ elementName }} başarıyla silindi."
     },
     "name": "İsim",
     "address": "Adres",

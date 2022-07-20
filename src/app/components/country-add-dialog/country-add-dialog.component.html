@@ -1,9 +1,11 @@
-<h1 mat-dialog-title>Create A New Country</h1>
+<h1 mat-dialog-title>
+    {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Country' : 'Ülke' }) }}
+</h1>
 
 <div mat-dialog-content>
     <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput placeholder="Country Name" [(ngModel)]="countryName" (keyup.enter)="add()">
+        <mat-label>{{ 'name' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="countryName" (keyup.enter)="add()">
     </mat-form-field>
 </div>
 

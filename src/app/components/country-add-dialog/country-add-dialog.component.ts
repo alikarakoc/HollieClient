@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from "@angular/material/table";
 import { Country } from "src/app/interfaces";
 import { CountryService } from 'src/app/services';
+import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   table: MatTable<Country>;
@@ -21,7 +22,8 @@ export class CountryAddDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<CountryAddDialogComponent>,
-    private countryService: CountryService
+    private countryService: CountryService,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void { }
@@ -29,11 +31,11 @@ export class CountryAddDialogComponent implements OnInit {
   add() {
     const condition = this.countryService.countries.some(c => c.name === this.countryName);
     if (!this.countryName) {
-      this.snackBar.open("Please type the blank areas", "OK");
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
     if (condition) {
-      this.snackBar.open("Please type another country name", "OK");
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'country' : 'ülke' }), "OK");
       this.countryName = "";
       return;
     }
@@ -41,7 +43,7 @@ export class CountryAddDialogComponent implements OnInit {
     //   name: this.countryName,
     //   code: "434"
     // });
-    this.snackBar.open(`${this.countryName} successfully added to your country table.`);
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.countryName }));
     this.closeDialog();
     this.data.table.renderRows();
   }

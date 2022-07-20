@@ -4,6 +4,7 @@ import { MatTable } from "@angular/material/table";
 import { HotelAddDialogComponent, HotelDeleteDialogComponent, HotelUpdateDialogComponent } from "src/app/components";
 import { Hotel } from "src/app/interfaces";
 import { HotelService } from "src/app/services/hotel.service";
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-hotel',
@@ -14,7 +15,7 @@ export class HotelComponent implements OnInit {
   columns: string[] = ["name", "address", "phone", "email", "actions"];
   @ViewChild(MatTable) table: MatTable<Hotel>;
 
-  constructor(public hotelService: HotelService, private dialog: MatDialog) { }
+  constructor(public hotelService: HotelService, private dialog: MatDialog, public translocoService: TranslocoService) { }
 
   ngOnInit(): void {
   }
