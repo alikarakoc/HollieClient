@@ -16,7 +16,7 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./hotel-category.component.scss'],
 })
 export class HotelCategoryComponent implements OnInit {
-  columns: string[] = ['name', 'actions'];
+  columns: string[] = ['code', 'name', 'actions'];
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
 
   hotels: HotelCategory[] = [];
