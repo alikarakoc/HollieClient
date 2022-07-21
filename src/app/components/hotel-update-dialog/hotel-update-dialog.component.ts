@@ -55,7 +55,7 @@ export class HotelUpdateDialogComponent implements OnInit {
       return;
     }
 
-    const otherHotels = this.hotels.filter(c => c.name !== this.newHotelName && c.address !== this.newHotelAddress && c.phone !== this.newHotelPhone && c.email !== this.newHotelEmail);
+    const otherHotels = this.hotels.filter(c => c.name !== this.newHotelName && c.address !== this.newHotelAddress && c.phone !== this.newHotelPhone && c.email !== this.newHotelEmail && c.hotelCategoryId !== this.newHotelCategoryId);
 
     if (otherHotels.some(c => c.name === this.newHotelName && c.address === this.newHotelAddress && c.phone === this.newHotelPhone && c.email === this.newHotelEmail)) {
       console.log(this.newHotelName, this.newHotelEmail, this.newHotelPhone, this.newHotelAddress);
@@ -67,17 +67,19 @@ export class HotelUpdateDialogComponent implements OnInit {
       return;
     }
 
+    console.log(this.newHotelCategoryId);
+
     this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
-    this.dialogRef.close({ isUpdated: true });
     this.data.dialogRef?.close();
     this.data.element.name = this.newHotelName;
     this.data.element.phone = this.newHotelPhone;
     this.data.element.email = this.newHotelEmail;
     this.data.element.address = this.newHotelAddress;
-    this.hotelService.updateHotel(this.data.element);
+    this.data.element.hotelCategoryId = this.newHotelCategoryId;
     console.log(this.data.element);
     this.data.table?.renderRows();
-    this.closeDialog();
+    // this.hotelService.updateHotel(this.data.element)
+    this.dialogRef.close({ isUpdated: true });
   }
 
   closeDialog() {

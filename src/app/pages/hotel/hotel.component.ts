@@ -12,7 +12,7 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./hotel.component.scss']
 })
 export class HotelComponent implements OnInit {
-  columns: string[] = ["name", "address", "phone", "email", "actions", "HotelCategoryId"];
+  columns: string[] = ["name", "address", "phone", "email", "HotelCategoryId", "actions"];
   @ViewChild(MatTable) table: MatTable<Hotel>;
 
   hotels: Hotel[] = [];
@@ -57,7 +57,13 @@ export class HotelComponent implements OnInit {
   }
 
   update(element: Hotel) {
-    this.dialog.open(HotelUpdateDialogComponent, { data: { element } });
+    const dialog = this.dialog.open(HotelUpdateDialogComponent, { data: { element } });
+
+    dialog.afterClosed().subscribe(result => {
+      if (result.isUpdated) {
+        this.hotelService.updateHotel(element).subscribe(() => this.ngOnInit());
+      }
+    })
   }
 
   delete(element: Hotel) {
