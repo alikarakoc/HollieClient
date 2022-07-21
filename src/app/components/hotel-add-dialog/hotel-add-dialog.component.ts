@@ -18,6 +18,7 @@ interface FormData {
   address: FormType<string>;
   phone: FormType<string /* Phone */>;
   email: FormType<string>;
+  HotelCategoryId: FormType<number>;
 }
 
 @Component({
@@ -31,6 +32,7 @@ export class HotelAddDialogComponent implements OnInit {
   hotelPhone: string;
   hotelEmail: string;
   hotelAddress: string;
+  hotelCategoryId: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -48,6 +50,7 @@ export class HotelAddDialogComponent implements OnInit {
       a.name === this.hotelName &&
       a.address === this.hotelAddress &&
       a.phone === this.hotelPhone &&
+      a.hotelCategoryId === this.hotelCategoryId &&
       a.email === this.hotelEmail;
 
     const condition = this.hotelService.hotels.some(predicate);
@@ -85,7 +88,8 @@ export class HotelAddDialogComponent implements OnInit {
         name: this.hotelName,
         phone: this.hotelPhone,
         email: this.hotelEmail,
-        address: this.hotelAddress
+        address: this.hotelAddress,
+        HotelCategoryId: this.hotelCategoryId
       }
     });
 
