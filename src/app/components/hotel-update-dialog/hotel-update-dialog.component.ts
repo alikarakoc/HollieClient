@@ -19,6 +19,7 @@ interface DialogData {
   styleUrls: ['./hotel-update-dialog.component.scss']
 })
 export class HotelUpdateDialogComponent implements OnInit {
+  newHotelCategoryId: number = this.data.element.hotelCategoryId;
   newHotelName: string = this.data.element.name;
   newHotelAddress: string = this.data.element.address;
   newHotelPhone: string = this.data.element.phone;

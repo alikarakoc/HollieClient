@@ -22,6 +22,9 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
   newCategoryName: string = this.data.element.name;
   newCategoryCode: string = this.data.element.code;
 
+  sameCodeCheck = false;
+  sameNameCheck = false;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<HotelCategoryUpdateDialogComponent>,
@@ -43,21 +46,59 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
-    debugger;
-    //const otherHotelCategories = this.hotels.filter(c => c.name !== this.newCategoryName && c.code !== this.newCategoryCode);
+
+    // const otherHotelCategories = this.hotels.filter(c => c.name !== this.newCategoryName && c.code !== this.newCategoryCode);
     const otherHotelCategories = this.hotels;
 
     console.log(this.hotels);
     console.log(otherHotelCategories);
 
-    if(otherHotelCategories.findIndex(c=>c.name==this.newCategoryName.toString())<1)
-    {
-      if (otherHotelCategories.some(c => c.name === this.newCategoryName && c.code === this.newCategoryCode)) {
-        console.log(this.newCategoryName);
-        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
-        this.newCategoryName = "";
-        this.ngOnInit();
-        return;
+
+    if (otherHotelCategories.findIndex(c => c.name == this.newCategoryName.toString() || c.code == this.newCategoryCode.toString()) > -1) {
+      { if (otherHotelCategories.some(c => c.name == this.newCategoryName && c.code == this.newCategoryCode )) {
+
+
+          console.log(this.newCategoryName);
+            this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
+            this.ngOnInit();
+            return;
+
+        }
+        else{
+          for (let i = 0; i < otherHotelCategories.length; i++){
+            if(otherHotelCategories[i].code == this.newCategoryCode && otherHotelCategories[i].id != this.data.element.id){
+              this.sameCodeCheck = true;
+            }
+            if(otherHotelCategories[i].name == this.newCategoryName && otherHotelCategories[i].id != this.data.element.id){
+              this.sameNameCheck = true;
+            }
+          }
+          if (this.sameCodeCheck || this.sameNameCheck){
+            this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
+            this.ngOnInit();
+            return;
+          }
+        }
+
+        //   const [month, day, year] = value.birthdate.split('.');
+        //   if(year > 2000){
+        //     console.log(value.name + " " + value.surname);
+        //   }
+        // });
+
+
+
+        otherHotelCategories.forEach(element => {
+          if (element.name == this.newCategoryName || element.code == this.newCategoryCode) {
+            console.log(this.newCategoryName);
+            this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
+            this.ngOnInit();
+            return;
+          }
+        });
+
+
+
       }
 
       this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCategoryName }));
@@ -69,11 +110,18 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       console.log(this.data.element);
       this.data.table?.renderRows();
       this.closeDialog();
-          }
-    else
-    {
-      alert("Otel adı var")
     }
+    else {
+      alert("Otel adı var");
+    }
+
+    // const otherCategories = this.hotels.map(v => {
+    //   return (v.name !== this.data.element.name && v.code !== this.data.element.name) && v;
+    // });
+
+    // if (otherCategories) {
+
+    // }
   }
 
   closeDialog() {
@@ -88,10 +136,11 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result.isDeleted) {
-        this.hotelCategoryService.deleteCategory({ name: this.newCategoryName, code: this.newCategoryCode }).subscribe(() => {
+        this.hotelCategoryService.deleteCategory(this.data.element).subscribe(() => {
           this.ngOnInit();
+
         });
-      }
+      } this.data.table?.renderRows();
     });
   }
 
