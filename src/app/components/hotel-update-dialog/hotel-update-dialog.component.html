@@ -34,7 +34,7 @@
   <br>
 
   <mat-form-field>
-    <mat-label>{{ 'HotelCategoryId' | transloco }}</mat-label>
+    <mat-label>{{ 'category' | transloco }}</mat-label>
     <mat-select matInput [(ngModel)]="newHotelCategoryId">
       <mat-option *ngFor="let c of hotelCategories" [value]="c.id">{{ c.name }}</mat-option>
     </mat-select>

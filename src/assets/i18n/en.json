@@ -41,6 +41,8 @@
     "name": "Name",
     "address": "Address",
     "phone": "Phone",
+    "category": "Category",
+    "code": "Code",
     "email": "Email",
     "actions": "Actions"
 }

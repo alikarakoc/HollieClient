@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { TranslocoService } from "@ngneat/transloco";
 import {
   MarketAddDialogComponent,
   MarketDeleteDialogComponent,
@@ -15,7 +16,7 @@ import { MarketService } from 'src/app/services';
   styleUrls: ['./market.component.scss'],
 })
 export class MarketComponent implements OnInit {
-  columns: string[] = ['name', 'actions'];
+  columns: string[] = ['code','name', 'actions'];
   @ViewChild(MatTable) table: MatTable<MarketComponent>;
 
   markets: Market[] = [];
@@ -26,7 +27,8 @@ export class MarketComponent implements OnInit {
 
   constructor(
     public marketService: MarketService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public translocoService: TranslocoService
   ) {}
 
   ngOnInit(): void {
@@ -45,9 +47,7 @@ export class MarketComponent implements OnInit {
       if (result.isAdded) {
         this.marketService
           .addMarket({
-            name: result.elementName,
-            id: ''
-          })
+            name: result.elementName, code: result.elementCode })
           .subscribe(() => {
             this.ngOnInit();
           });

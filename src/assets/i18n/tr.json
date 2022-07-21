@@ -41,6 +41,8 @@
     "name": "İsim",
     "address": "Adres",
     "phone": "Telefon",
+    "category": "Kategori",
+    "code": "Kod",
     "email": "Email",
     "actions": "İşlemler"
 }

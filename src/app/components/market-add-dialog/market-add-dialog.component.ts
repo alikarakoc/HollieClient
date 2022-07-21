@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from "@angular/material/table";
+import { TranslocoService } from "@ngneat/transloco";
 import { Market } from "src/app/interfaces";
 import { MarketService } from "src/app/services";
 
@@ -16,12 +17,14 @@ interface DialogData {
 })
 export class MarketAddDialogComponent implements OnInit {
   marketName: string;
+  marketCode: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<MarketAddDialogComponent>,
-    private marketService: MarketService
+    private marketService: MarketService,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void {
@@ -31,21 +34,21 @@ export class MarketAddDialogComponent implements OnInit {
     // let categories: HotelCategory[] = [];
 
     if (!this.marketName) {
-      this.snackBar.open("Please type the blank areas", "OK");
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
 
     this.marketService.getMarket().subscribe((res: { data: { name: string; }[]; }) => {
       // categories = res.data;
       if (res.data.some((c: { name: string; }) => c.name === this.marketName)) {
-        this.snackBar.open("Please type another market name", "OK");
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: 'market' }), "OK");
         this.marketName = "";
         return;
         
       }
     });
 
-    this.snackBar.open(`${this.marketName} successfully added to your table.`);
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success'));
 
     // O an...
     // this.hotelCategoryService.addCategory({ name: this.categoryName });
@@ -57,7 +60,8 @@ export class MarketAddDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close({
       isAdded: true,
-      elementName: this.marketName
+      elementName: this.marketName,
+      elementCode: this.marketCode
     });
   }
 
