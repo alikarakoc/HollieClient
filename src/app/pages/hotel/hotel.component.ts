@@ -18,6 +18,7 @@ export class HotelComponent implements OnInit {
   hotels: Hotel[] = [];
   hotelCategories: HotelCategory[] = [];
 
+  
   constructor(
     public hotelService: HotelService,
     private dialog: MatDialog,
