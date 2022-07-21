@@ -43,28 +43,37 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
-
-    const otherHotelCategories = this.hotels.filter(c => c.name !== this.newCategoryName && c.code !== this.newCategoryCode);
+    debugger;
+    //const otherHotelCategories = this.hotels.filter(c => c.name !== this.newCategoryName && c.code !== this.newCategoryCode);
+    const otherHotelCategories = this.hotels;
 
     console.log(this.hotels);
     console.log(otherHotelCategories);
-    if (otherHotelCategories.some(c => c.name === this.newCategoryName && c.code === this.newCategoryCode)) {
-      console.log(this.newCategoryName);
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
-      this.newCategoryName = "";
-      this.ngOnInit();
-      return;
+    
+    if(otherHotelCategories.findIndex(c=>c.name==this.newCategoryName.toString())<1)
+    {
+      if (otherHotelCategories.some(c => c.name === this.newCategoryName && c.code === this.newCategoryCode)) {
+        console.log(this.newCategoryName);
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
+        this.newCategoryName = "";
+        this.ngOnInit();
+        return;
+      }
+      
+      this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCategoryName }));
+      this.dialogRef.close({ isUpdated: true });
+      this.data.dialogRef?.close();
+      this.data.element.name = this.newCategoryName;
+      this.data.element.code = this.newCategoryCode;
+      this.hotelCategoryService.updateCategory(this.data.element);
+      console.log(this.data.element);
+      this.data.table?.renderRows();
+      this.closeDialog();
+          }
+    else
+    {
+      alert("Otel adı var")
     }
-
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCategoryName }));
-    this.dialogRef.close({ isUpdated: true });
-    this.data.dialogRef?.close();
-    this.data.element.name = this.newCategoryName;
-    this.data.element.code = this.newCategoryCode;
-    this.hotelCategoryService.updateCategory(this.data.element);
-    console.log(this.data.element);
-    this.data.table?.renderRows();
-    this.closeDialog();
   }
 
   closeDialog() {
