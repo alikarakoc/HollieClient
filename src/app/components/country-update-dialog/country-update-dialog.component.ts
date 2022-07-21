@@ -5,17 +5,13 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTable } from '@angular/material/table';
-import { Country} from 'src/app/interfaces';
+import { Country } from 'src/app/interfaces';
 import { CountryService } from 'src/app/services';
 import { CountryDeleteDialogComponent } from '../country-delete-dialog/country-delete-dialog.component';
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
   element: Country;
-  table: MatTable<any>;
-  dialogRef: MatDialogRef<any>;
-
 }
 
 @Component({
@@ -25,7 +21,7 @@ interface DialogData {
 })
 export class CountryUpdateDialogComponent implements OnInit {
   newCountryName: string = this.data.element.name;
-  newCategoryCode: string = this.data.element.code;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<CountryUpdateDialogComponent>,
@@ -35,12 +31,8 @@ export class CountryUpdateDialogComponent implements OnInit {
     public translocoService: TranslocoService
   ) { }
 
-  ngOnInit(): void { this.countryService.getAllCountries().subscribe(res => {
-    this.countries = res.data;
-  });
-  
-  }
-  countries: Country[] =[];
+  ngOnInit(): void { }
+
   update() {
     const condition = this.countryService.countries.some(
       (c) => c.name === this.newCountryName
@@ -67,13 +59,5 @@ export class CountryUpdateDialogComponent implements OnInit {
     this.dialog.open(CountryDeleteDialogComponent, {
       data: { element: this.data.element, dialogRef: this.dialogRef },
     });
-    this.dialog.afterClosed().subscribe(result => {
-      if (result.isDeleted) {
-        this.countryService.deleteCountry({ name: this.newCountryName, code: this.newCategoryCode }).subscribe(() => {
-          this.ngOnInit();
-        });
-      }
-    });
-
   }
 }

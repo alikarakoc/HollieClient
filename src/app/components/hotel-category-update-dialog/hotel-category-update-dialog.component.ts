@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from '@angular/material/table';
-import { HotelCategory } from "src/app/interfaces";
+import { Hotel, HotelCategory } from "src/app/interfaces";
 import { HotelCategoryService } from "src/app/services";
 import { HotelCategoryDeleteDialogComponent } from "../hotel-category-delete-dialog/hotel-category-delete-dialog.component";
 import { TranslocoService } from '@ngneat/transloco';

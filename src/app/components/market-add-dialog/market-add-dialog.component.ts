@@ -38,7 +38,7 @@ export class MarketAddDialogComponent implements OnInit {
       return;
     }
 
-    this.marketService.getMarket().subscribe((res) => {
+    this.marketService.getMarket().subscribe((res: { data: { name: string; }[]; }) => {
       // categories = res.data;
       if (res.data.some((c: { name: string; }) => c.name === this.marketName)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: 'market' }), "OK");
