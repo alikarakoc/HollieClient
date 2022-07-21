@@ -16,7 +16,7 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./room-type.component.scss'],
 })
 export class RoomTypeComponent implements OnInit {
-  columns: string[] = ['name', 'actions'];
+  columns: string[] = ['code','name', 'actions'];
 
   @ViewChild(MatTable) table: MatTable<RoomType>;
   roomTypes: RoomType[] = [];

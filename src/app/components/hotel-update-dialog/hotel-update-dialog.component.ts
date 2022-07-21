@@ -47,10 +47,15 @@ export class HotelUpdateDialogComponent implements OnInit {
       return;
     }
 
-    if (this.hotels.some(c => c.name === this.newHotelName)) {
-      console.log(this.newHotelName);
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
+    const otherHotels = this.hotels.filter(c => c.name !== this.newHotelName &&  c.address !== this.newHotelAddress && c.phone !== this.newHotelPhone && c.email !== this.newHotelEmail);
+
+    if (otherHotels.some(c => c.name === this.newHotelName && c.address === this.newHotelAddress && c.phone === this.newHotelPhone && c.email === this.newHotelEmail)) {
+      console.log(this.newHotelName,this.newHotelEmail,this.newHotelPhone,this.newHotelAddress);
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
       this.newHotelName = "";
+      this.newHotelAddress = "";
+      this.newHotelPhone = "";
+      this.newHotelEmail = "";
       return;
     }
 
@@ -58,6 +63,9 @@ export class HotelUpdateDialogComponent implements OnInit {
     this.dialogRef.close({ isUpdated: true });
     this.data.dialogRef?.close();
     this.data.element.name = this.newHotelName;
+    this.data.element.phone = this.newHotelPhone;
+    this.data.element.email = this.newHotelEmail;
+    this.data.element.address = this.newHotelAddress;
     this.hotelService.updateHotel(this.data.element);
     console.log(this.data.element);
     this.data.table?.renderRows();
@@ -66,6 +74,7 @@ export class HotelUpdateDialogComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
+
   }
 
   delete() {
@@ -75,7 +84,7 @@ export class HotelUpdateDialogComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result.isDeleted) {
-        this.hotelService.deleteHotel({ name: this.newHotelName }).subscribe(() => {
+        this.hotelService.deleteHotel({ name: this.newHotelName, address: this.newHotelAddress, phone: this.newHotelPhone, email: this.newHotelEmail }).subscribe(() => {
           this.ngOnInit();
         });
       }

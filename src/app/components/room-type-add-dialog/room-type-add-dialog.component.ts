@@ -35,9 +35,10 @@ export class RoomTypeAddDialogComponent implements OnInit {
       return;
     }
 
-    this.roomTypeService.getAllRoomTypes().subscribe(res => {
+    this.roomTypeService.getAllRoomTypes().subscribe((res) => {
       if (res.data.some(c => c.name === this.roomTypeName)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'room type' : 'oda tipi' }), 'OK');
+        this.roomTypeName="";
         this.clearInputs();
         return;
       }

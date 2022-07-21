@@ -10,8 +10,8 @@ import { ListResponseModel } from '../interfaces/listResponseModel';
 })
 export class MarketService {
   baseUrl = `${environment.baseUrl}/Market`;
-  categories: Market[] = [];
-  
+  markets: Market[] = [];
+
   constructor(private http: HttpClient) { }
 
   getMarket(): Observable<ListResponseModel<Market>> {

@@ -49,7 +49,7 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
 
     console.log(this.hotels);
     console.log(otherHotelCategories);
-    
+
     if(otherHotelCategories.findIndex(c=>c.name==this.newCategoryName.toString())<1)
     {
       if (otherHotelCategories.some(c => c.name === this.newCategoryName && c.code === this.newCategoryCode)) {
@@ -59,7 +59,7 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
         this.ngOnInit();
         return;
       }
-      
+
       this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCategoryName }));
       this.dialogRef.close({ isUpdated: true });
       this.data.dialogRef?.close();
@@ -78,6 +78,7 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
+
   }
 
   delete() {
