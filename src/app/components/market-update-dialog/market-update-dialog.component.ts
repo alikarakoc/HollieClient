@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from '@angular/material/table';
+import { TranslocoService } from "@ngneat/transloco";
 import { Market } from "src/app/interfaces";
 import { MarketService } from "src/app/services";
 import { MarketDeleteDialogComponent } from "../market-delete-dialog/market-delete-dialog.component";
@@ -21,7 +22,6 @@ export class MarketUpdateDialogComponent implements OnInit {
   newMarketName: string = this.data.element.name;
   newMarketCode: string = this.data.element.code;
 
-
   sameCodeCheck = false;
   sameNameCheck = false;
 
@@ -30,7 +30,8 @@ export class MarketUpdateDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<MarketUpdateDialogComponent>,
     private marketService: MarketService,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void {
@@ -42,7 +43,7 @@ export class MarketUpdateDialogComponent implements OnInit {
 
   update() {
     if (!this.newMarketName) {
-      this.snackBar.open("Please type the blank areas", "OK");
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
     const otherMarkets = this.markets;
@@ -52,26 +53,27 @@ export class MarketUpdateDialogComponent implements OnInit {
 
 
     if (otherMarkets.findIndex(c => c.name == this.newMarketName.toString() || c.code == this.newMarketCode.toString()) > -1) {
-      { if (otherMarkets.some(c => c.name == this.newMarketName && c.code == this.newMarketCode )) {
+      {
+        if (otherMarkets.some(c => c.name == this.newMarketName && c.code == this.newMarketCode)) {
 
 
           console.log(this.newMarketName);
-            
-            this.ngOnInit();
-            return;
+
+          this.ngOnInit();
+          return;
 
         }
-        else{
-          for (let i = 0; i < otherMarkets.length; i++){
-            if(otherMarkets[i].code == this.newMarketCode && otherMarkets[i].id != this.data.element.id){
+        else {
+          for (let i = 0; i < otherMarkets.length; i++) {
+            if (otherMarkets[i].code == this.newMarketCode && otherMarkets[i].id != this.data.element.id) {
               this.sameCodeCheck = true;
             }
-            if(otherMarkets[i].name == this.newMarketName && otherMarkets[i].id != this.data.element.id){
+            if (otherMarkets[i].name == this.newMarketName && otherMarkets[i].id != this.data.element.id) {
               this.sameNameCheck = true;
             }
           }
-          if (this.sameCodeCheck || this.sameNameCheck){
-            
+          if (this.sameCodeCheck || this.sameNameCheck) {
+
             this.ngOnInit();
             return;
           }
@@ -97,7 +99,7 @@ export class MarketUpdateDialogComponent implements OnInit {
 
       }
 
-      
+
       this.dialogRef.close({ isUpdated: true });
       this.data.dialogRef?.close();
       this.data.element.name = this.newMarketName;
@@ -108,7 +110,7 @@ export class MarketUpdateDialogComponent implements OnInit {
       this.closeDialog();
     }
     else {
-      alert("Market adı var");
+      this.snackBar.open(this.translocoService.translate("dialogs.error_same", { name: "market" }), "OK");
     }
 
     // const otherCategories = this.hotels.map(v => {
@@ -118,7 +120,7 @@ export class MarketUpdateDialogComponent implements OnInit {
     // if (otherCategories) {
 
     // }
-  
+
 
   }
 

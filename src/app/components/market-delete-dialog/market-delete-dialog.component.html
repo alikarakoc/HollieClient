@@ -1,10 +1,10 @@
-<h1 mat-dialog-title>Are you sure to delete the "{{ data.element.name }}" element?</h1>
+<h1 mat-dialog-title>{{ translocoService.translate('dialogs.delete_title', { elementName: data.element.name }) }}</h1>
 
 <div mat-dialog-content>
-    This will delete all the element's datas and cannot be undone.
+    {{ 'dialogs.delete_text' | transloco }}
 </div>
 
 <div mat-dialog-actions>
-    <button mat-flat-button color="warn" (click)="delete()">Delete</button>
-    <button mat-flat-button color="accent" (click)="closeDialog({ isDeleted: false })">Cancel</button>
+    <button mat-flat-button color="warn" (click)="delete()">{{ 'dialogs.delete' | transloco }}</button>
+    <button mat-flat-button color="accent" (click)="closeDialog({ isDeleted: false })">{{ 'dialogs.cancel' | transloco }}</button>
 </div>

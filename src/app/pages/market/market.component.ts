@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import { TranslocoService } from "@ngneat/transloco";
 import {
   MarketAddDialogComponent,
   MarketDeleteDialogComponent,
@@ -26,7 +27,8 @@ export class MarketComponent implements OnInit {
 
   constructor(
     public marketService: MarketService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public translocoService: TranslocoService
   ) {}
 
   ngOnInit(): void {
