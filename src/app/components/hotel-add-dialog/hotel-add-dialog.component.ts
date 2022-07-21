@@ -15,6 +15,7 @@ interface DialogData {
 type FormType<C> = FormControl<C | null>;
 
 interface FormData {
+  code: FormType<string>;
   name: FormType<string>;
   address: FormType<string>;
   phone: FormType<string /* Phone */>;
