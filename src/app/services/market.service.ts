@@ -19,7 +19,7 @@ export class MarketService {
   }
 
   getAllMarkets(): Observable<ListResponseModel<Market>> {
-    return this.http.get<ListResponseModel<Market>>(`${this.baseUrl}/AllMarket`);
+    return this.http.get<ListResponseModel<Market>>(`${this.baseUrl}/AllMarkets`);
   }
 
   addMarket(market: Partial<Market>) {

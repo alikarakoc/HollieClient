@@ -15,7 +15,7 @@ import { MarketService } from 'src/app/services';
   styleUrls: ['./market.component.scss'],
 })
 export class MarketComponent implements OnInit {
-  columns: string[] = ['name', 'actions'];
+  columns: string[] = ['code','name', 'actions'];
   @ViewChild(MatTable) table: MatTable<MarketComponent>;
 
   markets: Market[] = [];
@@ -45,9 +45,7 @@ export class MarketComponent implements OnInit {
       if (result.isAdded) {
         this.marketService
           .addMarket({
-            name: result.elementName,
-            id: ''
-          })
+            name: result.elementName, code: result.elementCode })
           .subscribe(() => {
             this.ngOnInit();
           });
