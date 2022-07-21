@@ -5,6 +5,7 @@
     "hotel_title": "Hotels",
     "hotel_category_title": "Hotel Categories",
     "room_type_title": "Room Types",
+    "market_title": "Markets",
     "navbar": {
         "change_language": "Change Language"
     },
