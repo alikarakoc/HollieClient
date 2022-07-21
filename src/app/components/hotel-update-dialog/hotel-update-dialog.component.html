@@ -26,6 +26,13 @@
   <br>
 
   <mat-form-field>
+    <mat-label>{{ 'HotelCategoryId' | transloco }}</mat-label>
+    <input matInput [(ngModel)]="newHotelCategoryId" (keyup.enter)="update()">
+    </mat-form-field>
+  
+    <br>
+
+  <mat-form-field>
   <mat-label>{{ 'email' | transloco }}</mat-label>
   <input matInput [(ngModel)]="newHotelEmail" (keyup.enter)="update()">
   </mat-form-field>

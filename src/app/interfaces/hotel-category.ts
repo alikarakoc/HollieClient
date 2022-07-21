@@ -1,5 +1,5 @@
 export interface HotelCategory {
-    id: string;
+    id: number;
     name: string;
     code :string;
 }
