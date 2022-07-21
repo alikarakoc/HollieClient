@@ -19,8 +19,8 @@ export class AgencyComponent implements OnInit {
   columns: string[] = ['name', 'address', 'phone', 'email', 'actions'];
   @ViewChild(MatTable) table: MatTable<Agency>;
 
-  agencies : Agency [] = [];
-
+  agencies: Agency[] = [];
+  //tuana
   constructor(
     public agencyService: AgencyService,
     private dialog: MatDialog,
@@ -32,49 +32,50 @@ export class AgencyComponent implements OnInit {
       this.agencies = res.data;
     });
     console.log('on init');
-    
-   }
+
+  }
 
   create() {
     const dialog = this.dialog.open(AgencyAddDialogComponent, {
-      data: { table: this.table } });
-    
-      dialog.afterClosed().subscribe((result) => {
-        if (result.isAdded) {
-          this.agencyService
-            .addAgency({ name: result.elementName })
-            .subscribe(() => {
-              this.ngOnInit();
-            });
-        }
-      });     
+      data: { table: this.table }
+    });
+
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isAdded) {
+        this.agencyService
+          .addAgency({ name: result.elementName })
+          .subscribe(() => {
+            this.ngOnInit();
+          });
+      }
+    });
   }
 
   update(element: Agency) {
     const dialog = this.dialog.open(AgencyUpdateDialogComponent, {
-       data: { element } 
-      });
+      data: { element }
+    });
 
-      dialog.afterClosed().subscribe(() => {
-        this.agencyService.updateAgency(element).subscribe((res) => {
-          console.log('res data checked');
-          console.log(res.data);
-        });
-      })
+    dialog.afterClosed().subscribe(() => {
+      this.agencyService.updateAgency(element).subscribe((res) => {
+        console.log('res data checked');
+        console.log(res.data);
+      });
+    })
   }
 
   delete(element: Agency) {
     const dialog = this.dialog.open(AgencyDeleteDialogComponent, {
-       data: { element } 
-      });
-      dialog.afterClosed().subscribe((result) => {
-        if (result.isDeleted){
-          this.agencyService.deleteAgency(element).subscribe((res) => {
-            console.log(element);
-            this.ngOnInit();
-            
-          });
-        } 
-      })
+      data: { element }
+    });
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isDeleted) {
+        this.agencyService.deleteAgency(element).subscribe((res) => {
+          console.log(element);
+          this.ngOnInit();
+
+        });
+      }
+    })
   }
 }
