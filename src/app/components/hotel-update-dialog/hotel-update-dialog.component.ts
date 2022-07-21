@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from '@angular/material/table';
-import { Hotel } from "src/app/interfaces";
-import { HotelService } from "src/app/services";
+import { Hotel, HotelCategory } from "src/app/interfaces";
+import { HotelCategoryService, HotelService } from "src/app/services";
 import { HotelDeleteDialogComponent } from "../hotel-delete-dialog/hotel-delete-dialog.component";
 import { TranslocoService } from '@ngneat/transloco';
 
@@ -32,12 +32,19 @@ export class HotelUpdateDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     public translocoService: TranslocoService
+    , private hotelCategoryService: HotelCategoryService,
   ) { }
+
+  hotelCategories: HotelCategory[] = []
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
       this.hotels = res.data;
     });
+
+    this.hotelCategoryService.getAllHotels().subscribe(res => {
+      this.hotelCategories = res.data;
+    })
   }
 
   hotels: Hotel[] = [];
@@ -48,10 +55,10 @@ export class HotelUpdateDialogComponent implements OnInit {
       return;
     }
 
-    const otherHotels = this.hotels.filter(c => c.name !== this.newHotelName &&  c.address !== this.newHotelAddress && c.phone !== this.newHotelPhone && c.email !== this.newHotelEmail);
+    const otherHotels = this.hotels.filter(c => c.name !== this.newHotelName && c.address !== this.newHotelAddress && c.phone !== this.newHotelPhone && c.email !== this.newHotelEmail);
 
     if (otherHotels.some(c => c.name === this.newHotelName && c.address === this.newHotelAddress && c.phone === this.newHotelPhone && c.email === this.newHotelEmail)) {
-      console.log(this.newHotelName,this.newHotelEmail,this.newHotelPhone,this.newHotelAddress);
+      console.log(this.newHotelName, this.newHotelEmail, this.newHotelPhone, this.newHotelAddress);
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
       this.newHotelName = "";
       this.newHotelAddress = "";
@@ -85,7 +92,7 @@ export class HotelUpdateDialogComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result.isDeleted) {
-        this.hotelService.deleteHotel({ name: this.newHotelName, address: this.newHotelAddress, phone: this.newHotelPhone, email: this.newHotelEmail }).subscribe(() => {
+        this.hotelService.deleteHotel({ name: this.newHotelName, address: this.newHotelAddress, phone: this.newHotelPhone, email: this.newHotelEmail, hotelCategoryId: this.newHotelCategoryId }).subscribe(() => {
           this.ngOnInit();
         });
       }

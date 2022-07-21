@@ -3,9 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
-import { Agency, Hotel } from 'src/app/interfaces';
+import { Agency, Hotel, HotelCategory } from 'src/app/interfaces';
 import { HotelService } from 'src/app/services/hotel.service';
 import { TranslocoService } from '@ngneat/transloco';
+import { HotelCategoryService } from 'src/app/services';
 
 interface DialogData {
   table: MatTable<Hotel>;
@@ -39,10 +40,17 @@ export class HotelAddDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<HotelAddDialogComponent>,
     private hotelService: HotelService,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private hotelCategoryService: HotelCategoryService
   ) { }
 
-  ngOnInit(): void { }
+  hotelCategories: HotelCategory[] = [];
+
+  ngOnInit(): void {
+    this.hotelCategoryService.getAllHotels().subscribe(res => {
+      this.hotelCategories = res.data
+    })
+  }
 
   add() {
 
@@ -81,6 +89,7 @@ export class HotelAddDialogComponent implements OnInit {
   }
 
   closeDialog() {
+    console.log(this.hotelCategoryId);
 
     this.dialogRef.close({
       isAdded: true,
