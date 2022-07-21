@@ -3,9 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
-import { Agency, Hotel } from 'src/app/interfaces';
+import { Agency, Hotel, HotelCategory } from 'src/app/interfaces';
 import { HotelService } from 'src/app/services/hotel.service';
 import { TranslocoService } from '@ngneat/transloco';
+import { HotelCategoryService } from 'src/app/services';
 
 interface DialogData {
   table: MatTable<Hotel>;
@@ -27,7 +28,7 @@ interface FormData {
   styleUrls: ['./hotel-add-dialog.component.scss']
 })
 export class HotelAddDialogComponent implements OnInit {
-
+  hotelCode: string;
   hotelName: string;
   hotelPhone: string;
   hotelEmail: string;
@@ -39,14 +40,22 @@ export class HotelAddDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<HotelAddDialogComponent>,
     private hotelService: HotelService,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private hotelCategoryService: HotelCategoryService
   ) { }
 
-  ngOnInit(): void { }
+  hotelCategories: HotelCategory[] = [];
+
+  ngOnInit(): void {
+    this.hotelCategoryService.getAllHotels().subscribe(res => {
+      this.hotelCategories = res.data
+    })
+  }
 
   add() {
 
     const predicate = (a: Omit<Hotel, 'id'>) =>
+      a.code === this.hotelCode &&
       a.name === this.hotelName &&
       a.address === this.hotelAddress &&
       a.phone === this.hotelPhone &&
@@ -57,14 +66,14 @@ export class HotelAddDialogComponent implements OnInit {
 
     this.hotelService.getAllHotels().subscribe((res) => {
       // categories = res.data;
-      if (res.data.some(c => c.name === this.hotelName)) {
+      if (res.data.some(c => c.code === this.hotelCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel türü' }), "OK");
-        this.hotelName = "";
+        this.hotelCode = "";
         return;
       }
     });
 
-    if (!this.hotelName || !this.hotelPhone || !this.hotelAddress || !this.hotelEmail) {
+    if (!this.hotelCode || !this.hotelName || !this.hotelPhone || !this.hotelAddress || !this.hotelEmail) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
       return;
     }
@@ -81,10 +90,12 @@ export class HotelAddDialogComponent implements OnInit {
   }
 
   closeDialog() {
+    console.log(this.hotelCategoryId);
 
     this.dialogRef.close({
       isAdded: true,
       element: {
+        code: this.hotelCode,
         name: this.hotelName,
         phone: this.hotelPhone,
         email: this.hotelEmail,

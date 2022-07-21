@@ -1,8 +1,16 @@
 <h1 mat-dialog-title>
-    {{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Hotel' : 'Otel' }) }}
+  {{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Hotel' :
+  'Otel' }) }}
 </h1>
 
 <div mat-dialog-content>
+
+  <mat-form-field>
+    <mat-label>{{ 'code' | transloco }}</mat-label>
+    <input matInput [(ngModel)]="newHotelCode" (keyup.enter)="update()">
+  </mat-form-field>
+
+  <br>
 
   <mat-form-field>
     <mat-label>{{ 'name' | transloco }}</mat-label>
@@ -19,31 +27,33 @@
   <br>
 
   <mat-form-field>
-  <mat-label>{{ 'phone' | transloco }}</mat-label>
-  <input matInput [(ngModel)]="newHotelPhone" (keyup.enter)="update()">
+    <mat-label>{{ 'phone' | transloco }}</mat-label>
+    <input matInput [(ngModel)]="newHotelPhone" (keyup.enter)="update()">
   </mat-form-field>
 
   <br>
 
   <mat-form-field>
     <mat-label>{{ 'HotelCategoryId' | transloco }}</mat-label>
-    <input matInput [(ngModel)]="newHotelCategoryId" (keyup.enter)="update()">
-    </mat-form-field>
-  
-    <br>
+    <mat-select matInput [(ngModel)]="newHotelCategoryId">
+      <mat-option *ngFor="let c of hotelCategories" [value]="c.id">{{ c.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
 
   <mat-form-field>
-  <mat-label>{{ 'email' | transloco }}</mat-label>
-  <input matInput [(ngModel)]="newHotelEmail" (keyup.enter)="update()">
+    <mat-label>{{ 'email' | transloco }}</mat-label>
+    <input matInput [(ngModel)]="newHotelEmail" (keyup.enter)="update()">
   </mat-form-field>
 
 </div>
 
 <div mat-dialog-actions>
-    <button mat-flat-button color="primary" (click)="update()">Update</button>
-    <button mat-flat-button color="warn" (click)="delete()">
-        <mat-icon>delete</mat-icon>
-        Delete
-    </button>
-    <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" (click)="update()">Update</button>
+  <button mat-flat-button color="warn" (click)="delete()">
+    <mat-icon>delete</mat-icon>
+    Delete
+  </button>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
 </div>
