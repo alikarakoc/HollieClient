@@ -6,13 +6,6 @@
 <div mat-dialog-content>
 
   <mat-form-field>
-    <mat-label>{{ 'code' | transloco }}</mat-label>
-    <input matInput [(ngModel)]="hotelCode" (keyup.enter)="add()">
-  </mat-form-field>
-
-  <br>
-  
-  <mat-form-field>
     <mat-label>{{ 'name' | transloco }}</mat-label>
     <input matInput [(ngModel)]="hotelName" (keyup.enter)="add()">
   </mat-form-field>
@@ -34,7 +27,7 @@
   <br>
 
   <mat-form-field>
-    <mat-label>{{ 'HotelCategoryId' | transloco }}</mat-label>
+    <mat-label>{{ 'category' | transloco }}</mat-label>
     <mat-select [(ngModel)]="hotelCategoryId">
       <mat-option *ngFor="let c of hotelCategories" [value]="c.id">{{ c.name }}</mat-option>
     </mat-select>

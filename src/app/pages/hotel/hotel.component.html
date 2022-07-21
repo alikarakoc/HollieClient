@@ -33,7 +33,7 @@
   </ng-container>
 
   <ng-container matColumnDef="HotelCategoryId">
-    <th mat-header-cell *matHeaderCellDef>HotelCategoryId</th>
+    <th mat-header-cell *matHeaderCellDef>{{ 'category' | transloco }}</th>
     <td mat-cell *matCellDef="let element">{{ getCurrentCategory(element) }}</td>
 </ng-container>
 
