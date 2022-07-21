@@ -6,6 +6,13 @@
 <div mat-dialog-content>
 
   <mat-form-field>
+    <mat-label>{{ 'code' | transloco }}</mat-label>
+    <input matInput [(ngModel)]="newHotelCode" (keyup.enter)="update()">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
     <mat-label>{{ 'name' | transloco }}</mat-label>
     <input matInput [(ngModel)]="newHotelName" (keyup.enter)="update()">
   </mat-form-field>

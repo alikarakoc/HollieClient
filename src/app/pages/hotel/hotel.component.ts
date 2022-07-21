@@ -12,7 +12,7 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./hotel.component.scss']
 })
 export class HotelComponent implements OnInit {
-  columns: string[] = ["name", "address", "phone", "email", "HotelCategoryId", "actions"];
+  columns: string[] = ["code", "name", "address", "phone", "email", "HotelCategoryId", "actions"];
   @ViewChild(MatTable) table: MatTable<Hotel>;
 
   hotels: Hotel[] = [];

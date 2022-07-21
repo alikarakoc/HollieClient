@@ -28,7 +28,7 @@ interface FormData {
   styleUrls: ['./hotel-add-dialog.component.scss']
 })
 export class HotelAddDialogComponent implements OnInit {
-
+  hotelCode: string;
   hotelName: string;
   hotelPhone: string;
   hotelEmail: string;
@@ -55,6 +55,7 @@ export class HotelAddDialogComponent implements OnInit {
   add() {
 
     const predicate = (a: Omit<Hotel, 'id'>) =>
+      a.code === this.hotelCode &&
       a.name === this.hotelName &&
       a.address === this.hotelAddress &&
       a.phone === this.hotelPhone &&
@@ -65,14 +66,14 @@ export class HotelAddDialogComponent implements OnInit {
 
     this.hotelService.getAllHotels().subscribe((res) => {
       // categories = res.data;
-      if (res.data.some(c => c.name === this.hotelName)) {
+      if (res.data.some(c => c.code === this.hotelCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel türü' }), "OK");
-        this.hotelName = "";
+        this.hotelCode = "";
         return;
       }
     });
 
-    if (!this.hotelName || !this.hotelPhone || !this.hotelAddress || !this.hotelEmail) {
+    if (!this.hotelCode || !this.hotelName || !this.hotelPhone || !this.hotelAddress || !this.hotelEmail) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
       return;
     }
@@ -94,6 +95,7 @@ export class HotelAddDialogComponent implements OnInit {
     this.dialogRef.close({
       isAdded: true,
       element: {
+        code: this.hotelCode,
         name: this.hotelName,
         phone: this.hotelPhone,
         email: this.hotelEmail,
