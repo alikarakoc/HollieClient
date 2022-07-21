@@ -1,12 +1,17 @@
 <div class="header">
-    <h1>Market Categories</h1>
+    <h1>Market </h1>
     <span class="spacer"></span>
     <button mat-flat-button color="primary" class="new-button" (click)="create()">
-        Add New Market Category
+        Add New Market 
     </button>
 </div>
 
 <table mat-table [dataSource]="markets">
+    <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef> Code</th>
+        <td mat-cell *matCellDef="let element">{{ element.code }}</td>
+    </ng-container>
+
     <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef> Name</th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>

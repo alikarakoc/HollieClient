@@ -16,6 +16,7 @@ interface DialogData {
 })
 export class MarketAddDialogComponent implements OnInit {
   marketName: string;
+  marketCode: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -57,7 +58,8 @@ export class MarketAddDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close({
       isAdded: true,
-      elementName: this.marketName
+      elementName: this.marketName,
+      elementCode: this.marketCode
     });
   }
 

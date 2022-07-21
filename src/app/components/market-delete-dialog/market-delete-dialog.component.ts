@@ -17,6 +17,7 @@ interface DialogData {
   styleUrls: ['./market-delete-dialog.component.scss'],
 })
 export class MarketDeleteDialogComponent implements OnInit {
+  
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<MarketDeleteDialogComponent>,
@@ -24,7 +25,9 @@ export class MarketDeleteDialogComponent implements OnInit {
     private marketService: MarketService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+   
+  }
 
   delete() {
     this.snackBar.open(`${this.data.element.name} successfully deleted.`);
