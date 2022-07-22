@@ -11,14 +11,6 @@ interface DialogData {
   table: MatTable<Agency>;
 }
 
-type FormType<C> = FormControl<C | null>;
-
-interface FormData {
-  name: FormType<string>;
-  address: FormType<string>;
-  phone: FormType<string /* Phone */>;
-  email: FormType<string>;
-}
 
 @Component({
   selector: 'app-agency-add-dialog',
@@ -26,25 +18,12 @@ interface FormData {
   styleUrls: ['./agency-add-dialog.component.scss'],
 })
 export class AgencyAddDialogComponent implements OnInit {
-  formGroup: FormGroup<FormData> = new FormGroup<FormData>({
-    name: new FormControl<string>('', [
-      Validators.required,
-      Validators.maxLength(50),
-    ]),
-    address: new FormControl<string>('', [
-      Validators.required,
-      Validators.maxLength(200),
-    ]),
-    phone: new FormControl<string>('', [
-      Validators.required,
-      Validators.maxLength(20),
-    ]),
-    email: new FormControl<string>('', [
-      Validators.required,
-      Validators.email,
-      Validators.maxLength(50),
-    ]),
-  });
+
+  agencyName: string;
+  agencyCode: string;
+  agencyPhone: string;
+  agencyEmail: string;
+  agencyAddress: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -57,47 +36,43 @@ export class AgencyAddDialogComponent implements OnInit {
   ngOnInit(): void { }
 
   add() {
-    const { address, email, name, phone } = this.formGroup.value;
-
-    const controls = {
-      nameControl: this.formGroup.controls.name,
-      emailControl: this.formGroup.controls.email,
-      addressControl: this.formGroup.controls.email,
-      phoneControl: this.formGroup.controls.phone,
-    };
-
-    const predicate = (a: Agency) =>
-      a.name === name &&
-      a.address === address &&
-      a.phone === phone &&
-      a.email === email;
-
-    const condition = this.agencyService.agencies.some(predicate);
-
-    if (controls.emailControl!.hasError('email')) {
-      this.snackBar.open(this.translocoService.translate('dialogs.error_email'), 'OK');
+    if (!this.agencyCode) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
 
-    for (const control of Object.values(controls)) {
-      if (control.hasError('required')) {
-        this.snackBar.open(this.translocoService.translate('dialogs.error_required'), 'OK');
+    this.agencyService.getAllAgencies().subscribe((res) => {
+      // categories = res.data;
+      if (res.data.some(c => c.code === this.agencyCode || c.name === this.agencyName)) {
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: 'agency' }), "OK");
+        this.agencyCode = "";
+        this.agencyName = "";
+        this.agencyPhone = "";
+        this.agencyAddress = "";
+        this.agencyEmail = "";
+
         return;
+
       }
-    }
+    });
 
-    if (condition) {
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'agency' : 'acenta' }), 'OK');
-      return;
-    }
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success'));
 
-    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: name }));
+    // O an...
+    // this.hotelCategoryService.addCategory({ name: this.categoryName });
 
     this.closeDialog();
     this.data.table.renderRows();
   }
 
   closeDialog() {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      isAdded: true,
+      elementName: this.agencyName,
+      elementCode: this.agencyCode,
+      elementAddress: this.agencyAddress,
+      elementEmail: this.agencyEmail,
+      elementPhone: this.agencyPhone
+    });
   }
 }

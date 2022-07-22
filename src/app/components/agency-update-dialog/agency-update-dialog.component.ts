@@ -1,5 +1,4 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
@@ -10,19 +9,14 @@ import { Agency } from 'src/app/interfaces';
 import { AgencyService } from 'src/app/services/agency.service';
 import { AgencyDeleteDialogComponent } from '../agency-delete-dialog/agency-delete-dialog.component';
 import { TranslocoService } from '@ngneat/transloco';
+import { MatTable } from '@angular/material/table';
 
 interface DialogData {
   element: Agency;
+  table: MatTable<any>;
+  dialogRef: MatDialogRef<any>;
 }
 
-type FormType<C> = FormControl<C | null>;
-
-interface FormData {
-  name: FormType<string>;
-  address: FormType<string>;
-  phone: FormType<string /* Phone */>;
-  email: FormType<string>;
-}
 
 @Component({
   selector: 'app-agency-update-dialog',
@@ -30,25 +24,12 @@ interface FormData {
   styleUrls: ['./agency-update-dialog.component.scss'],
 })
 export class AgencyUpdateDialogComponent implements OnInit {
-  formGroup: FormGroup<FormData> = new FormGroup<FormData>({
-    name: new FormControl<string>(this.data.element.name, [
-      Validators.required,
-      Validators.maxLength(50),
-    ]),
-    address: new FormControl<string>(this.data.element.address, [
-      Validators.required,
-      Validators.maxLength(200),
-    ]),
-    phone: new FormControl<string>(this.data.element.phone, [
-      Validators.required,
-      Validators.maxLength(20),
-    ]),
-    email: new FormControl<string>(this.data.element.email, [
-      Validators.required,
-      Validators.email,
-      Validators.maxLength(50),
-    ]),
-  });
+
+  newAgencyCode: string = this.data.element.code;
+  newAgencyName: string = this.data.element.name;
+  newAgencyEmail: string = this.data.element.email;
+  newAgencyAddress: string = this.data.element.address;
+  newAgencyPhone: string = this.data.element.phone;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -62,54 +43,58 @@ export class AgencyUpdateDialogComponent implements OnInit {
   ngOnInit(): void { }
 
   update() {
-    const predicate = (a: Agency) =>
-      a.name === this.formGroup.value.name &&
-      a.address === this.formGroup.value.address &&
-      a.phone === this.formGroup.value.phone &&
-      a.email === this.formGroup.value.email;
-
-    const controls = {
-      nameControl: this.formGroup.controls.name,
-      emailControl: this.formGroup.controls.email,
-      addressControl: this.formGroup.controls.email,
-      phoneControl: this.formGroup.controls.phone,
-    };
-
-    const condition = this.agencyService.agencies.some(predicate);
-
-    if (condition) {
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'agency' : 'acenta' }), "OK");
-      this.clearAreas();
+    if (!this.newAgencyName) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
 
-    if (controls.emailControl!.hasError('email')) {
-      this.snackBar.open(this.translocoService.translate('dialogs.error_email'), 'OK');
-      return;
-    }
+    this.agencyService.getAllAgencies().subscribe(res => {
+      const otherAgencies = res.data.filter(c => c.id !== this.data.element.id && c.name !== this.newAgencyName);
+      if (otherAgencies.some(c => c.code === this.newAgencyCode)) {
+        console.log(this.newAgencyCode, this.newAgencyName);
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'agency' : 'acenta' }), "OK");
+        this.newAgencyCode = "";
+        this.newAgencyName = "";
 
-    for (const control of Object.values(controls)) {
-      if (control.hasError('required')) {
-        this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
         return;
       }
-    }
+    });
 
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.data.element.name }));
-    this.closeDialog();
-  }
 
-  clearAreas() {
-    // this.formGroup.setValue({ name: '', address: '', email: '', phone: '' });
+
+
+
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newAgencyName }));
+    this.data.dialogRef?.close();
+
+    console.log(this.newAgencyCode, this.newAgencyName);
+
+    this.data.element.code = this.newAgencyCode;
+    this.data.element.name = this.newAgencyName;
+
+    console.log(this.data.element);
+    this.data.table?.renderRows();
+    // this.hotelService.updateHotel(this.data.element)
+    this.dialogRef.close({ isUpdated: true });
   }
 
   closeDialog() {
     this.dialogRef.close();
+
   }
 
   delete() {
-    this.dialog.open(AgencyDeleteDialogComponent, {
-      data: { element: this.data.element, dialogRef: this.dialogRef },
+    const dialog = this.dialog.open(AgencyDeleteDialogComponent, {
+      data: { element: this.data.element, dialogRef: this.dialogRef }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      if (result.isDeleted) {
+        this.agencyService.deleteAgency({ code: this.newAgencyCode, name: this.newAgencyName ,phone: this.newAgencyPhone ,address: this.newAgencyAddress ,email: this.newAgencyEmail}).subscribe(() => {
+          this.ngOnInit();
+        });
+      }
     });
   }
+
 }

@@ -3,33 +3,40 @@
 </h1>
 
 <div mat-dialog-content>
-    <form [formGroup]="formGroup">
+
+        <mat-form-field>
+            <mat-label>{{ 'code' | transloco }}</mat-label>
+            <input matInput  (keyup.enter)="add()" [(ngModel)]="agencyCode">
+        </mat-form-field>
+
+        <br>
+
         <mat-form-field>
             <mat-label>{{ 'name' | transloco }}</mat-label>
-            <input matInput formControlName="name" (keyup.enter)="add()">
+            <input matInput  (keyup.enter)="add()" [(ngModel)]="agencyName">
         </mat-form-field>
-    
+
         <br>
-    
+
         <mat-form-field>
             <mat-label>{{ 'address' | transloco }}</mat-label>
-            <textarea matInput formControlName="address" (keyup.enter)="add()"></textarea>
+            <textarea matInput  (keyup.enter)="add()" [(ngModel)]="agencyAddress"></textarea>
         </mat-form-field>
-    
+
         <br>
-    
+
         <mat-form-field>
             <mat-label>{{ 'phone' | transloco }}</mat-label>
-            <input matInput type="tel" formControlName="phone" (keyup.enter)="add()">
+            <input matInput type="tel"  (keyup.enter)="add()" [(ngModel)]="agencyPhone">
         </mat-form-field>
-    
+
         <br>
-    
+
         <mat-form-field>
             <mat-label>{{ 'email' | transloco }}</mat-label>
-            <input matInput type="email" formControlName="email" (keyup.enter)="add()">
+            <input matInput type="email" (keyup.enter)="add()" [(ngModel)]="agencyEmail">
         </mat-form-field>
-    </form>
+
 </div>
 
 <div mat-dialog-actions>

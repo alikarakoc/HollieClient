@@ -16,7 +16,7 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./agency.component.scss'],
 })
 export class AgencyComponent implements OnInit {
-  columns: string[] = ['name', 'address', 'phone', 'email', 'actions'];
+  columns: string[] = ['code','name', 'address', 'phone', 'email', 'actions'];
   @ViewChild(MatTable) table: MatTable<Agency>;
 
   agencies: Agency[] = [];
@@ -43,7 +43,7 @@ export class AgencyComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.agencyService
-          .addAgency({ name: result.elementName })
+          .addAgency({ name: result.elementName ,code: result.elementCode ,address: result.elementAddress ,email: result.elementEmail ,phone: result.elementPhone })
           .subscribe(() => {
             this.ngOnInit();
           });
@@ -56,11 +56,12 @@ export class AgencyComponent implements OnInit {
       data: { element }
     });
 
-    dialog.afterClosed().subscribe(() => {
-      this.agencyService.updateAgency(element).subscribe((res) => {
-        console.log('res data checked');
-        console.log(res.data);
-      });
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isUpdated) {
+        this.agencyService.updateAgency(element).subscribe((res) => {
+          this.ngOnInit();
+        });
+      }
     })
   }
 
