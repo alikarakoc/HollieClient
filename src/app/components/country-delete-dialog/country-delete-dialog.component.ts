@@ -4,6 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from '@angular/material/table';
 import { Country } from 'src/app/interfaces';
 import { TranslocoService } from '@ngneat/transloco';
+import { CountryService } from "src/app/services";
 
 interface DialogData {
   element: Country;
@@ -22,14 +23,23 @@ export class CountryDeleteDialogComponent implements OnInit {
     // private updateDialogRef: MatDialogRef<CountryUpdateDialogComponent>,
     private dialogRef: MatDialogRef<CountryDeleteDialogComponent>,
     private snackBar: MatSnackBar,
+    private countryService: CountryService,
     public translocoService: TranslocoService
   ) { }
 
   ngOnInit(): void { }
 
   delete() {
-    this.snackBar.open(this.translocoService.translate('dialogs.delete_success', { elementName: this.data.element.name }));
-    this.dialogRef.close();
-    this.data.dialogRef.close();
+    this.snackBar.open(this.translocoService.translate('dialogs.delete_success'));
+    this.closeDialog({ isDeleted: true });
+    this.data.dialogRef?.close();
+    this.countryService.deleteCountry(this.data.element);
+    console.log("deleted country");
+    console.log(this.data.element);
+    this.data.table?.renderRows();
+  }
+
+  closeDialog({ isDeleted }: { isDeleted: boolean; }) {
+    this.dialogRef.close({ isDeleted });
   }
 }

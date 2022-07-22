@@ -2,6 +2,13 @@
 
 <div mat-dialog-content>
     <mat-form-field>
+        <mat-label>{{ 'code' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="newCountryCode" (keyup.enter)="update()">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput [(ngModel)]="newCountryName" (keyup.enter)="update()">
     </mat-form-field>

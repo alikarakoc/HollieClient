@@ -31,7 +31,7 @@ export class MarketAddDialogComponent implements OnInit {
   }
 
   add() {
-    // let categories: HotelCategory[] = [];
+    
 
     if (!this.marketCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");

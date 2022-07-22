@@ -3,10 +3,19 @@
 </h1>
 
 <div mat-dialog-content>
+    
+
     <mat-form-field>
+      <mat-label>{{ 'code' | transloco }}</mat-label>
+      <input matInput [(ngModel)]="countryCode" (keyup.enter)="add()">
+    </mat-form-field>
+<br>
+<mat-form-field>
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput [(ngModel)]="countryName" (keyup.enter)="add()">
     </mat-form-field>
+    <br>
+
 </div>
 
 <div mat-dialog-actions>

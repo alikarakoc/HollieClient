@@ -5,9 +5,17 @@ import { MatTable } from "@angular/material/table";
 import { Country } from "src/app/interfaces";
 import { CountryService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
+import { FormControl } from '@angular/forms';
 
 interface DialogData {
   table: MatTable<Country>;
+}
+type FormType<C> = FormControl<C | null>;
+
+interface FormData {
+  code: FormType<string>;
+  name: FormType<string>;
+  
 }
 
 @Component({
@@ -17,6 +25,7 @@ interface DialogData {
 })
 export class CountryAddDialogComponent implements OnInit {
   countryName: string;
+  countryCode: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -26,29 +35,60 @@ export class CountryAddDialogComponent implements OnInit {
     public translocoService: TranslocoService
   ) { }
 
-  ngOnInit(): void { }
+  countries:Country[]=[];
+
+  ngOnInit(): void { 
+    this.countryService.getAllCountries().subscribe(res => {
+      this.countries = res.data
+    })
+  }
 
   add() {
-    const condition = this.countryService.countries.some(c => c.name === this.countryName);
-    if (!this.countryName) {
+    const predicate = (a: Omit<Country, 'id'>) =>
+      a.code === this.countryCode &&
+      a.name === this.countryName ;
+
+      const condition = this.countryService.countries.some(predicate);
+    
+      
+    this.countryService.getAllCountries().subscribe((res) => {
+
+      if (res.data.some(c =>  c.code === this.countryCode)) {
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel türü' }), "OK");
+        this.countryCode = "";
+        return;
+        
+      }
+    });
+
+    if (!this.countryCode || !this.countryName  ) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
     if (condition) {
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'country' : 'ülke' }), "OK");
-      this.countryName = "";
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'Hotel' : 'Otel' }), 'OK');
       return;
-    }
-    // this.countryService.addNewCountry({
-    //   name: this.countryName,
-    //   code: "434"
-    // });
-    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.countryName }));
+    }  
+
+
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success'));
+
+    
+
     this.closeDialog();
     this.data.table.renderRows();
   }
 
   closeDialog() {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      isAdded: true,
+      element: {
+        code: this.countryCode,
+        name: this.countryName
+      }
+    });
   }
+
 }
+
+ 

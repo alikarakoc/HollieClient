@@ -16,15 +16,19 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./country.component.scss']
 })
 export class CountryComponent implements OnInit {
-  columns: string[] = ["name", "actions"];
+  columns: string[] = ["code" ,"name", "actions"];
   @ViewChild(MatTable) table: MatTable<Country>;
   countries : Country [] =[];
 
-  constructor(public countryService: CountryService, private dialog: MatDialog, public translocoService: TranslocoService) { }
+  constructor(
+    public countryService: CountryService, 
+    private dialog: MatDialog, 
+    public translocoService: TranslocoService) { }
 
   ngOnInit(): void {
     this.countryService.getAllCountries().subscribe((res) => {
       this.countries = res.data;
+      console.log(this.countries);
     });
   }
 
@@ -33,16 +37,17 @@ export class CountryComponent implements OnInit {
       data: { element, table: this.table },
     });
 
-    dialog.afterClosed().subscribe(() => {
-      this.countryService.updateCountry(element); /* .subscribe(); */
-    });
+    dialog.afterClosed().subscribe(result => {
+      if (result.isUpdated) {
+        this.countryService.updateCountry(element).subscribe(() => this.ngOnInit());
+      }
+    })
   }
 
 
 
 
   create() {
-
     const dialog = this.dialog.open(CountryAddDialogComponent, {
       data: { table: this.table },
     });
@@ -50,7 +55,7 @@ export class CountryComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.countryService
-          .addCountry({ name: result.elementName })
+          .addCountry(result.element)
           .subscribe(() => {
             this.ngOnInit();
           });

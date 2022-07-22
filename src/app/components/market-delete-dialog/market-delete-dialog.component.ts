@@ -13,7 +13,7 @@ interface DialogData {
 }
 
 @Component({
-  selector: 'app-hotel-category-delete-dialog',
+  selector: 'app-market-delete-dialog',
   templateUrl: './market-delete-dialog.component.html',
   styleUrls: ['./market-delete-dialog.component.scss'],
 })

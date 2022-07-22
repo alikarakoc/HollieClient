@@ -15,7 +15,7 @@ export class CountryService {
 
 
   getAllCountries(): Observable<ListResponseModel<Country>> {
-    return this.http.get<ListResponseModel<Country>>(`${this.baseUrl}/AllCountry`);
+    return this.http.get<ListResponseModel<Country>>(`${this.baseUrl}/AllCountries`);
   }
 
   addCountry(country: Partial<Country>) {
