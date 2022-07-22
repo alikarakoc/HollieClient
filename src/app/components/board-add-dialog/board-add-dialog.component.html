@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>{{ translocoService.translate('dialogs.add_button', { name: 'Board' }) }}</h1>
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>{{ 'code' | transloco }}</mat-label>
+        <input matInput (keyup.enter)="add()" [(ngModel)]="boardCode">
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+        <mat-label>{{ 'name' | transloco }}</mat-label>
+        <input matInput (keyup.enter)="add()" [(ngModel)]="boardName">
+    </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" (click)="add()">{{ 'dialogs.add' | transloco }}</button>
+    <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
+</div>

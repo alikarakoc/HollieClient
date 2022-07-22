@@ -28,10 +28,13 @@ import {
   MarketAddDialogComponent,
   MarketDeleteDialogComponent,
   MarketUpdateDialogComponent,
+  BoardAddDialogComponent,
+  BoardDeleteDialogComponent,
+  BoardUpdateDialogComponent,
 } from './components';
 
 // Modules
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent,MarketComponent } from './pages';
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent,MarketComponent, BoardComponent } from './pages';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -75,7 +78,10 @@ import { TranslocoRootModule } from './transloco-root.module';
     MarketUpdateDialogComponent,
     MarketDeleteDialogComponent,
 
-
+    BoardComponent,
+    BoardAddDialogComponent,
+    BoardDeleteDialogComponent,
+    BoardUpdateDialogComponent,
 
     ErrorComponent,
   ],

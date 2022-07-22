@@ -6,6 +6,10 @@ export { RoomTypeUpdateDialogComponent } from './room-type-update-dialog/room-ty
 export { RoomTypeAddDialogComponent } from './room-type-add-dialog/room-type-add-dialog.component';
 export { RoomTypeDeleteDialogComponent } from './room-type-delete-dialog/room-type-delete-dialog.component';
 
+export { BoardAddDialogComponent } from './board-add-dialog/board-add-dialog.component'
+export { BoardDeleteDialogComponent } from './board-delete-dialog/board-delete-dialog.component'
+export { BoardUpdateDialogComponent } from './board-update-dialog/board-update-dialog.component'
+
 export { CountryAddDialogComponent } from './country-add-dialog/country-add-dialog.component';
 export { CountryUpdateDialogComponent } from './country-update-dialog/country-update-dialog.component';
 export { CountryDeleteDialogComponent } from './country-delete-dialog/country-delete-dialog.component';
@@ -26,4 +30,3 @@ export { HotelUpdateDialogComponent } from './hotel-update-dialog/hotel-update-d
 export { MarketAddDialogComponent } from './market-add-dialog/market-add-dialog.component';
 export { MarketDeleteDialogComponent } from './market-delete-dialog/market-delete-dialog.component';
 export { MarketUpdateDialogComponent } from './market-update-dialog/market-update-dialog.component';
- 
