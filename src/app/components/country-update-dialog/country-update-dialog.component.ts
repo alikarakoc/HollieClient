@@ -79,7 +79,7 @@ export class CountryUpdateDialogComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result.isDeleted) {
-        this.countryService.deleteCountry({ code: this.newCountryCode, name: this.newCountryName }).subscribe(() => {
+        this.countryService.deleteCountry(this.data.element ).subscribe(() => {
           this.ngOnInit();
         });
       }this.data.table?.renderRows();
