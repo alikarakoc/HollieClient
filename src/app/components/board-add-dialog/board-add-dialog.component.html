@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>{{ translocoService.translate('dialogs.add_button', { name: 'Board' }) }}</h1>
+<h1 mat-dialog-title>{{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() == 'en' ? 'Board' : 'Tablo' }) }}</h1>
 
 <div mat-dialog-content>
     <mat-form-field>
