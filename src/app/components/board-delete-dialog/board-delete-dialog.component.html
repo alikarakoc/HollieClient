@@ -5,6 +5,6 @@
 </div>
 
 <div mat-dialog-actions>
-<button mat-flat-button color="warn" (click)="delete()">{{ 'dialogs.delete' | transloco }}</button>
-    <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
+    <button mat-flat-button color="warn" (click)="delete()">{{ 'dialogs.delete' | transloco }}</button>
+    <button mat-flat-button color="accent" (click)="closeDialog({ isDeleted: false })">{{ 'dialogs.cancel' | transloco }}</button>
 </div>
