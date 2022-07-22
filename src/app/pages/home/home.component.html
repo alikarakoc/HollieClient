@@ -2,13 +2,16 @@
 
 <h3>{{ 'home.home_paragraph' | transloco }}</h3>
 
+<ng-template #noAgency>
+    No Data
+</ng-template>
+
 <div class="row my-2">
     <mat-card class="col-md-3">
         <mat-card-title>{{ 'agency_title' | transloco }}</mat-card-title>
         <mat-card-content>
-            <mat-list role="list">
-                <mat-list-item role="listitem"
-                    *ngFor="let item of agencies | slice:0:3; let last = last;">
+            <mat-list role="list" *ngIf="agencies !== null; else noAgency">
+                <mat-list-item role="listitem" *ngFor="let item of agencies | slice:0:3; let last = last;">
                     {{ item.name }}
                     <mat-divider *ngIf="!last"></mat-divider>
                 </mat-list-item>
@@ -21,7 +24,7 @@
     <mat-card class="col-md-3">
         <mat-card-title>{{ 'board_title' | transloco }}</mat-card-title>
         <mat-card-content>
-            <mat-list role="list">
+            <mat-list role="list" *ngIf="boards !== null; else noAgency">
                 <mat-list-item role="listitem" *ngFor="let item of boards | slice:0:3; let last = last;">
                     {{ item.name }}
                     <mat-divider *ngIf="!last"></mat-divider>
@@ -35,9 +38,8 @@
     <mat-card class="col-md-3">
         <mat-card-title>{{ 'country_title' | transloco }}</mat-card-title>
         <mat-card-content>
-            <mat-list role="list">
-                <mat-list-item role="listitem"
-                    *ngFor="let item of countries | slice:0:3; let last = last;">
+            <mat-list role="list" *ngIf="countries !== null; else noAgency">
+                <mat-list-item role="listitem" *ngFor="let item of countries | slice:0:3; let last = last;">
                     {{ item.name }}
                     <mat-divider *ngIf="!last"></mat-divider>
                 </mat-list-item>
@@ -50,9 +52,8 @@
     <mat-card class="col-md-3">
         <mat-card-title>{{ 'hotel_title' | transloco }}</mat-card-title>
         <mat-card-content>
-            <mat-list role="list">
-                <mat-list-item role="listitem"
-                    *ngFor="let item of hotels | slice:0:3; let last = last;">
+            <mat-list role="list" *ngIf="hotels !== null; else noAgency">
+                <mat-list-item role="listitem" *ngFor="let item of hotels | slice:0:3; let last = last;">
                     {{ item.name }}
                     <mat-divider *ngIf="!last"></mat-divider>
                 </mat-list-item>
@@ -68,24 +69,23 @@
     <mat-card class="col-md-3">
         <mat-card-title>{{ 'hotel_category_title' | transloco }}</mat-card-title>
         <mat-card-content>
-            <mat-list role="list">
-                <mat-list-item role="listitem"
-                    *ngFor="let item of hotelCategories | slice:0:3; let last = last">
+            <mat-list role="list" *ngIf="hotelCategories !== null; else noAgency">
+                <mat-list-item role="listitem" *ngFor="let item of hotelCategories | slice:0:3; let last = last">
                     {{ item.name }}
                     <mat-divider *ngIf="!last"></mat-divider>
                 </mat-list-item>
             </mat-list>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/hotel-categories">{{ 'home.see_more' | transloco }}</button>
+            <button mat-flat-button color="accent" routerLink="/hotel-categories">{{ 'home.see_more' | transloco
+                }}</button>
         </mat-card-actions>
     </mat-card>
     <mat-card class="col-md-3">
         <mat-card-title>{{ 'market_title' | transloco }}</mat-card-title>
         <mat-card-content>
-            <mat-list role="list">
-                <mat-list-item role="listitem"
-                    *ngFor="let item of markets | slice:0:3; let last = last">
+            <mat-list role="list" *ngIf="markets !== null; else noAgency">
+                <mat-list-item role="listitem" *ngFor="let item of markets | slice:0:3; let last = last">
                     {{ item.name }}
                     <mat-divider *ngIf="!last"></mat-divider>
                 </mat-list-item>
@@ -98,9 +98,8 @@
     <mat-card class="col-md-3">
         <mat-card-title>{{ 'room_type_title' | transloco }}</mat-card-title>
         <mat-card-content>
-            <mat-list role="list">
-                <mat-list-item role="listitem"
-                    *ngFor="let item of roomTypes | slice:0:3; let last = last">
+            <mat-list role="list" *ngIf="roomTypes !== null; else noAgency">
+                <mat-list-item role="listitem" *ngFor="let item of roomTypes | slice:0:3; let last = last">
                     {{ item.name }}
                     <mat-divider *ngIf="!last"></mat-divider>
                 </mat-list-item>
@@ -123,13 +122,13 @@
                     <mat-icon class="icon">work</mat-icon>
                 </div>
                 <div class="media-body text-right">
-                    <mat-card-title>{{ agencies.length }}</mat-card-title>
+                    <mat-card-title>{{ agencies !== null ? agencies.length : 0 }}</mat-card-title>
                     <mat-card-subtitle>{{ 'agency_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
         </mat-card-content>
     </mat-card>
-    
+
     <mat-card class="col-md-3">
         <mat-card-content>
             <div class="media d-flex">
@@ -138,7 +137,7 @@
                     <mat-icon class="icon">assignment</mat-icon>
                 </div>
                 <div class="media-body text-right">
-                    <mat-card-title>{{ boards.length }}</mat-card-title>
+                    <mat-card-title>{{ boards !== null ? boards.length : 0 }}</mat-card-title>
                     <mat-card-subtitle>{{ 'boards_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
@@ -153,7 +152,7 @@
                     <mat-icon class="icon">public</mat-icon>
                 </div>
                 <div class="media-body text-right">
-                    <mat-card-title>{{ countries.length }}</mat-card-title>
+                    <mat-card-title>{{ countries !== null ? countries.length : 0 }}</mat-card-title>
                     <mat-card-subtitle>{{ 'country_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
@@ -168,7 +167,7 @@
                     <mat-icon class="icon">apartment</mat-icon>
                 </div>
                 <div class="media-body text-right">
-                    <mat-card-title>{{ hotels.length }}</mat-card-title>
+                    <mat-card-title>{{ hotels !== null ? hotels.length : 0 }}</mat-card-title>
                     <mat-card-subtitle>{{ 'hotel_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
@@ -176,7 +175,7 @@
     </mat-card>
 
     <mat-divider class="my-2"></mat-divider>
-    
+
     <mat-card class="col-md-3">
         <mat-card-content>
             <div class="media d-flex">
@@ -184,7 +183,7 @@
                     <mat-icon class="icon">beach_access</mat-icon>
                 </div>
                 <div class="media-body text-right">
-                    <mat-card-title>{{ hotelCategories.length }}</mat-card-title>
+                    <mat-card-title>{{ hotelCategories !== null ? hotelCategories.length : 0 }}</mat-card-title>
                     <mat-card-subtitle>{{ 'hotel_category_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
@@ -198,7 +197,7 @@
                     <mat-icon class="icon">storefront</mat-icon>
                 </div>
                 <div class="media-body text-right">
-                    <mat-card-title>{{ markets.length }}</mat-card-title>
+                    <mat-card-title>{{ markets !== null ? markets.length : 0 }}</mat-card-title>
                     <mat-card-subtitle>{{ 'market_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
@@ -213,15 +212,15 @@
                     <mat-icon class="icon">bed</mat-icon>
                 </div>
                 <div class="media-body text-right">
-                    <mat-card-title>{{ roomTypes.length }}</mat-card-title>
+                    <mat-card-title>{{ roomTypes !== null ? roomTypes.length : 0 }}</mat-card-title>
                     <mat-card-subtitle>{{ 'room_type_title' | transloco }}</mat-card-subtitle>
                 </div>
             </div>
         </mat-card-content>
     </mat-card>
-    
 
-   
 
-    
-  </div>
+
+
+
+</div>

@@ -14,7 +14,7 @@ export class BoardService{
     constructor(private http: HttpClient) { }
 
     getAllBoards(): Observable<ListResponseModel<Board>>{
-        return this.http.get<ListResponseModel<Board>>(`${this.baseUrl}/AllBBoard`);
+        return this.http.get<ListResponseModel<Board>>(`${this.baseUrl}/AllBoards`);
     }
     addNewBoard(board:Partial<Board>) {
         return this.http.post<ListResponseModel<Board>>(`${this.baseUrl}/add`, board);
