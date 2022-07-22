@@ -54,6 +54,7 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
     console.log(otherHotelCategories);
 
 
+
     if (otherHotelCategories.findIndex(c => c.name == this.newCategoryName.toString() || c.code == this.newCategoryCode.toString()) > -1) {
       { if (otherHotelCategories.some(c => c.name == this.newCategoryName && c.code == this.newCategoryCode )) {
 
@@ -111,6 +112,19 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       this.data.table?.renderRows();
       this.closeDialog();
     }
+
+    else if (otherHotelCategories.some(c => c.name != this.newCategoryName && c.code != this.newCategoryCode )){
+      this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCategoryName }));
+      this.dialogRef.close({ isUpdated: true });
+      this.data.dialogRef?.close();
+      this.data.element.name = this.newCategoryName;
+      this.data.element.code = this.newCategoryCode;
+      this.hotelCategoryService.updateCategory(this.data.element);
+      console.log(this.data.element);
+      this.data.table?.renderRows();
+      this.closeDialog();
+    }
+    
     else {
       alert("Otel adı var");
     }
