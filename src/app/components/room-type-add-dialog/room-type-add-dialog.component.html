@@ -2,7 +2,14 @@
     {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Room Type' : 'Oda Tipi' }) }}
 </h1>
 
-<div mat-dialog-actions>
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>{{ 'code' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="roomTypeCode" (keyup.enter)="add()">
+    </mat-form-field>
+
+    <br>
+
     <mat-form-field>
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput [(ngModel)]="roomTypeName" (keyup.enter)="add()">

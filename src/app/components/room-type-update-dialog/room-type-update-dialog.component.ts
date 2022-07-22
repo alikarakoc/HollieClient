@@ -23,6 +23,7 @@ interface DialogData {
 })
 export class RoomTypeUpdateDialogComponent implements OnInit {
   newType: string = this.dialogData.element.name;
+  newCode: string = this.dialogData.element.code;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
@@ -36,26 +37,31 @@ export class RoomTypeUpdateDialogComponent implements OnInit {
   ngOnInit(): void { }
 
   closeDialog() {
-    this.dialogRef.close();
+    this.dialogRef.close({
+      isUpdated: true
+    });
   }
 
   updateRoomType() {
-    const condition = this.roomTypeService.rooms.some(
-      (r) => r.name === this.newType
-    );
     if (!this.newType) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), 'OK');
       return;
     }
-    if (condition) {
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === "en" ? 'room type' : 'oda tipi' }), 'OK');
-      this.newType = '';
-      return;
-    }
+
+    this.roomTypeService.getAllRoomTypes().subscribe(res => {
+      if (res.data.some(c => c.code === this.newCode)) {
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === "en" ? "room type" : "oda tipi" }), "OK");
+        this.newType = "";
+        this.newCode = "";
+        return;
+      }
+    });
+
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.dialogData.element.name }));
-    // this.dialogData.element.name = this.newType;
-    this.dialogData.table.renderRows();
+    this.dialogData.element.name = this.newType;
+    this.dialogData.element.code = this.newCode;
     this.closeDialog();
+    this.dialogData.table.renderRows();
   }
 
   delete() {

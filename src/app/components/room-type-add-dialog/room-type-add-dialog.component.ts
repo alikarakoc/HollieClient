@@ -17,6 +17,7 @@ interface DialogData {
 })
 export class RoomTypeAddDialogComponent implements OnInit {
   roomTypeName: string;
+  roomTypeCode: string;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
@@ -36,9 +37,8 @@ export class RoomTypeAddDialogComponent implements OnInit {
     }
 
     this.roomTypeService.getAllRoomTypes().subscribe((res) => {
-      if (res.data.some(c => c.name === this.roomTypeName)) {
+      if (res.data.some(c => c.code === this.roomTypeCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'room type' : 'oda tipi' }), 'OK');
-        this.roomTypeName="";
         this.clearInputs();
         return;
       }
@@ -58,7 +58,8 @@ export class RoomTypeAddDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close({
       isAdded: true,
-      elementName: this.roomTypeName
+      elementName: this.roomTypeName,
+      elementCode: this.roomTypeCode
     });
   }
 

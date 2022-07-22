@@ -20,7 +20,6 @@ interface DialogData {
 export class RoomTypeDeleteDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private roomTypeService: RoomTypeService,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<RoomTypeDeleteDialogComponent>,
     public translocoService: TranslocoService
@@ -31,7 +30,7 @@ export class RoomTypeDeleteDialogComponent implements OnInit {
   delete() {
     this.snackBar.open(this.translocoService.translate('dialogs.delete_success', { elementName: this.data.element.name }));
     // this.roomTypeService.deleteRoomType(this.data.element);
-    this.dialogRef.close();
+    this.dialogRef.close({ isDeleted: true });
     this.data.dialogRef.close();
     this.data.table.renderRows();
   }

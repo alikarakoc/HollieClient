@@ -20,14 +20,14 @@ export class RoomTypeService {
   }
 
   addRoomType(roomType: Partial<RoomType>) {
-    return this.httpClient.post<ListResponseModel<RoomType>>(`${this.baseUrl}/AddRoomType`, roomType);
+    return this.httpClient.post<ListResponseModel<RoomType>>(`${this.baseUrl}/add`, roomType);
   }
 
   deleteRoomType(roomType: Partial<RoomType>) {
-    return this.httpClient.delete<ListResponseModel<RoomType>>(`${this.baseUrl}/DeleteRoomType?Id=${roomType.id}`)
+    return this.httpClient.delete<ListResponseModel<RoomType>>(`${this.baseUrl}/delete?Id=${roomType.id}`)
   }
 
   updateRoomType(roomType: Partial<RoomType>) {
-    return this.httpClient.put<ListResponseModel<RoomType>>(`${this.baseUrl}/UpdateRoomType?Id=${roomType.id}`, roomType);
+    return this.httpClient.put<ListResponseModel<RoomType>>(`${this.baseUrl}/update?Id=${roomType.id}`, roomType);
   }
 }

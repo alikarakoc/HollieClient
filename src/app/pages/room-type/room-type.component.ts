@@ -16,7 +16,7 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./room-type.component.scss'],
 })
 export class RoomTypeComponent implements OnInit {
-  columns: string[] = ['code','name', 'actions'];
+  columns: string[] = ['code', 'name', 'actions'];
 
   @ViewChild(MatTable) table: MatTable<RoomType>;
   roomTypes: RoomType[] = [];
@@ -38,8 +38,16 @@ export class RoomTypeComponent implements OnInit {
       data: { element, table: this.table },
     });
 
-    dialog.afterClosed().subscribe(() => {
-      this.roomTypeService.updateRoomType(element); /* .subscribe(); */
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isUpdated) {
+        this.roomTypeService
+          .updateRoomType(element)
+          .subscribe(() => {
+            console.log(element);
+
+            this.ngOnInit();
+          });
+      }
     });
   }
 
@@ -51,7 +59,7 @@ export class RoomTypeComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.roomTypeService
-          .addRoomType({ name: result.elementName })
+          .addRoomType({ name: result.elementName, code: result.elementCode })
           .subscribe(() => {
             this.ngOnInit();
           });
