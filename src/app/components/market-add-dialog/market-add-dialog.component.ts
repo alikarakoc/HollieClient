@@ -33,16 +33,16 @@ export class MarketAddDialogComponent implements OnInit {
   add() {
     // let categories: HotelCategory[] = [];
 
-    if (!this.marketName) {
+    if (!this.marketCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
 
-    this.marketService.getMarket().subscribe((res: { data: { name: string; }[]; }) => {
+    this.marketService.getMarket().subscribe((res: { data: { code: string; }[]; }) => {
       // categories = res.data;
-      if (res.data.some((c: { name: string; }) => c.name === this.marketName)) {
+      if (res.data.some((c: { code: string; }) => c.code === this.marketCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: 'market' }), "OK");
-        this.marketName = "";
+        this.marketCode = "";
         return;
         
       }
