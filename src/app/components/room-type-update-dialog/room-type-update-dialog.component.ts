@@ -49,7 +49,7 @@ export class RoomTypeUpdateDialogComponent implements OnInit {
     }
 
     this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      const otherRoomTypes = res.data.filter(v => v.code !== this.newCode);
+      const otherRoomTypes = res.data.filter(v => v.id !== this.dialogData.element.id);
       if (otherRoomTypes.some(c => c.code === this.newCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === "en" ? "room type" : "oda tipi" }), "OK");
         this.newType = "";

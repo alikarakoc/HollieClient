@@ -44,16 +44,17 @@ export class MarketUpdateDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
-    const otherMarkets = this.markets.filter(c => c.code !== this.newMarketCode && c.name !== this.newMarketName);
+    // const otherMarkets = this.markets.filter(c => c.code !== this.newMarketCode && c.name !== this.newMarketName);
 
-    if (otherMarkets.some(c => c.code === this.newMarketCode && c.name === this.newMarketName )) {
-      console.log(this.newMarketCode, this.newMarketName);
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
-      this.newMarketCode = "";
-      this.newMarketName = "";
-      
-      return;
-    }
+    this.marketService.getAllMarkets().subscribe(res => {
+      const otherMarkets = res.data.filter(v => v.id !== this.data.element.id);
+      if (otherMarkets.some(c => c.code === this.newMarketCode)) {
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === "en" ? "room type" : "oda tipi" }), "OK");
+        this.newMarketName = "";
+        this.newMarketCode = "";
+        return;
+      }
+    });
 
     
 

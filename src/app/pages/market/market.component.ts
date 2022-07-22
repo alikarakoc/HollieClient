@@ -60,13 +60,14 @@ export class MarketComponent implements OnInit {
       data: { element },
     });
 
-    dialog.afterClosed().subscribe(() => {
-      this.marketService.updateMarket(element).subscribe((res) => {
-        // this.hotel.name = element.name;
-        // this.hotel.id = element.id;
-        console.log('res data checkec');
-        console.log(res.data);
-      });
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isUpdated) {
+        this.marketService.updateMarket(element).subscribe((res) => {
+          // this.hotel.name = element.name;
+          // this.hotel.id = element.id;
+          this.ngOnInit();
+        });
+      }
     });
   }
 
