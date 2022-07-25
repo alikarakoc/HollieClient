@@ -14,6 +14,7 @@ import { ContractService } from 'src/app/services';
 export class ContractComponent implements OnInit {
   columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end", "actions"];
   contracts: Contract[] = [];
+  @ViewChild(MatTable) table: MatTable<Contract>;
   constructor(
     public contractService: ContractService,
     private dialog: MatDialog,
@@ -27,7 +28,14 @@ export class ContractComponent implements OnInit {
 
   }
 
+  toDate(v: string) {
+    return new Date(v);
+  }
+
   create() {
+    const dialog = this.dialog.open(ContractAddDialogComponent, {
+      data: { table: this.table },
+    });
   }
 
   delete(element: Contract) {

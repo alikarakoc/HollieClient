@@ -3,8 +3,8 @@ export interface Contract {
     id?: number;
     code: string;
     price: number;
-    start: Date;
-    end: Date;
+    enteredDate: Date;
+    exitDate: Date;
     hotelId: number;
     marketId: number;
     categoryId: number;
