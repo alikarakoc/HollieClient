@@ -7,6 +7,8 @@
     "room_type_title": "Oda Tipleri",
     "market_title": "Marketler",
     "board_title": "Tablolar",
+    "contract_title": "Kontratlar",
+    "currency_title": "Döviz Kurları",
     "navbar": {
         "change_language": "Dili Değiştir"
     },

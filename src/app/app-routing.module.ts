@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent } from "./pages";
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent } from "./pages";
 import { HomeComponent } from "./pages/home/home.component";
 
 const routes: Routes = [
@@ -40,6 +40,14 @@ const routes: Routes = [
   {
     path: "market",
     component: MarketComponent
+  },
+  {
+    path: "currencies",
+    component: CurrencyComponent
+  },
+  {
+    path: "contracts",
+    component: ContractComponent
   },
   {
     path: "**",

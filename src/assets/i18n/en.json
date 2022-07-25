@@ -7,6 +7,8 @@
     "room_type_title": "Room Types",
     "market_title": "Markets",
     "board_title": "Boards",
+    "contract_title": "Contracts",
+    "currency_title": "Currencies",
     "navbar": {
         "change_language": "Change Language"
     },

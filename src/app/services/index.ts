@@ -9,3 +9,5 @@ export { BoardService } from './board.service';
  * AAARGH
  */
 export { HotelCategoryService } from './hotel-category.service';
+export { CurrencyService } from './currency.service';
+export { ContractService } from './contract.service';

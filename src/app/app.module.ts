@@ -31,10 +31,16 @@ import {
   BoardAddDialogComponent,
   BoardDeleteDialogComponent,
   BoardUpdateDialogComponent,
+  CurrencyAddDialogComponent,
+  CurrencyDeleteDialogComponent,
+  CurrencyUpdateDialogComponent,
+  ContractAddDialogComponent,
+  ContractDeleteDialogComponent,
+  ContractUpdateDialogComponent,
 } from './components';
 
 // Modules
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent,MarketComponent, BoardComponent } from './pages';
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent,MarketComponent, BoardComponent, CurrencyComponent, ContractComponent } from './pages';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -82,6 +88,16 @@ import { TranslocoRootModule } from './transloco-root.module';
     BoardAddDialogComponent,
     BoardDeleteDialogComponent,
     BoardUpdateDialogComponent,
+
+    CurrencyComponent,
+    CurrencyAddDialogComponent,
+    CurrencyDeleteDialogComponent,
+    CurrencyUpdateDialogComponent,
+
+    ContractComponent,
+    ContractAddDialogComponent,
+    ContractDeleteDialogComponent,
+    ContractUpdateDialogComponent,
 
     ErrorComponent,
   ],
