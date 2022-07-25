@@ -58,7 +58,7 @@ export class ContractUpdateDialogComponent implements OnInit {
   currencies: any[] = [];
 
   ngOnInit(): void {
-    this.contractService.getAllContracts().subscribe(res => {
+    this.hotelService.getAllHotels().subscribe(res => {
       this.hotels = res.data;
     });
 
@@ -121,8 +121,10 @@ contracts:Contract[]=[];
       this.code = "";
       this.name = "";
       this.price == null;
-       this.start == null;
-       this.end == null;
+      // start: new Date(2022, 1 - 1, 20),
+      // end: new Date(2022, 1 - 1, 26),
+       this.start == new Date(2022, 1 - 1, 20),
+       this.end == new Date(2022, 1 - 1, 26),
       this.hotel== null;
       this.market== null;
       this.agency==null;
