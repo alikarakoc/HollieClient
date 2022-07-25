@@ -1,0 +1,1 @@
+export { LocalizedDatePipe } from './localized-date.pipe';
