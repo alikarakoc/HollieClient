@@ -46,14 +46,10 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
-
-    // const otherHotelCategories = this.hotels.filter(c => c.name !== this.newCategoryName && c.code !== this.newCategoryCode);
     const otherHotelCategories = this.hotels;
 
     console.log(this.hotels);
     console.log(otherHotelCategories);
-
-
 
     if (otherHotelCategories.findIndex(c => c.name == this.newCategoryName.toString() || c.code == this.newCategoryCode.toString()) > -1) {
       { if (otherHotelCategories.some(c => c.name == this.newCategoryName && c.code == this.newCategoryCode )) {
@@ -81,14 +77,6 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
           }
         }
 
-        //   const [month, day, year] = value.birthdate.split('.');
-        //   if(year > 2000){
-        //     console.log(value.name + " " + value.surname);
-        //   }
-        // });
-
-
-
         otherHotelCategories.forEach(element => {
           if (element.name == this.newCategoryName || element.code == this.newCategoryCode) {
             console.log(this.newCategoryName);
@@ -97,9 +85,6 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
             return;
           }
         });
-
-
-
       }
 
       this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCategoryName }));
@@ -124,23 +109,14 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       this.data.table?.renderRows();
       this.closeDialog();
     }
-    
+
     else {
       alert("Otel adı var");
     }
-
-    // const otherCategories = this.hotels.map(v => {
-    //   return (v.name !== this.data.element.name && v.code !== this.data.element.name) && v;
-    // });
-
-    // if (otherCategories) {
-
-    // }
   }
 
   closeDialog() {
     this.dialogRef.close();
-
   }
 
   delete() {
@@ -152,7 +128,6 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       if (result.isDeleted) {
         this.hotelCategoryService.deleteCategory(this.data.element).subscribe(() => {
           this.ngOnInit();
-
         });
       } this.data.table?.renderRows();
     });

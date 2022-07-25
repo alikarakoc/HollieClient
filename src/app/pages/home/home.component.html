@@ -51,7 +51,7 @@
             <button mat-flat-button color="accent" routerLink="/countries">{{ 'home.see_more' | transloco }}</button>
         </mat-card-actions>
     </mat-card>
-    
+
 </div>
 
 <div class="row my-2">
@@ -98,7 +98,7 @@
             <button mat-flat-button color="accent" routerLink="/market">{{ 'home.see_more' | transloco }}</button>
         </mat-card-actions>
     </mat-card>
-    
+
 </div>
 
 <div class="row my-2">
@@ -137,10 +137,10 @@
         <mat-card-content>
             <mat-list role="list" *ngIf="currencies !== null; else noData">
                 <mat-list-item role="listitem" *ngFor="let item of currencies | slice:0:3; let last = last">
-                    {{ item.name }}
+                    {{ item.code }}
                     <!-- {{ item.name }}: {{ item.value }} -->
                     {{ item.value | currency: item.code : 'symbol-narrow' : '1.2-2'}}
-                    <mat-divider *ngIf="!last"></mat-divider> 
+                    <mat-divider *ngIf="!last"></mat-divider>
                 </mat-list-item>
             </mat-list>
         </mat-card-content>
