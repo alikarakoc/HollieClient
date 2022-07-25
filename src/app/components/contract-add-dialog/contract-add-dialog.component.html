@@ -6,7 +6,7 @@
 <div mat-dialog-content>
     <mat-form-field>
         <mat-label>{{ 'code' | transloco }}</mat-label>
-        <input matInput [(ngModel)]="code" (keyup.enter)="add()">
+        <input matInput [(ngModel)]="contractCode" (keyup.enter)="add()">
     </mat-form-field>
 
     <br>
@@ -47,14 +47,14 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="hotelId">
+        <mat-select [(ngModel)]="hotel">
             <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'market' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="marketId">
+        <mat-select [(ngModel)]="market">
             <mat-option *ngFor="let m of markets" [value]="m.id">{{ m.name }}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -63,14 +63,14 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'category' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="categoryId">
+        <mat-select [(ngModel)]="category">
             <mat-option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'agency' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="agencyId">
+        <mat-select [(ngModel)]="agency">
             <mat-option *ngFor="let a of agencies" [value]="a.id">{{ a.name }}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -79,14 +79,14 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'board' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="boardId">
+        <mat-select [(ngModel)]="board">
             <mat-option *ngFor="let b of boards" [value]="b.id">{{ b.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'room_type' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="roomTypeId">
+        <mat-select [(ngModel)]="roomType">
             <mat-option *ngFor="let r of roomTypes" [value]="r.id">{{ r.name }}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -95,7 +95,7 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'currency' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="currencyId">
+        <mat-select [(ngModel)]="currency">
             <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.name }}</mat-option>
         </mat-select>
     </mat-form-field>

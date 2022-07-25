@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from "@angular/material/table";
 import { TranslocoService } from '@ngneat/transloco';
-import { ContractAddDialogComponent, ContractDeleteDialogComponent } from "src/app/components";
+import { ContractAddDialogComponent, ContractDeleteDialogComponent, ContractUpdateDialogComponent } from "src/app/components";
 import { Contract } from 'src/app/interfaces';
 import { ContractService } from 'src/app/services';
 
@@ -13,6 +13,7 @@ import { ContractService } from 'src/app/services';
 })
 export class ContractComponent implements OnInit {
   columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end", "actions"];
+  @ViewChild(MatTable) table : MatTable<Contract>;
   contracts: Contract[] = [];
   constructor(
     public contractService: ContractService,
@@ -28,6 +29,21 @@ export class ContractComponent implements OnInit {
   }
 
   create() {
+    console.log(this.contracts);
+    const dialog = this.dialog.open(ContractAddDialogComponent, {data : {table : this.table}});
+  
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isAdded){
+        this.contractService
+        .addContract(result.element)
+        .subscribe(() =>{
+          this.ngOnInit();
+        });
+
+        console.log(result.element);
+      }
+    });
+  
   }
 
   delete(element: Contract) {
@@ -44,5 +60,14 @@ export class ContractComponent implements OnInit {
     });
   }
 
-  update(element: Contract) { }
+  update(element: Contract) {
+    const dialog =this.dialog.open(ContractUpdateDialogComponent, {data : {element}});
+  dialog.afterClosed().subscribe(result=> {
+    if(result.isUpdated){
+      this.contractService.updateContract(element).subscribe(() =>this.ngOnInit());
+    }
+  })
+  }
+
+
 }

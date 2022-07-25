@@ -1,11 +1,16 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MatTable } from "@angular/material/table";
-import { TranslocoService } from "@ngneat/transloco";
-import { AgencyService, BoardService, CurrencyService, HotelCategoryService, HotelService, MarketService, RoomTypeService } from "src/app/services";
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTable } from '@angular/material/table';
+import { ContractService } from 'src/app/services/contract.service';
+import { TranslocoService } from '@ngneat/transloco';
+import { Contract } from 'src/app/interfaces';
+import { HotelService, MarketService, HotelCategoryService, AgencyService, BoardService, RoomTypeService, CurrencyService } from 'src/app/services';
+
 
 interface DialogData {
-  table: MatTable<any>;
+  table: MatTable<Contract>;
 }
 
 @Component({
@@ -15,21 +20,23 @@ interface DialogData {
 })
 export class ContractAddDialogComponent implements OnInit {
   // NgModels :)
-  code: string;
+  contractCode: string;
   name: string;
   price: number;
   start: Date;
   end: Date;
-  hotelId: number;
-  marketId: number;
-  categoryId: number;
-  agencyId: number;
-  boardId: number;
-  roomTypeId: number;
-  currencyId: number;
+  hotel: number;
+  market: number;
+  category: number;
+  agency: number;
+  board: number;
+  roomType: number;
+  currency: number;
 
   constructor(
     public translocoService: TranslocoService,
+    private dialogRef: MatDialogRef<ContractAddDialogComponent>,
+    private snackBar: MatSnackBar,
     private hotelService: HotelService,
     private marketService: MarketService,
     private hotelCategoryService: HotelCategoryService,
@@ -37,6 +44,8 @@ export class ContractAddDialogComponent implements OnInit {
     private boardService: BoardService,
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
+    private contractService: ContractService,
+    
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
 
@@ -47,6 +56,7 @@ export class ContractAddDialogComponent implements OnInit {
   boards: any[] = [];
   roomTypes: any[] = [];
   currencies: any[] = [];
+  contracts: any[] = [];
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
@@ -61,26 +71,88 @@ export class ContractAddDialogComponent implements OnInit {
       this.categories = res.data;
     });
 
-    this.boardService.getAllBoards().subscribe(res => {
-      this.boards = res.data;
-    });
-
-    this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data;
-    });
 
     this.agencyService.getAllAgencies().subscribe(res => {
       this.agencies = res.data;
     });
 
-    // TODO: Github'dan pull ettikten sonra yorumu kaldır
-    // this.currencyService.getAllCurrency().subscribe(res => {
-    //   this.currencies = res.data;
-    // });
+    this.roomTypeService.getAllRoomTypes().subscribe(res => {
+      this.roomTypes = res.data
+    });
+
+    this.currencyService.getAllCurrency().subscribe(res => {
+      this.currencies = res.data
+    });
+
+    this.boardService.getAllBoards().subscribe(res => {
+      this.boards = res.data;
+    });
+
+    this.contractService.getAllContracts().subscribe(res => { this.contracts = res.data})
+
   }
 
-  add() { }
+  add() {
+    const predicate = (a: Omit<Contract, 'id'>) =>
+      a.hotel=== this.hotel &&
+      a.market === this.market &&
+      a.agency === this.agency &&
+      a.code === this.contractCode &&
+      a.name === this.name &&
+      a.price === this.price &&
+      a.board === this.board;
 
-  closeDialog() { }
 
-}
+    const condition = this.contractService.contracts.some(predicate);
+
+    this.contractService.getAllContracts().subscribe((res) => {
+      if(res.data.some(c =>c.code === this.contractCode)){
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same' , { data : this.translocoService.getActiveLang() === 'en'? 'contract' : 'sözleşme'}), "OK");
+        this.contractCode = "";
+        return;
+      }
+    });
+
+    if (!this.contractCode || !this.hotel || !this.market || !this.agency || !this.board || !this.name || !this.price) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
+      return;
+    }
+
+ 
+    if (condition) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'Contract' : 'Sözleşme' }), 'OK');
+      return;
+    }
+
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: name }));
+
+    this.closeDialog();
+    this.data.table.renderRows();
+    console.log(this.hotel)
+  }
+
+
+  closeDialog(){
+    console.log(this.contractCode);
+
+    this.dialogRef.close({
+      isAdded : true,
+      element: {
+        code : this.contractCode,
+        name : this.name,
+        price : this.price,
+        start: this.start,
+        end : this.end,
+        hotel : this.hotel,
+        market: this.market,
+        agency : this.agency,
+        board : this.board,
+        roomtype : this.roomType,
+        currency : this.currency
+
+
+      }
+    });
+
+  }
+  }

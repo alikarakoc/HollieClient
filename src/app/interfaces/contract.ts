@@ -5,11 +5,11 @@ export interface Contract {
     price: number;
     start: Date;
     end: Date;
-    hotelId: number;
-    marketId: number;
-    categoryId: number;
-    agencyId: number;
-    boardId: number;
-    roomTypeId: number;
-    currencyId: number;
+    hotel: number;
+    market: number;
+    category: number;
+    agency: number;
+    board: number;
+    roomType: number;
+    currency: number;
 }
