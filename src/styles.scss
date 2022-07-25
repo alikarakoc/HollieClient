@@ -36,6 +36,27 @@ $HollieClient-typography: mat-typography-config($font-family: "'Kanit', sans-ser
 
 /* You can add global styles to this file, and also import other style files */
 
+$app-theme: mat.define-light-theme((
+ color: (
+   primary: $HollieClient-primary,
+   accent: $HollieClient-accent,
+   warn: $HollieClient-warn,
+ )
+));
+
+$app-dark-theme: mat.define-dark-theme((
+ color: (
+   primary: $HollieClient-primary,
+   accent: $HollieClient-accent,
+   warn: $HollieClient-warn,
+ )
+));
+
+.darkMode{
+  @include mat.all-component-themes($app-dark-theme);
+
+}
+
 html,
 body {
   height: 100%;
