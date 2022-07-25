@@ -47,5 +47,6 @@
     "category": "Category",
     "code": "Code",
     "email": "Email",
-    "actions": "Actions"
+    "actions": "Actions",
+    "value": "Value"
 }
