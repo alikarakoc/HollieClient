@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Agency, Board, Country, Hotel, HotelCategory, Market, RoomType } from "src/app/interfaces";
-import { CountryService, HotelCategoryService, HotelService, MarketService, RoomTypeService } from "src/app/services";
+import { Agency, Board, Contract, Country, Currency, Hotel, HotelCategory, Market, RoomType } from "src/app/interfaces";
+import { ContractService, CountryService, CurrencyService, HotelCategoryService, HotelService, MarketService, RoomTypeService } from "src/app/services";
 import { AgencyService } from "src/app/services/agency.service";
 import { BoardService } from 'src/app/services/board.service';
 
@@ -18,7 +18,9 @@ export class HomeComponent implements OnInit {
     public hotelService: HotelService,
     public hotelCategoryService: HotelCategoryService,
     public marketService: MarketService,
-    public roomTypeService: RoomTypeService
+    public roomTypeService: RoomTypeService,
+    public contractService: ContractService,
+    public currencyService: CurrencyService
   ) { }
 
   agencies: Agency[] = [];
@@ -28,6 +30,8 @@ export class HomeComponent implements OnInit {
   hotelCategories: HotelCategory[] = [];
   markets: Market[] = [];
   roomTypes: RoomType[] = [];
+  contracts: Contract[] = [];
+  currencies: Currency[] = [];
 
   ngOnInit(): void {
 
@@ -57,6 +61,14 @@ export class HomeComponent implements OnInit {
 
     this.roomTypeService.getAllRoomTypes().subscribe((res) => {
       this.roomTypes = res.data;
+    });
+
+    this.contractService.getAllContracts().subscribe((res) => {
+      this.contracts = res.data;
+    });
+
+    this.currencyService.getAllCurrency().subscribe((res) => {
+      this.currencies = res.data;
     });
   }
 }
