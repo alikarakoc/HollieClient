@@ -18,21 +18,10 @@ import {
 })
 export class CurrencyComponent implements OnInit {
   columns: string[] = ["code", "name", "value", "actions"];
+
   @ViewChild(MatTable) table: MatTable<CurrencyComponent>;
 
-  currencies: Currency[] = [
-    /* EXAMPLE */
-    {
-      code: "TUR",
-      name: "Turkish Lira",
-      value: "123"
-    },
-    {
-      code: "USD",
-      name: "American Dollasr",
-      value: "123"
-    }
-  ];
+  currencies: Currency[] = [];
 
   constructor(
     public translocoService: TranslocoService,

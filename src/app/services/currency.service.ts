@@ -8,7 +8,7 @@ import { ListResponseModel } from '../interfaces/listResponseModel';
   providedIn: 'root'
 })
 export class CurrencyService {
-  baseUrl = `${environment.baseUrl}/Currency`;
+  baseUrl = `${environment.baseUrl}/Currencies`;
   currencies: Currency[] = [];
 
   constructor(private http: HttpClient) { }
