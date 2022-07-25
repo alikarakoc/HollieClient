@@ -12,6 +12,7 @@ import { ContractService } from 'src/app/services';
   styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent implements OnInit {
+  columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end", "actions"];
   contracts: Contract[] = [];
   constructor(
     public contractService: ContractService,
@@ -29,13 +30,13 @@ export class ContractComponent implements OnInit {
   create() {
   }
 
-  delete(element: Contract){
+  delete(element: Contract) {
     const dialog = this.dialog.open(ContractDeleteDialogComponent, {
-      data: {element},
+      data: { element },
     });
     dialog.afterClosed().subscribe((result) => {
-      if(result.isDeleted){
-        this.contractService.deleteContract(element).subscribe((res:any) =>{
+      if (result.isDeleted) {
+        this.contractService.deleteContract(element).subscribe((res: any) => {
           console.log(element);
           this.ngOnInit();
         });
@@ -43,5 +44,5 @@ export class ContractComponent implements OnInit {
     });
   }
 
-  update(element: Contract) {}
+  update(element: Contract) { }
 }
