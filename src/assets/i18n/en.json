@@ -37,6 +37,7 @@
         "error_same": "Please type another {{ name }} data",
         "error_email": "Please type a valid email",
         "error_required": "Please type the blank areas",
+        "error_date": "Enter date should be lower.",
         "update_success": "{{ elementName }} successfully updated.",
         "add_success": "{{ elementName }} successfully added to your table.",
         "delete_success": "{{ elementName }} successfully deleted."
