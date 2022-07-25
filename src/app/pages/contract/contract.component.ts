@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from "@angular/material/table";
 import { TranslocoService } from '@ngneat/transloco';
-import { ContractAddDialogComponent } from "src/app/components";
+import { ContractAddDialogComponent, ContractDeleteDialogComponent } from "src/app/components";
 import { Contract } from 'src/app/interfaces';
+import { ContractService } from 'src/app/services';
 
 @Component({
   selector: 'app-contract',
@@ -11,54 +12,36 @@ import { Contract } from 'src/app/interfaces';
   styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent implements OnInit {
-  columns: string[] = [
-    'code',
-    'name',
-    'price',
-    'currency',
-    'hotel',
-    'market',
-    'agency',
-    'board',
-    'roomType',
-    'start',
-    'end',
-    'actions',
-  ];
-
-  @ViewChild(MatTable) table: MatTable<Contract>;
-
-  contracts: Contract[] = [
-    /* EXAMPLE */
-    {
-      name: 'Contract',
-      code: 'C',
-      agencyId: 1,
-      boardId: 1,
-      categoryId: 1,
-      currencyId: 1,
-      hotelId: 1,
-      marketId: 1,
-      roomTypeId: 1,
-      price: 300,
-      // TODO: Javascript Date nesnesinde aylar 0'ıncı index'ten başlıyor. O yüzden ayı çekerken 1 eksiltmek lazım
-      start: new Date(2022, 1 - 1, 20),
-      end: new Date(2022, 1 - 1, 26),
-    },
-  ];
-
+  contracts: Contract[] = [];
   constructor(
-    public translocoService: TranslocoService,
-    private dialog: MatDialog
-  ) {}
+    public contractService: ContractService,
+    private dialog: MatDialog,
+    public translocoService: TranslocoService
+  ) { }
+  ngOnInit(): void {
+    this.contractService.getAllContracts().subscribe((res) => {
+      this.contracts = res.data;
+    });
+    console.log('on init');
 
-  ngOnInit(): void {}
-
-  create() {
-    const dialog = this.dialog.open(ContractAddDialogComponent, { data: { table: this.table } });
   }
 
-  delete(element: Contract) {}
+  create() {
+  }
+
+  delete(element: Contract){
+    const dialog = this.dialog.open(ContractDeleteDialogComponent, {
+      data: {element},
+    });
+    dialog.afterClosed().subscribe((result) => {
+      if(result.isDeleted){
+        this.contractService.deleteContract(element).subscribe((res:any) =>{
+          console.log(element);
+          this.ngOnInit();
+        });
+      }
+    });
+  }
 
   update(element: Contract) {}
 }
