@@ -12,7 +12,7 @@ export class ContractService {
   baseUrl = `${environment.baseUrl}/Contract`;
   contracts : Contract[] = [];
   getAllContracts(): Observable<ListResponseModel<Contract>> {
-    return this.http.get<ListResponseModel<Contract>>(`${this.baseUrl}/AllContracts`);
+    return this.http.get<ListResponseModel<Contract>>(`${this.baseUrl}/AllContract`);
   }
 
   addContract(contract: Partial<Contract>) {
