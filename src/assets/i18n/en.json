@@ -44,17 +44,9 @@
     "name": "Name",
     "address": "Address",
     "phone": "Phone",
+    "category": "Category",
     "code": "Code",
     "email": "Email",
     "actions": "Actions",
-    "category": "Category",
-    "agency": "Agency",
-    "board": "Board",
-    "currency": "Currency",
-    "hotel": "Hotel",
-    "market": "Market",
-    "room_type": "Room Type",
-    "price": "Price",
-    "start": "Start Date",
-    "end": "End Date"
+    "value": "Value"
 }
