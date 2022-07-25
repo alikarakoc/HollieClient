@@ -71,10 +71,13 @@ export class AgencyUpdateDialogComponent implements OnInit {
 
     this.data.element.code = this.newAgencyCode;
     this.data.element.name = this.newAgencyName;
+    this.data.element.email = this.newAgencyEmail;
+    this.data.element.address = this.newAgencyAddress;
+    this.data.element.phone = this.newAgencyPhone;
 
     console.log(this.data.element);
     this.data.table?.renderRows();
-    // this.hotelService.updateHotel(this.data.element)
+   this.agencyService.updateAgency(this.data.element)
     this.dialogRef.close({ isUpdated: true });
   }
 
