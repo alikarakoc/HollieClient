@@ -1,1 +1,20 @@
-<p>currency-update-dialog works!</p>
+<h1 mat-dialog-title>
+  {{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Hotel Category' : 'Otel Tipi' }) }}
+</h1>
+
+<div mat-dialog-content>
+
+  <mat-form-field>
+      <mat-label>{{ 'vaue' | transloco }}</mat-label>
+      <input matInput [(ngModel)]="newCurrencyValue" (keyup.enter)="update()">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="update()">{{ 'dialogs.update' | transloco }}</button>
+  <button mat-flat-button color="warn" (click)="delete()">
+      <mat-icon>delete</mat-icon>
+      {{ 'dialogs.delete' | transloco }}
+  </button>
+  <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
+</div>
