@@ -1,6 +1,7 @@
 export interface Contract {
     name: string;
-    id: number;
+    id?: number;
+    code: string;
     price: number;
     start: Date;
     end: Date;

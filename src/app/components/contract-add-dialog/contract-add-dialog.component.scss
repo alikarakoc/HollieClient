@@ -1,0 +1,24 @@
+.price-input {
+    text-align: right;
+}
+
+input.price-input::-webkit-outer-spin-button,
+input.price-input::-webkit-inner-spin-button {
+    display: none;
+}
+
+input.price-input {
+    -moz-appearance: textfield;
+}
+
+.datepicker+.datepicker {
+    margin-left: 5px;
+}
+
+mat-form-field.selects-m {
+    width: 10vw;
+}
+
+.selects-m+.selects-m {
+    margin-left: 5px !important;
+}

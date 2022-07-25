@@ -1,11 +1,11 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AllFormsModule, MaterialModule, CdkModule } from './modules';
+import { AllFormsModule, MaterialModule, CdkModule, TranslocoRootModule } from './modules';
 import { HttpClientModule } from '@angular/common/http';
 
 import {
@@ -40,16 +40,23 @@ import {
 } from './components';
 
 // Modules
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent,MarketComponent, BoardComponent, CurrencyComponent, ContractComponent } from './pages';
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent } from './pages';
+import { HomeComponent } from './pages/home/home.component';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { HomeComponent } from './pages/home/home.component';
-import { TranslocoRootModule } from './transloco-root.module';
 
+import { LocalizedDatePipe } from "./pipes";
+
+import { registerLocaleData } from "@angular/common";
+import localeTR from '@angular/common/locales/tr';
+
+registerLocaleData(localeTR);
 
 @NgModule({
   declarations: [
+    LocalizedDatePipe,
+
     AppComponent,
     HomeComponent,
     NavbarComponent,
@@ -118,7 +125,7 @@ import { TranslocoRootModule } from './transloco-root.module';
     },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline' },
+      useValue: { appearance: 'fill' },
     },
   ],
   bootstrap: [AppComponent],

@@ -1,1 +1,89 @@
-<p>contract works!</p>
+<div class="header">
+    <h1>{{ 'contract_title' | transloco }}</h1>
+    <span class="spacer"></span>
+    <button mat-flat-button color="primary" class="new-button" (click)="create()">
+        {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Contract' : 'Kontrat' }) }}
+    </button>
+</div>
+
+<table mat-table [dataSource]="contracts">
+    <ng-container matColumnDef="code">
+        <th mat-header-cell *matHeaderCellDef>{{ 'code' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.code }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef>{{ 'name' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>{{ 'price' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.price }}</td>
+    </ng-container>
+
+    <!-- TODO: Şimdilik ID'leri göster -->
+    <ng-container matColumnDef="currency">
+        <th mat-header-cell *matHeaderCellDef>{{ 'currency' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.currencyId }}</td>
+    </ng-container>
+
+    <!-- TODO: Şimdilik ID'leri göster -->
+    <ng-container matColumnDef="hotel">
+        <th mat-header-cell *matHeaderCellDef>{{ 'hotel' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.hotelId }}</td>
+    </ng-container>
+
+    <!-- TODO: Şimdilik ID'leri göster -->
+    <ng-container matColumnDef="market">
+        <th mat-header-cell *matHeaderCellDef>{{ 'market' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.marketId }}</td>
+    </ng-container>
+
+    <!-- TODO: Şimdilik ID'leri göster -->
+    <ng-container matColumnDef="agency">
+        <th mat-header-cell *matHeaderCellDef>{{ 'agency' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.agencyId }}</td>
+    </ng-container>
+
+    <!-- TODO: Şimdilik ID'leri göster -->
+    <ng-container matColumnDef="board">
+        <th mat-header-cell *matHeaderCellDef>{{ 'board' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.boardId }}</td>
+    </ng-container>
+
+    <!-- TODO: Şimdilik ID'leri göster -->
+    <ng-container matColumnDef="roomType">
+        <th mat-header-cell *matHeaderCellDef>{{ 'room_type' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.roomTypeId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="start">
+        <th mat-header-cell *matHeaderCellDef>{{ 'start' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.start | localizedDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="end">
+        <th mat-header-cell *matHeaderCellDef>{{ 'end' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.end | localizedDate }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>{{ 'actions' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ element }">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="columns"></tr>
+    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+</table>
+
+<mat-menu #menu="matMenu">
+    <ng-template matMenuContent let-element="element">
+        <button mat-menu-item (click)="update(element)">{{ 'dialogs.edit' | transloco }}</button>
+        <button mat-menu-item (click)="delete(element)">{{ 'dialogs.delete' | transloco }}</button>
+    </ng-template>
+</mat-menu>
