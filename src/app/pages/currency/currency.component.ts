@@ -44,7 +44,7 @@ export class CurrencyComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.CurrencyService
-          .addCurrency({ name: result.elementName, code: result.elementCode })
+          .addCurrency({ name: result.elementName, code: result.elementCode, value: result.elementValue })
           .subscribe(() => {
             this.ngOnInit();
           });
