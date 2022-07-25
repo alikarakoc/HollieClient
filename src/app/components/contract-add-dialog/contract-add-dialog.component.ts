@@ -39,7 +39,6 @@ export class ContractAddDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private hotelService: HotelService,
     private marketService: MarketService,
-    private hotelCategoryService: HotelCategoryService,
     private agencyService: AgencyService,
     private boardService: BoardService,
     private roomTypeService: RoomTypeService,
@@ -51,7 +50,6 @@ export class ContractAddDialogComponent implements OnInit {
 
   hotels: any[] = [];
   markets: any[] = [];
-  categories: any[] = [];
   agencies: any[] = [];
   boards: any[] = [];
   roomTypes: any[] = [];
@@ -66,11 +64,6 @@ export class ContractAddDialogComponent implements OnInit {
     this.marketService.getAllMarkets().subscribe(res => {
       this.markets = res.data;
     });
-
-    this.hotelCategoryService.getAllHotels().subscribe(res => {
-      this.categories = res.data;
-    });
-
 
     this.agencyService.getAllAgencies().subscribe(res => {
       this.agencies = res.data;
@@ -94,13 +87,13 @@ export class ContractAddDialogComponent implements OnInit {
 
   add() {
     const predicate = (a: Omit<Contract, 'id'>) =>
-      a.hotel=== this.hotel &&
-      a.market === this.market &&
-      a.agency === this.agency &&
+      a.hotelId=== this.hotel &&
+      a.marketId === this.market &&
+      a.agencyId === this.agency &&
       a.code === this.contractCode &&
       a.name === this.name &&
       a.price === this.price &&
-      a.board === this.board;
+      a.boardId === this.board;
 
 
     const condition = this.contractService.contracts.some(predicate);
@@ -143,13 +136,12 @@ export class ContractAddDialogComponent implements OnInit {
         price : this.price,
         start: this.start,
         end : this.end,
-        hotel : this.hotel,
-        market: this.market,
-        agency : this.agency,
-        board : this.board,
-        roomtype : this.roomType,
-        currency : this.currency
-
+        hotelId : this.hotel,
+        marketId: this.market,
+        agencyId : this.agency,
+        boardId : this.board,
+        roomtypeId : this.roomType,
+        currencyId : this.currency,
 
       }
     });

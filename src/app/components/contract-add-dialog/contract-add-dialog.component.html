@@ -62,20 +62,12 @@
     <br>
 
     <mat-form-field class="selects-m">
-        <mat-label>{{ 'category' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="category">
-            <mat-option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-    <mat-form-field class="selects-m">
         <mat-label>{{ 'agency' | transloco }}</mat-label>
         <mat-select [(ngModel)]="agency">
             <mat-option *ngFor="let a of agencies" [value]="a.id">{{ a.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 
-    <br>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'board' | transloco }}</mat-label>
@@ -83,6 +75,7 @@
             <mat-option *ngFor="let b of boards" [value]="b.id">{{ b.name }}</mat-option>
         </mat-select>
     </mat-form-field>
+    <br>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'room_type' | transloco }}</mat-label>
@@ -91,7 +84,6 @@
         </mat-select>
     </mat-form-field>
 
-    <br>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'currency' | transloco }}</mat-label>
