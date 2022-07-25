@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
-import { Agency, Hotel, HotelCategory } from 'src/app/interfaces';
+import { Hotel, HotelCategory } from 'src/app/interfaces';
 import { HotelService } from 'src/app/services/hotel.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { HotelCategoryService } from 'src/app/services';
