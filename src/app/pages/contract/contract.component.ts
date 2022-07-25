@@ -15,7 +15,7 @@ export class ContractComponent implements OnInit {
   columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end", "actions"];
   @ViewChild(MatTable) table: MatTable<Contract>;
   contracts: Contract[] = [];
-  @ViewChild(MatTable) table: MatTable<Contract>;
+
   constructor(
     public contractService: ContractService,
     private dialog: MatDialog,
