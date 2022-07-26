@@ -92,6 +92,10 @@ contracts:Contract[]=[];
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
+    if (this.start > this.end) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
+      return;
+    }
 
     const otherContracts = this.contracts.filter(c => 
       c.code !== this.code && 

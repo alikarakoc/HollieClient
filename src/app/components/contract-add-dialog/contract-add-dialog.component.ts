@@ -111,6 +111,11 @@ export class ContractAddDialogComponent implements OnInit {
       return;
     }
 
+    
+    if (this.start > this.end) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
+      return;
+    }
  
     if (condition) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'Contract' : 'Sözleşme' }), 'OK');
