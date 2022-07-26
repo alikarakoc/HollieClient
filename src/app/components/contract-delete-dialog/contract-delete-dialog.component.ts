@@ -69,11 +69,6 @@ export class ContractDeleteDialogComponent implements OnInit {
   }
 
   delete() {
-    const condition = this.hotels.some(h => h.hotelCategoryId === this.data.element.id);
-    if (condition) {
-      this.snackBar.open('This category is using with another column.', "OK");
-      return;
-    }
     this.snackBar.open(this.translocoService.translate('dialogs.delete_success'));
     this.closeDialog({ isDeleted: true });
     this.data.dialogRef?.close();
