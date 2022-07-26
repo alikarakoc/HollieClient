@@ -32,6 +32,7 @@
         "edit": "Edit",
         "add": "Add",
         "add_button": "Add New {{ name }}",
+        "excel_button": "Download Excel",
         "delete_title": "Are you sure to delete the \"{{ elementName }}\" element?",
         "delete_text": "This will delete all the element's datas and cannot be undone.",
         "edit_title": "Update {{ name }}",

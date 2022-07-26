@@ -2,8 +2,11 @@
     <h1>{{ 'agency_title' | transloco }}</h1>
     <span class="spacer"></span>
     <button mat-flat-button color="primary" class="new-button" (click)="create()">
-        {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Agency' : 'Acenta' }) }}
-    </button>
+      {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Agency' : 'Acenta' }) }}
+  </button>
+    <button mat-flat-button color="excel" class="new-button" (click)="exportExcel()">
+      {{ 'dialogs.excel_button' | transloco }}
+  </button>
 </div>
 
 <table mat-table [dataSource]="agencies">

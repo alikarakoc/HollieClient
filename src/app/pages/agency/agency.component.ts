@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable } from '@angular/material/table';
+import * as FileSaver from 'file-saver';
 import {
   AgencyAddDialogComponent,
   AgencyDeleteDialogComponent,
@@ -19,6 +20,8 @@ export class AgencyComponent implements OnInit {
   columns: string[] = ['code','name', 'address', 'phone', 'email', 'actions'];
   @ViewChild(MatTable) table: MatTable<Agency>;
 
+  fileName= 'ExcelSheet.xlsx';
+
   agencies: Agency[] = [];
   //tuana
   constructor(
@@ -26,6 +29,25 @@ export class AgencyComponent implements OnInit {
     private dialog: MatDialog,
     public translocoService: TranslocoService
   ) { }
+
+  exportExcel() {
+    if (this.agencies.length > 0) {
+      import("xlsx").then(xlsx => {
+        const worksheet = xlsx.utils.json_to_sheet(this.agencies);
+        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
+        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
+        this.saveAsExcelFile(excelBuffer, "ExportExcel");
+      });
+    }
+  }
+  saveAsExcelFile(buffer: any, fileName: string): void {
+    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    let EXCEL_EXTENSION = '.xlsx';
+    const data: Blob = new Blob([buffer], {
+      type: EXCEL_TYPE
+    });
+    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
+  }
 
   ngOnInit(): void {
     this.agencyService.getAllAgencies().subscribe((res) => {
