@@ -70,8 +70,8 @@ export class ContractComponent implements OnInit {
   }
 
   create() {
-
     console.log(this.contracts);
+
     const dialog = this.dialog.open(ContractAddDialogComponent, { data: { table: this.table } });
 
     dialog.afterClosed().subscribe((result) => {
@@ -112,7 +112,7 @@ export class ContractComponent implements OnInit {
     })
   }
 
-  getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: any) {
+  getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: Contract) {
     switch (type) {
       case 'agency':
         // return this.agencies.find(a => a.id === element.agencyId)?.name;
@@ -131,7 +131,7 @@ export class ContractComponent implements OnInit {
         // return this.markets.find(a => a.id === element.marketId)?.name;
 
       case 'hotel':
-        return element.hotelIds;
+        return element.hotelId;
         // return this.hotels.find(a => a.id === element.hotelId)?.name;
 
       case 'currency':

@@ -43,7 +43,7 @@ export class ContractAddDialogComponent implements OnInit {
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
     private contractService: ContractService,
-    
+
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
 
@@ -69,18 +69,18 @@ export class ContractAddDialogComponent implements OnInit {
     });
 
     this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data
+      this.roomTypes = res.data;
     });
 
     this.currencyService.getAllCurrency().subscribe(res => {
-      this.currencies = res.data
+      this.currencies = res.data;
     });
 
     this.boardService.getAllBoards().subscribe(res => {
       this.boards = res.data;
     });
 
-    this.contractService.getAllContracts().subscribe(res => { this.contracts = res.data})
+    this.contractService.getAllContracts().subscribe(res => { this.contracts = res.data; });
 
   }
 
@@ -98,8 +98,8 @@ export class ContractAddDialogComponent implements OnInit {
     // const condition = this.contractService.contracts.some(predicate);
 
     this.contractService.getAllContracts().subscribe((res) => {
-      if(res.data.some(c =>c.code === this.contractCode)){
-        this.snackBar.open(this.translocoService.translate('dialogs.error_same' , { data : this.translocoService.getActiveLang() === 'en'? 'contract' : 'sözleşme'}), "OK");
+      if (res.data.some(c => c.code === this.contractCode)) {
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'contract' : 'sözleşme' }), "OK");
         this.contractCode = "";
         return;
       }
@@ -110,12 +110,15 @@ export class ContractAddDialogComponent implements OnInit {
     //   return;
     // }
 
-    
+
     if (this.start > this.end) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
       return;
     }
- 
+
+    console.log(this.selectedMarkets, this.selectedAgencies, this.selectedBoards, this.selectedRoomTypes);
+
+
     // if (condition) {
     //   this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'Contract' : 'Sözleşme' }), 'OK');
     //   return;
@@ -125,30 +128,30 @@ export class ContractAddDialogComponent implements OnInit {
 
     this.closeDialog();
     this.data.table.renderRows();
-    console.log(this.hotel)
+    console.log(this.hotel);
   }
 
 
-  closeDialog(){
+  closeDialog() {
     console.log(this.contractCode);
 
     this.dialogRef.close({
-      isAdded : true,
+      isAdded: true,
       element: {
-        code : this.contractCode,
-        name : this.name,
-        price : this.price,
+        code: this.contractCode,
+        name: this.name,
+        price: this.price,
         enteredDate: this.start,
-        exitDate : this.end,
-        hotelId : this.hotel,
+        exitDate: this.end,
+        hotelId: this.hotel,
         marketIds: this.selectedMarkets,
-        agencyIds : this.selectedAgencies,
-        boardIds : this.selectedBoards,
-        roomtypeIds : this.selectedRoomTypes,
-        currencyId : this.currency,
+        agencyIds: this.selectedAgencies,
+        boardIds: this.selectedBoards,
+        roomtypeIds: this.selectedRoomTypes,
+        currencyId: this.currency,
 
       }
     });
 
   }
-  }
+}

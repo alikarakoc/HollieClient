@@ -1,6 +1,7 @@
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from "@angular/router";
 import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
@@ -30,7 +31,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-  constructor(private translocoService: TranslocoService, private overlay: OverlayContainer) {
+  constructor(private translocoService: TranslocoService, private overlay: OverlayContainer, private router: Router) {
   }
 
   changeLanguage(language: "tr" | "en") {
