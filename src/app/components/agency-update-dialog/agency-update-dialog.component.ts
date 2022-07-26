@@ -40,7 +40,10 @@ export class AgencyUpdateDialogComponent implements OnInit {
     public translocoService: TranslocoService
   ) { }
 
-  ngOnInit(): void { }
+  agencies: any[] = [];
+
+  ngOnInit(): void {
+  }
 
   update() {
     if (!this.newAgencyName) {
@@ -59,10 +62,6 @@ export class AgencyUpdateDialogComponent implements OnInit {
         return;
       }
     });
-
-
-
-
 
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newAgencyName }));
     this.data.dialogRef?.close();
