@@ -9,19 +9,21 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  toggleControl: FormControl = new FormControl(false);
+  toggleControl: FormControl = new FormControl( );
   @HostBinding('class') className = '';
 
   ngOnInit(): void {
-    this.overlay.getContainerElement().classList.add("darkMode")
+    // this.overlay.getContainerElement().classList.add("darkMode")
     this.toggleControl.valueChanges.subscribe((darkMode) => {
+      console.log(darkMode);
+
       const darkClassName = 'darkMode';
       this.className = darkMode ? darkClassName : '';
 
       if (darkMode) {
-        this.overlay.getContainerElement().classList.add(this.className);
+        this.overlay.getContainerElement().classList.add(darkClassName);
       } else {
-        this.overlay.getContainerElement().classList.remove(this.className);
+        this.overlay.getContainerElement().classList.remove(darkClassName);
       }
 
       console.log(this.overlay.getContainerElement().classList);
