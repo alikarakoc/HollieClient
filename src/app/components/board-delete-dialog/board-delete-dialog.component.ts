@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
-import {  Board, Contract } from 'src/app/interfaces';
+import { Board, Contract } from 'src/app/interfaces';
 import { BoardService, ContractService } from "src/app/services";
 
 interface DialogData {
@@ -31,8 +31,9 @@ export class BoardDeleteDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.contractService.getAllContracts().subscribe(res => {
-      this.contracts = res.data;
-    })
+      if (res.data !== null) this.contracts = res.data;
+      else this.contracts = [];
+    });
   }
 
   delete() {

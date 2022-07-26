@@ -19,7 +19,7 @@
 
     <mat-form-field>
         <mat-label>{{ 'value' | transloco }}</mat-label>
-        <input matInput (keyup.enter)="add()" [(ngModel)]="currencyValue">
+        <input type="number" matInput (keyup.enter)="add()" [(ngModel)]="currencyValue">
     </mat-form-field>
    
 </div>

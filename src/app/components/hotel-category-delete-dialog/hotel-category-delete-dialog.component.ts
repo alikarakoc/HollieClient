@@ -31,7 +31,8 @@ export class HotelCategoryDeleteDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
-      this.hotels = res.data;
+      if (res.data !== null) this.hotels = res.data;
+      else this.hotels = [];
     });
   }
 

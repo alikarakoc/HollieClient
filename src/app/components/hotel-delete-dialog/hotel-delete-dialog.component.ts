@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from "@angular/material/table";
-import { Hotel , Contract } from "src/app/interfaces";
+import { Hotel, Contract } from "src/app/interfaces";
 import { HotelService, ContractService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
 
@@ -33,8 +33,9 @@ export class HotelDeleteDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.contractService.getAllContracts().subscribe(res => {
-      this.contracts = res.data;
-    })
+      if (res.data !== null) this.contracts = res.data;
+      else this.contracts = [];
+    });
   }
 
   delete() {

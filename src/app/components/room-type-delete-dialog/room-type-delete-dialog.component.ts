@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { RoomType, Contract } from 'src/app/interfaces';
-import { RoomTypeService , ContractService } from 'src/app/services';
+import { RoomTypeService, ContractService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
@@ -27,10 +27,11 @@ export class RoomTypeDeleteDialogComponent implements OnInit {
   ) { }
   contracts: Contract[];
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.contractService.getAllContracts().subscribe(res => {
-      this.contracts = res.data;
-    })
+      if (res.data != null) this.contracts = res.data;
+      else this.contracts = [];
+    });
   }
 
   delete() {
@@ -46,8 +47,8 @@ export class RoomTypeDeleteDialogComponent implements OnInit {
     this.data.dialogRef.close();
     this.data.table.renderRows();
   }
-  
+
   closeDialog({ isDeleted }: { isDeleted: boolean; }) {
-    this.dialogRef.close({ isDeleted })
+    this.dialogRef.close({ isDeleted });
   }
 }

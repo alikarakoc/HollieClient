@@ -32,8 +32,9 @@ export class AgencyDeleteDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.contractService.getAllContracts().subscribe(res => {
-      this.contracts = res.data;
-    })
+      if (res.data !== null) this.contracts = res.data;
+      else this.contracts = [];
+    });
   }
 
   delete() {
@@ -54,6 +55,6 @@ export class AgencyDeleteDialogComponent implements OnInit {
   }
 
   closeDialog({ isDeleted }: { isDeleted: boolean; }) {
-    this.dialogRef.close({ isDeleted })
+    this.dialogRef.close({ isDeleted });
   }
 }

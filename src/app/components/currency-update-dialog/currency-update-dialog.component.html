@@ -6,7 +6,7 @@
 
   <mat-form-field>
       <mat-label>{{ 'vaue' | transloco }}</mat-label>
-      <input matInput [(ngModel)]="newCurrencyValue" (keyup.enter)="update()">
+      <input type="number" matInput [(ngModel)]="newCurrencyValue" (keyup.enter)="update()">
   </mat-form-field>
 </div>
 

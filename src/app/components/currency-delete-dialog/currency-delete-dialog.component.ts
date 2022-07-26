@@ -33,7 +33,8 @@ export class CurrencyDeleteDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.contractService.getAllContracts().subscribe(res => {
-      this.contracts = res.data;
+      if (res.data !== null) this.contracts = res.data;
+      else this.contracts = [];
     })
   }
 

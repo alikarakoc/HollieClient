@@ -28,7 +28,7 @@
 
   <mat-form-field>
     <mat-label>{{ 'phone' | transloco }}</mat-label>
-    <input matInput [(ngModel)]="newHotelPhone" (keyup.enter)="update()">
+    <input matInput type="number" [(ngModel)]="newHotelPhone" (keyup.enter)="update()">
   </mat-form-field>
 
   <br>
