@@ -19,10 +19,10 @@ interface DialogData {
   styleUrls: ['./currency-update-dialog.component.scss']
 })
 export class CurrencyUpdateDialogComponent implements OnInit {
-  newCurrencyValue: number = this.dialogData.element.value;
+  newCurrencyValue: number = this.data.element.value;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<CurrencyUpdateDialogComponent>,
     private snackBar: MatSnackBar,
     private currencyService: CurrencyService,
@@ -45,21 +45,31 @@ export class CurrencyUpdateDialogComponent implements OnInit {
     }
 
     this.currencyService.getAllCurrency().subscribe(res => {
-      const otherRoomTypes = res.data.filter(v => v.id !== this.dialogData.element.id);
+      const otherRoomTypes = res.data.filter(v => v.id !== this.data.element.id);
 
     });
 
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.dialogData.element.name }));
-    this.dialogData.element.value = this.newCurrencyValue;
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.data.element.name }));
+    this.data.element.value = this.newCurrencyValue;
 
     this.closeDialog();
     //this.dialogData.table.renderRows();
   }
 
   delete() {
-    this.dialog.open(CurrencyDeleteDialogComponent, {
-      data: { ...this.dialogData, dialogRef: this.dialogRef },
+    const dialog = this.dialog.open(CurrencyDeleteDialogComponent, {
+      data: { element: this.data.element, dialogRef: this.dialogRef }
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      if (result.isDeleted) {
+        this.currencyService.deleteCurrency(this.data.element).subscribe(() => {
+          this.ngOnInit();
+        });
+      } this.data.table?.renderRows();
     });
   }
+
+
 }
 

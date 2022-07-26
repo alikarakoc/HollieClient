@@ -136,15 +136,7 @@ contracts:Contract[]=[];
     }
 
 
-    if(this.data.element.enteredDate != this.start){
-      let startDate = this.start.getDate() + 1;
-      this.start.setDate(startDate);
-    }
-    if(this.data.element.exitDate != this.end){
-      let endDate = this.end.getDate() + 1;
-      this.end.setDate(endDate);
-    }
-
+    
     this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
     this.data.dialogRef?.close();
     this.data.element.code = this.code;
