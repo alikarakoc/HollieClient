@@ -32,6 +32,7 @@
         "edit": "Değiştir",
         "add": "Ekle",
         "add_button": "Yeni {{ name }} Ekle",
+        "excel_button": "Excel İndir",
         "delete_title": "\"{{ elementName }}\" adlı nesneyi silmek istediğinizden emin misiniz?",
         "delete_text": "Bu işlem nesnenin bütün verilerini siler ve geri alınamaz.",
         "edit_title": "{{ name }} Değiştir",

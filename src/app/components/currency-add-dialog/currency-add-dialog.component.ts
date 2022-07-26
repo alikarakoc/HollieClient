@@ -49,7 +49,7 @@ export class CurrencyAddDialogComponent implements OnInit {
 
     this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.currencyName }));
 
-  
+
     this.closeDialog();
     this.data.table.renderRows();
   }
@@ -61,6 +61,7 @@ export class CurrencyAddDialogComponent implements OnInit {
       elementCode: this.currencyCode,
       elementValue: this.currencyValue
     });
+    console.log(this.currencyCode);
   }
 
 
