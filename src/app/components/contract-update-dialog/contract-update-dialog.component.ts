@@ -123,8 +123,8 @@ contracts:Contract[]=[];
       this.price == null;
       // start: new Date(2022, 1 - 1, 20),
       // end: new Date(2022, 1 - 1, 26),
-       this.start == new Date(2022, 1 - 1, 20),
-       this.end == new Date(2022, 1 - 1, 26),
+       this.start == null,
+       this.end == null,
       this.hotel== null;
       this.market== null;
       this.agency==null;
@@ -135,6 +135,15 @@ contracts:Contract[]=[];
       return;
     }
 
+
+    if(this.data.element.enteredDate != this.start){
+      let startDate = this.start.getDate() + 1;
+      this.start.setDate(startDate);
+    }
+    if(this.data.element.exitDate != this.end){
+      let endDate = this.end.getDate() + 1;
+      this.end.setDate(endDate);
+    }
 
     this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
     this.data.dialogRef?.close();
@@ -150,17 +159,17 @@ contracts:Contract[]=[];
     this.data.element.roomTypeId = this.roomType;
     this.data.element.currencyId= this.currency;
 
+   
+
 
     console.log(this.data.element);
     this.data.table?.renderRows();
-    // this.hotelService.updateHotel(this.data.element)
+     //this.contractService.updateContract(this.data.element)
     this.dialogRef.close({ isUpdated: true });
   }
 
   closeDialog() {
     this.dialogRef.close();
-
-
   }
 
 
