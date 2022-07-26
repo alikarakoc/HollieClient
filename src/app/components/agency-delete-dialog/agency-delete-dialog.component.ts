@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from "@angular/material/table";
-import { Agency } from "src/app/interfaces";
-import { AgencyService } from "src/app/services";
+import { Agency, Contract } from "src/app/interfaces";
+import { AgencyService, ContractService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
@@ -24,15 +24,28 @@ export class AgencyDeleteDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<AgencyDeleteDialogComponent>,
     private snackBar: MatSnackBar,
     private agencyService: AgencyService,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private contractService: ContractService
   ) { }
 
+  contracts: Contract[];
+
   ngOnInit(): void {
+    this.contractService.getAllContracts().subscribe(res => {
+      this.contracts = res.data;
+    })
   }
-  
+
   delete() {
+    const condition = this.contracts.some(c => c.agencyId === this.data.element.id);
+
+    if (condition) {
+      this.snackBar.open('This category is using with another column.', "OK");
+      return;
+    }
+
     this.snackBar.open(this.translocoService.translate('dialogs.delete_success', { elementName: this.data.element.name }));
-    this.closeDialog({ isDeleted : true});
+    this.closeDialog({ isDeleted: true });
     this.data.dialogRef.close();
     this.agencyService.deleteAgency(this.data.element);
     console.log("deleted agency");
@@ -40,7 +53,7 @@ export class AgencyDeleteDialogComponent implements OnInit {
     this.data.table?.renderRows();
   }
 
-  closeDialog({isDeleted} : { isDeleted : boolean;}) {
-    this.dialogRef.close({ isDeleted})
+  closeDialog({ isDeleted }: { isDeleted: boolean; }) {
+    this.dialogRef.close({ isDeleted })
   }
 }

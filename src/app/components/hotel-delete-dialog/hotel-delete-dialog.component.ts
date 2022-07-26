@@ -2,8 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from "@angular/material/table";
-import { Hotel } from "src/app/interfaces";
-import { HotelService } from "src/app/services";
+import { Hotel , Contract } from "src/app/interfaces";
+import { HotelService, ContractService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
@@ -24,13 +24,26 @@ export class HotelDeleteDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<HotelDeleteDialogComponent>,
     private snackBar: MatSnackBar,
     private hotelService: HotelService,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private contractService: ContractService
+
   ) { }
 
+  contracts: Contract[];
+
   ngOnInit(): void {
+    this.contractService.getAllContracts().subscribe(res => {
+      this.contracts = res.data;
+    })
   }
 
   delete() {
+    const condition = this.contracts.some(c => c.agencyId === this.data.element.id);
+
+    if (condition) {
+      this.snackBar.open('This category is using with another column.', "OK");
+      return;
+    }
     this.snackBar.open(this.translocoService.translate('dialogs.delete_success', { elementName: this.data.element.name }));
     this.closeDialog({ isDeleted: true });
     this.data.dialogRef?.close();
