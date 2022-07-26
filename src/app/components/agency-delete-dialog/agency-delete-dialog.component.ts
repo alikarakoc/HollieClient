@@ -38,7 +38,7 @@ export class AgencyDeleteDialogComponent implements OnInit {
   }
 
   delete() {
-    const condition = this.contracts.some(c => c.agencyId === this.data.element.id);
+    const condition = this.contracts.some(c => c.agencyIds.some(a => a === this.data.element.id));
 
     if (condition) {
       this.snackBar.open('This category is using with another column.', "OK");
