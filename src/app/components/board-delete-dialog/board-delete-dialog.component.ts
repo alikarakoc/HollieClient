@@ -37,7 +37,7 @@ export class BoardDeleteDialogComponent implements OnInit {
   }
 
   delete() {
-    const condition = this.contracts.some(c => c.boardId === this.data.element.id);
+    const condition = this.contracts.some(c => c.boardIds.some(b => b === this.data.element.id));
 
     if (condition) {
       this.snackBar.open('This category is using with another column.', "OK");

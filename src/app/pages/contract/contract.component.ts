@@ -115,19 +115,24 @@ export class ContractComponent implements OnInit {
   getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: any) {
     switch (type) {
       case 'agency':
-        return this.agencies.find(a => a.id === element.agencyId)?.name;
+        // return this.agencies.find(a => a.id === element.agencyId)?.name;
+        return element.agencyIds;
 
       case 'board':
-        return this.boards.find(a => a.id === element.boardId)?.name;
+        // return this.boards.find(a => a.id === element.boardId)?.name;
+        return element.boardIds;
 
       case 'room_type':
-        return this.roomTypes.find(a => a.id === element.roomTypeId)?.name;
+        return element.roomTypeIds;
+        // return this.roomTypes.find(a => a.id === element.roomTypeId)?.name;
 
       case 'market':
-        return this.markets.find(a => a.id === element.marketId)?.name;
+        return element.marketIds;
+        // return this.markets.find(a => a.id === element.marketId)?.name;
 
       case 'hotel':
-        return this.hotels.find(a => a.id === element.hotelId)?.name;
+        return element.hotelIds;
+        // return this.hotels.find(a => a.id === element.hotelId)?.name;
 
       case 'currency':
         return this.currencies.find(a => a.id === element.currencyId)?.name;
