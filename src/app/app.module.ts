@@ -40,7 +40,7 @@ import {
 } from './components';
 
 // Modules
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent } from './pages';
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent } from './pages';
 import { HomeComponent } from './pages/home/home.component';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
@@ -50,6 +50,7 @@ import { LocalizedDatePipe } from "./pipes";
 
 import { registerLocaleData } from "@angular/common";
 import localeTR from '@angular/common/locales/tr';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/dialog";
 
 registerLocaleData(localeTR);
 
@@ -60,6 +61,7 @@ registerLocaleData(localeTR);
     AppComponent,
     HomeComponent,
     NavbarComponent,
+    SearchContractComponent,
 
     RoomTypeComponent,
     RoomTypeUpdateDialogComponent,
@@ -127,6 +129,13 @@ registerLocaleData(localeTR);
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'fill' },
     },
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {
+        disableClose: true,
+        // hasBackdrop: false
+      }
+    }
   ],
   bootstrap: [AppComponent],
 })

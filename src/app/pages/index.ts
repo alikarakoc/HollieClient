@@ -8,3 +8,4 @@ export { MarketComponent } from './market/market.component';
 export { BoardComponent } from './board/board.component';
 export { CurrencyComponent } from './currency/currency.component';
 export { ContractComponent } from './contract/contract.component';
+export { SearchContractComponent } from './search-contract/search-contract.component';

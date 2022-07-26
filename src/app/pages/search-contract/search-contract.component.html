@@ -1,0 +1,31 @@
+<div class="search-container">
+    <h1 class="title">Search Contracts</h1>
+    <mat-form-field class="mx-2">
+        <mat-label>Entered Date</mat-label>
+        <input matInput [matDatepicker]="startPicker">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="mx-2">
+        <mat-label>Exit Date</mat-label>
+        <input matInput [matDatepicker]="endPicker">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="mx-2">
+        <mat-label>{{ 'hotel' | transloco }}</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <div class="search-button-bar">
+        <button class="search-button" mat-flat-button color="primary">Search</button>
+    </div>
+</div>

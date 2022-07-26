@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent } from "./pages";
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent } from "./pages";
 import { HomeComponent } from "./pages/home/home.component";
 
 const routes: Routes = [
@@ -28,7 +28,6 @@ const routes: Routes = [
     path: "hotels",
     component: HotelComponent
   },
-  
   {
     path: "board",
     component: BoardComponent
@@ -48,6 +47,10 @@ const routes: Routes = [
   {
     path: "contracts",
     component: ContractComponent
+  },
+  {
+    path: "search-contract",
+    component: SearchContractComponent
   },
   {
     path: "**",
