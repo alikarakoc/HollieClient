@@ -26,11 +26,10 @@ export class ContractAddDialogComponent implements OnInit {
   start: Date;
   end: Date;
   hotel: number;
-  market: number;
-  category: number;
-  agency: number;
-  board: number;
-  roomType: number;
+  selectedMarkets: number[];
+  selectedAgencies: number[];
+  selectedBoards: number[];
+  selectedRoomTypes: number[];
   currency: number;
 
   constructor(
@@ -86,17 +85,17 @@ export class ContractAddDialogComponent implements OnInit {
   }
 
   add() {
-    const predicate = (a: Omit<Contract, 'id'>) =>
-      a.hotelId=== this.hotel &&
-      a.marketId === this.market &&
-      a.agencyId === this.agency &&
-      a.code === this.contractCode &&
-      a.name === this.name &&
-      a.price === this.price &&
-      a.boardId === this.board;
+    // const predicate = (a: Omit<Contract, 'id'>) =>
+    //   a.hotelId=== this.hotel &&
+    //   a.marketIds === this.market &&
+    //   a.agencyId === this.agency &&
+    //   a.code === this.contractCode &&
+    //   a.name === this.name &&
+    //   a.price === this.price &&
+    //   a.boardId === this.board;
 
 
-    const condition = this.contractService.contracts.some(predicate);
+    // const condition = this.contractService.contracts.some(predicate);
 
     this.contractService.getAllContracts().subscribe((res) => {
       if(res.data.some(c =>c.code === this.contractCode)){
@@ -106,10 +105,10 @@ export class ContractAddDialogComponent implements OnInit {
       }
     });
 
-    if (!this.contractCode || !this.hotel || !this.market || !this.agency || !this.board || !this.name || !this.price) {
-      this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
-      return;
-    }
+    // if (!this.contractCode || !this.hotel || !this.market || !this.agency || !this.board || !this.name || !this.price) {
+    //   this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
+    //   return;
+    // }
 
     
     if (this.start > this.end) {
@@ -117,10 +116,10 @@ export class ContractAddDialogComponent implements OnInit {
       return;
     }
  
-    if (condition) {
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'Contract' : 'Sözleşme' }), 'OK');
-      return;
-    }
+    // if (condition) {
+    //   this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'Contract' : 'Sözleşme' }), 'OK');
+    //   return;
+    // }
 
     this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: name }));
 
@@ -142,10 +141,10 @@ export class ContractAddDialogComponent implements OnInit {
         enteredDate: this.start,
         exitDate : this.end,
         hotelId : this.hotel,
-        marketId: this.market,
-        agencyId : this.agency,
-        boardId : this.board,
-        roomtypeId : this.roomType,
+        marketIds: this.selectedMarkets,
+        agencyIds : this.selectedAgencies,
+        boardIds : this.selectedBoards,
+        roomtypeIds : this.selectedRoomTypes,
         currencyId : this.currency,
 
       }

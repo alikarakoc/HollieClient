@@ -54,7 +54,7 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'market' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="market">
+        <mat-select [(ngModel)]="selectedMarkets" multiple>
             <mat-option *ngFor="let m of markets" [value]="m.id">{{ m.name }}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -63,7 +63,7 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'agency' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="agency">
+        <mat-select [(ngModel)]="selectedAgencies" multiple>
             <mat-option *ngFor="let a of agencies" [value]="a.id">{{ a.name }}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -71,7 +71,7 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'board' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="board">
+        <mat-select [(ngModel)]="selectedBoards" multiple>
             <mat-option *ngFor="let b of boards" [value]="b.id">{{ b.name }}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -79,11 +79,10 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'room_type' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="roomType">
+        <mat-select [(ngModel)]="selectedRoomTypes" multiple>
             <mat-option *ngFor="let r of roomTypes" [value]="r.id">{{ r.name }}</mat-option>
         </mat-select>
     </mat-form-field>
-
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'currency' | transloco }}</mat-label>

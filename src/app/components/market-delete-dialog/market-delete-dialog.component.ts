@@ -39,7 +39,7 @@ export class MarketDeleteDialogComponent implements OnInit {
   }
 
   delete() {
-    const condition = this.contracts.some(c => c.marketId === this.data.element.id);
+    const condition = this.contracts.some(c => c.marketIds.some(m => m === this.data.element.id));
 
     if (condition) {
       this.snackBar.open('This category is using with another column.', "OK");
