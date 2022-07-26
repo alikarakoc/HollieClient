@@ -4,6 +4,9 @@
   <button mat-flat-button color="primary" class="new-button" (click)="create()">
       {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Hotel' : 'Otel' }) }}
   </button>
+  <button mat-flat-button color="excel" class="new-button" (click)="exportAsXLSX()">
+    <mat-icon >publish</mat-icon>
+</button>
 </div>
 
 <table mat-table [dataSource]="hotels">
@@ -11,7 +14,7 @@
         <th mat-header-cell *matHeaderCellDef>{{ 'code' | transloco }}</th>
         <td mat-cell *matCellDef="let element">{{ element.code }}</td>
     </ng-container>
-    
+
   <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef>{{ 'name' | transloco }}</th>
       <td mat-cell *matCellDef="let element">{{ element.name }}</td>

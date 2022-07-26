@@ -5,6 +5,7 @@ import { HotelAddDialogComponent, HotelDeleteDialogComponent, HotelUpdateDialogC
 import { Hotel, HotelCategory } from "src/app/interfaces";
 import { HotelCategoryService, HotelService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-hotel',
@@ -15,16 +16,23 @@ export class HotelComponent implements OnInit {
   columns: string[] = ["code", "name", "address", "phone", "email", "HotelCategoryId", "actions"];
   @ViewChild(MatTable) table: MatTable<Hotel>;
 
+  Hotel= 'ExcelSheet.xlsx';
+
   hotels: Hotel[] = [];
   hotelCategories: HotelCategory[] = [];
 
-  
+
   constructor(
     public hotelService: HotelService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
     private hotelCategoryService: HotelCategoryService,
+    private excelService:ExcelService
   ) { }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.hotels, 'Hotel');
+  }
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe((res) => {

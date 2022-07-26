@@ -5,6 +5,9 @@
         {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ?
         'Contract' : 'Kontrat' }) }}
     </button>
+    <button mat-flat-button color="excel" class="new-button" (click)="exportAsXLSX()">
+      <mat-icon >publish</mat-icon>
+  </button>
 </div>
 
 <table mat-table [dataSource]="contracts">

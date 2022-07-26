@@ -9,6 +9,7 @@ import {
 } from 'src/app/components';
 import { Market } from 'src/app/interfaces';
 import { MarketService } from 'src/app/services';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-market',
@@ -19,6 +20,8 @@ export class MarketComponent implements OnInit {
   columns: string[] = ['code','name', 'actions'];
   @ViewChild(MatTable) table: MatTable<MarketComponent>;
 
+  Market= 'ExcelSheet.xlsx';
+
   markets: Market[] = [];
   // hotel: HotelCategory = {
   //   id: '',
@@ -28,8 +31,13 @@ export class MarketComponent implements OnInit {
   constructor(
     public marketService: MarketService,
     private dialog: MatDialog,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private excelService:ExcelService
   ) {}
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.markets, 'Market');
+  }
 
   ngOnInit(): void {
     this.marketService.getAllMarkets().subscribe((res) => {

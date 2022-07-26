@@ -6,10 +6,11 @@ import {
   BoardAddDialogComponent,
   BoardDeleteDialogComponent,
   BoardUpdateDialogComponent,
-  
+
 } from 'src/app/components';
 import { Board } from 'src/app/interfaces';
 import { BoardService } from 'src/app/services';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-board',
@@ -20,12 +21,19 @@ export class BoardComponent implements OnInit {
   columns: string[] = ['code','name', 'actions'];
   @ViewChild(MatTable) table: MatTable<Board>;
 
+  Board= 'ExcelSheet.xlsx';
+
   boards: Board[] = [];
   constructor(
     public boardService: BoardService,
     private dialog: MatDialog,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private excelService:ExcelService
   ) { }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.boards, 'Board');
+  }
 
   ngOnInit(): void {
     this.boardService.getAllBoards().subscribe((res) => {

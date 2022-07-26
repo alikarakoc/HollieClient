@@ -9,6 +9,7 @@ import {
 import { Country } from "src/app/interfaces";
 import { CountryService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-country',
@@ -18,12 +19,21 @@ import { TranslocoService } from '@ngneat/transloco';
 export class CountryComponent implements OnInit {
   columns: string[] = ["code" ,"name", "actions"];
   @ViewChild(MatTable) table: MatTable<Country>;
+
+  Country= 'ExcelSheet.xlsx';
+
   countries : Country [] =[];
 
   constructor(
-    public countryService: CountryService, 
-    private dialog: MatDialog, 
-    public translocoService: TranslocoService) { }
+    public countryService: CountryService,
+    private dialog: MatDialog,
+    public translocoService: TranslocoService,
+    private excelService:ExcelService
+    ) { }
+
+    exportAsXLSX():void {
+      this.excelService.exportAsExcelFile(this.countries, 'Country');
+    }
 
   ngOnInit(): void {
     this.countryService.getAllCountries().subscribe((res) => {

@@ -9,6 +9,7 @@ import {
 import { RoomType } from 'src/app/interfaces';
 import { RoomTypeService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-room-type',
@@ -19,13 +20,22 @@ export class RoomTypeComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
 
   @ViewChild(MatTable) table: MatTable<RoomType>;
+
+  RoomType= 'ExcelSheet.xlsx';
+
   roomTypes: RoomType[] = [];
+
 
   constructor(
     private dialog: MatDialog,
     public roomTypeService: RoomTypeService,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private excelService:ExcelService
   ) { }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.roomTypes, 'RoomType');
+  }
 
   ngOnInit(): void {
     this.roomTypeService.getAllRoomTypes().subscribe((res) => {

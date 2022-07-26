@@ -10,6 +10,8 @@ import {
 import { Agency } from 'src/app/interfaces';
 import { AgencyService } from 'src/app/services/agency.service';
 import { TranslocoService } from '@ngneat/transloco';
+import { ExcelService } from 'src/app/services/excel.service';
+
 
 @Component({
   selector: 'app-agency',
@@ -20,34 +22,16 @@ export class AgencyComponent implements OnInit {
   columns: string[] = ['code','name', 'address', 'phone', 'email', 'actions'];
   @ViewChild(MatTable) table: MatTable<Agency>;
 
-  fileName= 'ExcelSheet.xlsx';
+  Agency= 'ExcelSheet.xlsx';
 
   agencies: Agency[] = [];
   //tuana
   constructor(
     public agencyService: AgencyService,
     private dialog: MatDialog,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private excelService:ExcelService
   ) { }
-
-  exportExcel() {
-    if (this.agencies.length > 0) {
-      import("xlsx").then(xlsx => {
-        const worksheet = xlsx.utils.json_to_sheet(this.agencies);
-        const workbook = { Sheets: { 'data': worksheet }, SheetNames: ['data'] };
-        const excelBuffer: any = xlsx.write(workbook, { bookType: 'xlsx', type: 'array' });
-        this.saveAsExcelFile(excelBuffer, "ExportExcel");
-      });
-    }
-  }
-  saveAsExcelFile(buffer: any, fileName: string): void {
-    let EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-    let EXCEL_EXTENSION = '.xlsx';
-    const data: Blob = new Blob([buffer], {
-      type: EXCEL_TYPE
-    });
-    FileSaver.saveAs(data, fileName + '_export_' + new Date().getTime() + EXCEL_EXTENSION);
-  }
 
   ngOnInit(): void {
     this.agencyService.getAllAgencies().subscribe((res) => {
@@ -55,6 +39,9 @@ export class AgencyComponent implements OnInit {
     });
     console.log('on init');
 
+  }
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.agencies, 'Agency');
   }
 
   create() {
@@ -101,4 +88,5 @@ export class AgencyComponent implements OnInit {
       }
     })
   }
+
 }

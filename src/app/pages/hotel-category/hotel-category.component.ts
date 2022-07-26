@@ -9,6 +9,7 @@ import {
 import { HotelCategory } from 'src/app/interfaces';
 import { HotelCategoryService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-hotel-category',
@@ -19,6 +20,8 @@ export class HotelCategoryComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
 
+  HotelCategory= 'ExcelSheet.xlsx';
+
   hotels: HotelCategory[] = [];
   // hotel: HotelCategory = {
   //   id: '',
@@ -28,8 +31,13 @@ export class HotelCategoryComponent implements OnInit {
   constructor(
     public hotelCategoryService: HotelCategoryService,
     private dialog: MatDialog,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private excelService:ExcelService
   ) { }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.hotels, 'HotelCategory');
+  }
 
   ngOnInit(): void {
     this.hotelCategoryService.getAllHotels().subscribe((res) => {

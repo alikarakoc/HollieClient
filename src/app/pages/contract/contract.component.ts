@@ -5,6 +5,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { ContractAddDialogComponent, ContractDeleteDialogComponent, ContractUpdateDialogComponent } from "src/app/components";
 import { Contract } from 'src/app/interfaces';
 import { AgencyService, BoardService, ContractService, CurrencyService, HotelService, MarketService, RoomTypeService } from 'src/app/services';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-contract',
@@ -14,6 +15,9 @@ import { AgencyService, BoardService, ContractService, CurrencyService, HotelSer
 export class ContractComponent implements OnInit {
   columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end", "actions"];
   @ViewChild(MatTable) table: MatTable<Contract>;
+
+  Contrats= 'ExcelSheet.xlsx';
+
   contracts: Contract[] = [];
 
   constructor(
@@ -26,6 +30,7 @@ export class ContractComponent implements OnInit {
     private boardService: BoardService,
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
+    private excelService:ExcelService
   ) { }
 
   hotels: any[] = [];
@@ -63,6 +68,10 @@ export class ContractComponent implements OnInit {
 
     this.contractService.getAllContracts().subscribe(res => { this.contracts = res.data })
 
+  }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.contracts, 'Contrats');
   }
 
   toDate(v: string) {

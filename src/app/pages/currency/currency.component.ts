@@ -9,6 +9,7 @@ import {
     CurrencyDeleteDialogComponent,
     CurrencyUpdateDialogComponent,
 } from 'src/app/components';
+import { ExcelService } from 'src/app/services/excel.service';
 
 
 @Component({
@@ -21,13 +22,21 @@ export class CurrencyComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<CurrencyComponent>;
 
+  Currency= 'ExcelSheet.xlsx';
+
+
   currencies: Currency[] = [];
 
   constructor(
     public translocoService: TranslocoService,
     private dialog: MatDialog,
-    public CurrencyService: CurrencyService
+    public CurrencyService: CurrencyService,
+    private excelService:ExcelService
   ) { }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.currencies, 'Currency');
+  }
 
   ngOnInit(): void {
     this.CurrencyService.getAllCurrency().subscribe((res) => {

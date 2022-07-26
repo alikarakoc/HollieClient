@@ -18,6 +18,8 @@ $HollieClient-accent: mat.define-palette(mat.$orange-palette, A200, A100, A400);
 // The warn palette is optional (defaults to red).
 $HollieClient-warn: mat.define-palette(mat.$red-palette);
 
+$HollieClient-excel: mat.define-palette(mat.$green-palette);
+
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $HollieClient-theme: mat.define-light-theme((color: (primary: $HollieClient-primary,
@@ -127,4 +129,5 @@ mat-form-field.selects-m {
 .mat-excel{
   color: white;
   background-color: #1D6F42;
+  transform: rotate(180deg);;
 }

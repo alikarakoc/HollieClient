@@ -51,6 +51,7 @@ import { LocalizedDatePipe } from "./pipes";
 import { registerLocaleData } from "@angular/common";
 import localeTR from '@angular/common/locales/tr';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/dialog";
+import { ExcelService } from './services/excel.service';
 
 registerLocaleData(localeTR);
 
@@ -135,7 +136,8 @@ registerLocaleData(localeTR);
         disableClose: true,
         // hasBackdrop: false
       }
-    }
+    },
+    ExcelService
   ],
   bootstrap: [AppComponent],
 })
