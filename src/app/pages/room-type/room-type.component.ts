@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {
   RoomTypeAddDialogComponent,
   RoomTypeDeleteDialogComponent,
@@ -10,6 +10,7 @@ import { RoomType } from 'src/app/interfaces';
 import { RoomTypeService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
+import { MatSort } from "@angular/material/sort";
 
 @Component({
   selector: 'app-room-type',
@@ -18,10 +19,12 @@ import { ExcelService } from 'src/app/services/excel.service';
 })
 export class RoomTypeComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
+  dataSource: MatTableDataSource<RoomType>;
 
   @ViewChild(MatTable) table: MatTable<RoomType>;
+  @ViewChild(MatSort) sort: MatSort;
 
-  RoomType= 'ExcelSheet.xlsx';
+  RoomType = 'ExcelSheet.xlsx';
 
   roomTypes: RoomType[] = [];
 
@@ -30,16 +33,18 @@ export class RoomTypeComponent implements OnInit {
     private dialog: MatDialog,
     public roomTypeService: RoomTypeService,
     public translocoService: TranslocoService,
-    private excelService:ExcelService
+    private excelService: ExcelService
   ) { }
 
-  exportAsXLSX():void {
+  exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.roomTypes, 'RoomType');
   }
 
   ngOnInit(): void {
     this.roomTypeService.getAllRoomTypes().subscribe((res) => {
       this.roomTypes = res.data;
+      this.dataSource = new MatTableDataSource(this.roomTypes);
+      this.dataSource.sort = this.sort;
     });
   }
 

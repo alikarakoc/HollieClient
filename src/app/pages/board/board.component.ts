@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { MatSort } from "@angular/material/sort";
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
 import {
   BoardAddDialogComponent,
@@ -18,10 +19,13 @@ import { ExcelService } from 'src/app/services/excel.service';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent implements OnInit {
-  columns: string[] = ['code','name', 'actions'];
-  @ViewChild(MatTable) table: MatTable<Board>;
+  columns: string[] = ['code', 'name', 'actions'];
+  dataSource: MatTableDataSource<Board>;
 
-  Board= 'ExcelSheet.xlsx';
+  @ViewChild(MatTable) table: MatTable<Board>;
+  @ViewChild(MatSort) sort: MatSort;
+
+  Board = 'ExcelSheet.xlsx';
 
   boards: Board[] = [];
 
@@ -29,36 +33,38 @@ export class BoardComponent implements OnInit {
     public boardService: BoardService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
-    private excelService:ExcelService
+    private excelService: ExcelService
   ) { }
 
-  exportAsXLSX():void {
+  exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.boards, 'Board');
   }
 
   ngOnInit(): void {
     this.boardService.getAllBoards().subscribe((res) => {
       this.boards = res.data;
+      this.dataSource = new MatTableDataSource<Board>(this.boards);
+      this.dataSource.sort = this.sort;
     });
     console.log('on init');
 
   }
 
   create() {
-    const dialog = this.dialog.open(BoardAddDialogComponent,{
-      data: {table: this.table},
+    const dialog = this.dialog.open(BoardAddDialogComponent, {
+      data: { table: this.table },
     });
 
-  dialog.afterClosed().subscribe((result) => {
-    if(result.isAdded){
-      this.boardService
-      .addNewBoard({
-        name: result.elementName, code: result.elementCode
-      }).subscribe(()=> {
-        this.ngOnInit();
-      });
-    }
-  });
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isAdded) {
+        this.boardService
+          .addNewBoard({
+            name: result.elementName, code: result.elementCode
+          }).subscribe(() => {
+            this.ngOnInit();
+          });
+      }
+    });
   }
 
   update(element: Board) {
@@ -66,20 +72,20 @@ export class BoardComponent implements OnInit {
       data: { element }
     });
 
-    dialog.afterClosed().subscribe(()=> {
+    dialog.afterClosed().subscribe(() => {
       this.boardService.updateBoard(element).subscribe((res) => {
         this.ngOnInit();
       });
     });
   }
 
-  delete(element: Board){
+  delete(element: Board) {
     const dialog = this.dialog.open(BoardDeleteDialogComponent, {
-      data: {element},
+      data: { element },
     });
     dialog.afterClosed().subscribe((result) => {
-      if(result.isDeleted){
-        this.boardService.deleteBoard(element).subscribe((res:any) =>{
+      if (result.isDeleted) {
+        this.boardService.deleteBoard(element).subscribe((res: any) => {
           this.ngOnInit();
         });
       }

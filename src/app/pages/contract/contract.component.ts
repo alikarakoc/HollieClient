@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from "@angular/material/table";
+import { MatSort } from "@angular/material/sort";
+import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { TranslocoService } from '@ngneat/transloco';
 import { ContractAddDialogComponent, ContractDeleteDialogComponent, ContractUpdateDialogComponent } from "src/app/components";
 import { Contract } from 'src/app/interfaces';
@@ -14,9 +15,12 @@ import { ExcelService } from 'src/app/services/excel.service';
 })
 export class ContractComponent implements OnInit {
   columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end", "actions"];
-  @ViewChild(MatTable) table: MatTable<Contract>;
+  dataSource: MatTableDataSource<Contract>;
 
-  Contrats= 'ExcelSheet.xlsx';
+  @ViewChild(MatTable) table: MatTable<Contract>;
+  @ViewChild(MatSort) sort: MatSort;
+
+  Contrats = 'ExcelSheet.xlsx';
 
   contracts: Contract[] = [];
 
@@ -30,7 +34,7 @@ export class ContractComponent implements OnInit {
     private boardService: BoardService,
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
-    private excelService:ExcelService
+    private excelService: ExcelService
   ) { }
 
   hotels: any[] = [];
@@ -55,22 +59,26 @@ export class ContractComponent implements OnInit {
     });
 
     this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data
+      this.roomTypes = res.data;
     });
 
     this.currencyService.getAllCurrency().subscribe(res => {
-      this.currencies = res.data
+      this.currencies = res.data;
     });
 
     this.boardService.getAllBoards().subscribe(res => {
       this.boards = res.data;
     });
 
-    this.contractService.getAllContracts().subscribe(res => { this.contracts = res.data })
+    this.contractService.getAllContracts().subscribe(res => {
+      this.contracts = res.data;
+      this.dataSource = new MatTableDataSource<Contract>(this.contracts);
+      this.dataSource.sort = this.sort;
+    });
 
   }
 
-  exportAsXLSX():void {
+  exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.contracts, 'Contrats');
   }
 
@@ -118,7 +126,7 @@ export class ContractComponent implements OnInit {
       if (result.isUpdated) {
         this.contractService.updateContract(element).subscribe(() => this.ngOnInit());
       }
-    })
+    });
   }
 
   getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: Contract) {
@@ -133,15 +141,15 @@ export class ContractComponent implements OnInit {
 
       case 'room_type':
         return element.roomTypeIds;
-        // return this.roomTypes.find(a => a.id === element.roomTypeId)?.name;
+      // return this.roomTypes.find(a => a.id === element.roomTypeId)?.name;
 
       case 'market':
         return element.marketIds;
-        // return this.markets.find(a => a.id === element.marketId)?.name;
+      // return this.markets.find(a => a.id === element.marketId)?.name;
 
       case 'hotel':
         return element.hotelId;
-        // return this.hotels.find(a => a.id === element.hotelId)?.name;
+      // return this.hotels.find(a => a.id === element.hotelId)?.name;
 
       case 'currency':
         return this.currencies.find(a => a.id === element.currencyId)?.name;

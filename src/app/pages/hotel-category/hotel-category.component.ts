@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {
   HotelCategoryAddDialogComponent,
   HotelCategoryDeleteDialogComponent,
@@ -10,6 +10,7 @@ import { HotelCategory } from 'src/app/interfaces';
 import { HotelCategoryService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
+import { MatSort } from "@angular/material/sort";
 
 @Component({
   selector: 'app-hotel-category',
@@ -18,6 +19,9 @@ import { ExcelService } from 'src/app/services/excel.service';
 })
 export class HotelCategoryComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
+  dataSource: MatTableDataSource<HotelCategory>;
+
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
 
   HotelCategory= 'ExcelSheet.xlsx';
@@ -42,6 +46,8 @@ export class HotelCategoryComponent implements OnInit {
   ngOnInit(): void {
     this.hotelCategoryService.getAllHotels().subscribe((res) => {
       this.hotels = res.data;
+      this.dataSource = new MatTableDataSource<HotelCategory>(this.hotels);
+      this.dataSource.sort = this.sort;
     });
     console.log('on init');
   }

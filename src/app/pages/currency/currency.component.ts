@@ -1,15 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
 import { Currency } from "src/app/interfaces";
 import { CurrencyService } from 'src/app/services';
 import {
-    CurrencyAddDialogComponent,
-    CurrencyDeleteDialogComponent,
-    CurrencyUpdateDialogComponent,
+  CurrencyAddDialogComponent,
+  CurrencyDeleteDialogComponent,
+  CurrencyUpdateDialogComponent,
 } from 'src/app/components';
 import { ExcelService } from 'src/app/services/excel.service';
+import { MatSort } from "@angular/material/sort";
 
 
 @Component({
@@ -19,11 +20,10 @@ import { ExcelService } from 'src/app/services/excel.service';
 })
 export class CurrencyComponent implements OnInit {
   columns: string[] = ["code", "name", "value", "actions"];
+  dataSource: MatTableDataSource<Currency>;
 
   @ViewChild(MatTable) table: MatTable<CurrencyComponent>;
-
-  Currency= 'ExcelSheet.xlsx';
-
+  @ViewChild(MatSort) sort: MatSort;
 
   currencies: Currency[] = [];
 
@@ -31,18 +31,19 @@ export class CurrencyComponent implements OnInit {
     public translocoService: TranslocoService,
     private dialog: MatDialog,
     public CurrencyService: CurrencyService,
-    private excelService:ExcelService
+    private excelService: ExcelService
   ) { }
 
-  exportAsXLSX():void {
+  exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.currencies, 'Currency');
   }
 
   ngOnInit(): void {
     this.CurrencyService.getAllCurrency().subscribe((res) => {
       this.currencies = res.data;
+      this.dataSource = new MatTableDataSource<Currency>(this.currencies);
+      this.dataSource.sort = this.sort;
     });
-    console.log('on init');
   }
 
   create() {
@@ -59,7 +60,7 @@ export class CurrencyComponent implements OnInit {
           });
       }
     });
-   }
+  }
 
   delete(element: Currency) {
     const dialog = this.dialog.open(CurrencyDeleteDialogComponent, {
@@ -73,7 +74,7 @@ export class CurrencyComponent implements OnInit {
         });
       }
     });
-   }
+  }
 
   update(element: Currency) {
     const dialog = this.dialog.open(CurrencyUpdateDialogComponent, {
@@ -87,6 +88,6 @@ export class CurrencyComponent implements OnInit {
         console.log(res.data);
       });
     });
-   }
+  }
 
 }

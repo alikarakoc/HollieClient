@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
-import { MatTable } from "@angular/material/table";
+import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { HotelAddDialogComponent, HotelDeleteDialogComponent, HotelUpdateDialogComponent } from "src/app/components";
 import { Hotel, HotelCategory } from "src/app/interfaces";
 import { HotelCategoryService, HotelService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
+import { MatSort } from "@angular/material/sort";
 
 @Component({
   selector: 'app-hotel',
@@ -14,9 +15,12 @@ import { ExcelService } from 'src/app/services/excel.service';
 })
 export class HotelComponent implements OnInit {
   columns: string[] = ["code", "name", "address", "phone", "email", "HotelCategoryId", "actions"];
-  @ViewChild(MatTable) table: MatTable<Hotel>;
+  dataSource: MatTableDataSource<Hotel>;
 
-  Hotel= 'ExcelSheet.xlsx';
+  @ViewChild(MatTable) table: MatTable<Hotel>;
+  @ViewChild(MatSort) sort: MatSort;
+
+  Hotel = 'ExcelSheet.xlsx';
 
   hotels: Hotel[] = [];
   hotelCategories: HotelCategory[] = [];
@@ -27,21 +31,23 @@ export class HotelComponent implements OnInit {
     private dialog: MatDialog,
     public translocoService: TranslocoService,
     private hotelCategoryService: HotelCategoryService,
-    private excelService:ExcelService
+    private excelService: ExcelService
   ) { }
 
-  exportAsXLSX():void {
+  exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.hotels, 'Hotel');
   }
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe((res) => {
       this.hotels = res.data;
+      this.dataSource = new MatTableDataSource<Hotel>(this.hotels);
+      this.dataSource.sort = this.sort;
     });
+
     this.hotelCategoryService.getAllHotels().subscribe(res => {
       this.hotelCategories = res.data;
-    })
-    console.log('on init');
+    });
   }
 
   getCurrentCategory(element: Hotel) {
@@ -72,7 +78,7 @@ export class HotelComponent implements OnInit {
       if (result.isUpdated) {
         this.hotelService.updateHotel(element).subscribe(() => this.ngOnInit());
       }
-    })
+    });
   }
 
   delete(element: Hotel) {

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { MatSort } from "@angular/material/sort";
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
 import {
   MarketAddDialogComponent,
@@ -17,10 +18,13 @@ import { ExcelService } from 'src/app/services/excel.service';
   styleUrls: ['./market.component.scss'],
 })
 export class MarketComponent implements OnInit {
-  columns: string[] = ['code','name', 'actions'];
-  @ViewChild(MatTable) table: MatTable<MarketComponent>;
+  columns: string[] = ['code', 'name', 'actions'];
+  dataSource: MatTableDataSource<Market>;
 
-  Market= 'ExcelSheet.xlsx';
+  @ViewChild(MatTable) table: MatTable<MarketComponent>;
+  @ViewChild(MatSort) sort: MatSort;
+
+  Market = 'ExcelSheet.xlsx';
 
   markets: Market[] = [];
 
@@ -28,18 +32,19 @@ export class MarketComponent implements OnInit {
     public marketService: MarketService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
-    private excelService:ExcelService
-  ) {}
+    private excelService: ExcelService
+  ) { }
 
-  exportAsXLSX():void {
+  exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.markets, 'Market');
   }
 
   ngOnInit(): void {
     this.marketService.getAllMarkets().subscribe((res) => {
       this.markets = res.data;
+      this.dataSource = new MatTableDataSource(this.markets);
+      this.dataSource.sort = this.sort;
     });
-    console.log('on init');
   }
 
   create() {
@@ -51,7 +56,8 @@ export class MarketComponent implements OnInit {
       if (result.isAdded) {
         this.marketService
           .addMarket({
-            name: result.elementName, code: result.elementCode })
+            name: result.elementName, code: result.elementCode
+          })
           .subscribe(() => {
             this.ngOnInit();
           });

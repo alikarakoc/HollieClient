@@ -9,7 +9,7 @@
   </button>
 </div>
 
-<table mat-table [dataSource]="agencies" matSort>
+<table mat-table [dataSource]="dataSource" matSort>
 
   <ng-container matColumnDef="code">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'code' | transloco }}</th>
