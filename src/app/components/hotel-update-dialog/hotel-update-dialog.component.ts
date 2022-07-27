@@ -26,6 +26,9 @@ export class HotelUpdateDialogComponent implements OnInit {
   newHotelPhone: string = this.data.element.phone;
   newHotelEmail: string = this.data.element.email;
 
+  sameCodeCheck = false;
+  sameNameCheck = false;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<HotelUpdateDialogComponent>,
@@ -51,13 +54,22 @@ export class HotelUpdateDialogComponent implements OnInit {
   hotels: Hotel[] = [];
 
   update() {
+
     if (!this.newHotelCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
-
+    const otherHotelCode = this.hotels;
     const otherHotels = this.hotels.filter(c => c.code !== this.newHotelCode && c.name !== this.newHotelName && c.address !== this.newHotelAddress && c.phone !== this.newHotelPhone && c.email !== this.newHotelEmail && c.hotelCategoryId !== this.newHotelCategoryId);
 
+
+    if (otherHotelCode.findIndex(c =>c.code == this.newHotelCode.toString()) >-1){
+      console.log(this.newHotelName);
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
+      this.ngOnInit();
+      return;
+
+    }
     if (otherHotels.some(c => c.code === this.newHotelCode && c.name === this.newHotelName && c.address === this.newHotelAddress && c.phone === this.newHotelPhone && c.email === this.newHotelEmail)) {
       console.log(this.newHotelCode, this.newHotelName, this.newHotelEmail, this.newHotelPhone, this.newHotelAddress);
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
