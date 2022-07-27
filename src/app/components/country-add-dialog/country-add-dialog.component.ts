@@ -39,7 +39,8 @@ export class CountryAddDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.countryService.getAllCountries().subscribe(res => {
-      this.countries = res.data;
+      if (res.data !== null) this.countries = res.data;
+      else this.countries = [];
     });
   }
 
