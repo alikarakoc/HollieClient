@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as FileSaver from 'file-saver';
 import {
   AgencyAddDialogComponent,
@@ -11,6 +11,7 @@ import { Agency } from 'src/app/interfaces';
 import { AgencyService } from 'src/app/services/agency.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
+import { MatSort } from "@angular/material/sort";
 
 
 @Component({
@@ -19,10 +20,13 @@ import { ExcelService } from 'src/app/services/excel.service';
   styleUrls: ['./agency.component.scss'],
 })
 export class AgencyComponent implements OnInit {
-  columns: string[] = ['code','name', 'address', 'phone', 'email', 'actions'];
-  @ViewChild(MatTable) table: MatTable<Agency>;
+  columns: string[] = ['code', 'name', 'address', 'phone', 'email', 'actions'];
+  dataSource: MatTableDataSource<Agency>;
 
-  Agency= 'ExcelSheet.xlsx';
+  @ViewChild(MatTable) table: MatTable<Agency>;
+  @ViewChild(MatSort) sort: MatSort;
+
+  Agency = 'Agency';
 
   agencies: Agency[] = [];
   //tuana
@@ -30,18 +34,18 @@ export class AgencyComponent implements OnInit {
     public agencyService: AgencyService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
-    private excelService:ExcelService
+    private excelService: ExcelService
   ) { }
 
   ngOnInit(): void {
     this.agencyService.getAllAgencies().subscribe((res) => {
       this.agencies = res.data;
+      this.dataSource = new MatTableDataSource<Agency>(this.agencies);
+      this.dataSource.sort = this.sort;
     });
-    console.log('on init');
-
   }
-  exportAsXLSX():void {
-    this.excelService.exportAsExcelFile(this.agencies, 'Agency');
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(this.agencies, this.Agency);
   }
 
   create() {
@@ -52,7 +56,7 @@ export class AgencyComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.agencyService
-          .addAgency({ name: result.elementName ,code: result.elementCode ,address: result.elementAddress ,email: result.elementEmail ,phone: result.elementPhone })
+          .addAgency({ name: result.elementName, code: result.elementCode, address: result.elementAddress, email: result.elementEmail, phone: result.elementPhone })
           .subscribe(() => {
             this.ngOnInit();
           });
@@ -71,7 +75,7 @@ export class AgencyComponent implements OnInit {
           this.ngOnInit();
         });
       }
-    })
+    });
   }
 
   delete(element: Agency) {
@@ -86,7 +90,7 @@ export class AgencyComponent implements OnInit {
 
         });
       }
-    })
+    });
   }
 
 }

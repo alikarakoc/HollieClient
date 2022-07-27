@@ -24,7 +24,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
   @ViewChild(MatTable) table: MatTable<Country>;
   @ViewChild(MatSort) sort: MatSort;
 
-  Country = 'ExcelSheet.xlsx';
+  Country = 'Country';
 
   countries: Country[] = [];
 
@@ -36,7 +36,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
   ) { }
 
   exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(this.countries, 'Country');
+    this.excelService.exportAsExcelFile(this.countries, this.Country);
   }
 
   ngOnInit(): void {

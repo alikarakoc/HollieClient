@@ -45,18 +45,16 @@ export class CountryUpdateDialogComponent implements OnInit {
       return;
     }
 
-    this.countryService.getAllCountries().subscribe(res => {
-    const otherCountries = res.data.filter(v => v.id !== this.data.element.id);
+    const otherCountries = this.countries.filter(c => c.id !== this.data.element.id);
 
-    if (otherCountries.some(c => c.code === this.newCountryCode || c.name === this.newCountryName )) {
+    if (otherCountries.some(c => c.code === this.newCountryCode || c.name === this.newCountryName)) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'country' : 'ülke' }), "OK");
       this.newCountryCode = "";
       this.newCountryName = "";
       return;
     }
-  });
 
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCountryName }));
     this.data.dialogRef?.close();
     this.data.element.code = this.newCountryCode;
     this.data.element.name = this.newCountryName;
@@ -77,7 +75,7 @@ export class CountryUpdateDialogComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result.isDeleted) {
-        this.countryService.deleteCountry(this.data.element ).subscribe(() => {
+        this.countryService.deleteCountry(this.data.element).subscribe(() => {
           this.ngOnInit();
         });
       }

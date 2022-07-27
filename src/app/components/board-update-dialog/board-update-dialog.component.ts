@@ -55,7 +55,7 @@ export class BoardUpdateDialogComponent implements OnInit {
       }
     });
 
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newBoardName }));
     this.data.dialogRef?.close();
     this.data.element.code = this.newBoardCode;
     this.data.element.name = this.newBoardName;

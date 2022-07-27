@@ -54,6 +54,7 @@ export class HotelAddDialogComponent implements OnInit {
   }
 
   add() {
+    this.hotelPhone = String(this.hotelPhone);
 
     const predicate = (a: Omit<Hotel, 'id'>) =>
       a.code === this.hotelCode &&
@@ -84,7 +85,7 @@ export class HotelAddDialogComponent implements OnInit {
       return;
     }
 
-    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: name }));
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.hotelName }));
 
     this.closeDialog();
     this.data.table.renderRows();

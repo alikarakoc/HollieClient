@@ -124,7 +124,7 @@ export class ContractAddDialogComponent implements OnInit {
     //   return;
     // }
 
-    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: name }));
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.name }));
 
     this.closeDialog();
     this.data.table.renderRows();

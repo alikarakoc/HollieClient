@@ -71,7 +71,7 @@ export class HotelUpdateDialogComponent implements OnInit {
 
     console.log(this.newHotelCategoryId);
 
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newHotelName }));
     this.data.dialogRef?.close();
     this.data.element.code = this.newHotelCode;
     this.data.element.name = this.newHotelName;

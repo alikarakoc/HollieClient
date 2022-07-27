@@ -56,7 +56,7 @@ export class AgencyAddDialogComponent implements OnInit {
       }
     });
 
-    this.snackBar.open(this.translocoService.translate('dialogs.add_success'));
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.agencyName }));
 
     // O an...
     // this.hotelCategoryService.addCategory({ name: this.categoryName });

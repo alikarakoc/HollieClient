@@ -28,7 +28,7 @@
     <mat-form-field class="currency-field">
         <mat-label>{{ 'currency' | transloco }}</mat-label>
         <mat-select [(ngModel)]="currency">
-            <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.name }}</mat-option>
+            <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.code }}</mat-option>
         </mat-select>
     </mat-form-field>
 

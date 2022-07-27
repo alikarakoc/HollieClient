@@ -56,7 +56,7 @@ export class MarketUpdateDialogComponent implements OnInit {
       }
     });
 
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newMarketName }));
     this.data.dialogRef?.close();
     this.data.element.code = this.newMarketCode;
     this.data.element.name = this.newMarketName;

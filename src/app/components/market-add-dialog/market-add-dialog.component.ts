@@ -48,7 +48,7 @@ export class MarketAddDialogComponent implements OnInit {
       }
     });
 
-    this.snackBar.open(this.translocoService.translate('dialogs.add_success'));
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.marketName }));
 
     // O an...
     // this.hotelCategoryService.addCategory({ name: this.categoryName });

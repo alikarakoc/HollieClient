@@ -47,7 +47,7 @@ export class BoardAddDialogComponent implements OnInit {
       }
     });
 
-    this.snackBar.open(this.translocoService.translate('dialogs.add_success'));
+    this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.boardName }));
 
     this.closeDialog();
     this.data.table.renderRows();

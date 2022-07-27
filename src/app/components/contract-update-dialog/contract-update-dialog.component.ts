@@ -21,17 +21,17 @@ interface DialogData {
 })
 export class ContractUpdateDialogComponent implements OnInit {
   code: string = this.data.element.code;
-  name: string =this.data.element.name;
-  price: number=this.data.element.price;
-  start: Date=this.data.element.enteredDate;
-  end: Date=this.data.element.exitDate;
-  hotel: number=this.data.element.hotelId;
-  market: number[]=this.data.element.marketIds;
+  name: string = this.data.element.name;
+  price: number = this.data.element.price;
+  start: Date = this.data.element.enteredDate;
+  end: Date = this.data.element.exitDate;
+  hotel: number = this.data.element.hotelId;
+  market: number[] = this.data.element.marketIds;
   //category: number=this.data.element.categoryId;
-  agency: number[]=this.data.element.agencyIds;
-  board: number[]=this.data.element.boardIds;
-  roomType: number[]=this.data.element.roomTypeIds;
-  currency: number=this.data.element.currencyId;
+  agency: number[] = this.data.element.agencyIds;
+  board: number[] = this.data.element.boardIds;
+  roomType: number[] = this.data.element.roomTypeIds;
+  currency: number = this.data.element.currencyId;
 
   constructor(
     public translocoService: TranslocoService,
@@ -84,9 +84,9 @@ export class ContractUpdateDialogComponent implements OnInit {
     });
   }
 
-contracts:Contract[]=[];
+  contracts: Contract[] = [];
 
-  update(){
+  update() {
 
     if (!this.code) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
@@ -97,29 +97,29 @@ contracts:Contract[]=[];
       return;
     }
 
-    const otherContracts = this.contracts.filter(c => 
-      c.code !== this.code && 
-      c.name !== this.name && 
-      c.price !== this.price&& 
-      c.hotelId !== this.hotel&&
-      c.marketIds!==this.market&&
-      c.agencyIds !== this.agency&&
-      c.boardIds !== this.board&&
-      c.roomTypeIds !== this.roomType&&
+    const otherContracts = this.contracts.filter(c =>
+      c.code !== this.code &&
+      c.name !== this.name &&
+      c.price !== this.price &&
+      c.hotelId !== this.hotel &&
+      c.marketIds !== this.market &&
+      c.agencyIds !== this.agency &&
+      c.boardIds !== this.board &&
+      c.roomTypeIds !== this.roomType &&
       c.currencyId !== this.currency &&
       c.enteredDate !== this.start &&
       c.exitDate !== this.end);
 
-    if (otherContracts.some(c => 
-      c.code === this.code && 
-      c.name === this.name && 
-      c.price === this.price && 
-      c.hotelId === this.hotel&&
-      c.marketIds === this.market&&
-      c.agencyIds === this.agency&&
-      c.boardIds === this.board&&
-      c.roomTypeIds === this.roomType&&
-      c.currencyId === this.currency )) {
+    if (otherContracts.some(c =>
+      c.code === this.code &&
+      c.name === this.name &&
+      c.price === this.price &&
+      c.hotelId === this.hotel &&
+      c.marketIds === this.market &&
+      c.agencyIds === this.agency &&
+      c.boardIds === this.board &&
+      c.roomTypeIds === this.roomType &&
+      c.currencyId === this.currency)) {
       //console.log(this.code, this.name, this.price, this.start,this.end,this.hotel,this.market,this.agency,this.board,this.roomType,this.currency);
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'contract' : 'kontrakt' }), "OK");
       this.code = "";
@@ -127,21 +127,21 @@ contracts:Contract[]=[];
       this.price == null;
       // start: new Date(2022, 1 - 1, 20),
       // end: new Date(2022, 1 - 1, 26),
-       this.start == null,
-       this.end == null,
-      this.hotel== null;
-      this.market== null;
-      this.agency==null;
-      this.board==null;
-      this.roomType==null;
-      this.currency==null;
+      this.start == null,
+        this.end == null,
+        this.hotel == null;
+      this.market == null;
+      this.agency == null;
+      this.board == null;
+      this.roomType == null;
+      this.currency == null;
 
       return;
     }
 
 
-    
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
+
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.name }));
     this.data.dialogRef?.close();
     this.data.element.code = this.code;
     this.data.element.name = this.name;
@@ -149,18 +149,18 @@ contracts:Contract[]=[];
     this.data.element.enteredDate = this.start;
     this.data.element.exitDate = this.end;
     this.data.element.hotelId = this.hotel;
-    this.data.element.marketIds= this.market;
+    this.data.element.marketIds = this.market;
     this.data.element.agencyIds = this.agency;
     this.data.element.boardIds = this.board;
     this.data.element.roomTypeIds = this.roomType;
-    this.data.element.currencyId= this.currency;
+    this.data.element.currencyId = this.currency;
 
-   
+
 
 
     console.log(this.data.element);
     this.data.table?.renderRows();
-     //this.contractService.updateContract(this.data.element)
+    //this.contractService.updateContract(this.data.element)
     this.dialogRef.close({ isUpdated: true });
   }
 
@@ -169,7 +169,7 @@ contracts:Contract[]=[];
   }
 
 
-  delete(){
+  delete() {
 
     const dialog = this.dialog.open(ContractDeleteDialogComponent, {
       data: { element: this.data.element, dialogRef: this.dialogRef }
@@ -177,19 +177,19 @@ contracts:Contract[]=[];
 
     dialog.afterClosed().subscribe(result => {
       if (result.isDeleted) {
-       this.contractService.deleteContract({ 
-        code: this.code, 
-        name: this.name, 
-        price: this.price,
-        enteredDate:this.start,
-        exitDate:this.end,
-        hotelId:this.hotel,
-        marketIds:this.market,
-        agencyIds:this.agency,
-        boardIds:this.board,
-        roomTypeIds:this.roomType,
-        currencyId:this.currency }).subscribe(() => 
-       {
+        this.contractService.deleteContract({
+          code: this.code,
+          name: this.name,
+          price: this.price,
+          enteredDate: this.start,
+          exitDate: this.end,
+          hotelId: this.hotel,
+          marketIds: this.market,
+          agencyIds: this.agency,
+          boardIds: this.board,
+          roomTypeIds: this.roomType,
+          currencyId: this.currency
+        }).subscribe(() => {
           this.ngOnInit();
         });
       }
