@@ -134,7 +134,8 @@ registerLocaleData(localeTR);
       provide: MAT_DIALOG_DEFAULT_OPTIONS,
       useValue: {
         disableClose: true,
-        // hasBackdrop: false
+        // hasBackdrop: false,
+        width: '26vw'
       }
     },
     ExcelService

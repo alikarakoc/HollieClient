@@ -1,45 +1,56 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
-import { MatTable } from "@angular/material/table";
+import { MatTable, MatTableDataSource } from "@angular/material/table";
 import {
   CountryAddDialogComponent,
   CountryDeleteDialogComponent,
   CountryUpdateDialogComponent
-  } from "src/app/components";
+} from "src/app/components";
 import { Country } from "src/app/interfaces";
 import { CountryService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
+import { MatSort } from "@angular/material/sort";
 
 @Component({
   selector: 'app-country',
   templateUrl: './country.component.html',
   styleUrls: ['./country.component.scss']
 })
-export class CountryComponent implements OnInit {
-  columns: string[] = ["code" ,"name", "actions"];
+export class CountryComponent implements OnInit, AfterViewInit {
+  columns: string[] = ["code", "name", "actions"];
+  dataSource: MatTableDataSource<Country>;
+
   @ViewChild(MatTable) table: MatTable<Country>;
+  @ViewChild(MatSort) sort: MatSort;
 
-  Country= 'ExcelSheet.xlsx';
+  Country = 'ExcelSheet.xlsx';
 
-  countries : Country [] =[];
+  countries: Country[] = [];
 
   constructor(
     public countryService: CountryService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
-    private excelService:ExcelService
-    ) { }
+    private excelService: ExcelService
+  ) { }
 
-    exportAsXLSX():void {
-      this.excelService.exportAsExcelFile(this.countries, 'Country');
-    }
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(this.countries, 'Country');
+  }
 
   ngOnInit(): void {
     this.countryService.getAllCountries().subscribe((res) => {
       this.countries = res.data;
       console.log(this.countries);
     });
+  }
+
+  ngAfterViewInit(): void {
+    this.dataSource = new MatTableDataSource<Country>(this.countries);
+    console.log(this.dataSource);
+    console.log(this.sort);
+    this.dataSource.sort = this.sort;
   }
 
   update(element: Country) {
@@ -51,11 +62,8 @@ export class CountryComponent implements OnInit {
       if (result.isUpdated) {
         this.countryService.updateCountry(element).subscribe(() => this.ngOnInit());
       }
-    })
+    });
   }
-
-
-
 
   create() {
     const dialog = this.dialog.open(CountryAddDialogComponent, {

@@ -38,23 +38,17 @@ $HollieClient-typography: mat-typography-config($font-family: "'Kanit', sans-ser
 
 /* You can add global styles to this file, and also import other style files */
 
-$app-theme: mat.define-light-theme((
- color: (
-   primary: $HollieClient-primary,
-   accent: $HollieClient-accent,
-   warn: $HollieClient-warn,
- )
-));
+$app-theme: mat.define-light-theme((color: (primary: $HollieClient-primary,
+        accent: $HollieClient-accent,
+        warn: $HollieClient-warn,
+      )));
 
-$app-dark-theme: mat.define-dark-theme((
- color: (
-   primary: $HollieClient-primary,
-   accent: $HollieClient-accent,
-   warn: $HollieClient-warn,
- )
-));
+$app-dark-theme: mat.define-dark-theme((color: (primary: $HollieClient-primary,
+        accent: $HollieClient-accent,
+        warn: $HollieClient-warn,
+      )));
 
-.darkMode{
+.darkMode {
   @include mat.all-component-themes($app-dark-theme);
 
 }
@@ -126,8 +120,28 @@ mat-form-field.selects-m {
   margin-left: 5px !important;
 }
 
-.mat-excel{
+.mat-excel {
   color: white;
   background-color: #1D6F42;
-  transform: rotate(180deg);;
+  transform: rotate(180deg);
+}
+
+.price-field {
+  width: 12vw;
+}
+
+.currency-field {
+  width: 8vw;
+}
+
+.price-field .mat-form-field-appearance-fill,
+.price-field .mat-form-field-flex {
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+
+.currency-field .mat-form-field-appearance-fill,
+.currency-field .mat-form-field-flex {
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
 }
