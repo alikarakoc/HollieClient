@@ -11,3 +11,4 @@ export { BoardService } from './board.service';
 export { HotelCategoryService } from './hotel-category.service';
 export { CurrencyService } from './currency.service';
 export { ContractService } from './contract.service';
+export {ExcelService} from './excel.service'

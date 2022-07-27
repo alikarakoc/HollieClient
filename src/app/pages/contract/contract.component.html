@@ -6,8 +6,8 @@
         'Contract' : 'Kontrat' }) }}
     </button>
     <button mat-flat-button color="excel" class="excel-button" (click)="exportAsXLSX()">
-      <mat-icon >file_download</mat-icon>
-  </button>
+        <mat-icon>file_download</mat-icon>
+    </button>
 </div>
 
 <table mat-table [dataSource]="contracts" matSort>
@@ -43,7 +43,14 @@
 
     <ng-container matColumnDef="agency">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'agency' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ getItem('agency', element) }}</td>
+        <!-- <td mat-cell *matCellDef="let element">{{ getItem('agency', element) }}</td> -->
+        <td mat-cell *matCellDef="let element">
+            <span>{{ ['ag1', 'ag2'] }}</span>
+            <!-- <span class="see-more">•••</span> -->
+            <button class="more-icon" mat-icon-button>
+                <mat-icon>more_horiz</mat-icon>
+            </button>
+        </td>
     </ng-container>
 
     <ng-container matColumnDef="board">

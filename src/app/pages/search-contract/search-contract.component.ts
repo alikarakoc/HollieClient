@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Contract, Hotel } from "src/app/interfaces";
-import { HotelService } from "src/app/services";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTable, MatTableDataSource } from "@angular/material/table";
+import { Agency, Board, Contract, Currency, Hotel, Market, RoomType } from "src/app/interfaces";
+import { AgencyService, BoardService, ContractService, CurrencyService, HotelService, MarketService, RoomTypeService } from "src/app/services";
+import { ExcelService } from "src/app/services";
 
 @Component({
   selector: 'app-search-contract',
@@ -8,79 +10,118 @@ import { HotelService } from "src/app/services";
   styleUrls: ['./search-contract.component.scss']
 })
 export class SearchContractComponent implements OnInit {
-  // -- ÖRNEK VERİ -- ÖRNEK VERİ -- ÖRNEK VERİ -- ÖRNEK VERİ --
   columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end"];
-  results: Contract[] = [
-    {
-      name: "Example",
-      price: 300,
-      code: "EXAM",
-      enteredDate: new Date(2022, 6, 20),
-      exitDate: new Date(2022, 7, 1),
-      agencyIds: [1, 2],
-      boardIds: [1],
-      categoryIds: [1],
-      marketIds: [1],
-      roomTypeIds: [1],
-      currencyId: 1,
-      hotelId: 1
-    },
-    {
-      name: "2. Example",
-      price: 10000,
-      code: "EX2M",
-      enteredDate: new Date(2022, 7, 20),
-      exitDate: new Date(2022, 7, 23),
-      agencyIds: [2],
-      boardIds: [1],
-      categoryIds: [1],
-      marketIds: [1],
-      roomTypeIds: [1],
-      currencyId: 1,
-      hotelId: 1
-    },
-  ];
+  dataSource: MatTableDataSource<Contract>;
+
+  @ViewChild(MatTable) table: MatTable<SearchContractComponent>;
+
+  startDate?: Date;
+  endDate?: Date;
+  people?: number;
+  hotelIds: number[];
 
   constructor(
-    private hotelService: HotelService
+    private hotelService: HotelService,
+    private contractService: ContractService,
+    private marketService: MarketService,
+    private agencyService: AgencyService,
+    private boardService: BoardService,
+    private roomTypeService: RoomTypeService,
+    private currencyService: CurrencyService,
+    private excelService: ExcelService
   ) { }
 
   hotels: Hotel[] = [];
+  contracts: Contract[] = [];
+  agencies: Agency[] = [];
+  markets: Market[] = [];
+  boards: Board[] = [];
+  roomTypes: RoomType[] = [];
+  currencies: Currency[] = [];
+  result: Contract[] = [];
+
+  clearTable() {
+    this.result = [];
+    this.table.renderRows();
+  }
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
       this.hotels = res.data;
     });
+
+    this.marketService.getAllMarkets().subscribe(res => {
+      this.markets = res.data;
+    });
+
+    this.agencyService.getAllAgencies().subscribe(res => {
+      this.agencies = res.data;
+    });
+
+    this.roomTypeService.getAllRoomTypes().subscribe(res => {
+      this.roomTypes = res.data;
+    });
+
+    this.currencyService.getAllCurrency().subscribe(res => {
+      this.currencies = res.data;
+    });
+
+    this.boardService.getAllBoards().subscribe(res => {
+      this.boards = res.data;
+    });
+
+    this.contractService.getAllContracts().subscribe(res => {
+      this.contracts = res.data;
+    });
   }
 
-  toDate(v: string) {
+  applyFilter() {
+    // console.log(this.startDate?.getTime(), this.endDate?.getTime());
+    const dateConditions = (startDate: Date, endDate: Date): boolean => (this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() >= endDate.getTime());
+
+    for (const contract of this.contracts) {
+      if (this.hotelIds.some(hI => hI === contract.hotelId) || dateConditions(this.toDate(contract.enteredDate), this.toDate(contract.exitDate))) {
+        this.result.push(contract);
+      }
+    }
+    this.table.renderRows();
+
+    // console.log(this.hotelIds);
+
+    console.log(this.result);
+  }
+
+  clearInputs() {
+  }
+
+  toDate(v: Date | string) {
     return new Date(v);
   }
 
   getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: Contract) {
     switch (type) {
       case 'agency':
-        // return this.agencies.find(a => a.id === element.agencyId)?.name;
+        // return element.agencyIds.map(i => this.agencies.find(a => a.id === i));
         return element.agencyIds;
 
       case 'board':
-        // return this.boards.find(a => a.id === element.boardId)?.name;
+        // return element.boardIds.map(i => this.boards.find(b => b.id === i));
         return element.boardIds;
 
       case 'room_type':
+        // return element.roomTypeIds.map(i => this.roomTypes.find(r => r.id === i));
         return element.roomTypeIds;
-        // return this.roomTypes.find(a => a.id === element.roomTypeId)?.name;
 
       case 'market':
+        // return element.marketIds.map(i => this.markets.find(m => m.id === i));
         return element.marketIds;
-        // return this.markets.find(a => a.id === element.marketId)?.name;
 
       case 'hotel':
+        // return this.hotels.find(h => h.id === element.hotelId)?.name;
         return element.hotelId;
-        // return this.hotels.find(a => a.id === element.hotelId)?.name;
 
       case 'currency':
-        // return this.currencies.find(a => a.id === element.currencyId)?.name;
+        // return this.currencies.find(c => c.id === element.currencyId)?.name;
         return element.currencyId;
     }
   }
