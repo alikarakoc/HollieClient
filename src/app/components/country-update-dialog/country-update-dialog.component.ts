@@ -17,10 +17,11 @@ interface DialogData {
   templateUrl: './country-update-dialog.component.html',
   styleUrls: ['./country-update-dialog.component.scss']
 })
+
 export class CountryUpdateDialogComponent implements OnInit {
+
   newCountryName: string = this.data.element.name;
   newCountryCode: string = this.data.element.code;
-
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -43,33 +44,30 @@ export class CountryUpdateDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
-    const otherCountries = this.countries.filter(c => c.code !== this.newCountryCode && c.name !== this.newCountryName);
 
-    if (otherCountries.some(c => c.code === this.newCountryCode && c.name === this.newCountryName )) {
-      console.log(this.newCountryCode, this.newCountryName);
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
+    this.countryService.getAllCountries().subscribe(res => {
+    const otherCountries = res.data.filter(v => v.id !== this.data.element.id);
+
+    if (otherCountries.some(c => c.code === this.newCountryCode || c.name === this.newCountryName )) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'country' : 'ülke' }), "OK");
       this.newCountryCode = "";
       this.newCountryName = "";
-      
       return;
     }
-
-    
+  });
 
     this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
     this.data.dialogRef?.close();
     this.data.element.code = this.newCountryCode;
     this.data.element.name = this.newCountryName;
-   
+
     console.log(this.data.element);
     this.data.table?.renderRows();
-    // this.hotelService.updateHotel(this.data.element)
     this.dialogRef.close({ isUpdated: true });
   }
 
   closeDialog() {
     this.dialogRef.close();
-
   }
 
   delete() {
@@ -82,9 +80,9 @@ export class CountryUpdateDialogComponent implements OnInit {
         this.countryService.deleteCountry(this.data.element ).subscribe(() => {
           this.ngOnInit();
         });
-      }this.data.table?.renderRows();
+      }
     });
   }
-
 }
+
 

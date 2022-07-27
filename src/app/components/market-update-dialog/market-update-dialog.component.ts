@@ -19,9 +19,9 @@ interface DialogData {
   styleUrls: ['./market-update-dialog.component.scss']
 })
 export class MarketUpdateDialogComponent implements OnInit {
+
   newMarketName: string = this.data.element.name;
   newMarketCode: string = this.data.element.code;
-
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -44,10 +44,10 @@ export class MarketUpdateDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
-    // const otherMarkets = this.markets.filter(c => c.code !== this.newMarketCode && c.name !== this.newMarketName);
 
     this.marketService.getAllMarkets().subscribe(res => {
       const otherMarkets = res.data.filter(v => v.id !== this.data.element.id);
+
       if (otherMarkets.some(c => c.code === this.newMarketCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === "en" ? "room type" : "oda tipi" }), "OK");
         this.newMarketName = "";
@@ -56,13 +56,11 @@ export class MarketUpdateDialogComponent implements OnInit {
       }
     });
 
-    
-
     this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
     this.data.dialogRef?.close();
     this.data.element.code = this.newMarketCode;
     this.data.element.name = this.newMarketName;
-   
+
     console.log(this.data.element);
     this.data.table?.renderRows();
     // this.hotelService.updateHotel(this.data.element)
@@ -71,7 +69,6 @@ export class MarketUpdateDialogComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
-
   }
 
   delete() {

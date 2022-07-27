@@ -45,7 +45,7 @@ export class CurrencyUpdateDialogComponent implements OnInit {
     }
 
     this.currencyService.getAllCurrency().subscribe(res => {
-      const otherRoomTypes = res.data.filter(v => v.id !== this.data.element.id);
+      const otherCurrencies = res.data.filter(v => v.id !== this.data.element.id);
 
     });
 

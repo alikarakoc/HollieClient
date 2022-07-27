@@ -19,8 +19,10 @@ interface DialogData {
   styleUrls: ['./board-update-dialog.component.scss']
 })
 export class BoardUpdateDialogComponent implements OnInit {
+
   newBoardName: string = this.data.element.name;
   newBoardCode: string = this.data.element.code;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<BoardUpdateDialogComponent>,
@@ -46,19 +48,18 @@ export class BoardUpdateDialogComponent implements OnInit {
     this.boardService.getAllBoards().subscribe(res => {
       const otherMarkets = res.data.filter(v => v.id !== this.data.element.id);
       if (otherMarkets.some(c => c.code === this.newBoardCode)) {
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === "en" ? "board" : "tablo" }), "OK");
         this.newBoardName = "";
         this.newBoardCode = "";
         return;
       }
     });
 
-    
-
     this.snackBar.open(this.translocoService.translate('dialogs.update_success'));
     this.data.dialogRef?.close();
     this.data.element.code = this.newBoardCode;
     this.data.element.name = this.newBoardName;
-   
+
     console.log(this.data.element);
     this.data.table?.renderRows();
     this.dialogRef.close({ isUpdated: true });
@@ -66,7 +67,6 @@ export class BoardUpdateDialogComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
-
   }
 
   delete() {

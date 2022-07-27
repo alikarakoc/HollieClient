@@ -24,6 +24,7 @@ export class BoardComponent implements OnInit {
   Board= 'ExcelSheet.xlsx';
 
   boards: Board[] = [];
+
   constructor(
     public boardService: BoardService,
     private dialog: MatDialog,
@@ -67,8 +68,7 @@ export class BoardComponent implements OnInit {
 
     dialog.afterClosed().subscribe(()=> {
       this.boardService.updateBoard(element).subscribe((res) => {
-        console.log('res data checkec');
-        console.log(res.data);
+        this.ngOnInit();
       });
     });
   }
@@ -80,7 +80,6 @@ export class BoardComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if(result.isDeleted){
         this.boardService.deleteBoard(element).subscribe((res:any) =>{
-          console.log(element);
           this.ngOnInit();
         });
       }

@@ -4,8 +4,8 @@
     <button mat-flat-button color="primary" class="new-button" (click)="create()">
         {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Country' : 'Ülke' }) }}
     </button>
-    <button mat-flat-button color="excel" class="new-button" (click)="exportAsXLSX()">
-      <mat-icon >publish</mat-icon>
+    <button mat-flat-button color="excel" class="excel-button" (click)="exportAsXLSX()">
+      <mat-icon >file_download</mat-icon>
   </button>
 </div>
 

@@ -23,10 +23,6 @@ export class MarketComponent implements OnInit {
   Market= 'ExcelSheet.xlsx';
 
   markets: Market[] = [];
-  // hotel: HotelCategory = {
-  //   id: '',
-  //   name: ''
-  // };
 
   constructor(
     public marketService: MarketService,
@@ -71,8 +67,6 @@ export class MarketComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {
         this.marketService.updateMarket(element).subscribe((res) => {
-          // this.hotel.name = element.name;
-          // this.hotel.id = element.id;
           this.ngOnInit();
         });
       }
@@ -86,7 +80,6 @@ export class MarketComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
         this.marketService.deleteMarket(element).subscribe((res: any) => {
-          console.log(element);
           this.ngOnInit();
         });
       }
