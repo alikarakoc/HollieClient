@@ -43,7 +43,7 @@ export class AgencyAddDialogComponent implements OnInit {
 
     this.agencyService.getAllAgencies().subscribe((res) => {
       // categories = res.data;
-      if (res.data.some(c => c.code === this.agencyCode || c.name === this.agencyName)) {
+      if (res.data !== null && res.data.some(c => c.code === this.agencyCode || c.name === this.agencyName)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: 'agency' }), "OK");
         this.agencyCode = "";
         this.agencyName = "";

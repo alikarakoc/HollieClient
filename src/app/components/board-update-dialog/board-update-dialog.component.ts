@@ -34,7 +34,8 @@ export class BoardUpdateDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.boardService.getAllBoards().subscribe(res => {
-      this.boards = res.data;
+      if (res.data !== null) this.boards = res.data;
+      else this.boards = [];
     });
   }
   boards: Board[] = [];

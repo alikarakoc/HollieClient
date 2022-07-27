@@ -30,7 +30,7 @@ export class BoardAddDialogComponent implements OnInit {
   ngOnInit(): void {
   }
   add() {
-    
+
 
     if (!this.boardCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
@@ -39,11 +39,11 @@ export class BoardAddDialogComponent implements OnInit {
 
     this.boardService.getAllBoards().subscribe((res: { data: { code: string; }[]; }) => {
       // categories = res.data;
-      if (res.data.some((c: { code: string; }) => c.code === this.boardCode)) {
+      if (res.data !== null && res.data.some((c: { code: string; }) => c.code === this.boardCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: 'board' }), "OK");
         this.boardCode = "";
         return;
-        
+
       }
     });
 

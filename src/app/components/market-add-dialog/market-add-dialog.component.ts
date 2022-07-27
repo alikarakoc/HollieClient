@@ -31,20 +31,20 @@ export class MarketAddDialogComponent implements OnInit {
   }
 
   add() {
-    
+
 
     if (!this.marketCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
 
-    this.marketService.getMarket().subscribe((res: { data: { code: string; }[]; }) => {
+    this.marketService.getMarket().subscribe((res) => {
       // categories = res.data;
-      if (res.data.some((c: { code: string; }) => c.code === this.marketCode)) {
+      if (res.data !== null && res.data.some((c: { code: string; }) => c.code === this.marketCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: 'market' }), "OK");
         this.marketCode = "";
         return;
-        
+
       }
     });
 

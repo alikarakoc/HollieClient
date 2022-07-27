@@ -40,11 +40,11 @@ export class CurrencyAddDialogComponent implements OnInit {
     }
 
     this.currencyService.getAllCurrency().subscribe((res) => {
-      if (res.data.some(c =>  c.code === this.currencyCode)) {
-        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'currency' : 'döviz' }), "OK");
-        this.currencyName = "";
-        return;
-      }
+      if (res.data !== null && res.data.some(c =>  c.code === this.currencyCode)) {
+          this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'currency' : 'döviz' }), "OK");
+          this.currencyName = "";
+          return;
+        }
     });
 
     this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.currencyName }));

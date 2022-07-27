@@ -41,7 +41,7 @@ export class HotelCategoryAddDialogComponent implements OnInit {
 
     this.hotelCategoryService.getAllHotels().subscribe((res) => {
       // categories = res.data;
-      if (res.data.some(c => c.name === this.categoryName || c.code === this.categoryCode)) {
+      if (res.data !== null && res.data.some(c => c.name === this.categoryName || c.code === this.categoryCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel türü' }), "OK");
         this.categoryName = "";
         return;

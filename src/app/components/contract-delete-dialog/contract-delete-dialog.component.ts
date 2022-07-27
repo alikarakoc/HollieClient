@@ -23,16 +23,10 @@ export class ContractDeleteDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<ContractDeleteDialogComponent>,
     private snackBar: MatSnackBar,
     private contractService: ContractService,
-    private hotelService: HotelService,
-    private marketService: MarketService,
-    private agencyService: AgencyService,
-    private boardService: BoardService,
-    private roomTypeService: RoomTypeService,
-    private currencyService: CurrencyService,
     public translocoService: TranslocoService
   ) { }
 
-  
+
   hotels: any[] = [];
   markets: any[] = [];
   agencies: any[] = [];
@@ -41,32 +35,7 @@ export class ContractDeleteDialogComponent implements OnInit {
   currencies: any[] = [];
 
 
-  ngOnInit(): void {
-    this.hotelService.getAllHotels().subscribe(res => {
-      this.hotels = res.data;
-    });
-
-    this.marketService.getAllMarkets().subscribe(res => {
-      this.markets = res.data;
-    });
-
-    this.agencyService.getAllAgencies().subscribe(res => {
-      this.agencies = res.data;
-    });
-
-    this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data
-    });
-
-    this.currencyService.getAllCurrency().subscribe(res => {
-      this.currencies = res.data
-    });
-
-    this.boardService.getAllBoards().subscribe(res => {
-      this.boards = res.data;
-    });
-
-  }
+  ngOnInit(): void {  }
 
   delete() {
     this.snackBar.open(this.translocoService.translate('dialogs.delete_success'));

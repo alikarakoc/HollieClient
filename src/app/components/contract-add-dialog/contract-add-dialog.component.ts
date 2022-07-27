@@ -57,30 +57,39 @@ export class ContractAddDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
-      this.hotels = res.data;
+      if (res.data !== null) this.hotels = res.data;
+      else this.hotels = [];
     });
 
     this.marketService.getAllMarkets().subscribe(res => {
-      this.markets = res.data;
+      if (res.data !== null) this.markets = res.data;
+      else this.markets = [];
     });
 
     this.agencyService.getAllAgencies().subscribe(res => {
-      this.agencies = res.data;
+      if (res.data !== null) this.agencies = res.data;
+      else this.agencies = [];
     });
 
     this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data;
+      if (res.data !== null) this.roomTypes = res.data;
+      else this.roomTypes = [];
     });
 
     this.currencyService.getAllCurrency().subscribe(res => {
-      this.currencies = res.data;
+      if (res.data !== null) this.currencies = res.data;
+      else this.currencies = []
     });
 
     this.boardService.getAllBoards().subscribe(res => {
-      this.boards = res.data;
+      if (res.data !== null) this.boards = res.data;
+      else this.boards = []
     });
 
-    this.contractService.getAllContracts().subscribe(res => { this.contracts = res.data; });
+    this.contractService.getAllContracts().subscribe(res => {
+      if (res.data !== null) this.contracts = res.data;
+      else this.contracts = [];
+    });
 
   }
 

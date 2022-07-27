@@ -53,7 +53,7 @@ export class AgencyUpdateDialogComponent implements OnInit {
 
     this.agencyService.getAllAgencies().subscribe(res => {
       const otherAgencies = res.data.filter(c => c.id !== this.data.element.id && c.name !== this.newAgencyName);
-      if (otherAgencies.some(c => c.code === this.newAgencyCode)) {
+      if (res.data !== null && otherAgencies.some(c => c.code === this.newAgencyCode)) {
         console.log(this.newAgencyCode, this.newAgencyName);
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'agency' : 'acenta' }), "OK");
         this.newAgencyCode = "";

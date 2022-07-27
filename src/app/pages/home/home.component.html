@@ -137,9 +137,9 @@
         <mat-card-content>
             <mat-list role="list" *ngIf="currencies !== null; else noData">
                 <mat-list-item role="listitem" *ngFor="let item of currencies | slice:0:3; let last = last">
-                    {{ item.code }}
-                    &nbsp;
-                    <span>/TRY</span>
+                    <!-- {{ item.code }}/{{ item.value }} -->
+                    <!-- &nbsp;
+                    <span>/TRY</span> -->
                     <!-- {{ item.name }}: {{ item.value }} -->
                     {{ item.value | currency: item.code : 'symbol-narrow' : '1.2-2'}}
                     <mat-divider *ngIf="!last"></mat-divider>

@@ -49,7 +49,8 @@ export class HotelAddDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.hotelCategoryService.getAllHotels().subscribe(res => {
-      this.hotelCategories = res.data
+      if (res.data !== null) this.hotelCategories = res.data
+      else this.hotelCategories = []
     })
   }
 
