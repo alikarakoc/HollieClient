@@ -10,6 +10,8 @@
     "contract_title": "Contracts",
     "currency_title": "Currencies",
     "search_contract": "Search Contract",
+    "search": "Search",
+    "results": "Results",
     "navbar": {
         "change_language": "Change Language"
     },
@@ -61,5 +63,6 @@
     "price": "Price",
     "start": "Start Date",
     "end": "End Date",
-    "value": "Value"
+    "value": "Value",
+    "people": "People"
 }

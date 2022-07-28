@@ -10,6 +10,8 @@
     "contract_title": "Kontratlar",
     "currency_title": "Döviz Kurları",
     "search_contract": "Kontrat Ara",
+    "search": "Ara",
+    "results": "Sonuçlar",
     "navbar": {
         "change_language": "Dili Değiştir"
     },
@@ -61,5 +63,6 @@
     "price": "Fiyat",
     "start": "Başlangıç Tarihi",
     "end": "Bitiş Tarihi",
-    "value": "Değer"
+    "value": "Değer",
+    "people": "Kişiler"
 }

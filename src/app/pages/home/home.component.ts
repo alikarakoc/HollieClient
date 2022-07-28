@@ -1,4 +1,6 @@
+import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { Component, OnInit } from '@angular/core';
+import { map, Observable, shareReplay } from "rxjs";
 import { Agency, Board, Contract, Country, Currency, Hotel, HotelCategory, Market, RoomType } from "src/app/interfaces";
 import { ContractService, CountryService, CurrencyService, HotelCategoryService, HotelService, MarketService, RoomTypeService } from "src/app/services";
 import { AgencyService } from "src/app/services/agency.service";
@@ -20,7 +22,8 @@ export class HomeComponent implements OnInit {
     public marketService: MarketService,
     public roomTypeService: RoomTypeService,
     public contractService: ContractService,
-    public currencyService: CurrencyService
+    public currencyService: CurrencyService,
+    private breakpointObserver: BreakpointObserver
   ) { }
 
   agencies: Agency[] = [];
@@ -71,4 +74,11 @@ export class HomeComponent implements OnInit {
       this.currencies = res.data;
     });
   }
+
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
 }
