@@ -7,6 +7,7 @@ import { ContractService } from 'src/app/services/contract.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { Contract } from 'src/app/interfaces';
 import { HotelService, MarketService, HotelCategoryService, AgencyService, BoardService, RoomTypeService, CurrencyService } from 'src/app/services';
+import { CAgencyService } from 'src/app/services/cagency.service';
 
 
 interface DialogData {
@@ -27,10 +28,12 @@ export class ContractAddDialogComponent implements OnInit {
   end: Date;
   hotel: number;
   selectedMarkets: number;
-  selectedAgencies: number;
+  selectedAgencies: number[];
   selectedBoards: number;
   selectedRoomTypes: number;
   currency: number;
+  listId: number;
+  contractId: number;
 
   constructor(
     public translocoService: TranslocoService,
@@ -39,6 +42,7 @@ export class ContractAddDialogComponent implements OnInit {
     private hotelService: HotelService,
     private marketService: MarketService,
     private agencyService: AgencyService,
+    private cagencyService: CAgencyService,
     private boardService: BoardService,
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
@@ -54,6 +58,7 @@ export class ContractAddDialogComponent implements OnInit {
   roomTypes: any[] = [];
   currencies: any[] = [];
   contracts: any[] = [];
+  cAgencies: any[] = [];
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
@@ -91,6 +96,10 @@ export class ContractAddDialogComponent implements OnInit {
       else this.contracts = [];
     });
 
+    this.cagencyService.getAllCAgencies().subscribe(res => {
+      if (res.data !== null) this.cAgencies = res.data;
+      else this.cAgencies = [];
+    });
   }
 
   add() {
@@ -102,10 +111,9 @@ export class ContractAddDialogComponent implements OnInit {
     //   a.name === this.name &&
     //   a.price === this.price &&
     //   a.boardId === this.board;
-
-
+    
     // const condition = this.contractService.contracts.some(predicate);
-
+    
     this.contractService.getAllContracts().subscribe((res) => {
       if (res.data.some(c => c.code === this.contractCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'contract' : 'sözleşme' }), "OK");
@@ -125,7 +133,7 @@ export class ContractAddDialogComponent implements OnInit {
       return;
     }
 
-    console.log(this.selectedMarkets, this.selectedAgencies, this.selectedBoards, this.selectedRoomTypes);
+    // console.log(this.selectedMarkets, this.selectedAgencies, this.selectedBoards, this.selectedRoomTypes);
 
 
     // if (condition) {
@@ -154,11 +162,11 @@ export class ContractAddDialogComponent implements OnInit {
         exitDate: this.end,
         hotelId: this.hotel,
         marketId: this.selectedMarkets,
-        agencyId: this.selectedAgencies,
+        // agencyId: this.selectedAgencies,
         boardId: this.selectedBoards,
         roomtypeId: this.selectedRoomTypes,
         currencyId: this.currency,
-
+        agencyList: this.selectedAgencies
       }
     });
 

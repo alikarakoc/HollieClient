@@ -6,6 +6,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { ContractAddDialogComponent, ContractDeleteDialogComponent, ContractUpdateDialogComponent } from "src/app/components";
 import { Contract } from 'src/app/interfaces';
 import { AgencyService, BoardService, ContractService, CurrencyService, HotelService, MarketService, RoomTypeService } from 'src/app/services';
+import { CAgencyService } from 'src/app/services/cagency.service';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class ContractComponent implements OnInit {
   @ViewChild(MatTable) table: MatTable<Contract>;
   @ViewChild(MatSort) sort: MatSort;
 
-  Contrats = 'ExcelSheet.xlsx';
+  Contrats = 'Contract.xlsx';
 
   contracts: Contract[] = [];
 
@@ -34,6 +35,7 @@ export class ContractComponent implements OnInit {
     private boardService: BoardService,
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
+    private cagencyService: CAgencyService,
     private excelService: ExcelService
   ) { }
 
@@ -43,7 +45,7 @@ export class ContractComponent implements OnInit {
   boards: any[] = [];
   roomTypes: any[] = [];
   currencies: any[] = [];
-
+  cAgencies: any[] = [];
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
@@ -70,6 +72,10 @@ export class ContractComponent implements OnInit {
       this.boards = res.data;
     });
 
+    this.cagencyService.getAllCAgencies().subscribe(res => {
+      this.cAgencies = res.data;
+    });
+
     this.contractService.getAllContracts().subscribe(res => {
       this.contracts = res.data;
       this.dataSource = new MatTableDataSource<Contract>(this.contracts);
@@ -79,7 +85,7 @@ export class ContractComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(this.contracts, 'Contrats');
+    this.excelService.exportAsExcelFile(this.contracts, 'Contracts');
   }
 
   toDate(v: string) {
@@ -98,13 +104,28 @@ export class ContractComponent implements OnInit {
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
-        this.contractService
-          .addContract(result.element)
-          .subscribe(() => {
-            this.ngOnInit();
-          });
 
-        console.log(result.element);
+        console.log(result.element.agencyList);
+
+        // console.log(element);
+        
+        const agencyList = result.element.agencyList.map((a: any) => {
+          return { agencyId: a, listId: element.id };
+        });
+        
+        console.log(agencyList);
+        
+        this.contractService
+        .addContract({ ...result.element, agencyList })
+        .subscribe(() => {
+          this.ngOnInit();
+        });
+        
+        // console.log(result.element);
+        const element = this.contracts.find(c => c.code === result.element.code)!;
+        
+
+        console.log(this.cAgencies);
       }
     });
 
@@ -145,7 +166,7 @@ export class ContractComponent implements OnInit {
       case 'board':
         // return this.boards.find(a => a.id === element.boardId)!.name;
         // console.log(this.boards);
-      return element.boardId;
+        return element.boardId;
 
       case 'room_type':
         // return this.roomTypes.find(a => a.id === element.roomTypeId)!.name;
@@ -155,7 +176,7 @@ export class ContractComponent implements OnInit {
       case 'market':
         // console.log(this.markets);
         return element.marketId;
-        // return this.markets.find(a => a.id === element.marketId)!.name;
+      // return this.markets.find(a => a.id === element.marketId)!.name;
 
       case 'hotel':
         // return this.hotels.find(a => a.id === element.hotelId)!.name;
@@ -163,7 +184,7 @@ export class ContractComponent implements OnInit {
         return element.hotelId;
 
       case 'currency':
-         return this.contracts.find(a => a.id === element.id)!.name;
+        return this.contracts.find(a => a.id === element.id)!.name;
     }
   }
 }
