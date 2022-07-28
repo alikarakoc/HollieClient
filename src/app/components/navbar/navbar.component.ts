@@ -1,20 +1,50 @@
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayContainer } from '@angular/cdk/overlay';
+import { AsyncPipe } from "@angular/common";
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from "@angular/router";
+import { MatDrawer } from "@angular/material/sidenav";
+import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
+import { map, Observable, shareReplay } from "rxjs";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
   toggleControl: FormControl;
   @HostBinding('class') className = '';
 
+  constructor(
+    private translocoService: TranslocoService,
+    private overlay: OverlayContainer,
+    private router: Router,
+    private breakpointObserver: BreakpointObserver,
+    private asyncPipe: AsyncPipe
+  ) { }
+
+  isHandset: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
+
+  closeDrawer(drawer: MatDrawer): void {
+    const handset = this.asyncPipe.transform(this.isHandset);
+
+    if (handset) {
+      drawer.toggle();
+    }
+    else return;
+  }
+
   ngOnInit(): void {
-    this.toggleControl = new FormControl(localStorage.getItem('mode') === 'dark');
+    this.toggleControl = new FormControl(
+      localStorage.getItem('mode') === 'dark'
+    );
     this.getTheme(this.toggleControl.value);
     // this.overlay.getContainerElement().classList.add("darkMode")
     // const darkMode = this.toggleControl.value;
@@ -40,10 +70,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  constructor(private translocoService: TranslocoService, private overlay: OverlayContainer, private router: Router) {
-  }
-
-  changeLanguage(language: "tr" | "en") {
+  changeLanguage(language: 'tr' | 'en') {
     this.translocoService.setActiveLang(language);
   }
 }

@@ -48,7 +48,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 import { LocalizedDatePipe } from "./pipes";
 
-import { registerLocaleData } from "@angular/common";
+import { AsyncPipe, registerLocaleData } from "@angular/common";
 import localeTR from '@angular/common/locales/tr';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/dialog";
 import { ExcelService } from './services/excel.service';
@@ -138,7 +138,8 @@ registerLocaleData(localeTR);
         width: '26vw'
       }
     },
-    ExcelService
+    ExcelService,
+    AsyncPipe
   ],
   bootstrap: [AppComponent],
 })

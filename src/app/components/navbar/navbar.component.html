@@ -1,31 +1,47 @@
-
 <mat-sidenav-container autosize class="sidenav-container">
-  <mat-sidenav class="sidenav" #drawer opened mode="side">
+  <mat-sidenav class="sidenav" #drawer [opened]="(isHandset | async) === false"
+    [mode]="(isHandset | async) ? 'over' : 'side'" fixedInViewport
+    [attr.role]="(isHandset | async) ? 'dialog' : 'navigation'">
     <mat-nav-list>
-      <a mat-list-item routerLink="/">{{ 'home_title' | transloco }}</a>
-      <a mat-list-item routerLink="/room-types">{{ 'room_type_title' | transloco }}</a>
-      <a mat-list-item routerLink="/board">{{ 'board_title' | transloco }}</a>
-      <a mat-list-item routerLink="/countries">{{ 'country_title' | transloco }}</a>
-      <a mat-list-item routerLink="/agencies">{{ 'agency_title' | transloco }}</a>
-      <a mat-list-item routerLink="/hotel-categories">{{ 'hotel_category_title' | transloco }}</a>
-      <a mat-list-item routerLink="/hotels">{{ 'hotel_title' | transloco }}</a>
-      <a mat-list-item routerLink="/market">{{ 'market_title' | transloco }}</a>
-      <a mat-list-item routerLink="/currencies">{{ 'currency_title' | transloco }}</a>
-      <a mat-list-item routerLink="/contracts">{{ 'contract_title' | transloco }}</a>
-      <a mat-list-item routerLink="/search-contract">{{ 'search_contract' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/">{{ 'home_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/room-types">{{ 'room_type_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/board">{{ 'board_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/countries">{{ 'country_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/agencies">{{ 'agency_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/hotel-categories">{{ 'hotel_category_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/hotels">{{ 'hotel_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/market">{{ 'market_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/currencies">{{ 'currency_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/contracts">{{ 'contract_title' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/search-contract">{{ 'search_contract' | transloco }}</a>
+      <ng-container *ngIf="isHandset | async">
+        <mat-divider></mat-divider>
+        <div style="text-align: center;">
+          <button class="mx-2" [matMenuTriggerFor]="changeLang" mat-button>{{ 'navbar.change_language' | transloco
+            }}</button>
+          <br>
+          <mat-slide-toggle [formControl]="toggleControl">
+            <mat-icon>bedtime</mat-icon>
+          </mat-slide-toggle>
+        </div>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <!-- <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button *ngIf="isHandset | async"
+        (click)="drawer.toggle()">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button> -->
+      </button>
       <span>Hollie</span>
-      <span class="spacer"></span>
-      <button class="mx-2" [matMenuTriggerFor]="changeLang" mat-button>{{ 'navbar.change_language' | transloco }}</button>
-      <mat-slide-toggle [formControl]="toggleControl">
-        <mat-icon>bedtime</mat-icon>
-      </mat-slide-toggle>
+      <ng-container *ngIf="!(isHandset | async)">
+        <span class="spacer"></span>
+        <button class="mx-2" [matMenuTriggerFor]="changeLang" mat-button>{{ 'navbar.change_language' | transloco
+          }}</button>
+        <mat-slide-toggle [formControl]="toggleControl">
+          <mat-icon>bedtime</mat-icon>
+        </mat-slide-toggle>
+      </ng-container>
     </mat-toolbar>
     <div class="grid-container">
       <ng-content></ng-content>
