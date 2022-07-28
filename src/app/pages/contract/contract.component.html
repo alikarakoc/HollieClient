@@ -45,11 +45,11 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'agency' | transloco }}</th>
         <!-- <td mat-cell *matCellDef="let element">{{ getItem('agency', element) }}</td> -->
         <td mat-cell *matCellDef="let element">
-            <span>{{ ['ag1', 'ag2'] }}</span>
+            <span>{{ getItem('agency', element) }}</span>
             <!-- <span class="see-more">•••</span> -->
-            <button class="more-icon" mat-icon-button>
+            <!-- <button class="more-icon" mat-icon-button>
                 <mat-icon>more_horiz</mat-icon>
-            </button>
+            </button> -->
         </td>
     </ng-container>
 

@@ -103,29 +103,14 @@ export class ContractComponent implements OnInit {
     const dialog = this.dialog.open(ContractAddDialogComponent, { data: { table: this.table } });
 
     dialog.afterClosed().subscribe((result) => {
+      console.log(result.element);
       if (result.isAdded) {
 
-        console.log(result.element.agencyList);
-
-        // console.log(element);
-        
-        const agencyList = result.element.agencyList.map((a: any) => {
-          return { agencyId: a, listId: element.id };
-        });
-        
-        console.log(agencyList);
-        
         this.contractService
-        .addContract({ ...result.element, agencyList })
-        .subscribe(() => {
-          this.ngOnInit();
-        });
-        
-        // console.log(result.element);
-        const element = this.contracts.find(c => c.code === result.element.code)!;
-        
-
-        console.log(this.cAgencies);
+          .addContract(result.element)
+          .subscribe(() => {
+            this.ngOnInit();
+          });
       }
     });
 
@@ -161,7 +146,22 @@ export class ContractComponent implements OnInit {
       case 'agency':
         // return this.agencies.find(a => a.id === element.agencyId)!.name;
         // console.log(this.agencies);
-        return element.agencyId;
+        // return element.agencyId;
+        // console.log(element);
+        // console.log(this.agencies);
+
+        // return element.agencyList.map(ca => {
+        //   // this.cAgencies.filter(cA => cA.id === a.agencyId)
+        //   return this.agencies.find(a => a.id === ca.agencyId)
+        // })
+
+        console.log(this.cAgencies);
+        // return element.agencyList.map(ca => {
+        //   // this.cAgencies.filter(cA => cA.id === a.agencyId)
+        //   return this.agencies.find(a => a.id === ca.agencyId)
+        // })
+        const ids = this.cAgencies.filter(cA => cA.listId === element.id).map(cA => cA.agencyId);
+        return ids.map(i => this.agencies.find(a => a.id === i).name);
 
       case 'board':
         // return this.boards.find(a => a.id === element.boardId)!.name;
