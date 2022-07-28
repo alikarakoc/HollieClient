@@ -10,25 +10,34 @@ import { TranslocoService } from '@ngneat/transloco';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  toggleControl: FormControl = new FormControl( );
+  toggleControl: FormControl;
   @HostBinding('class') className = '';
 
   ngOnInit(): void {
+    this.toggleControl = new FormControl(localStorage.getItem('mode') === 'dark');
+    this.getTheme(this.toggleControl.value);
     // this.overlay.getContainerElement().classList.add("darkMode")
+    // const darkMode = this.toggleControl.value;
     this.toggleControl.valueChanges.subscribe((darkMode) => {
-      console.log(darkMode);
+      // console.log(darkMode);
 
-      const darkClassName = 'darkMode';
-      this.className = darkMode ? darkClassName : '';
+      this.getTheme(darkMode);
 
-      if (darkMode) {
-        this.overlay.getContainerElement().classList.add(darkClassName);
-      } else {
-        this.overlay.getContainerElement().classList.remove(darkClassName);
-      }
-
-      console.log(this.overlay.getContainerElement().classList);
+      // console.log(this.overlay.getContainerElement().classList);
     });
+  }
+
+  getTheme(darkMode: boolean) {
+    const darkClassName = 'darkMode';
+    this.className = darkMode ? darkClassName : '';
+
+    if (darkMode) {
+      this.overlay.getContainerElement().classList.add(darkClassName);
+      localStorage.setItem('mode', 'dark');
+    } else {
+      this.overlay.getContainerElement().classList.remove(darkClassName);
+      localStorage.setItem('mode', 'light');
+    }
   }
 
   constructor(private translocoService: TranslocoService, private overlay: OverlayContainer, private router: Router) {

@@ -80,8 +80,10 @@ export class SearchContractComponent implements OnInit {
     const dateConditions = (startDate: Date, endDate: Date): boolean => (this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() >= endDate.getTime());
 
     for (const contract of this.contracts) {
-      if (this.hotelIds.some(hI => hI === contract.hotelId) || dateConditions(this.toDate(contract.enteredDate), this.toDate(contract.exitDate))) {
-        this.result.push(contract);
+      if (dateConditions(this.toDate(contract.enteredDate), this.toDate(contract.exitDate))) {
+        if (this.hotelIds.some(hI => hI === contract.hotelId)) {
+          this.result.push(contract);
+        }
       }
     }
     this.table.renderRows();
