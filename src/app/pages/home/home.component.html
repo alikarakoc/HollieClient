@@ -7,7 +7,7 @@
 </ng-template>
 
 <div class="row my-2">
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-title>{{ 'agency_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list" *ngIf="agencies !== null; else noData">
@@ -22,7 +22,7 @@
         </mat-card-actions>
     </mat-card>
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-title>{{ 'board_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list" *ngIf="boards !== null; else noData">
@@ -37,7 +37,7 @@
         </mat-card-actions>
     </mat-card>
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-title>{{ 'country_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list" *ngIf="countries !== null; else noData">
@@ -55,7 +55,7 @@
 </div>
 
 <div class="row my-2">
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-title>{{ 'hotel_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list" *ngIf="hotels !== null; else noData">
@@ -69,7 +69,7 @@
             <button mat-flat-button color="accent" routerLink="/hotels">{{ 'home.see_more' | transloco }}</button>
         </mat-card-actions>
     </mat-card>
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-title>{{ 'hotel_category_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list" *ngIf="hotelCategories !== null; else noData">
@@ -84,7 +84,7 @@
                 }}</button>
         </mat-card-actions>
     </mat-card>
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-title>{{ 'market_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list" *ngIf="markets !== null; else noData">
@@ -102,7 +102,7 @@
 </div>
 
 <div class="row my-2">
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-title>{{ 'room_type_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list" *ngIf="roomTypes !== null; else noData">
@@ -117,7 +117,7 @@
         </mat-card-actions>
     </mat-card>
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-title>{{ 'contract_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list" *ngIf="contracts !== null; else noData">
@@ -132,7 +132,7 @@
         </mat-card-actions>
     </mat-card>
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-title>{{ 'currency_title' | transloco }}</mat-card-title>
         <mat-card-content>
             <mat-list role="list" *ngIf="currencies !== null; else noData">
@@ -155,7 +155,7 @@
 <mat-divider class="my-3"></mat-divider>
 
 <div class="row">
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">
@@ -170,7 +170,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">
@@ -185,7 +185,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">
@@ -202,7 +202,7 @@
 </div>
 <div class="row my-2">
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">
@@ -218,7 +218,7 @@
     </mat-card>
 
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">
@@ -232,7 +232,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">
@@ -247,7 +247,7 @@
     </mat-card>
 </div>
 <div class="row my-2">
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">
@@ -262,7 +262,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">
@@ -277,7 +277,7 @@
         </mat-card-content>
     </mat-card>
 
-    <mat-card class="col-md-4">
+    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
         <mat-card-content>
             <div class="media d-flex">
                 <div class="align-self-center">

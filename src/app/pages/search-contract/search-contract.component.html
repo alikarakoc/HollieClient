@@ -1,21 +1,21 @@
 <div class="search-container">
-    <h1 class="title">Search Contracts</h1>
+    <h1 class="title">{{ 'search_contract' | transloco }}</h1>
     <mat-form-field class="mx-2 date">
-        <mat-label>Start</mat-label>
+        <mat-label>{{ 'start' | transloco }}</mat-label>
         <input [(ngModel)]="startDate" matInput [matDatepicker]="startPicker">
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
         <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="mx-2 date">
-        <mat-label>End</mat-label>
+        <mat-label>{{ 'end' | transloco }}</mat-label>
         <input [(ngModel)]="endDate" matInput [matDatepicker]="endPicker">
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="mx-2 person">
-        <mat-label>People</mat-label>
+        <mat-label>{{ 'people' | transloco }}</mat-label>
         <input [(ngModel)]="people" matInput type="number" value="1" min="0">
     </mat-form-field>
 
@@ -31,14 +31,14 @@
     <br>
 
     <div class="search-button-bar">
-        <button class="search-button" mat-flat-button color="primary" (click)="applyFilter()">Search</button>
+        <button class="search-button" mat-flat-button color="primary" (click)="applyFilter()">{{ 'search' | transloco }}</button>
         <!-- <button mat-flat-button color="accent" (click)="clearTable()">Clear</button> -->
     </div>
 </div>
 
 <div class="results" [ngClass]="{'d-none': result.length === 0}">
     <div class="d-flex">
-        <h2 class="results-title">Results</h2>
+        <h2 class="results-title">{{ 'results' | transloco }}</h2>
         <span class="spacer"></span>
         <button class="export-button" mat-flat-button color="excel" (click)="exportAsXLSX()">
             <mat-icon>file_download</mat-icon>
