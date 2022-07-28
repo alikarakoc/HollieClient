@@ -79,19 +79,19 @@ export class SearchContractComponent implements OnInit {
     switch (type) {
       case 'agency':
         // return element.agencyIds.map(i => this.agencies.find(a => a.id === i));
-        return element.agencyIds;
+        return element.agencyId;
 
       case 'board':
         // return element.boardIds.map(i => this.boards.find(b => b.id === i));
-        return element.boardIds;
+        return element.boardId;
 
       case 'room_type':
         // return element.roomTypeIds.map(i => this.roomTypes.find(r => r.id === i));
-        return element.roomTypeIds;
+        return element.roomTypeId;
 
       case 'market':
         // return element.marketIds.map(i => this.markets.find(m => m.id === i));
-        return element.marketIds;
+        return element.marketId;
 
       case 'hotel':
         // return this.hotels.find(h => h.id === element.hotelId)?.name;

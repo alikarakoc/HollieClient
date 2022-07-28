@@ -35,9 +35,7 @@ export class RoomTypeDeleteDialogComponent implements OnInit {
   }
 
   delete() {
-    const condition = this.contracts.some(c => {
-      return c.roomTypeIds.some(r => r === this.data.element.id);
-    });
+    const condition = this.contracts.some(c => c.roomTypeId === this.data.element.id);
 
     if (condition) {
       this.snackBar.open('This category is using with another column.', "OK");

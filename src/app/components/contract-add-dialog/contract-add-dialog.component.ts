@@ -26,10 +26,10 @@ export class ContractAddDialogComponent implements OnInit {
   start: Date;
   end: Date;
   hotel: number;
-  selectedMarkets: number[];
-  selectedAgencies: number[];
-  selectedBoards: number[];
-  selectedRoomTypes: number[];
+  selectedMarkets: number;
+  selectedAgencies: number;
+  selectedBoards: number;
+  selectedRoomTypes: number;
   currency: number;
 
   constructor(
@@ -153,10 +153,10 @@ export class ContractAddDialogComponent implements OnInit {
         enteredDate: this.start,
         exitDate: this.end,
         hotelId: this.hotel,
-        marketIds: this.selectedMarkets,
-        agencyIds: this.selectedAgencies,
-        boardIds: this.selectedBoards,
-        roomtypeIds: this.selectedRoomTypes,
+        marketId: this.selectedMarkets,
+        agencyId: this.selectedAgencies,
+        boardId: this.selectedBoards,
+        roomtypeId: this.selectedRoomTypes,
         currencyId: this.currency,
 
       }

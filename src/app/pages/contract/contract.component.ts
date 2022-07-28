@@ -87,7 +87,12 @@ export class ContractComponent implements OnInit {
   }
 
   create() {
-    console.log(this.contracts);
+    // console.log(this.contracts);
+    // console.log(this.agencies);
+    // console.log(this.boards);
+    // console.log(this.hotels);
+    // console.log(this.roomTypes);
+    // console.log(this.markets);
 
     const dialog = this.dialog.open(ContractAddDialogComponent, { data: { table: this.table } });
 
@@ -129,30 +134,36 @@ export class ContractComponent implements OnInit {
     });
   }
 
+
   getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: Contract) {
     switch (type) {
       case 'agency':
-        // return this.agencies.find(a => a.id === element.agencyId)?.name;
-        return element.agencyIds;
+        // return this.agencies.find(a => a.id === element.agencyId)!.name;
+        // console.log(this.agencies);
+        return element.agencyId;
 
       case 'board':
-        // return this.boards.find(a => a.id === element.boardId)?.name;
-        return element.boardIds;
+        // return this.boards.find(a => a.id === element.boardId)!.name;
+        // console.log(this.boards);
+      return element.boardId;
 
       case 'room_type':
-        return element.roomTypeIds;
-      // return this.roomTypes.find(a => a.id === element.roomTypeId)?.name;
+        // return this.roomTypes.find(a => a.id === element.roomTypeId)!.name;
+        // console.log(this.roomTypes);
+        return element.roomTypeId;
 
       case 'market':
-        return element.marketIds;
-      // return this.markets.find(a => a.id === element.marketId)?.name;
+        // console.log(this.markets);
+        return element.marketId;
+        // return this.markets.find(a => a.id === element.marketId)!.name;
 
       case 'hotel':
+        // return this.hotels.find(a => a.id === element.hotelId)!.name;
+        // console.log(this.hotels);
         return element.hotelId;
-      // return this.hotels.find(a => a.id === element.hotelId)?.name;
 
       case 'currency':
-        return this.currencies.find(a => a.id === element.currencyId)?.name;
+         return this.contracts.find(a => a.id === element.id)!.name;
     }
   }
 }

@@ -6,10 +6,10 @@ export interface Contract {
     enteredDate: Date;
     exitDate: Date;
     hotelId: number;
-    marketIds: number[];
-    categoryIds: number[];
-    agencyIds: number[];
-    boardIds: number[];
-    roomTypeIds: number[];
+    marketId: number;
+    categoryId: number;
+    agencyId: number;
+    boardId: number;
+    roomTypeId: number;
     currencyId: number;
 }

@@ -3,8 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
-import {  Market,Contract } from 'src/app/interfaces';
-import { MarketService,ContractService } from "src/app/services";
+import { Market, Contract } from 'src/app/interfaces';
+import { MarketService, ContractService } from "src/app/services";
 
 interface DialogData {
   element: Market;
@@ -18,7 +18,7 @@ interface DialogData {
   styleUrls: ['./market-delete-dialog.component.scss'],
 })
 export class MarketDeleteDialogComponent implements OnInit {
-  
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<MarketDeleteDialogComponent>,
@@ -39,7 +39,7 @@ export class MarketDeleteDialogComponent implements OnInit {
   }
 
   delete() {
-    const condition = this.contracts.some(c => c.marketIds.some(m => m === this.data.element.id));
+    const condition = this.contracts.some(c => c.marketId === this.data.element.id)
 
     if (condition) {
       this.snackBar.open('This category is using with another column.', "OK");
