@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTable, MatTableDataSource } from "@angular/material/table";
-import { Agency, Board, Contract, Currency, Hotel, Market, RoomType } from "src/app/interfaces";
-import { AgencyService, BoardService, ContractService, CurrencyService, HotelService, MarketService, RoomTypeService } from "src/app/services";
-import { ExcelService } from "src/app/services";
+import { Contract, Hotel } from "src/app/interfaces";
+import { ContractService, HotelService, ExcelService } from "src/app/services";
 
 @Component({
   selector: 'app-search-contract',
@@ -23,21 +22,11 @@ export class SearchContractComponent implements OnInit {
   constructor(
     private hotelService: HotelService,
     private contractService: ContractService,
-    private marketService: MarketService,
-    private agencyService: AgencyService,
-    private boardService: BoardService,
-    private roomTypeService: RoomTypeService,
-    private currencyService: CurrencyService,
     private excelService: ExcelService
   ) { }
 
   hotels: Hotel[] = [];
   contracts: Contract[] = [];
-  agencies: Agency[] = [];
-  markets: Market[] = [];
-  boards: Board[] = [];
-  roomTypes: RoomType[] = [];
-  currencies: Currency[] = [];
   result: Contract[] = [];
 
   clearTable() {
@@ -45,30 +34,15 @@ export class SearchContractComponent implements OnInit {
     this.table.renderRows();
   }
 
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(this.result, 'Contracts_Filtered');
+  }
+
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
       this.hotels = res.data;
     });
 
-    this.marketService.getAllMarkets().subscribe(res => {
-      this.markets = res.data;
-    });
-
-    this.agencyService.getAllAgencies().subscribe(res => {
-      this.agencies = res.data;
-    });
-
-    this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data;
-    });
-
-    this.currencyService.getAllCurrency().subscribe(res => {
-      this.currencies = res.data;
-    });
-
-    this.boardService.getAllBoards().subscribe(res => {
-      this.boards = res.data;
-    });
 
     this.contractService.getAllContracts().subscribe(res => {
       this.contracts = res.data;
@@ -76,6 +50,7 @@ export class SearchContractComponent implements OnInit {
   }
 
   applyFilter() {
+    this.clearTable();
     // console.log(this.startDate?.getTime(), this.endDate?.getTime());
     const dateConditions = (startDate: Date, endDate: Date): boolean => (this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() >= endDate.getTime());
 

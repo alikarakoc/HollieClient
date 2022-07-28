@@ -32,12 +32,18 @@
 
     <div class="search-button-bar">
         <button class="search-button" mat-flat-button color="primary" (click)="applyFilter()">Search</button>
-        <button mat-flat-button color="accent" (click)="clearTable()">Clear</button>
+        <!-- <button mat-flat-button color="accent" (click)="clearTable()">Clear</button> -->
     </div>
 </div>
 
-<div class="results">
-    <h2 class="results-title">Results</h2>
+<div class="results" [ngClass]="{'d-none': result.length === 0}">
+    <div class="d-flex">
+        <h2 class="results-title">Results</h2>
+        <span class="spacer"></span>
+        <button class="export-button" mat-flat-button color="excel" (click)="exportAsXLSX()">
+            <mat-icon>file_download</mat-icon>
+        </button>
+    </div>
     <table mat-table [dataSource]="result">
         <ng-container matColumnDef="code">
             <th mat-header-cell *matHeaderCellDef>{{ 'code' | transloco }}</th>
