@@ -54,7 +54,6 @@ export class HotelUpdateDialogComponent implements OnInit {
   hotels: Hotel[] = [];
 
   update() {
-    debugger;
     if (!this.newHotelCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
