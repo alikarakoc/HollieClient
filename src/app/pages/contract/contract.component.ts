@@ -106,7 +106,23 @@ export class ContractComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(this.contracts, 'Contracts');
+    const arrayToExport = this.contracts.map(c => {
+      return {
+        code: c.code,
+        name: c.name,
+        price: c.price,
+        currency: this.getItem('currency', c),
+        hotels: this.getItem('hotel', c),
+        markets: this.getItem('market', c).toString(),
+        agencies: this.getItem('agency', c).toString(),
+        boards: this.getItem('board', c).toString(),
+        roomTypes: this.getItem('room_type', c).toString(),
+        startDate: c.enteredDate,
+        endDate: c.exitDate
+      }
+    });
+
+    this.excelService.exportAsExcelFile(arrayToExport, 'Contracts');
   }
 
   toDate(v: string) {
@@ -114,7 +130,6 @@ export class ContractComponent implements OnInit {
   }
 
   create() {
-
 
     const dialog = this.dialog.open(ContractAddDialogComponent, { data: { table: this.table } });
 
@@ -148,6 +163,8 @@ export class ContractComponent implements OnInit {
   }
 
   update(element: Contract) {
+
+
     const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: { element } });
     dialog.afterClosed().subscribe(result => {
       if (result.isUpdated) {

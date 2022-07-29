@@ -35,7 +35,17 @@ export class HotelComponent implements OnInit {
   ) { }
 
   exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(this.hotels, 'Hotel');
+    const arrayToExport = this.hotels.map(h => {
+      return {
+        code: h.code,
+        name: h.name,
+        address: h.address,
+        category: this.getCurrentCategory(h),
+        phone: h.phone,
+        email: h.email
+      }
+    })
+    this.excelService.exportAsExcelFile(arrayToExport, 'Hotel');
   }
 
   ngOnInit(): void {
