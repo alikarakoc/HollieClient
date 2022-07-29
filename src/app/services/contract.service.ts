@@ -23,7 +23,7 @@ export class ContractService {
   }
 
   deleteContract(contract: Partial<Contract>) {
-    return this.http.delete<ListResponseModel<Contract>>(`${this.baseUrl}/delete{contract.id}`);
+    return this.http.delete<ListResponseModel<Contract>>(`${this.baseUrl}/delete`, { body: contract });
   }
 
   updateContract(contract: Partial<Contract>) {
