@@ -54,7 +54,7 @@ export class HotelUpdateDialogComponent implements OnInit {
   hotels: Hotel[] = [];
 
   update() {
-
+    debugger;
     if (!this.newHotelCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
@@ -63,7 +63,7 @@ export class HotelUpdateDialogComponent implements OnInit {
     const otherHotels = this.hotels.filter(c => c.code !== this.newHotelCode && c.name !== this.newHotelName && c.address !== this.newHotelAddress && c.phone !== this.newHotelPhone && c.email !== this.newHotelEmail && c.hotelCategoryId !== this.newHotelCategoryId);
 
 
-    if (otherHotelCode.findIndex(c =>c.code == this.newHotelCode.toString()) >-1){
+    if (otherHotels.findIndex(c =>c.code == this.newHotelCode.toString()) >-1){
       console.log(this.newHotelName);
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
       this.ngOnInit();
