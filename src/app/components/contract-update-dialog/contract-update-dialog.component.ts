@@ -95,7 +95,6 @@ export class ContractUpdateDialogComponent implements OnInit {
   contracts: Contract[] = [];
 
   update() {
-
     if (!this.code) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
@@ -174,9 +173,11 @@ export class ContractUpdateDialogComponent implements OnInit {
 
 
     console.log(this.data.element);
-    this.data.table?.renderRows();
+    
     //this.contractService.updateContract(this.data.element)
     this.dialogRef.close({ isUpdated: true });
+    // this.contractService.updateContract(this.data.element);
+    this.data.table?.renderRows();
   }
 
   closeDialog() {

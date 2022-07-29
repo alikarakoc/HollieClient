@@ -140,7 +140,6 @@ export class ContractComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
         this.contractService.deleteContract(element).subscribe((res: any) => {
-          console.log(element);
           this.ngOnInit();
         });
       }
@@ -149,7 +148,8 @@ export class ContractComponent implements OnInit {
 
   update(element: Contract) {
     const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: { element } });
-    dialog.afterClosed().subscribe(result => {
+    console.log("elemennt1 : " + element);
+    dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {
         this.contractService.updateContract(element).subscribe(() => this.ngOnInit());
       }
@@ -206,19 +206,16 @@ export class ContractComponent implements OnInit {
       case 'hotel':
         // return this.hotels.find(a => a.id === element.hotelId)!.name;
         // console.log(this.hotels);
-        return element.hotelId;
-
+        const h = this.hotels.find(c => c.id === element.hotelId)
+        return h.name;
+ 
       case 'currency':
-        return element.currencyId;
+        const c = this.currencies.find(c => c.id === element.currencyId)
+        // console.log(c);
+        
+        return c.code
     }
   }
 
 
-  getCurrency(element: Currency) {
-    return this.currencies.find(c => c.id === element.id)?.code;
-  }
-
-  getHotel(element: Hotel) {
-    return this.hotels.find(c => c.id === element.id)?.name;
-  }
 }
