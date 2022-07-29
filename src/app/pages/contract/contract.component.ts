@@ -4,7 +4,7 @@ import { MatSort } from "@angular/material/sort";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { TranslocoService } from '@ngneat/transloco';
 import { ContractAddDialogComponent, ContractDeleteDialogComponent, ContractUpdateDialogComponent } from "src/app/components";
-import { Contract } from 'src/app/interfaces';
+import { Contract, Currency, Hotel } from 'src/app/interfaces';
 import { AgencyService, BoardService, ContractService, CurrencyService, HotelService, MarketService, RoomTypeService } from 'src/app/services';
 import { CAgencyService } from 'src/app/services/cagency.service';
 import { CBoardService } from 'src/app/services/cboard.service';
@@ -206,7 +206,16 @@ export class ContractComponent implements OnInit {
         return element.hotelId;
 
       case 'currency':
-        return this.contracts.find(a => a.id === element.id)!.name;
+        return element.currencyId;
     }
+  }
+
+  
+  getCurrency(element: Currency) {
+    return this.currencies.find(c => c.id === element.id)?.code;
+  }
+
+  getHotel(element: Hotel) {
+    return this.hotels.find(c => c.id === element.id)?.name;
   }
 }
