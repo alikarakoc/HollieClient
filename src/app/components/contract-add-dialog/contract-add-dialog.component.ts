@@ -61,6 +61,13 @@ export class ContractAddDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
 
+  myFilter = (d: Date | null): boolean => {
+    let dun = new Date();
+    dun.setDate(dun.getDate()-1);
+    const day = (d || (dun).getDate());
+    return d!>(dun);
+  };
+
   hotels: any[] = [];
   markets: any[] = [];
   agencies: any[] = [];
@@ -160,6 +167,7 @@ export class ContractAddDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
       return;
     }
+
 
     // console.log(this.selectedMarkets, this.selectedAgencies, this.selectedBoards, this.selectedRoomTypes);
 
