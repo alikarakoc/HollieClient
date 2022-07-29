@@ -38,7 +38,8 @@
 
     <ng-container matColumnDef="market">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'market' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ getItem('market', element) }}</td>
+        <td mat-cell *matCellDef="let element">
+            <span>{{ getItem('market', element) }}</span></td>
     </ng-container>
 
     <ng-container matColumnDef="agency">
@@ -46,21 +47,20 @@
         <!-- <td mat-cell *matCellDef="let element">{{ getItem('agency', element) }}</td> -->
         <td mat-cell *matCellDef="let element">
             <span>{{ getItem('agency', element) }}</span>
-            <!-- <span class="see-more">•••</span> -->
-            <!-- <button class="more-icon" mat-icon-button>
-                <mat-icon>more_horiz</mat-icon>
-            </button> -->
+           
         </td>
     </ng-container>
 
     <ng-container matColumnDef="board">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'board' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ getItem('board', element) }}</td>
+        <td mat-cell *matCellDef="let element">
+            <span>{{ getItem('board', element) }}</span></td>
     </ng-container>
 
     <ng-container matColumnDef="roomType">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'room_type' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ getItem('room_type', element) }}</td>
+        <td mat-cell *matCellDef="let element">
+            <span>{{ getItem('room_type', element) }}</span></td>
     </ng-container>
 
     <ng-container matColumnDef="start">

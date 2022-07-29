@@ -23,11 +23,11 @@ export class ContractService {
   }
 
   deleteContract(contract: Partial<Contract>) {
-    return this.http.delete<ListResponseModel<Contract>>(`${this.baseUrl}/delete?Id=${contract.id}`);
+    return this.http.delete<ListResponseModel<Contract>>(`${this.baseUrl}/delete{contract.id}`);
   }
 
   updateContract(contract: Partial<Contract>) {
-    return this.http.put<ListResponseModel<Contract>>(`${this.baseUrl}/update?Id=${contract.id}`, contract);
+    return this.http.put<ListResponseModel<Contract>>(`${this.baseUrl}/update`, contract);
   }
   
   constructor(private http: HttpClient) { }

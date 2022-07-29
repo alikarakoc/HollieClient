@@ -7,6 +7,10 @@ import { ContractDeleteDialogComponent } from "../contract-delete-dialog/contrac
 import { TranslocoService } from '@ngneat/transloco';
 import { Contract } from 'src/app/interfaces';
 import { HotelService, MarketService, HotelCategoryService, AgencyService, BoardService, RoomTypeService, ContractService, CurrencyService } from 'src/app/services';
+import { CMarket } from 'src/app/interfaces/cmarket';
+import { CAgency } from 'src/app/interfaces/cagency';
+import { CBoard } from 'src/app/interfaces/cboard';
+import { CRoomType } from 'src/app/interfaces/croomtype';
 
 interface DialogData {
   element: Contract;
@@ -26,12 +30,16 @@ export class ContractUpdateDialogComponent implements OnInit {
   start: Date = this.data.element.enteredDate;
   end: Date = this.data.element.exitDate;
   hotel: number = this.data.element.hotelId;
-  market: number = this.data.element.marketId;
+  //market: number = this.data.element.marketId;
   //category: number=this.data.element.categoryId;
-  agency: number = this.data.element.agencyId;
-  board: number = this.data.element.boardId;
-  roomType: number = this.data.element.roomTypeId;
+  //agency: number = this.data.element.agencyId;
+  //board: number = this.data.element.boardId;
+  //roomType: number = this.data.element.roomTypeId;
   currency: number = this.data.element.currencyId;
+  selectedAgencies: CAgency[] = this.data.element.agencyList;
+  selectedBoards: CBoard[] = this.data.element.boardList;
+  selectedMarkets: CMarket[] = this.data.element.marketList;
+  selectedRoomTypes: CRoomType[] = this.data.element.roomTypeList;
 
   constructor(
     public translocoService: TranslocoService,
@@ -102,10 +110,10 @@ export class ContractUpdateDialogComponent implements OnInit {
       c.name !== this.name &&
       c.price !== this.price &&
       c.hotelId !== this.hotel &&
-      c.marketId !== this.market &&
-      c.agencyId !== this.agency &&
-      c.boardId !== this.board &&
-      c.roomTypeId !== this.roomType &&
+      //c.marketId !== this.market &&
+      //c.agencyId !== this.agency &&
+      //c.boardId !== this.board &&
+      //c.roomTypeId !== this.roomType &&
       c.currencyId !== this.currency &&
       c.enteredDate !== this.start &&
       c.exitDate !== this.end);
@@ -115,10 +123,10 @@ export class ContractUpdateDialogComponent implements OnInit {
       c.name === this.name &&
       c.price === this.price &&
       c.hotelId === this.hotel &&
-      c.marketId === this.market &&
-      c.agencyId === this.agency &&
-      c.boardId === this.board &&
-      c.roomTypeId === this.roomType &&
+      //c.marketId === this.market &&
+      //c.agencyId === this.agency &&
+      //c.boardId === this.board &&
+      //c.roomTypeId === this.roomType &&
       c.currencyId === this.currency)) {
       //console.log(this.code, this.name, this.price, this.start,this.end,this.hotel,this.market,this.agency,this.board,this.roomType,this.currency);
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'contract' : 'kontrakt' }), "OK");
@@ -130,14 +138,17 @@ export class ContractUpdateDialogComponent implements OnInit {
       this.start == null,
         this.end == null,
         this.hotel == null;
-      this.market == null;
-      this.agency == null;
-      this.board == null;
-      this.roomType == null;
+      //this.market == null;
+      //this.agency == null;
+      //this.board == null;
+      //this.roomType == null;
       this.currency == null;
 
       return;
     }
+
+    console.log("this.selectedAgencies"+this.selectedAgencies.toString() );
+      
 
 
 
@@ -149,11 +160,15 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.data.element.enteredDate = this.start;
     this.data.element.exitDate = this.end;
     this.data.element.hotelId = this.hotel;
-    this.data.element.marketId = this.market;
-    this.data.element.agencyId = this.agency;
-    this.data.element.boardId = this.board;
-    this.data.element.roomTypeId = this.roomType;
+    //this.data.element.marketId = this.market;
+    //this.data.element.agencyId = this.agency;
+    //this.data.element.boardId = this.board;
+    //this.data.element.roomTypeId = this.roomType;
     this.data.element.currencyId = this.currency;
+    this.data.element.agencyList = this.selectedAgencies;
+    this.data.element.marketList = this.selectedMarkets;
+    this.data.element.boardList = this.selectedBoards;
+    this.data.element.roomTypeList = this.selectedRoomTypes;
 
 
 
@@ -184,10 +199,11 @@ export class ContractUpdateDialogComponent implements OnInit {
           enteredDate: this.start,
           exitDate: this.end,
           hotelId: this.hotel,
-          marketId: this.market,
-          agencyId: this.agency,
-          boardId: this.board,
-          roomTypeId: this.roomType,
+          //marketId: this.market,
+          //agencyId: this.agency,
+          //boardId: this.board,
+          //roomTypeId: this.roomType,
+          //selectedMarkets: this.selectedMarkets,
           currencyId: this.currency
         }).subscribe(() => {
           this.ngOnInit();

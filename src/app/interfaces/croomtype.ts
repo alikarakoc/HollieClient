@@ -1,8 +1,5 @@
 export interface CRoomType {
-    code: string;
-    id: number;
-    name: string;
-    address: string;
-    phone: string;
-    email: string;
+    id : number;
+    listId : number;
+    roomTypeId : number;
 }

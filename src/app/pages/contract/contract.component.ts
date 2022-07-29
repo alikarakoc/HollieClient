@@ -7,6 +7,9 @@ import { ContractAddDialogComponent, ContractDeleteDialogComponent, ContractUpda
 import { Contract } from 'src/app/interfaces';
 import { AgencyService, BoardService, ContractService, CurrencyService, HotelService, MarketService, RoomTypeService } from 'src/app/services';
 import { CAgencyService } from 'src/app/services/cagency.service';
+import { CBoardService } from 'src/app/services/cboard.service';
+import { CMarketService } from 'src/app/services/cmarket.service';
+import { CRoomTypeService } from 'src/app/services/croomtype.service';
 import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
@@ -36,6 +39,9 @@ export class ContractComponent implements OnInit {
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
     private cagencyService: CAgencyService,
+    private cboardService : CBoardService,
+    private croomTypeService : CRoomTypeService,
+    private cmarketService : CMarketService,
     private excelService: ExcelService
   ) { }
 
@@ -46,7 +52,10 @@ export class ContractComponent implements OnInit {
   roomTypes: any[] = [];
   currencies: any[] = [];
   cAgencies: any[] = [];
-
+  cBoards: any[] = [];
+  cMarkets: any[] = [];
+  cRoomTypes: any[] = [];
+  
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
       this.hotels = res.data;
@@ -76,6 +85,18 @@ export class ContractComponent implements OnInit {
       this.cAgencies = res.data;
     });
 
+    this.cboardService.getAllCBoards().subscribe(res => {
+      this.cBoards = res.data;
+    });
+
+    this.croomTypeService.getAllCRoomTypes().subscribe(res => {
+      this.cRoomTypes = res.data;
+    });
+    
+    this.cmarketService.getAllCMarkets().subscribe(res => {
+      this.cMarkets = res.data;
+    });
+
     this.contractService.getAllContracts().subscribe(res => {
       this.contracts = res.data;
       this.dataSource = new MatTableDataSource<Contract>(this.contracts);
@@ -93,12 +114,7 @@ export class ContractComponent implements OnInit {
   }
 
   create() {
-    // console.log(this.contracts);
-    // console.log(this.agencies);
-    // console.log(this.boards);
-    // console.log(this.hotels);
-    // console.log(this.roomTypes);
-    // console.log(this.markets);
+  
 
     const dialog = this.dialog.open(ContractAddDialogComponent, { data: { table: this.table } });
 
@@ -155,28 +171,34 @@ export class ContractComponent implements OnInit {
         //   return this.agencies.find(a => a.id === ca.agencyId)
         // })
 
-        console.log(this.cAgencies);
+        //console.log(this.cAgencies);
         // return element.agencyList.map(ca => {
         //   // this.cAgencies.filter(cA => cA.id === a.agencyId)
         //   return this.agencies.find(a => a.id === ca.agencyId)
         // })
-        const ids = this.cAgencies.filter(cA => cA.listId === element.id).map(cA => cA.agencyId);
-        return ids.map(i => this.agencies.find(a => a.id === i).name);
+        const idAgency = this.cAgencies.filter(cA => cA.listId === element.id).map(cA => cA.agencyId);
+        return idAgency.map(i => this.agencies.find(a => a.id === i).name);
 
       case 'board':
         // return this.boards.find(a => a.id === element.boardId)!.name;
         // console.log(this.boards);
-        return element.boardId;
+        //return element.boardId;
+        const idBoard = this.cBoards.filter(cB => cB.listId === element.id).map(cB => cB.boardId);
+        return idBoard.map(i => this.boards.find(b => b.id === i).name);
 
       case 'room_type':
         // return this.roomTypes.find(a => a.id === element.roomTypeId)!.name;
         // console.log(this.roomTypes);
-        return element.roomTypeId;
+        //return element.roomTypeId;
+        const idRoom = this.cRoomTypes.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
+        return idRoom.map(i => this.roomTypes.find(r => r.id === i).name);
 
       case 'market':
         // console.log(this.markets);
-        return element.marketId;
+        //return element.marketId;
       // return this.markets.find(a => a.id === element.marketId)!.name;
+        const idMarket = this.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
+        return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
       case 'hotel':
         // return this.hotels.find(a => a.id === element.hotelId)!.name;

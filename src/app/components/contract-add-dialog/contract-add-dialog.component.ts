@@ -9,6 +9,9 @@ import { Contract } from 'src/app/interfaces';
 import { HotelService, MarketService, HotelCategoryService, AgencyService, BoardService, RoomTypeService, CurrencyService } from 'src/app/services';
 import { CAgencyService } from 'src/app/services/cagency.service';
 import { CAgency } from 'src/app/interfaces/cagency';
+import { CRoomType } from 'src/app/interfaces/croomtype';
+import { CMarket } from 'src/app/interfaces/cmarket';
+import { CBoard } from 'src/app/interfaces/cboard';
 
 
 interface DialogData {
@@ -28,10 +31,10 @@ export class ContractAddDialogComponent implements OnInit {
   start: Date;
   end: Date;
   hotel: number;
-  selectedMarkets: number[];
+  selectedMarkets: CMarket[];
   selectedAgencies: CAgency[];
-  selectedBoards: number[];
-  selectedRoomTypes: number[];
+  selectedBoards: CBoard[];
+  selectedRoomTypes: CRoomType[];
   currency: number;
   listId: number;
   contractId: number;
@@ -60,6 +63,7 @@ export class ContractAddDialogComponent implements OnInit {
   currencies: any[] = [];
   contracts: any[] = [];
   cAgencies: any[] = [];
+  cBoards: any[] = [];
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
@@ -170,10 +174,13 @@ export class ContractAddDialogComponent implements OnInit {
         hotelId: this.hotel,
         marketId: this.selectedMarkets[0],
         // agencyId: this.selectedAgencies,
-        boardId: this.selectedBoards[0],
+        boardId: this.selectedBoards,
         roomtypeId: this.selectedRoomTypes[0],
         currencyId: this.currency,
-        agencyList: this.selectedAgencies
+        agencyList: this.selectedAgencies,
+        boardList: this.selectedBoards,
+        marketList: this.selectedMarkets,
+        roomTypeList: this.selectedRoomTypes
       }
     });
 
