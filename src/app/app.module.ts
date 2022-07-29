@@ -37,6 +37,7 @@ import {
   ContractAddDialogComponent,
   ContractDeleteDialogComponent,
   ContractUpdateDialogComponent,
+  ContractDetailsComponent,
 } from './components';
 
 // Modules
@@ -63,6 +64,7 @@ registerLocaleData(localeTR);
     HomeComponent,
     NavbarComponent,
     SearchContractComponent,
+    ContractDetailsComponent,
 
     RoomTypeComponent,
     RoomTypeUpdateDialogComponent,

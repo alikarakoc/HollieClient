@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from "@angular/material/sort";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { TranslocoService } from '@ngneat/transloco';
-import { ContractAddDialogComponent, ContractDeleteDialogComponent, ContractUpdateDialogComponent } from "src/app/components";
+import { ContractAddDialogComponent, ContractDeleteDialogComponent, ContractDetailsComponent, ContractUpdateDialogComponent } from "src/app/components";
 import { Contract, Currency, Hotel } from 'src/app/interfaces';
 import { AgencyService, BoardService, ContractService, CurrencyService, HotelService, MarketService, RoomTypeService } from 'src/app/services';
 import { CAgencyService } from 'src/app/services/cagency.service';
@@ -18,7 +18,7 @@ import { ExcelService } from 'src/app/services/excel.service';
   styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent implements OnInit {
-  columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end", "actions"];
+  columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end", "actions", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
   @ViewChild(MatTable) table: MatTable<Contract>;
@@ -39,9 +39,9 @@ export class ContractComponent implements OnInit {
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
     private cagencyService: CAgencyService,
-    private cboardService : CBoardService,
-    private croomTypeService : CRoomTypeService,
-    private cmarketService : CMarketService,
+    private cboardService: CBoardService,
+    private croomTypeService: CRoomTypeService,
+    private cmarketService: CMarketService,
     private excelService: ExcelService
   ) { }
 
@@ -55,7 +55,7 @@ export class ContractComponent implements OnInit {
   cBoards: any[] = [];
   cMarkets: any[] = [];
   cRoomTypes: any[] = [];
-  
+
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
       this.hotels = res.data;
@@ -92,7 +92,7 @@ export class ContractComponent implements OnInit {
     this.croomTypeService.getAllCRoomTypes().subscribe(res => {
       this.cRoomTypes = res.data;
     });
-    
+
     this.cmarketService.getAllCMarkets().subscribe(res => {
       this.cMarkets = res.data;
     });
@@ -114,7 +114,7 @@ export class ContractComponent implements OnInit {
   }
 
   create() {
-  
+
 
     const dialog = this.dialog.open(ContractAddDialogComponent, { data: { table: this.table } });
 
@@ -156,6 +156,9 @@ export class ContractComponent implements OnInit {
     });
   }
 
+  seeDetails(element: Contract) {
+    this.dialog.open(ContractDetailsComponent, { data: { contract: element } });
+  }
 
   getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: Contract) {
     switch (type) {
@@ -196,7 +199,7 @@ export class ContractComponent implements OnInit {
       case 'market':
         // console.log(this.markets);
         //return element.marketId;
-      // return this.markets.find(a => a.id === element.marketId)!.name;
+        // return this.markets.find(a => a.id === element.marketId)!.name;
         const idMarket = this.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
@@ -210,7 +213,7 @@ export class ContractComponent implements OnInit {
     }
   }
 
-  
+
   getCurrency(element: Currency) {
     return this.currencies.find(c => c.id === element.id)?.code;
   }

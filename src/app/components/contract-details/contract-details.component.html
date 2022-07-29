@@ -1,0 +1,38 @@
+<h1 mat-dialog-title>Contract Details</h1>
+
+<div mat-dialog-content>
+    <p>
+        <strong>{{ 'code' | transloco }}</strong>:&nbsp;{{ contract.code }}
+    </p>
+    <p>
+        <strong>{{ 'name' | transloco }}</strong>:&nbsp;{{ contract.name }}
+    </p>
+    <p>
+        <strong>{{ 'price' | transloco }}</strong>:&nbsp;{{ contract.price }} ({{ getItem('currency') }})
+    </p>
+    <p>
+        <strong>{{ 'start' | transloco }}</strong>:&nbsp;{{ toDate(contract.enteredDate) | localizedDate }}
+    </p>
+    <p>
+        <strong>{{ 'end' | transloco }}</strong>:&nbsp;{{ toDate(contract.exitDate) | localizedDate }}
+    </p>
+    <p>
+        <strong>{{ 'hotel' | transloco }}</strong>:&nbsp;{{ getItem('hotel') }}
+    </p>
+    <p>
+        <strong>{{ 'market' | transloco }}</strong>:&nbsp;{{ getItem('market') }}
+    </p>
+    <p>
+        <strong>{{ 'agency' | transloco }}</strong>:&nbsp;{{ getItem('agency') }}
+    </p>
+    <p>
+        <strong>{{ 'board' | transloco }}</strong>:&nbsp;{{ getItem('board') }}
+    </p>
+    <p>
+        <strong>{{ 'room_type' | transloco }}</strong>:&nbsp;{{ getItem('room_type') }}
+    </p>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-dialog-close mat-flat-button color="primary">OK</button>
+</div>

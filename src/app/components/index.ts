@@ -37,4 +37,4 @@ export { CurrencyUpdateDialogComponent } from './currency-update-dialog/currency
 export { ContractAddDialogComponent } from './contract-add-dialog/contract-add-dialog.component';
 export { ContractDeleteDialogComponent } from './contract-delete-dialog/contract-delete-dialog.component';
 export { ContractUpdateDialogComponent } from './contract-update-dialog/contract-update-dialog.component';
-// export {ContractDetailsComponent } from './contract-details/contract-details.component'
+export { ContractDetailsComponent } from './contract-details/contract-details.component';
