@@ -12,6 +12,8 @@
     "search_contract": "Kontrat Ara",
     "search": "Ara",
     "results": "Sonuçlar",
+    "Total-price": "Toplam Tutar",
+    "Per-price": "Birim Ücret",
     "navbar": {
         "change_language": "Dili Değiştir"
     },
