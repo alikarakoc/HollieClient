@@ -112,7 +112,7 @@ export class SearchContractComponent implements OnInit {
     });
 
     this.cBoardService.getAllCBoards().subscribe(res => {
-      this.cMarkets = res.data;
+      this.cBoards = res.data;
     });
 
     this.cMarketService.getAllCMarkets().subscribe(res => {
