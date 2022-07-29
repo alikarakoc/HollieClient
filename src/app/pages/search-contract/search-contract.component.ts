@@ -59,7 +59,22 @@ export class SearchContractComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(this.result, 'Contracts_Filtered');
+    const arrayToExport = this.result.map(c => {
+      return {
+        code: c.code,
+        name: c.name,
+        price: c.price,
+        currency: this.getItem('currency', c),
+        hotels: this.getItem('hotel', c),
+        markets: this.getItem('market', c).toString(),
+        agencies: this.getItem('agency', c).toString(),
+        boards: this.getItem('board', c).toString(),
+        roomTypes: this.getItem('room_type', c).toString(),
+        startDate: c.enteredDate,
+        endDate: c.exitDate
+      }
+    });
+    this.excelService.exportAsExcelFile(arrayToExport, 'Contracts_Filtered');
   }
 
   ngOnInit(): void {
