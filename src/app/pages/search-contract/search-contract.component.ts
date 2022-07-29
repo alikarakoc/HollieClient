@@ -11,7 +11,7 @@ import { ContractService, HotelService, ExcelService, CBoardService, CAgencyServ
   styleUrls: ['./search-contract.component.scss']
 })
 export class SearchContractComponent implements OnInit {
-  columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end"];
+  columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end","Total-Price"];
   dataSource: MatTableDataSource<Contract>;
 
   @ViewChild(MatTable) table: MatTable<SearchContractComponent>;
