@@ -87,7 +87,7 @@
     <mat-form-field class="selects-m">
         <mat-label>{{ 'room_type' | transloco }}</mat-label>
         <mat-select [(ngModel)]="selectedRoomTypes" multiple>
-            <mat-option *ngFor="let r of roomTypes" [value]="{rommTypeId: r.id}">{{ r.name }}</mat-option>
+            <mat-option *ngFor="let r of roomTypes" [value]="{roomTypeId: r.id}">{{ r.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 </div>
