@@ -12,6 +12,9 @@ import { CAgency } from 'src/app/interfaces/cagency';
 import { CRoomType } from 'src/app/interfaces/croomtype';
 import { CMarket } from 'src/app/interfaces/cmarket';
 import { CBoard } from 'src/app/interfaces/cboard';
+import { CBoardService } from 'src/app/services/cboard.service';
+import { CRoomTypeService } from 'src/app/services/croomtype.service';
+import { CMarketService } from 'src/app/services/cmarket.service';
 
 
 interface DialogData {
@@ -47,6 +50,9 @@ export class ContractAddDialogComponent implements OnInit {
     private marketService: MarketService,
     private agencyService: AgencyService,
     private cagencyService: CAgencyService,
+    private cboardService: CBoardService,
+    private croomTypeService: CRoomTypeService,
+    private cmarketService: CMarketService,
     private boardService: BoardService,
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
@@ -64,6 +70,8 @@ export class ContractAddDialogComponent implements OnInit {
   contracts: any[] = [];
   cAgencies: any[] = [];
   cBoards: any[] = [];
+  cMarkets : any[] =[];
+  cRoomTypes: any[] = [];
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
@@ -104,6 +112,21 @@ export class ContractAddDialogComponent implements OnInit {
     this.cagencyService.getAllCAgencies().subscribe(res => {
       if (res.data !== null) this.cAgencies = res.data;
       else this.cAgencies = [];
+    });
+
+    this.cboardService.getAllCBoards().subscribe(res => {
+      if (res.data !== null) this.cBoards = res.data;
+      else this.cBoards = [];
+    });
+
+    this.croomTypeService.getAllCRoomTypes().subscribe(res => {
+      if (res.data !== null) this.cRoomTypes = res.data;
+      else this.cRoomTypes = [];
+    });
+
+    this.cmarketService.getAllCMarkets().subscribe(res => {
+      if (res.data !== null) this.cMarkets = res.data;
+      else this.cMarkets = [];
     });
   }
 
@@ -172,10 +195,10 @@ export class ContractAddDialogComponent implements OnInit {
         enteredDate: this.start,
         exitDate: this.end,
         hotelId: this.hotel,
-        marketId: this.selectedMarkets[0],
+        marketId: this.selectedMarkets,
         // agencyId: this.selectedAgencies,
         boardId: this.selectedBoards,
-        roomtypeId: this.selectedRoomTypes[0],
+        roomtypeId: this.selectedRoomTypes,
         currencyId: this.currency,
         agencyList: this.selectedAgencies,
         boardList: this.selectedBoards,
