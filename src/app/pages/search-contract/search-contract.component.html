@@ -76,6 +76,11 @@
         <ng-container matColumnDef="market">
             <th mat-header-cell *matHeaderCellDef>{{ 'market' | transloco }}</th>
             <td mat-cell *matCellDef="let element">{{ getItem('market', element) }}</td>
+            <!-- <td mat-cell *matCellDef="let element">
+                <mat-select>
+                    <mat-option *ngFor="let i of getItem('market', element)">{{ i }}</mat-option>
+                </mat-select>
+            </td> -->
         </ng-container>
 
         <!-- TODO: Şimdilik ID'leri göster -->
@@ -93,7 +98,15 @@
         <!-- TODO: Şimdilik ID'leri göster -->
         <ng-container matColumnDef="roomType">
             <th mat-header-cell *matHeaderCellDef>{{ 'room_type' | transloco }}</th>
-            <td mat-cell *matCellDef="let element">{{ getItem('room_type', element) }}</td>
+            <!-- <td mat-cell *matCellDef="let element">{{ getItem('room_type', element) }}</td> -->
+            <td mat-cell *matCellDef="let element">
+                <mat-form-field class="selects-m" appearance="outline">
+                    <mat-label>{{ 'market' | transloco }}</mat-label>
+                    <mat-select>
+                        <mat-option disabled *ngFor="let m of getItem('market', element)">{{ m }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
         </ng-container>
 
         <ng-container matColumnDef="start">

@@ -11,4 +11,8 @@ export { BoardService } from './board.service';
 export { HotelCategoryService } from './hotel-category.service';
 export { CurrencyService } from './currency.service';
 export { ContractService } from './contract.service';
-export {ExcelService} from './excel.service'
+export { ExcelService } from './excel.service';
+export { CAgencyService } from './cagency.service';
+export { CBoardService } from './cboard.service';
+export { CMarketService } from './cmarket.service';
+export { CRoomTypeService } from './croomtype.service';
