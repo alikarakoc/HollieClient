@@ -223,11 +223,11 @@ export class ContractComponent implements OnInit {
       case 'hotel':
         // return this.hotels.find(a => a.id === element.hotelId)!.name;
         // console.log(this.hotels);
-        const h = this.hotels.find(c => c.id === element.hotelId)
+        const h = this.hotels.find(c => c.id === element.hotelId);
         return h.name;
  
       case 'currency':
-        const c = this.currencies.find(c => c.id === element.currencyId)
+        const c = this.currencies.find(c => c.id === element.currencyId);
         // console.log(c);
         
         return c.code
