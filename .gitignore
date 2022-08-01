@@ -41,3 +41,4 @@ testem.log
 .DS_Store
 Thumbs.db
 src/app/pages/room-type/room-type.component.html
+src/app/pages/contract/contract.component.ts

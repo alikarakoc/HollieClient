@@ -50,7 +50,10 @@ export class HotelComponent implements OnInit {
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe((res) => {
-      this.hotels = res.data;
+      if(res.data!=null){
+         this.hotels = res.data;
+      }
+     
       this.dataSource = new MatTableDataSource<Hotel>(this.hotels);
       this.dataSource.sort = this.sort;
     });

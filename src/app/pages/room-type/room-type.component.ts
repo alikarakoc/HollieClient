@@ -42,7 +42,10 @@ export class RoomTypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.roomTypeService.getAllRoomTypes().subscribe((res) => {
-      this.roomTypes = res.data;
+      if (res.data!=null){
+          this.roomTypes = res.data;
+      }
+    
       this.dataSource = new MatTableDataSource(this.roomTypes);
       this.dataSource.sort = this.sort;
     });

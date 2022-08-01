@@ -38,8 +38,14 @@ export class AgencyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+   
     this.agencyService.getAllAgencies().subscribe((res) => {
-      this.agencies = res.data;
+      if(res.data != null){
+        this.agencies = res.data;
+      }
+      
+      
+      
       this.dataSource = new MatTableDataSource<Agency>(this.agencies);
       this.dataSource.sort = this.sort;
     });

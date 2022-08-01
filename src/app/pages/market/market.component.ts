@@ -41,10 +41,16 @@ export class MarketComponent implements OnInit {
 
   ngOnInit(): void {
     this.marketService.getAllMarkets().subscribe((res) => {
-      this.markets = res.data;
+      if(res.data != null){
+        this.markets = res.data;
+      }
+      
+      console.log(res.data);
       this.dataSource = new MatTableDataSource(this.markets);
       this.dataSource.sort = this.sort;
     });
+
+
   }
 
   create() {

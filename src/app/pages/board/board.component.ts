@@ -42,7 +42,10 @@ export class BoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.boardService.getAllBoards().subscribe((res) => {
-      this.boards = res.data;
+      if(res.data!=null){
+        this.boards = res.data;
+      }
+      
       this.dataSource = new MatTableDataSource<Board>(this.boards);
       this.dataSource.sort = this.sort;
     });

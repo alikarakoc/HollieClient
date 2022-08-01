@@ -40,7 +40,10 @@ export class CurrencyComponent implements OnInit {
 
   ngOnInit(): void {
     this.CurrencyService.getAllCurrency().subscribe((res) => {
-      this.currencies = res.data;
+      if(res.data!=null){
+        this.currencies = res.data;
+      }
+      
       this.dataSource = new MatTableDataSource<Currency>(this.currencies);
       this.dataSource.sort = this.sort;
     });
