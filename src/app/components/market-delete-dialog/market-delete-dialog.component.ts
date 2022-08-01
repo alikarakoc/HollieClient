@@ -3,8 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
-import { Market, Contract } from 'src/app/interfaces';
-import { MarketService, ContractService } from "src/app/services";
+import { CMarket } from 'src/app/interfaces/cmarket';
+import { Market } from 'src/app/interfaces';
+import { MarketService, CMarketService } from "src/app/services";
 
 interface DialogData {
   element: Market;
@@ -25,21 +26,21 @@ export class MarketDeleteDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private marketService: MarketService,
     public translocoService: TranslocoService,
-    private contractService: ContractService
+    private cmarketservice: CMarketService
 
   ) { }
 
-  contracts: Contract[];
+  cmarket: CMarket[];
 
   ngOnInit(): void {
-    this.contractService.getAllContracts().subscribe(res => {
-      if (res.data != null) this.contracts = res.data;
-      else this.contracts = [];
+    this.cmarketservice.getAllCMarkets().subscribe(res => {
+      if (res.data != null) this.cmarket = res.data;
+      else this.cmarket = [];
     })
   }
 
   delete() {
-    const condition = this.contracts.some(c => c.marketId === this.data.element.id)
+    const condition = this.cmarket.some(c => c.marketId === this.data.element.id)
 
     if (condition) {
       this.snackBar.open('This category is using with another column.', "OK");
