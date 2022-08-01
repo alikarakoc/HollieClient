@@ -30,6 +30,7 @@ export class ContractUpdateDialogComponent implements OnInit {
   start: Date = this.data.element.enteredDate;
   end: Date = this.data.element.exitDate;
   hotel: number = this.data.element.hotelId;
+  market: any = this.data.element.marketList;
   //market: number = this.data.element.marketId;
   //category: number=this.data.element.categoryId;
   //agency: number = this.data.element.agencyId;
@@ -62,16 +63,21 @@ export class ContractUpdateDialogComponent implements OnInit {
   categories: any[] = [];
   agencies: any[] = [];
   boards: any[] = [];
+  cMarkets: any[] = [];
   roomTypes: any[] = [];
   currencies: any[] = [];
+  selectedValue: any[] = [];
 
   ngOnInit(): void {
+    
     this.hotelService.getAllHotels().subscribe(res => {
       this.hotels = res.data;
     });
 
     this.marketService.getAllMarkets().subscribe(res => {
+      //this.selectedValue = this.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
       this.markets = res.data;
+      //this.selectedValue = [1,2];
     });
 
     this.boardService.getAllBoards().subscribe(res => {
@@ -89,7 +95,8 @@ export class ContractUpdateDialogComponent implements OnInit {
     // TODO: Github'dan pull ettikten sonra yorumu kaldır
     this.currencyService.getAllCurrency().subscribe(res => {
       this.currencies = res.data;
-    });
+    })
+    
   }
 
   contracts: Contract[] = [];
@@ -109,14 +116,15 @@ export class ContractUpdateDialogComponent implements OnInit {
       c.name !== this.name &&
       c.price !== this.price &&
       c.hotelId !== this.hotel &&
-      //c.marketId !== this.market &&
+      c.marketId !== this.market &&
       //c.agencyId !== this.agency &&
       //c.boardId !== this.board &&
       //c.roomTypeId !== this.roomType &&
       c.currencyId !== this.currency &&
       c.enteredDate !== this.start &&
       c.exitDate !== this.end);
-
+      //this.selectedValue = this.cMarkets.filter(cM => cM.listId === c.market).map(cM => cM.marketId);
+      console.log(this.selectedValue);
     if (otherContracts.some(c =>
       c.code === this.code &&
       c.name === this.name &&

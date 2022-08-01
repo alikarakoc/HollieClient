@@ -62,9 +62,9 @@
     <br>
 
     <mat-form-field class="selects-m">
-        <mat-label>{{ 'market' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="selectedMarkets" multiple>
-            <mat-option *ngFor="let m of markets" [value]="{marketId: m.id}">{{ m.name }}</mat-option>
+        <mat-label>{{ 'market' | transloco }}</mat-label> 
+        <mat-select [(ngModel)]="selectedMarkets" multiple [(ngModel)]="selectedValue">
+            <mat-option *ngFor="let m of markets" [value]="m.id">{{ m.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 
