@@ -3,8 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
-import { Board, Contract } from 'src/app/interfaces';
-import { BoardService, ContractService } from "src/app/services";
+import { Board } from 'src/app/interfaces';
+import { CBoard } from 'src/app/interfaces/cboard';
+import { BoardService, CBoardService } from "src/app/services";
 
 interface DialogData {
   element: Board;
@@ -25,19 +26,19 @@ export class BoardDeleteDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private boardService: BoardService,
     public translocoService: TranslocoService,
-    private contractService: ContractService
+    private cboardservice: CBoardService
   ) { }
-  contracts: Contract[];
+  cboard: CBoard[];
 
   ngOnInit(): void {
-    this.contractService.getAllContracts().subscribe(res => {
-      if (res.data !== null) this.contracts = res.data;
-      else this.contracts = [];
+    this.cboardservice.getAllCBoards().subscribe(res => {
+      if (res.data !== null) this.cboard = res.data;
+      else this.cboard = [];
     });
   }
 
   delete() {
-    const condition = this.contracts.some(c => c.boardId === this.data.element.id);
+    const condition = this.cboard.some(c => c.boardId === this.data.element.id);
 
     if (condition) {
       this.snackBar.open('This category is using with another column.', "OK");
