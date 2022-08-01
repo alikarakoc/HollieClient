@@ -204,6 +204,8 @@ export class ContractComponent implements OnInit {
         // console.log(this.boards);
         //return element.boardId;
         const idBoard = this.cBoards.filter(cB => cB.listId === element.id).map(cB => cB.boardId);
+        console.log(idBoard);
+        
         return idBoard.map(i => this.boards.find(b => b.id === i).name);
 
       case 'room_type':

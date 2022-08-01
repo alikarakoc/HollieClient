@@ -43,6 +43,7 @@ export class MarketAddDialogComponent implements OnInit {
       if (res.data !== null && res.data.some((c: { code: string; }) => c.code === this.marketCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: 'market' }), "OK");
         this.marketCode = "";
+        this.marketName = "";
         return;
 
       }

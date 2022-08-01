@@ -42,8 +42,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.countryService.getAllCountries().subscribe((res) => {
       if(res.data!=null){
-        this.countries = res.data;
-      }
+        this.countries = res.data;}
       
       this.dataSource = new MatTableDataSource<Country>(this.countries);
       this.dataSource.sort = this.sort;

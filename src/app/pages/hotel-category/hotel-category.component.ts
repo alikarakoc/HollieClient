@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit , Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {
@@ -52,8 +52,11 @@ export class HotelCategoryComponent implements OnInit {
       this.dataSource = new MatTableDataSource<HotelCategory>(this.hotels);
       this.dataSource.sort = this.sort;
     });
-    console.log('on init');
+   
   }
+  ngAfterViewInit(): void {
+  }
+  
 
   create() {
     const dialog = this.dialog.open(HotelCategoryAddDialogComponent, {
@@ -73,7 +76,7 @@ export class HotelCategoryComponent implements OnInit {
 
   update(element: HotelCategory) {
     const dialog = this.dialog.open(HotelCategoryUpdateDialogComponent, {
-      data: { element },
+      data: { element , table : this.table },
     });
 
     dialog.afterClosed().subscribe(() => {
@@ -88,7 +91,7 @@ export class HotelCategoryComponent implements OnInit {
 
   delete(element: HotelCategory) {
     const dialog = this.dialog.open(HotelCategoryDeleteDialogComponent, {
-      data: { element },
+      data: { element , table:this.table},
     });
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
