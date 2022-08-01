@@ -3,7 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { RoomType, Contract } from 'src/app/interfaces';
-import { RoomTypeService, ContractService } from 'src/app/services';
+import { CRoomType } from 'src/app/interfaces/croomtype';
+import { CRoomTypeService, ContractService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
@@ -23,19 +24,19 @@ export class RoomTypeDeleteDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<RoomTypeDeleteDialogComponent>,
     public translocoService: TranslocoService,
-    private contractService: ContractService
+    private croomtypeservice: CRoomTypeService
   ) { }
-  contracts: Contract[];
+  croomtype: CRoomType[];
 
   ngOnInit(): void {
-    this.contractService.getAllContracts().subscribe(res => {
-      if (res.data != null) this.contracts = res.data;
-      else this.contracts = [];
+    this.croomtypeservice.getAllCRoomTypes().subscribe(res => {
+      if (res.data != null) this.croomtype = res.data;
+      else this.croomtype = [];
     });
   }
 
   delete() {
-    const condition = this.contracts.some(c => c.roomTypeId === this.data.element.id);
+    const condition = this.croomtype.some(c => c.roomTypeId === this.data.element.id);
 
     if (condition) {
       this.snackBar.open('This category is using with another column.', "OK");
