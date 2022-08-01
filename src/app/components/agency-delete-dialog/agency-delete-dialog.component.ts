@@ -4,6 +4,8 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from "@angular/material/table";
 import { Agency, Contract } from "src/app/interfaces";
 import { AgencyService, ContractService } from "src/app/services";
+import { CAgencyService } from 'src/app/services/cagency.service';
+import { CAgency } from 'src/app/interfaces/cagency';
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
@@ -25,20 +27,21 @@ export class AgencyDeleteDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private agencyService: AgencyService,
     public translocoService: TranslocoService,
-    private contractService: ContractService
+    private contractService: ContractService,
+    private cagencyservice: CAgencyService
   ) { }
 
-  contracts: Contract[];
+  cagency: CAgency[];
 
   ngOnInit(): void {
-    this.contractService.getAllContracts().subscribe(res => {
-      if (res.data !== null) this.contracts = res.data;
-      else this.contracts = [];
+    this.cagencyservice.getAllCAgencies().subscribe(res => {
+      if (res.data !== null) this.cagency = res.data;
+      else this.cagency = [];
     });
   }
 
   delete() {
-    const condition = this.contracts.some(c => c.agencyId === this.data.element.id);
+    const condition = this.cagency.some(c => c.agencyId === this.data.element.id);
 
     if (condition) {
       this.snackBar.open('This category is using with another column.', "OK");

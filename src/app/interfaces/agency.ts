@@ -5,4 +5,5 @@ export interface Agency {
     address: string;
     phone: string;
     email: string;
+    status: boolean;
 }

@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { Hotel, HotelCategory } from 'src/app/interfaces';
 import { HotelCategoryService, HotelService } from "src/app/services";
+import { CAgencyService } from 'src/app/services/cagency.service';
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
