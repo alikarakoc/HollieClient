@@ -2,7 +2,10 @@
   <mat-sidenav class="sidenav" #drawer [opened]="(isHandset | async) === false"
     [mode]="(isHandset | async) ? 'over' : 'side'" fixedInViewport
     [attr.role]="(isHandset | async) ? 'dialog' : 'navigation'">
+    <img class="logo" src="../../../assets/images/hollielogo.png" alt="image">
+
     <mat-nav-list>
+      
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/">{{ 'home_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/room-types">{{ 'room_type_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/board">{{ 'board_title' | transloco }}</a>
