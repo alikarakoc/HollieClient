@@ -27,6 +27,7 @@ export class ContractService {
   }
 
   updateContract(contract: Partial<Contract>) {
+    debugger;
     return this.http.put<ListResponseModel<Contract>>(`${this.baseUrl}/update`, contract );
   }
 

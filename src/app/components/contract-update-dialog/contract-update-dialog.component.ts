@@ -12,11 +12,24 @@ import { CMarket } from 'src/app/interfaces/cmarket';
 import { CAgency } from 'src/app/interfaces/cagency';
 import { CBoard } from 'src/app/interfaces/cboard';
 import { CRoomType } from 'src/app/interfaces/croomtype';
+import { FormControl } from '@angular/forms';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 interface DialogData {
   element: Contract;
   table: MatTable<any>;
   dialogRef: MatDialogRef<any>;
+  hotels: any[];
+  markets: any[];
+  agencies: any[];
+  boards: any[];
+  currencies: any[];
+  hotelCategories: any[];
+  roomTypes: any[];
+  cMarkets: any[];
+  cAgencies: any[];
+  cBoards: any[];
+  cRoomTypes: any[];
 }
 
 @Component({
@@ -25,23 +38,20 @@ interface DialogData {
   styleUrls: ['./contract-update-dialog.component.scss']
 })
 export class ContractUpdateDialogComponent implements OnInit {
+  
+  contract = this.data.element;
   code: string = this.data.element.code;
   name: string = this.data.element.name;
   price: number = this.data.element.price;
   start: Date = this.data.element.enteredDate;
   end: Date = this.data.element.exitDate;
   hotel: number = this.data.element.hotelId;
-  market: any = this.data.element.marketList;
-  //market: number = this.data.element.marketId;
-  //category: number=this.data.element.categoryId;
-  //agency: number = this.data.element.agencyId;
-  //board: number = this.data.element.boardId;
-  //roomType: number = this.data.element.roomTypeId;
   currency: number = this.data.element.currencyId;
   selectedAgencies: CAgency[] = this.data.element.agencyList;
   selectedBoards: CBoard[] = this.data.element.boardList;
   selectedMarkets: CMarket[] = this.data.element.marketList;
   selectedRoomTypes: CRoomType[] = this.data.element.roomTypeList;
+  
 
   constructor(
     public translocoService: TranslocoService,
@@ -49,20 +59,17 @@ export class ContractUpdateDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<ContractUpdateDialogComponent>,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private marketService: MarketService,
-    private hotelCategoryService: HotelCategoryService,
-    private agencyService: AgencyService,
-    private boardService: BoardService,
-    private roomTypeService: RoomTypeService,
     private contractService: ContractService,
-    private currencyService: CurrencyService,
-    private cagencyService: CAgencyService,
-    private cboardService: CBoardService,
-    private croomTypeService: CRoomTypeService,
-    private cmarketService: CMarketService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { }
-
+  ) { 
+    //this.contract = this.data.element;
+    this.markets = this.data.markets;
+    this.agencies = this.data.agencies;
+    this.boards = this.data.boards;
+    this.roomTypes = this.data.roomTypes;
+    this.hotels = this.data.hotels;
+  }
+ 
   hotels: any[] = [];
   markets: any[] = [];
   categories: any[] = [];
@@ -76,61 +83,23 @@ export class ContractUpdateDialogComponent implements OnInit {
   cMarkets : any[] =[];
   cRoomTypes: any[] = [];
 
+
   ngOnInit(): void {
-    
-    this.hotelService.getAllHotels().subscribe(res => {
-      this.hotels = res.data;
-    });
 
-    this.marketService.getAllMarkets().subscribe(res => {
-      //this.selectedValue = this.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
-      this.markets = res.data;
-      this.selectedValue = [];
-      
-    });
+    // this.contractService.getAllContracts().subscribe(res => {
+    //   this.contracts = res.data;
+    // });
 
-    this.boardService.getAllBoards().subscribe(res => {
-      this.boards = res.data;
-    });
-
-    this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data;
-    });
-
-    this.agencyService.getAllAgencies().subscribe(res => {
-      this.agencies = res.data;
-    });
-
-    // TODO: Github'dan pull ettikten sonra yorumu kaldır
-    this.currencyService.getAllCurrency().subscribe(res => {
-      this.currencies = res.data;
-    });
-
-    
-    this.cagencyService.getAllCAgencies().subscribe(res => {
-      if (res.data !== null) this.cAgencies = res.data;
-      else this.cAgencies = [];
-    });
-
-    this.cboardService.getAllCBoards().subscribe(res => {
-      if (res.data !== null) this.cBoards = res.data;
-      else this.cBoards = [];
-    });
-
-    this.croomTypeService.getAllCRoomTypes().subscribe(res => {
-      if (res.data !== null) this.cRoomTypes = res.data;
-      else this.cRoomTypes = [];
-    });
-
-    this.cmarketService.getAllCMarkets().subscribe(res => {
-      if (res.data !== null) this.cMarkets = res.data;
-      else this.cMarkets = [];
-
-      
-
-
-    });
-    
+    const idAgency = this.data.cAgencies.filter(cA => cA.listId === this.data.element.id).map(cA => cA.agencyId);
+     //idAgency.map(i => this.agencies.find(a => a.id === i).name);
+     console.log("idAgency" + idAgency);
+     //this.selectedValue = [1,2,3];
+     this.selectedValue = idAgency;
+     
+     
+     
+     //this.selectedValue = idAgency;
+     
   }
 
   contracts: Contract[] = [];
@@ -150,15 +119,10 @@ export class ContractUpdateDialogComponent implements OnInit {
       c.name !== this.name &&
       c.price !== this.price &&
       c.hotelId !== this.hotel &&
-      //c.marketId !== this.market &&
-      //c.agencyId !== this.agency &&
-      //c.boardId !== this.board &&
-      //c.roomTypeId !== this.roomType &&
       c.currencyId !== this.currency &&
       c.enteredDate !== this.start &&
       c.exitDate !== this.end);
-      //this.selectedValue = this.cMarkets.filter(cM => cM.listId === c.market).map(cM => cM.marketId);
-    if (otherContracts.some(c =>
+      if (otherContracts.some(c =>
       c.code === this.code &&
       c.name === this.name &&
       c.price === this.price &&
@@ -167,66 +131,40 @@ export class ContractUpdateDialogComponent implements OnInit {
       //c.agencyId === this.agency &&
       //c.boardId === this.board &&
       //c.roomTypeId === this.roomType &&
-      c.currencyId === this.currency)) {
-      //console.log(this.code, this.name, this.price, this.start,this.end,this.hotel,this.market,this.agency,this.board,this.roomType,this.currency);
-      this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'contract' : 'kontrakt' }), "OK");
+      c.currencyId === this.currency)) {this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'contract' : 'kontrakt' }), "OK");
       this.code = "";
       this.name = "";
       this.price == null;
-      // start: new Date(2022, 1 - 1, 20),
-      // end: new Date(2022, 1 - 1, 26),
       this.start == null,
         this.end == null,
         this.hotel == null;
-      //this.market == null;
-      //this.agency == null;
-      //this.board == null;
-      //this.roomType == null;
       this.currency == null;
       
       return;
-
    
     }
 
-      const idMarket = this.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
-      console.log("idMarket: "  + idMarket)
-      
-   
-      
-
-
+    console.log("this.data.element.name" + this.data.element.name );
+    console.log("agencies" + this.agencies);
+    
+    
 
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.name }));
     this.data.dialogRef?.close();
-    console.log("this.data.element.marketList11111"+this.data.element.marketList);
     this.data.element.code = this.code;
     this.data.element.name = this.name;
     this.data.element.price = this.price;
     this.data.element.enteredDate = this.start;
     this.data.element.exitDate = this.end;
     this.data.element.hotelId = this.hotel;
-    //this.data.element.marketId = this.market;
-    //this.data.element.agencyId = this.agency;
-    //this.data.element.boardId = this.board;
-    //this.data.element.roomTypeId = this.roomType;
     this.data.element.currencyId = this.currency;
     this.data.element.agencyList = this.selectedAgencies;
     this.data.element.marketList = this.selectedMarkets;
     this.data.element.boardList = this.selectedBoards;
     this.data.element.roomTypeList = this.selectedRoomTypes;
-    console.log("this.data.element.marketList"+this.data.element.marketList);
     
-
-
-
-
-
-    console.log(this.data.element);
-    
-    //this.contractService.updateContract(this.data.element)
+    console.log("this.data.element"+this.data.element);
     this.dialogRef.close({ isUpdated: true });
-    // this.contractService.updateContract(this.data.element);
     this.data.table?.renderRows();
   }
 
@@ -235,36 +173,4 @@ export class ContractUpdateDialogComponent implements OnInit {
   }
 
 
-  delete() {
-
-    const dialog = this.dialog.open(ContractDeleteDialogComponent, {
-      data: { element: this.data.element, dialogRef: this.dialogRef }
-    });
-
-    dialog.afterClosed().subscribe(result => {
-      if (result.isDeleted) {
-        this.contractService.deleteContract({
-          code: this.code,
-          name: this.name,
-          price: this.price,
-          enteredDate: this.start,
-          exitDate: this.end,
-          hotelId: this.hotel,
-          //marketId: this.market,
-          //agencyId: this.agency,
-          //boardId: this.board,
-          //roomTypeId: this.roomType,
-          //selectedMarkets: this.selectedMarkets,
-          currencyId: this.currency
-        }).subscribe(() => {
-          this.ngOnInit();
-        });
-      }
-    });
-
-
-
-
-
-  }
 }

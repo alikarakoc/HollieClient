@@ -162,10 +162,11 @@ export class ContractComponent implements OnInit {
   }
 
   update(element: Contract) {
-
-
-    const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: { element } });
-    console.log("elemennt1 : " + element);
+    const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: { element: element, roomTypes: this.roomTypes, hotels: this.hotels,
+      markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
+      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
+      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets  } });
+    //console.log("elemennt1 : " + element);
     dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {
         this.contractService.updateContract(element).subscribe(() => this.ngOnInit());
