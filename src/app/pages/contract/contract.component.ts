@@ -174,64 +174,40 @@ export class ContractComponent implements OnInit {
   }
 
   seeDetails(element: Contract) {
-    this.dialog.open(ContractDetailsComponent, { data: { contract: element } });
+
+    this.dialog.open(ContractDetailsComponent, { data: { 
+      contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
+      markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
+      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
+      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets } });
+
   }
 
   getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: Contract) {
     switch (type) {
       case 'agency':
-        // return this.agencies.find(a => a.id === element.agencyId)!.name;
-        // console.log(this.agencies);
-        // return element.agencyId;
-        // console.log(element);
-        // console.log(this.agencies);
-
-        // return element.agencyList.map(ca => {
-        //   // this.cAgencies.filter(cA => cA.id === a.agencyId)
-        //   return this.agencies.find(a => a.id === ca.agencyId)
-        // })
-
-        //console.log(this.cAgencies);
-        // return element.agencyList.map(ca => {
-        //   // this.cAgencies.filter(cA => cA.id === a.agencyId)
-        //   return this.agencies.find(a => a.id === ca.agencyId)
-        // })
+       
         const idAgency = this.cAgencies.filter(cA => cA.listId === element.id).map(cA => cA.agencyId);
         return idAgency.map(i => this.agencies.find(a => a.id === i).name);
 
       case 'board':
-        // return this.boards.find(a => a.id === element.boardId)!.name;
-        // console.log(this.boards);
-        //return element.boardId;
         const idBoard = this.cBoards.filter(cB => cB.listId === element.id).map(cB => cB.boardId);
-        console.log(idBoard);
-        
         return idBoard.map(i => this.boards.find(b => b.id === i).name);
 
       case 'room_type':
-        // return this.roomTypes.find(a => a.id === element.roomTypeId)!.name;
-        // console.log(this.roomTypes);
-        //return element.roomTypeId;
         const idRoom = this.cRoomTypes.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
         return idRoom.map(i => this.roomTypes.find(r => r.id === i).name);
 
       case 'market':
-        // console.log(this.markets);
-        //return element.marketId;
-        // return this.markets.find(a => a.id === element.marketId)!.name;
         const idMarket = this.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
       case 'hotel':
-        // return this.hotels.find(a => a.id === element.hotelId)!.name;
-        // console.log(this.hotels);
         const h = this.hotels.find(c => c.id === element.hotelId);
         return h.name;
  
       case 'currency':
         const c = this.currencies.find(c => c.id === element.currencyId);
-        // console.log(c);
-        
         return c.code
     }
   }

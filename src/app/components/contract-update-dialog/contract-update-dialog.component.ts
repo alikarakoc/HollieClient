@@ -6,7 +6,8 @@ import { MatTable } from '@angular/material/table';
 import { ContractDeleteDialogComponent } from "../contract-delete-dialog/contract-delete-dialog.component";
 import { TranslocoService } from '@ngneat/transloco';
 import { Contract } from 'src/app/interfaces';
-import { HotelService, MarketService, HotelCategoryService, AgencyService, BoardService, RoomTypeService, ContractService, CurrencyService } from 'src/app/services';
+import { HotelService, MarketService, HotelCategoryService, AgencyService, BoardService, RoomTypeService, 
+  ContractService, CurrencyService, CAgencyService, CBoardService, CRoomTypeService,CMarketService  } from 'src/app/services';
 import { CMarket } from 'src/app/interfaces/cmarket';
 import { CAgency } from 'src/app/interfaces/cagency';
 import { CBoard } from 'src/app/interfaces/cboard';
@@ -55,6 +56,10 @@ export class ContractUpdateDialogComponent implements OnInit {
     private roomTypeService: RoomTypeService,
     private contractService: ContractService,
     private currencyService: CurrencyService,
+    private cagencyService: CAgencyService,
+    private cboardService: CBoardService,
+    private croomTypeService: CRoomTypeService,
+    private cmarketService: CMarketService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
 
@@ -63,10 +68,13 @@ export class ContractUpdateDialogComponent implements OnInit {
   categories: any[] = [];
   agencies: any[] = [];
   boards: any[] = [];
-  cMarkets: any[] = [];
   roomTypes: any[] = [];
   currencies: any[] = [];
   selectedValue: any[] = [];
+  cAgencies: any[] = [];
+  cBoards: any[] = [];
+  cMarkets : any[] =[];
+  cRoomTypes: any[] = [];
 
   ngOnInit(): void {
     
@@ -77,7 +85,8 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.marketService.getAllMarkets().subscribe(res => {
       //this.selectedValue = this.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
       this.markets = res.data;
-      //this.selectedValue = [1,2];
+      this.selectedValue = [];
+      
     });
 
     this.boardService.getAllBoards().subscribe(res => {
@@ -95,7 +104,32 @@ export class ContractUpdateDialogComponent implements OnInit {
     // TODO: Github'dan pull ettikten sonra yorumu kaldır
     this.currencyService.getAllCurrency().subscribe(res => {
       this.currencies = res.data;
-    })
+    });
+
+    
+    this.cagencyService.getAllCAgencies().subscribe(res => {
+      if (res.data !== null) this.cAgencies = res.data;
+      else this.cAgencies = [];
+    });
+
+    this.cboardService.getAllCBoards().subscribe(res => {
+      if (res.data !== null) this.cBoards = res.data;
+      else this.cBoards = [];
+    });
+
+    this.croomTypeService.getAllCRoomTypes().subscribe(res => {
+      if (res.data !== null) this.cRoomTypes = res.data;
+      else this.cRoomTypes = [];
+    });
+
+    this.cmarketService.getAllCMarkets().subscribe(res => {
+      if (res.data !== null) this.cMarkets = res.data;
+      else this.cMarkets = [];
+
+      
+
+
+    });
     
   }
 
@@ -124,7 +158,6 @@ export class ContractUpdateDialogComponent implements OnInit {
       c.enteredDate !== this.start &&
       c.exitDate !== this.end);
       //this.selectedValue = this.cMarkets.filter(cM => cM.listId === c.market).map(cM => cM.marketId);
-      console.log(this.selectedValue);
     if (otherContracts.some(c =>
       c.code === this.code &&
       c.name === this.name &&
@@ -150,17 +183,23 @@ export class ContractUpdateDialogComponent implements OnInit {
       //this.board == null;
       //this.roomType == null;
       this.currency == null;
-
+      
       return;
+
+   
     }
 
-    console.log("this.selectedAgencies"+this.selectedAgencies.toString() );
+      const idMarket = this.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
+      console.log("idMarket: "  + idMarket)
+      
+   
       
 
 
 
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.name }));
     this.data.dialogRef?.close();
+    console.log("this.data.element.marketList11111"+this.data.element.marketList);
     this.data.element.code = this.code;
     this.data.element.name = this.name;
     this.data.element.price = this.price;
@@ -176,6 +215,9 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.data.element.marketList = this.selectedMarkets;
     this.data.element.boardList = this.selectedBoards;
     this.data.element.roomTypeList = this.selectedRoomTypes;
+    console.log("this.data.element.marketList"+this.data.element.marketList);
+    
+
 
 
 
