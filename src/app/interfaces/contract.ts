@@ -11,15 +11,15 @@ export interface Contract {
     enteredDate: Date;
     exitDate: Date;
     hotelId: number;
-    marketId: number;
-    categoryId: number;
-    agencyId: number;
+    //marketId: number;
+    //categoryId: number;
+    //agencyId: number;
     agencyList: CAgency[];
     boardList: CBoard[];
     marketList: CMarket[];
     roomTypeList: CRoomType[];
-    boardId: number;
-    roomTypeId: number;
+    //boardId: number;
+    //roomTypeId: number;
     currencyId: number;
     status: boolean;
 }

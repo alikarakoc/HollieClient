@@ -150,7 +150,7 @@ export class ContractUpdateDialogComponent implements OnInit {
       c.name !== this.name &&
       c.price !== this.price &&
       c.hotelId !== this.hotel &&
-      c.marketId !== this.market &&
+      //c.marketId !== this.market &&
       //c.agencyId !== this.agency &&
       //c.boardId !== this.board &&
       //c.roomTypeId !== this.roomType &&
