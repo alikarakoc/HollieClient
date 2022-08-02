@@ -3,4 +3,5 @@ export interface Currency {
     id?: number;
     code: string;
     value: number;
+    status: boolean;
 }

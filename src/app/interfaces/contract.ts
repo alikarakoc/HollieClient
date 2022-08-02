@@ -21,4 +21,5 @@ export interface Contract {
     boardId: number;
     roomTypeId: number;
     currencyId: number;
+    status: boolean;
 }

@@ -6,4 +6,5 @@ export interface Hotel {
   phone: string;
   email: string;
   hotelCategoryId: number;
+  status: boolean;
 }
