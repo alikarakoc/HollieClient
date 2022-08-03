@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { TranslocoService } from "@ngneat/transloco";
+import { ContractDetailsComponent } from 'src/app/components';
 import { Contract, Hotel } from "src/app/interfaces";
 import { ContractService, HotelService, ExcelService, CBoardService, CAgencyService, CMarketService, CRoomTypeService, RoomTypeService, AgencyService, BoardService, CurrencyService, MarketService } from "src/app/services";
 
@@ -11,7 +13,7 @@ import { ContractService, HotelService, ExcelService, CBoardService, CAgencyServ
   styleUrls: ['./search-contract.component.scss']
 })
 export class SearchContractComponent implements OnInit {
-  columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end","Total-Price", "seeDetails"];
+  columns: string[] = ["code", "name",  "hotel", "start", "end","Total-Price", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
   @ViewChild(MatTable) table: MatTable<SearchContractComponent>;
@@ -23,6 +25,7 @@ export class SearchContractComponent implements OnInit {
 
   constructor(
     private hotelService: HotelService,
+    private dialog: MatDialog,
     private contractService: ContractService,
     private marketService: MarketService,
     private agencyService: AgencyService,
@@ -154,6 +157,16 @@ export class SearchContractComponent implements OnInit {
   }
 
   clearInputs() {
+  }
+
+  seeDetails(element: Contract) {
+
+    this.dialog.open(ContractDetailsComponent, { data: { 
+      contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
+      markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
+      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
+      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets } });
+
   }
 
   toDate(v: Date | string) {
