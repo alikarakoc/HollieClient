@@ -13,7 +13,7 @@ export interface Contract {
     hotelId: number;
     //marketId: number;
     //categoryId: number;
-    //agencyId: number;
+    agencyId: number;
     agencyList: CAgency[];
     boardList: CBoard[];
     marketList: CMarket[];

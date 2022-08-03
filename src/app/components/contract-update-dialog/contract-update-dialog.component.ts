@@ -40,6 +40,7 @@ interface DialogData {
 export class ContractUpdateDialogComponent implements OnInit {
   
   contract = this.data.element;
+  id = this.data.element.id;
   code: string = this.data.element.code;
   name: string = this.data.element.name;
   price: number = this.data.element.price;
@@ -47,10 +48,10 @@ export class ContractUpdateDialogComponent implements OnInit {
   end: Date = this.data.element.exitDate;
   hotel: number = this.data.element.hotelId;
   currency: number = this.data.element.currencyId;
-  selectedAgencies: CAgency[] = this.data.element.agencyList;
-  selectedBoards: CBoard[] = this.data.element.boardList;
-  selectedMarkets: CMarket[] = this.data.element.marketList;
-  selectedRoomTypes: CRoomType[] = this.data.element.roomTypeList;
+  selectedAgencies: any[] = this.data.element.agencyList;
+  selectedBoards: any[] = this.data.element.boardList;
+  selectedMarkets: any[] = this.data.element.marketList;
+  selectedRoomTypes: any[] = this.data.element.roomTypeList;
   
 
   constructor(
@@ -68,6 +69,7 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.boards = this.data.boards;
     this.roomTypes = this.data.roomTypes;
     this.hotels = this.data.hotels;
+    this.currencies = this.data.currencies;
   }
  
   hotels: any[] = [];
@@ -86,19 +88,18 @@ export class ContractUpdateDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.contractService.getAllContracts().subscribe(res => {
-    //   this.contracts = res.data;
-    // });
-
     const idAgency = this.data.cAgencies.filter(cA => cA.listId === this.data.element.id).map(cA => cA.agencyId);
-     //idAgency.map(i => this.agencies.find(a => a.id === i).name);
-     console.log("idAgency" + idAgency);
-     //this.selectedValue = [1,2,3];
-     this.selectedValue = idAgency;
-     
-     
-     
-     //this.selectedValue = idAgency;
+    this.selectedAgencies = idAgency;
+
+    const idBoard = this.data.cBoards.filter(cB => cB.listId === this.data.element.id).map(cB => cB.boardId);
+    this.selectedBoards= idBoard;
+
+
+    const iMarket = this.data.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
+    this.selectedMarkets = iMarket;
+
+    const idRoomType = this.data.cRoomTypes.filter(cR => cR.listId === this.data.element.id).map(cR => cR.roomTypeId);
+    this.selectedRoomTypes = idRoomType;
      
   }
 
@@ -140,15 +141,48 @@ export class ContractUpdateDialogComponent implements OnInit {
         this.hotel == null;
       this.currency == null;
       
+      
       return;
    
     }
 
-    console.log("this.data.element.name" + this.data.element.name );
-    console.log("agencies" + this.agencies);
-    
-    
+    for(let i = 0; i < this.selectedAgencies.length; i++){
+      const agency : CAgency = {
+        agencyId: 0
+      } ;
+      agency.agencyId = this.selectedAgencies[i];
+      this.selectedAgencies[i] = agency;
+     };
 
+
+     for(let i = 0; i < this.selectedBoards.length; i++){
+      const board : CBoard = {
+       boardId: 0
+      };
+      board.boardId = this.selectedBoards[i];
+      this.selectedBoards[i] = board;
+     };
+     
+     
+     for(let i = 0; i < this.selectedMarkets.length; i++){
+      const market : CMarket = {
+        marketId: 0
+      };
+      market.marketId = this.selectedMarkets[i];
+      this.selectedMarkets[i] = market;
+     };
+
+
+     for(let i = 0; i < this.selectedRoomTypes.length; i++){
+      const roomType : CRoomType = {
+        roomTypeId: 0
+      };
+      roomType.roomTypeId = this.selectedRoomTypes[i];
+      this.selectedRoomTypes[i] = roomType;
+     };
+
+   
+    
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.name }));
     this.data.dialogRef?.close();
     this.data.element.code = this.code;
@@ -170,7 +204,8 @@ export class ContractUpdateDialogComponent implements OnInit {
 
   closeDialog() {
     this.dialogRef.close();
-  }
+   
 
+  }
 
 }

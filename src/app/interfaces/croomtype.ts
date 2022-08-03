@@ -1,6 +1,6 @@
 export interface CRoomType {
-    id : number;
-    listId : number;
+    id? : number;
+    listId? : number;
     roomTypeId : number;
-    status: boolean;
+    status?: boolean;
 }

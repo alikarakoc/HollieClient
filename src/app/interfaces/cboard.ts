@@ -1,6 +1,6 @@
 export interface CBoard{
-    id : number;
-    listId : number;
+    id? : number;
     boardId : number;
-    status: boolean;
+    listId? : number;
+    status?: boolean;
 }

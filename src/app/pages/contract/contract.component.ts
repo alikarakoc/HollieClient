@@ -213,5 +213,4 @@ export class ContractComponent implements OnInit {
     }
   }
 
-
 }

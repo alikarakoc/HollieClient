@@ -1,6 +1,6 @@
 export interface CAgency{
-    id : number;
+    id? : number;
     agencyId : number;
-    listId : number;
-    status: boolean;
+    listId? : number;
+    status?: boolean;
 }
