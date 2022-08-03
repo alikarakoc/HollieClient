@@ -21,23 +21,20 @@
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="price">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'price' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.price }}</td>
-    </ng-container>
+    
 
-    <ng-container matColumnDef="currency">
+    <!-- <ng-container matColumnDef="currency">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'currency' | transloco }}</th>
-        <!-- <td mat-cell *matCellDef="let element">{{ getCurrency(element) }}</td> -->
+        
         <td mat-cell *matCellDef="let element">{{ getItem('currency', element) }}</td>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="hotel">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'hotel' | transloco }}</th>
         <td mat-cell *matCellDef="let element">{{ getItem('hotel', element) }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="market">
+    <!-- <ng-container matColumnDef="market">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'market' | transloco }}</th>
         <td mat-cell *matCellDef="let element">
             <span>{{ getItem('market', element) }}</span></td>
@@ -45,7 +42,6 @@
 
     <ng-container matColumnDef="agency">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'agency' | transloco }}</th>
-        <!-- <td mat-cell *matCellDef="let element">{{ getItem('agency', element) }}</td> -->
         <td mat-cell *matCellDef="let element">
             <span>{{ getItem('agency', element) }}</span>
            
@@ -62,7 +58,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'room_type' | transloco }}</th>
         <td mat-cell *matCellDef="let element">
             <span>{{ getItem('room_type', element) }}</span></td>
-    </ng-container>
+    </ng-container> -->
 
     <ng-container matColumnDef="start">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'start' | transloco }}</th>
@@ -74,6 +70,12 @@
         <td mat-cell *matCellDef="let element">{{ toDate(element.exitDate) | localizedDate }}</td>
     </ng-container>
 
+
+    <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'price' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.price }} {{ getItem('currency', element) }}</td>
+    </ng-container>
+    
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>{{ 'actions' | transloco }}</th>
         <td mat-cell *matCellDef="let element">

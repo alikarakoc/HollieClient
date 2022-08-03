@@ -18,7 +18,7 @@ import { ExcelService } from 'src/app/services/excel.service';
   styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent implements OnInit {
-  columns: string[] = ["code", "name", "price", "currency", "hotel", "market", "agency", "board", "roomType", "start", "end", "actions", "seeDetails"];
+  columns: string[] = ["code", "name", "hotel", "start", "end", "price", "actions", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
   @ViewChild(MatTable) table: MatTable<Contract>;
