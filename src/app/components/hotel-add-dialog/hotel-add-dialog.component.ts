@@ -47,6 +47,8 @@ export class HotelAddDialogComponent implements OnInit {
 
   hotelCategories: HotelCategory[] = [];
 
+  emailControl = new FormControl('', [Validators.required,Validators.email]);
+
   ngOnInit(): void {
     this.hotelCategoryService.getAllHotels().subscribe(res => {
       if (res.data !== null) this.hotelCategories = res.data
@@ -63,7 +65,7 @@ export class HotelAddDialogComponent implements OnInit {
       a.address === this.hotelAddress &&
       a.phone === this.hotelPhone &&
       a.hotelCategoryId === this.hotelCategoryId &&
-      a.email === this.hotelEmail;
+      a.email === this.emailControl.value;
 
     const condition = this.hotelService.hotels.some(predicate);
 
@@ -75,8 +77,16 @@ export class HotelAddDialogComponent implements OnInit {
         return;
       }
     });
+    if (this.emailControl.hasError('email')) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_email'));
+      return;
+    }
 
-    if (!this.hotelCode || !this.hotelName || !this.hotelPhone || !this.hotelAddress || !this.hotelEmail) {
+    if (!this.hotelCode || !this.hotelName || !this.hotelPhone || !this.hotelAddress ) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
+      return;
+    }
+    if (this.emailControl.hasError('required')) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
       return;
     }
@@ -85,6 +95,9 @@ export class HotelAddDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'Hotel' : 'Otel' }), 'OK');
       return;
     }
+    console.log(this.emailControl.value);
+
+
 
     this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.hotelName }));
 
@@ -101,7 +114,7 @@ export class HotelAddDialogComponent implements OnInit {
         code: this.hotelCode,
         name: this.hotelName,
         phone: this.hotelPhone,
-        email: this.hotelEmail,
+        email: this.emailControl.value,
         address: this.hotelAddress,
         HotelCategoryId: this.hotelCategoryId
       }

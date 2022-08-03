@@ -33,11 +33,17 @@ export class AgencyAddDialogComponent implements OnInit {
     public translocoService: TranslocoService
   ) { }
 
+  emailControl = new FormControl('', [Validators.required,Validators.email]);
+
   ngOnInit(): void { }
 
   add() {
     if (!this.agencyCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
+      return;
+    }
+    if (this.emailControl.hasError('email')) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_email'));
       return;
     }
 
@@ -71,7 +77,7 @@ export class AgencyAddDialogComponent implements OnInit {
       elementName: this.agencyName,
       elementCode: this.agencyCode,
       elementAddress: this.agencyAddress,
-      elementEmail: this.agencyEmail,
+      elementEmail: this.emailControl.value,
       elementPhone: this.agencyPhone
     });
   }

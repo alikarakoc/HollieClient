@@ -10,6 +10,7 @@ import { AgencyService } from 'src/app/services/agency.service';
 import { AgencyDeleteDialogComponent } from '../agency-delete-dialog/agency-delete-dialog.component';
 import { TranslocoService } from '@ngneat/transloco';
 import { MatTable } from '@angular/material/table';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 interface DialogData {
   element: Agency;
@@ -40,6 +41,8 @@ export class AgencyUpdateDialogComponent implements OnInit {
     public translocoService: TranslocoService
   ) { }
 
+  emailControl = new FormControl('', [Validators.required,Validators.email]);
+
   agencies: any[] = [];
 
   ngOnInit(): void {
@@ -48,6 +51,10 @@ export class AgencyUpdateDialogComponent implements OnInit {
   update() {
     if (!this.newAgencyName) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
+      return;
+    }
+    if (this.emailControl.hasError('email')) {
+      this.snackBar.open(this.translocoService.translate('dialogs.error_email'));
       return;
     }
 
@@ -70,7 +77,7 @@ export class AgencyUpdateDialogComponent implements OnInit {
 
     this.data.element.code = this.newAgencyCode;
     this.data.element.name = this.newAgencyName;
-    this.data.element.email = this.newAgencyEmail;
+    this.data.element.email = this.emailControl.value!;
     this.data.element.address = this.newAgencyAddress;
     this.data.element.phone = this.newAgencyPhone;
 

@@ -34,7 +34,7 @@
 
         <mat-form-field>
             <mat-label>{{ 'email' | transloco }}</mat-label>
-            <input matInput type="email" (keyup.enter)="add()" [(ngModel)]="agencyEmail">
+            <input [formControl]="emailControl" matInput type="email" (keyup.enter)="add()" >
         </mat-form-field>
 
 </div>

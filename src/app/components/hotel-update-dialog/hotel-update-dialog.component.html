@@ -44,7 +44,7 @@
 
   <mat-form-field>
     <mat-label>{{ 'email' | transloco }}</mat-label>
-    <input matInput [(ngModel)]="newHotelEmail" (keyup.enter)="update()">
+    <input matInput [formControl]="emailControl" (keyup.enter)="update()">
   </mat-form-field>
 
 </div>
