@@ -129,8 +129,8 @@ export class SearchContractComponent implements OnInit {
 
   applyFilter() {
     this.clearTable();
-    // console.log(this.startDate?.getTime(), this.endDate?.getTime());
-    const dateConditions = (startDate: Date, endDate: Date): boolean => (this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() >= endDate.getTime());
+    // console.log(this.startDate?.getTime(), this.endDate?.getTime());                                         //g1                       //g                                                      //ç                        //ç1                                                    //g2                      //g                                                     //ç2                   //ç                                                        //g                         //g3                                                   //ç                    //ç3                                                     //g                         //g4                                                   //ç4                       //ç
+    const dateConditions = (startDate: Date, endDate: Date): boolean => ((this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && endDate.getTime() <= this.endDate?.getTime()) || (this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() <= endDate.getTime()) || (this.startDate !== undefined && startDate.getTime() <= this.startDate?.getTime()) && (this.endDate !== undefined && endDate.getTime() <= this.endDate?.getTime()) || (this.startDate !== undefined && startDate.getTime() <= this.startDate?.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() <= endDate.getTime())  );
 
     if (this.startDate! > this.endDate!) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
