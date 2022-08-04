@@ -58,49 +58,81 @@ export class ContractComponent implements OnInit {
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
-      this.hotels = res.data;
+      if (res.data!=null){
+        this.hotels = res.data;
+    }
     });
 
     this.marketService.getAllMarkets().subscribe(res => {
-      this.markets = res.data;
+
+      if (res.data!=null){
+        this.markets = res.data;
+    }
+
     });
 
     this.agencyService.getAllAgencies().subscribe(res => {
-      this.agencies = res.data;
+      if(res.data!=null){
+        this.agencies = res.data;
+      }
+      
     });
 
     this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data;
+      if(res.data!=null){
+          this.roomTypes = res.data;
+      }
+    
     });
 
     this.currencyService.getAllCurrency().subscribe(res => {
-      this.currencies = res.data;
+      if(res.data!=null){
+         this.currencies = res.data;
+      }
+     
     });
 
     this.boardService.getAllBoards().subscribe(res => {
-      this.boards = res.data;
+      if(res.data!=null){
+        this.boards = res.data;
+      }
+      
     });
 
     this.cagencyService.getAllCAgencies().subscribe(res => {
-      this.cAgencies = res.data;
+      if(res.data!=null){
+           this.cAgencies = res.data;
+      }
+   
     });
 
     this.cboardService.getAllCBoards().subscribe(res => {
-      this.cBoards = res.data;
+      if(res.data!=null){
+          this.cBoards = res.data;
+         }
     });
 
     this.croomTypeService.getAllCRoomTypes().subscribe(res => {
-      this.cRoomTypes = res.data;
+      if(res.data!=null){
+        this.cRoomTypes = res.data;
+      }
+      
     });
 
     this.cmarketService.getAllCMarkets().subscribe(res => {
-      this.cMarkets = res.data;
+      if(res.data!=null){
+        this.cMarkets = res.data;
+      }
+      
     });
 
     this.contractService.getAllContracts().subscribe(res => {
-      this.contracts = res.data;
+      if(res.data!=null){
+         this.contracts = res.data;
       this.dataSource = new MatTableDataSource<Contract>(this.contracts);
       this.dataSource.sort = this.sort;
+      }
+     
     });
 
   }
