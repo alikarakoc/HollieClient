@@ -36,18 +36,23 @@
 
     <br>
 
+
     <mat-form-field floatLabel="always" class="selects-m">
         <mat-label>{{ 'adultPrice' | transloco }}</mat-label>
         <input matInput [(ngModel)]="adultPrice" type="number" class="price-input" placeholder="0">
         <!-- <span matPrefix>&nbsp;</span>
         <span matSuffix>.00</span> -->
     </mat-form-field>
+
+
     <mat-form-field floatLabel="always" class="selects-m">
         <mat-label>{{ 'childPrice' | transloco }}</mat-label>
         <input matInput [(ngModel)]=" childPrice" type="number" class="price-input" placeholder="0">
         <!-- <span matPrefix>&nbsp;</span>
         <span matSuffix>.00</span> -->
     </mat-form-field>
+
+
     <br>
     <mat-form-field class="selects-m">
       <mat-label>{{ 'currency' | transloco }}</mat-label>
@@ -56,7 +61,13 @@
       </mat-select>
   </mat-form-field>
 
-  <br>
+
+<mat-form-field class="selects-m">
+    <mat-label>{{ 'room_type' | transloco }}</mat-label>
+    <mat-select [(ngModel)]="selectedRoomTypes" multiple>
+        <mat-option *ngFor="let r of roomTypes" [value]="{roomTypeId: r.id}">{{ r.name }}</mat-option>
+    </mat-select>
+</mat-form-field>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
@@ -72,8 +83,6 @@
         </mat-select>
     </mat-form-field>
 
-    <br>
-
     <mat-form-field class="selects-m">
         <mat-label>{{ 'agency' | transloco }}</mat-label>
         <mat-select [(ngModel)]="selectedAgencies" multiple>
@@ -81,24 +90,12 @@
         </mat-select>
     </mat-form-field>
 
-
     <mat-form-field class="selects-m">
         <mat-label>{{ 'board' | transloco }}</mat-label>
         <mat-select [(ngModel)]="selectedBoards" multiple>
             <mat-option *ngFor="let b of boards" [value]="{boardId: b.id}">{{ b.name }}</mat-option>
         </mat-select>
     </mat-form-field>
-    <br>
-
-    <mat-form-field class="selects-m">
-        <mat-label>{{ 'room_type' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="selectedRoomTypes" multiple>
-            <mat-option *ngFor="let r of roomTypes" [value]="{roomTypeId: r.id}">{{ r.name }}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
-
-
 
 </div>
 
