@@ -23,6 +23,7 @@ export class SearchContractComponent implements OnInit {
   adult?: number;
   child?: number;
   hotelIds: number[];
+  totalPrice: number;
 
   constructor(
     private hotelService: HotelService,
@@ -132,14 +133,16 @@ export class SearchContractComponent implements OnInit {
 
   applyFilter() {
     this.clearTable();
-    
+
     if (this.startDate! > this.endDate!) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
       return;
     }
+    console.log(this.adult+"   "+this.child );
+
 
     for (const contract of this.contracts) {
-      
+
       const enterC: Date = this.toDate(contract.enteredDate);
       const exitC: Date = this.toDate(contract.exitDate);
 

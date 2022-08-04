@@ -33,7 +33,7 @@
         <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
 
-    
+
     <br>
 
     <mat-form-field floatLabel="always" class="selects-m">
@@ -49,8 +49,14 @@
         <span matSuffix>.00</span> -->
     </mat-form-field>
     <br>
+    <mat-form-field class="selects-m">
+      <mat-label>{{ 'currency' | transloco }}</mat-label>
+      <mat-select [(ngModel)]="currency" multiple>
+          <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.code }}</mat-option>
+      </mat-select>
+  </mat-form-field>
 
-
+  <br>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
@@ -91,12 +97,7 @@
         </mat-select>
     </mat-form-field>
 
-    <mat-form-field class="selects-m">
-        <mat-label>{{ 'currency' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="currency" multiple>
-            <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.code }}</mat-option>
-        </mat-select>
-    </mat-form-field>
+
 
 
 </div>

@@ -26,7 +26,7 @@
         <input [(ngModel)]="child" matInput type="number" value="1" min="0">
     </mat-form-field>
 
-    
+
 
     <mat-form-field class="mx-2 hotel">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
@@ -67,7 +67,7 @@
             <td mat-cell *matCellDef="let element">{{ element.price }}</td>
         </ng-container>
 
-        
+
         <ng-container matColumnDef="currency">
             <th mat-header-cell *matHeaderCellDef>{{ 'currency' | transloco }}</th>
             <td mat-cell *matCellDef="let element">{{ getItem('currency', element) }}</td>
@@ -79,28 +79,28 @@
             <td mat-cell *matCellDef="let element">{{ getItem('hotel', element) }}</td>
         </ng-container>
 
-        
+
         <!-- <ng-container matColumnDef="market">
             <th mat-header-cell *matHeaderCellDef>{{ 'market' | transloco }}</th>
             <td mat-cell *matCellDef="let element">{{ getItem('market', element) }}</td>
         </ng-container>
 
-        
+
         <ng-container matColumnDef="agency">
             <th mat-header-cell *matHeaderCellDef>{{ 'agency' | transloco }}</th>
             <td mat-cell *matCellDef="let element">{{ getItem('agency', element) }}</td>
         </ng-container>
 
-        
+
         <ng-container matColumnDef="board">
             <th mat-header-cell *matHeaderCellDef>{{ 'board' | transloco }}</th>
             <td mat-cell *matCellDef="let element">{{ getItem('board', element) }}</td>
         </ng-container>
 
-        
+
         <ng-container matColumnDef="roomType">
             <th mat-header-cell *matHeaderCellDef>{{ 'room_type' | transloco }}</th>
-            <td mat-cell *matCellDef="let element">{{ getItem('room_type', element) }}</td>       
+            <td mat-cell *matCellDef="let element">{{ getItem('room_type', element) }}</td>
         </ng-container> -->
 
         <ng-container matColumnDef="start">
@@ -116,8 +116,8 @@
         <ng-container matColumnDef="Total-Price">
             <th mat-header-cell *matHeaderCellDef>{{ 'Total-price' | transloco }}</th>
             <td width="100" mat-cell *matCellDef="let element">
-                {{ element.adultPrice * adult! * element.contDay }}&nbsp;&nbsp;&nbsp;
-                {{ element.chilPrice * child! * element.contDay }}&nbsp;&nbsp;&nbsp;
+                {{ element.adultPrice * adult! * element.contDay + element.childPrice * child! * element.contDay}}&nbsp;&nbsp;&nbsp;
+                <!-- {{ element.childPrice * child! * element.contDay }}&nbsp;&nbsp;&nbsp; -->
                 {{ getItem('currency', element) }}</td>
         </ng-container>
 
