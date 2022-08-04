@@ -127,23 +127,57 @@ export class SearchContractComponent implements OnInit {
     })
   }
 
+  
   applyFilter() {
     this.clearTable();
     // console.log(this.startDate?.getTime(), this.endDate?.getTime());                                         //g1                       //g                                                      //ç                        //ç1                                                    //g2                      //g                                                     //ç2                   //ç                                                        //g                         //g3                                                   //ç                    //ç3                                                     //g                         //g4                                                   //ç4                       //ç
-    const dateConditions = (startDate: Date, endDate: Date): boolean => ((this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && endDate.getTime() <= this.endDate?.getTime()) || (this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() <= endDate.getTime()) || (this.startDate !== undefined && startDate.getTime() <= this.startDate?.getTime()) && (this.endDate !== undefined && endDate.getTime() <= this.endDate?.getTime()) || (this.startDate !== undefined && startDate.getTime() <= this.startDate?.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() <= endDate.getTime())  );
+    // const dateConditions = (startDate: Date, endDate: Date): boolean => 
+    // ((this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && endDate.getTime() <= this.endDate?.getTime()) || 
+    // (this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() <= endDate.getTime()) || 
+    // (this.startDate !== undefined && startDate.getTime() <= this.startDate?.getTime()) && (this.endDate !== undefined && endDate.getTime() <= this.endDate?.getTime()) || 
+    // (this.startDate !== undefined && startDate.getTime() <= this.startDate?.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() <= endDate.getTime())  );
 
+
+    
     if (this.startDate! > this.endDate!) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
       return;
     }
 
+  
+   
     for (const contract of this.contracts) {
-      if (dateConditions(this.toDate(contract.enteredDate), this.toDate(contract.exitDate))) {
-        if (!this.hotelIds || this.hotelIds.length === 0) this.hotelIds = this.hotels.map(h => h.id!);
-        if (this.hotelIds.some(hI => hI === contract.hotelId)) {
+      // if (dateConditions(this.toDate(contract.enteredDate), this.toDate(contract.exitDate))) {
+      //   if (!this.hotelIds || this.hotelIds.length === 0) this.hotelIds = this.hotels.map(h => h.id!);
+      //   if (this.hotelIds.some(hI => hI === contract.hotelId)) {
+      //     this.result.push(contract);
+      //   }
+      // }
+
+      const enterC : Date = this.toDate(contract.enteredDate);
+      const exitC : Date = this.toDate(contract.exitDate);
+      if(this.startDate !== undefined  && this.endDate !== undefined){
+        const start : Date =this.startDate;
+        const end : Date = this.endDate;
+        //if((start <= enterC && end >= exitC) || (enterC < start && exitC < end) || (enterC > start && exitC > end) || (enterC < start && exitC > end) ){
+        if(start <= enterC && end >= exitC){
           this.result.push(contract);
         }
+        else if(enterC <= start && exitC <= end && !(exitC <= start) ){
+          this.result.push(contract);
+        }
+        else if(enterC >= start && exitC >= end && enterC <= end){
+          this.result.push(contract);
+        }
+        else if(enterC <= start && exitC >= end ){
+          this.result.push(contract);
+        }
+        else{ 
+          
+        }
+        
       }
+      
     }
     this.table.renderRows();
 
