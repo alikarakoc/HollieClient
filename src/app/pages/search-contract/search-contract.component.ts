@@ -13,7 +13,7 @@ import { ContractService, HotelService, ExcelService, CBoardService, CAgencyServ
   styleUrls: ['./search-contract.component.scss']
 })
 export class SearchContractComponent implements OnInit {
-  columns: string[] = ["code", "name",  "hotel", "start", "end","Total-Price", "seeDetails"];
+  columns: string[] = ["code", "name", "hotel", "start", "end", "Total-Price", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
   @ViewChild(MatTable) table: MatTable<SearchContractComponent>;
@@ -127,67 +127,48 @@ export class SearchContractComponent implements OnInit {
     })
   }
 
-  
+
   applyFilter() {
     this.clearTable();
-    // console.log(this.startDate?.getTime(), this.endDate?.getTime());                                         //g1                       //g                                                      //ç                        //ç1                                                    //g2                      //g                                                     //ç2                   //ç                                                        //g                         //g3                                                   //ç                    //ç3                                                     //g                         //g4                                                   //ç4                       //ç
-    // const dateConditions = (startDate: Date, endDate: Date): boolean => 
-    // ((this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && endDate.getTime() <= this.endDate?.getTime()) || 
-    // (this.startDate !== undefined && this.startDate?.getTime() <= startDate.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() <= endDate.getTime()) || 
-    // (this.startDate !== undefined && startDate.getTime() <= this.startDate?.getTime()) && (this.endDate !== undefined && endDate.getTime() <= this.endDate?.getTime()) || 
-    // (this.startDate !== undefined && startDate.getTime() <= this.startDate?.getTime()) && (this.endDate !== undefined && this.endDate?.getTime() <= endDate.getTime())  );
-
-
     
     if (this.startDate! > this.endDate!) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
       return;
     }
 
-  
-   
     for (const contract of this.contracts) {
-      // if (dateConditions(this.toDate(contract.enteredDate), this.toDate(contract.exitDate))) {
-      //   if (!this.hotelIds || this.hotelIds.length === 0) this.hotelIds = this.hotels.map(h => h.id!);
-      //   if (this.hotelIds.some(hI => hI === contract.hotelId)) {
-      //     this.result.push(contract);
-      //   }
-      // }
-
-      const enterC : Date = this.toDate(contract.enteredDate);
-      const exitC : Date = this.toDate(contract.exitDate);
-      if(this.startDate !== undefined  && this.endDate !== undefined){
-        const start : Date =this.startDate;
-        const end : Date = this.endDate;
-        //if((start <= enterC && end >= exitC) || (enterC < start && exitC < end) || (enterC > start && exitC > end) || (enterC < start && exitC > end) ){
-        if(start <= enterC && end >= exitC){
-          this.result.push(contract);
-        }
-        else if(enterC <= start && exitC <= end && !(exitC <= start) ){
-          this.result.push(contract);
-        }
-        else if(enterC >= start && exitC >= end && enterC <= end){
-          this.result.push(contract);
-        }
-        else if(enterC <= start && exitC >= end ){
-          this.result.push(contract);
-        }
-        else{ 
-          
-        }
-        
-      }
       
+      const enterC: Date = this.toDate(contract.enteredDate);
+      const exitC: Date = this.toDate(contract.exitDate);
+
+      if (this.startDate !== undefined && this.endDate !== undefined) {
+        const start: Date = this.startDate;
+        const end: Date = this.endDate;
+        //if((start <= enterC && end >= exitC) || (enterC < start && exitC < end) || (enterC > start && exitC > end) || (enterC < start && exitC > end) ){
+        if (this.hotelIds != null && this.hotelIds.includes(contract.hotelId) || this.hotelIds == null) {
+          if (start <= enterC && end >= exitC) {
+            this.result.push(contract);
+          }
+          else if (enterC <= start && exitC <= end && !(exitC <= start)) {
+            this.result.push(contract);
+          }
+          else if (enterC >= start && exitC >= end && enterC <= end) {
+            this.result.push(contract);
+          }
+          else if (enterC <= start && exitC >= end) {
+            this.result.push(contract);
+          }
+          else {
+          }
+        }
+      };
+
     }
     this.table.renderRows();
-
-    console.log(this.hotelIds);
 
     if (this.result.length === 0) {
       this.snackBar.open(this.translocoService.translate('contract_not_found'));
     }
-
-    // console.log(this.result);
   }
 
   clearInputs() {
@@ -195,11 +176,14 @@ export class SearchContractComponent implements OnInit {
 
   seeDetails(element: Contract) {
 
-    this.dialog.open(ContractDetailsComponent, { data: { 
-      contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
-      markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
-      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
-      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets } });
+    this.dialog.open(ContractDetailsComponent, {
+      data: {
+        contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
+        markets: this.markets, agencies: this.agencies, currencies: this.currencies,
+        boards: this.boards, cAgencies: this.cAgencies, cBoards: this.cBoards,
+        cRoomTypes: this.cRoomTypes, cMarkets: this.cMarkets
+      }
+    });
 
   }
 
