@@ -42,7 +42,7 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
   hotels: HotelCategory[] = [];
 
   update() {
-    if (!this.newCategoryName) {
+    if (!this.newCategoryName || !this.newCategoryCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }

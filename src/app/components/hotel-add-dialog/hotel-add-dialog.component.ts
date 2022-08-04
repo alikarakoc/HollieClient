@@ -82,7 +82,7 @@ export class HotelAddDialogComponent implements OnInit {
       return;
     }
 
-    if (!this.hotelCode || !this.hotelName || !this.hotelPhone || !this.hotelAddress ) {
+    if (!this.hotelCode || !this.hotelName || !this.hotelPhone || !this.hotelAddress || !this.emailControl.value) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
       return;
     }

@@ -41,7 +41,7 @@ export class BoardUpdateDialogComponent implements OnInit {
   boards: Board[] = [];
 
   update() {
-    if (!this.newBoardName) {
+    if (!this.newBoardName || !this.newBoardCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }

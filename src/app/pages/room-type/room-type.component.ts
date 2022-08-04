@@ -12,6 +12,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
 
+
 @Component({
   selector: 'app-room-type',
   templateUrl: './room-type.component.html',
@@ -41,6 +42,7 @@ export class RoomTypeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // this.translocoService.selectTranslation('ENG').subscribe(translation => 'TR');    bu dursun çalışacağım üzerinde
     this.roomTypeService.getAllRoomTypes().subscribe((res) => {
       if (res.data!=null){
           this.roomTypes = res.data;

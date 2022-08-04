@@ -6,6 +6,7 @@ import { MatTable } from '@angular/material/table';
 import { Agency } from 'src/app/interfaces';
 import { AgencyService } from 'src/app/services/agency.service';
 import { TranslocoService } from '@ngneat/transloco';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 interface DialogData {
   table: MatTable<Agency>;
@@ -38,7 +39,7 @@ export class AgencyAddDialogComponent implements OnInit {
   ngOnInit(): void { }
 
   add() {
-    if (!this.agencyCode) {
+    if (!this.agencyCode || !this.agencyAddress || !this.emailControl.value || !this.agencyName || !this.agencyPhone) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }

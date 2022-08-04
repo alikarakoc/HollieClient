@@ -40,6 +40,7 @@ export class CountryUpdateDialogComponent implements OnInit {
   countries: Country[] = [];
 
   update() {
+
     if (!this.newCountryName) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;

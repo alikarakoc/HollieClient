@@ -34,7 +34,7 @@ export class HotelCategoryAddDialogComponent implements OnInit {
   add() {
     // let categories: HotelCategory[] = [];
 
-    if (!this.categoryName) {
+    if (!this.categoryName || !this.categoryName) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }

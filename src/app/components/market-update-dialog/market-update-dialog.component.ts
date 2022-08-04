@@ -40,7 +40,7 @@ export class MarketUpdateDialogComponent implements OnInit {
   markets: Market[] = [];
 
   update() {
-    if (!this.newMarketName) {
+    if (!this.newMarketName || !this.newMarketCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }

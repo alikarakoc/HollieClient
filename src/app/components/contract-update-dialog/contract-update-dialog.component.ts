@@ -106,7 +106,7 @@ export class ContractUpdateDialogComponent implements OnInit {
   contracts: Contract[] = [];
 
   update() {
-    if (!this.code) {
+    if (!this.code || !this.name || !this.end || !this.start  || !this.price) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }

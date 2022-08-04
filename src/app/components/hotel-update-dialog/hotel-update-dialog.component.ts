@@ -58,7 +58,7 @@ export class HotelUpdateDialogComponent implements OnInit {
   hotels: Hotel[] = [];
 
   update() {
-    if (!this.newHotelCode) {
+    if (!this.newHotelCode || !this.newHotelAddress || !this.newHotelCategoryId || !this.emailControl.value || !this.newHotelName || !this.newHotelPhone) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }

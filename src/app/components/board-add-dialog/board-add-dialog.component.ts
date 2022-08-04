@@ -32,7 +32,7 @@ export class BoardAddDialogComponent implements OnInit {
   add() {
 
 
-    if (!this.boardCode) {
+    if (!this.boardCode || !this.boardName) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }

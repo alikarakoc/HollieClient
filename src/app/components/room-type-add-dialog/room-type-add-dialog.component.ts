@@ -30,7 +30,7 @@ export class RoomTypeAddDialogComponent implements OnInit {
   ngOnInit(): void { }
 
   add() {
-    if (!this.roomTypeName) {
+    if (!this.roomTypeName || !this.roomTypeCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), 'OK');
       this.clearInputs();
       return;

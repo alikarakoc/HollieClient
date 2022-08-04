@@ -43,7 +43,7 @@ export class RoomTypeUpdateDialogComponent implements OnInit {
   }
 
   updateRoomType() {
-    if (!this.newType) {
+    if (!this.newType || !this.newCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), 'OK');
       return;
     }

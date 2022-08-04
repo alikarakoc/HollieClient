@@ -33,7 +33,7 @@ export class MarketAddDialogComponent implements OnInit {
   add() {
 
 
-    if (!this.marketCode) {
+    if (!this.marketCode || !this.marketName) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
