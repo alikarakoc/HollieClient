@@ -65,7 +65,7 @@
     "room_type": "Room Type",
     "price": "Price",
     "adultPrice": "Adult Price",
-    "childprice": "Child Price",
+    "childPrice": "Child Price",
     "start": "Start Date",
     "end": "End Date",
     "value": "Value",
