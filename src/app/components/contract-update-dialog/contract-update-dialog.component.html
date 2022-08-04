@@ -14,9 +14,27 @@
     <mat-form-field>
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput maxlength="50" [(ngModel)]="name" (keyup.enter)="update()">
+    </mat-form-field> 
+    <br>
+    <mat-form-field class="datepicker">
+        <mat-label>{{ 'start' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="start" [matDatepicker]="startPicker">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
 
     <br>
+
+    <mat-form-field class="datepicker">
+        <mat-label>{{ 'end' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="end" [matDatepicker]="endPicker">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+
+    <br>
+
+   
 
     <mat-form-field floatLabel="always" class="selects-m">
         <mat-label>{{ 'price' | transloco }}</mat-label>
@@ -36,23 +54,7 @@
 
     <br>
 
-    <mat-form-field class="datepicker">
-        <mat-label>{{ 'start' | transloco }}</mat-label>
-        <input matInput [(ngModel)]="start" [matDatepicker]="startPicker">
-        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
-        <mat-datepicker #startPicker></mat-datepicker>
-    </mat-form-field>
 
-    <br>
-
-    <mat-form-field class="datepicker">
-        <mat-label>{{ 'end' | transloco }}</mat-label>
-        <input matInput [(ngModel)]="end" [matDatepicker]="endPicker">
-        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
-        <mat-datepicker #endPicker></mat-datepicker>
-    </mat-form-field>
-
-    <br>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
