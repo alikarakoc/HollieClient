@@ -64,8 +64,13 @@
     "market": "Market",
     "room_type": "Room Type",
     "price": "Price",
+    "adultPrice": "Adult Price",
+    "childprice": "Child Price",
     "start": "Start Date",
     "end": "End Date",
     "value": "Value",
-    "people": "People"
+    "adult": "Adult",
+    "child": "Child"
+
+
 }

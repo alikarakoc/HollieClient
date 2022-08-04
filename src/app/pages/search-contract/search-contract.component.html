@@ -13,13 +13,20 @@
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
+    <br>
 
     <mat-form-field class="mx-2 person">
-        <mat-label>{{ 'people' | transloco }}</mat-label>
-        <input [(ngModel)]="people" matInput type="number" value="1" min="0">
+        <mat-label>{{ 'adult' | transloco }}</mat-label>
+        <input [(ngModel)]="adult" matInput type="number" value="1" min="0">
     </mat-form-field>
 
-    <br>
+
+    <mat-form-field class="mx-2 person">
+        <mat-label>{{ 'child' | transloco }}</mat-label>
+        <input [(ngModel)]="child" matInput type="number" value="1" min="0">
+    </mat-form-field>
+
+    
 
     <mat-form-field class="mx-2 hotel">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
@@ -108,7 +115,7 @@
 
         <ng-container matColumnDef="Total-Price">
             <th mat-header-cell *matHeaderCellDef>{{ 'Total-price' | transloco }}</th>
-            <td width="100" mat-cell *matCellDef="let element">{{ element.price * people! }}&nbsp;&nbsp;&nbsp;{{ getItem('currency', element) }}</td>
+            <td width="100" mat-cell *matCellDef="let element">{{ element.price * adult! }}&nbsp;&nbsp;&nbsp;{{ getItem('currency', element) }}</td>
         </ng-container>
 
         <ng-container matColumnDef="seeDetails">

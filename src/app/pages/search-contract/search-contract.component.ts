@@ -20,7 +20,8 @@ export class SearchContractComponent implements OnInit {
 
   startDate?: Date;
   endDate?: Date;
-  people?: number;
+  adult?: number;
+  child?: number;
   hotelIds: number[];
 
   constructor(
@@ -66,7 +67,8 @@ export class SearchContractComponent implements OnInit {
       return {
         code: c.code,
         name: c.name,
-        price: c.price,
+        adultPrice: c.adultPrice,
+        childPrice:c.childPrice,
         currency: this.getItem('currency', c),
         hotels: this.getItem('hotel', c),
         markets: this.getItem('market', c).toString(),

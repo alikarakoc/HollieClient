@@ -64,8 +64,12 @@
     "market": "Market",
     "room_type": "Oda Tipi",
     "price": "Fiyat",
+    "adultPrice": "Yetişkin Fiyat",
+    "childPrice": "Çocuk Fiyat",
     "start": "Başlangıç Tarihi",
     "end": "Bitiş Tarihi",
     "value": "Değer",
-    "people": "Kişiler"
+    "adult": "Yetişkin",
+    "child": "Çocuk"
+
 }

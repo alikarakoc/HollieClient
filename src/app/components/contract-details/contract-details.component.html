@@ -8,7 +8,10 @@
         <strong>{{ 'name' | transloco }}</strong>:&nbsp;{{ contract.name }}
     </p>
     <p>
-        <strong>{{ 'price' | transloco }}</strong>:&nbsp;{{ contract.price }} ({{ getItem('currency') }})
+        <strong>{{ 'adultPrice' | transloco }}</strong>:&nbsp;{{ contract.adultPrice }} ({{ getItem('currency') }})
+    </p>
+    <p>
+        <strong>{{ 'childPrice' | transloco }}</strong>:&nbsp;{{ contract.childPrice }} ({{ getItem('currency') }})
     </p>
     <p>
         <strong>{{ 'start' | transloco }}</strong>:&nbsp;{{ toDate(contract.enteredDate) | localizedDate }}

@@ -7,7 +7,8 @@ export interface Contract {
     name: string;
     id?: number;
     code: string;
-    price: number;
+    adultPrice: number;
+    childPrice:number;
     enteredDate: Date;
     exitDate: Date;
     hotelId: number;

@@ -31,6 +31,8 @@ export class ContractAddDialogComponent implements OnInit {
   contractCode: string;
   name: string;
   price: number;
+  adultPrice:number;
+  childPrice:number;
   start: Date;
   end: Date;
   hotel: number;
@@ -199,7 +201,8 @@ export class ContractAddDialogComponent implements OnInit {
       element: {
         code: this.contractCode,
         name: this.name,
-        price: this.price,
+        adultPrice: this.adultPrice,
+        childPrice: this.childPrice,
         enteredDate: this.start,
         exitDate: this.end,
         hotelId: this.hotel,
