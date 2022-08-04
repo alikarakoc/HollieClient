@@ -3,12 +3,12 @@
 <div mat-dialog-content>
     <mat-form-field>
         <mat-label>{{ 'code' | transloco }}</mat-label>
-        <input matInput (keyup.enter)="add()" [(ngModel)]="marketCode">
+        <input matInput maxlength="20" (keyup.enter)="add()" [(ngModel)]="marketCode">
     </mat-form-field>
     <br>
     <mat-form-field>
         <mat-label>{{ 'name' | transloco }}</mat-label>
-        <input matInput (keyup.enter)="add()" [(ngModel)]="marketName">
+        <input matInput maxlength="50" (keyup.enter)="add()" [(ngModel)]="marketName">
     </mat-form-field>
 
 </div>

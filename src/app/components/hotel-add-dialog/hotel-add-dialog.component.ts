@@ -47,7 +47,11 @@ export class HotelAddDialogComponent implements OnInit {
 
   hotelCategories: HotelCategory[] = [];
 
-  emailControl = new FormControl('', [Validators.required,Validators.email]);
+  emailControl = new FormControl('', [Validators.required, Validators.email]);
+
+  // phoneControl = new FormControl('', [Validators.required,Validators.minLength(9)])
+
+  // phoneControl = new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)])
 
   ngOnInit(): void {
     this.hotelCategoryService.getAllHotels().subscribe(res => {
@@ -77,12 +81,17 @@ export class HotelAddDialogComponent implements OnInit {
         return;
       }
     });
+    // if (this.phoneControl.hasError('phone')) {
+    //   this.snackBar.open(this.translocoService.translate('dialogs.error_phone'));
+    //   return;
+    // }
+
     if (this.emailControl.hasError('email')) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_email'));
       return;
     }
 
-    if (!this.hotelCode || !this.hotelName || !this.hotelPhone || !this.hotelAddress || !this.emailControl.value) {
+    if (!this.hotelCode || !this.hotelName || !this.hotelPhone|| !this.hotelAddress || !this.emailControl.value) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
       return;
     }
@@ -96,6 +105,7 @@ export class HotelAddDialogComponent implements OnInit {
       return;
     }
     console.log(this.emailControl.value);
+    // console.log(this.phoneControl.value);
 
 
 

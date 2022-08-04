@@ -6,14 +6,14 @@
 <div mat-dialog-content>
     <mat-form-field>
         <mat-label>{{ 'code' | transloco }}</mat-label>
-        <input matInput [(ngModel)]="contractCode" (keyup.enter)="add()">
+        <input matInput maxlength="20" [(ngModel)]="contractCode" (keyup.enter)="add()">
     </mat-form-field>
 
     <br>
 
     <mat-form-field>
         <mat-label>{{ 'name' | transloco }}</mat-label>
-        <input matInput [(ngModel)]="name" (keyup.enter)="add()">
+        <input matInput maxlength="50" [(ngModel)]="name" (keyup.enter)="add()">
     </mat-form-field>
 
     <br>

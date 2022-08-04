@@ -42,6 +42,7 @@
         "edit_title": "{{ name }} Değiştir",
         "error_same": "Lütfen başka bir {{ name }} verisi girin",
         "error_email": "Lütfen geçerli bir Email adresi girin",
+        "error_phone": "Lütfen geçerli bir Telefon girin",
         "error_required": "Lütfen boşlukları doldurun",
         "error_date": "Giriş tarihi daha önce olmalıdır.",
         "update_success": "{{ elementName }} başarıyla güncellendi.",

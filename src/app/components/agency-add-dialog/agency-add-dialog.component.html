@@ -6,35 +6,36 @@
 
         <mat-form-field>
             <mat-label>{{ 'code' | transloco }}</mat-label>
-            <input matInput  (keyup.enter)="add()" [(ngModel)]="agencyCode">
+            <input matInput maxlength="20"  (keyup.enter)="add()" [(ngModel)]="agencyCode">
         </mat-form-field>
 
         <br>
 
         <mat-form-field>
             <mat-label>{{ 'name' | transloco }}</mat-label>
-            <input matInput  (keyup.enter)="add()" [(ngModel)]="agencyName">
+            <input matInput maxlength="50" (keyup.enter)="add()" [(ngModel)]="agencyName">
         </mat-form-field>
 
         <br>
 
         <mat-form-field>
             <mat-label>{{ 'address' | transloco }}</mat-label>
-            <textarea matInput  (keyup.enter)="add()" [(ngModel)]="agencyAddress"></textarea>
+            <textarea matInput maxlength="200" (keyup.enter)="add()" [(ngModel)]="agencyAddress"></textarea>
         </mat-form-field>
 
         <br>
 
         <mat-form-field>
             <mat-label>{{ 'phone' | transloco }}</mat-label>
-            <input matInput type="phone"  (keyup.enter)="add()" [(ngModel)]="agencyPhone">
+            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            type="number" [(ngModel)]="agencyPhone" matInput type="phone" maxlength="11" placeholder="(05* *** ****)" (keyup.enter)="add()">
         </mat-form-field>
 
         <br>
 
         <mat-form-field>
             <mat-label>{{ 'email' | transloco }}</mat-label>
-            <input [formControl]="emailControl" matInput type="email" (keyup.enter)="add()" >
+            <input [formControl]="emailControl" matInput type="email" maxlength="50" (keyup.enter)="add()" >
         </mat-form-field>
 
 </div>

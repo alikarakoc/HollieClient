@@ -42,6 +42,7 @@
         "edit_title": "Update {{ name }}",
         "error_same": "Please type another {{ name }} data",
         "error_email": "Please type a valid email",
+        "error_phone": "Please type a valid phone",
         "error_required": "Please type the blank areas",
         "error_date": "Enter date should be lower.",
         "update_success": "{{ elementName }} successfully updated.",

@@ -6,14 +6,14 @@
 <div mat-dialog-content>
     <mat-form-field>
         <mat-label>{{ 'code' | transloco }}</mat-label>
-        <input matInput [(ngModel)]="code" (keyup.enter)="update()">
+        <input matInput maxlength="20" [(ngModel)]="code" (keyup.enter)="update()">
     </mat-form-field>
 
     <br>
 
     <mat-form-field>
         <mat-label>{{ 'name' | transloco }}</mat-label>
-        <input matInput [(ngModel)]="name" (keyup.enter)="update()">
+        <input matInput maxlength="50" [(ngModel)]="name" (keyup.enter)="update()">
     </mat-form-field>
 
     <br>
@@ -69,7 +69,7 @@
     </mat-form-field>
 
   <br>
-    
+
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'agency' | transloco }}</mat-label>

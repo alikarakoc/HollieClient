@@ -28,7 +28,8 @@
 
   <mat-form-field>
     <mat-label>{{ 'phone' | transloco }}</mat-label>
-    <input matInput type="number" [(ngModel)]="newHotelPhone" (keyup.enter)="update()">
+    <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+    type="number" [(ngModel)]="newHotelPhone" matInput type="phone" maxlength="11" placeholder="(05* *** ****)" (keyup.enter)="update()">
   </mat-form-field>
 
   <br>
