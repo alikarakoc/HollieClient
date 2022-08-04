@@ -39,8 +39,12 @@ export class AgencyAddDialogComponent implements OnInit {
   ngOnInit(): void { }
 
   add() {
-    if (!this.agencyCode || !this.agencyAddress || !this.emailControl.value || !this.agencyName || !this.agencyPhone) {
+    if (!this.agencyCode || !this.agencyAddress || !this.emailControl.value || !this.agencyName || !this.agencyPhone ) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
+      return;
+    }
+    if (this.agencyPhone.length != 11){
+      this.snackBar.open(this.translocoService.translate('dialogs.error_phone'), "OK");
       return;
     }
     if (this.emailControl.hasError('email')) {

@@ -54,6 +54,10 @@ export class AgencyUpdateDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
+    if (this.newAgencyPhone.length != 11){
+      this.snackBar.open(this.translocoService.translate('dialogs.error_phone'), "OK");
+      return;
+    }
     if (this.emailControl.hasError('email')) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_email'));
       return;
@@ -73,7 +77,7 @@ export class AgencyUpdateDialogComponent implements OnInit {
         this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
         return;
       }
-  
+
     });
 
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newAgencyName }));

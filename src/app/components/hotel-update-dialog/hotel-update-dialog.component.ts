@@ -69,6 +69,10 @@ export class HotelUpdateDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_email'));
       return;
     }
+    if (this.newHotelPhone.length != 11){
+      this.snackBar.open(this.translocoService.translate('dialogs.error_phone'), "OK");
+      return;
+    }
 
     if (otherHotels.findIndex(c =>c.code == this.newHotelCode.toString()) >-1){
       console.log(this.newHotelName);
