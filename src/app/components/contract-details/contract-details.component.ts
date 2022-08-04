@@ -77,10 +77,10 @@ export class ContractDetailsComponent implements OnInit {
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
       case 'hotel':
-        return this.data.hotels.find(h => h.id === element.hotelId)!.name;
+        return this.data.hotels.find(h => h.id === element.hotelId)?.name;
 
       case 'currency':
-        return this.data.currencies.find(c => c.id === element.currencyId)!.code;
+        return this.data.currencies.find(c => c.id === element.currencyId)?.code;
     }
 } 
 }

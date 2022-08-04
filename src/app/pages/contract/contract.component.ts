@@ -204,12 +204,12 @@ export class ContractComponent implements OnInit {
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
       case 'hotel':
-        const h = this.hotels.find(c => c.id === element.hotelId);
-        return h.name;
+        return this.hotels.find(h => h.id === element.hotelId)?.name;
+
  
       case 'currency':
-        const c = this.currencies.find(c => c.id === element.currencyId);
-        return c.code
+        return this.currencies.find(c => c.id === element.currencyId)?.name;
+        
     }
   }
 
