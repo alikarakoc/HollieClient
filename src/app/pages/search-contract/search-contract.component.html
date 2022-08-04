@@ -115,7 +115,10 @@
 
         <ng-container matColumnDef="Total-Price">
             <th mat-header-cell *matHeaderCellDef>{{ 'Total-price' | transloco }}</th>
-            <td width="100" mat-cell *matCellDef="let element">{{ element.price * adult! }}&nbsp;&nbsp;&nbsp;{{ getItem('currency', element) }}</td>
+            <td width="100" mat-cell *matCellDef="let element">
+                {{ element.adultPrice * adult! * element.contDay }}&nbsp;&nbsp;&nbsp;
+                {{ element.chilPrice * child! * element.contDay }}&nbsp;&nbsp;&nbsp;
+                {{ getItem('currency', element) }}</td>
         </ng-container>
 
         <ng-container matColumnDef="seeDetails">

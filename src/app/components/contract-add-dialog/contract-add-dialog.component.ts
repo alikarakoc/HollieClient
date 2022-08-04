@@ -181,6 +181,10 @@ export class ContractAddDialogComponent implements OnInit {
 
     this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.name }));
 
+    var differenceInTime = this.end.getTime()-this.start.getTime();
+    var differenceInDay = differenceInTime / (1000 * 3600 * 24);
+    
+
     this.closeDialog();
     this.data.table.renderRows();
     console.log(this.hotel);
