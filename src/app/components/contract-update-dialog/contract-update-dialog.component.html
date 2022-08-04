@@ -18,26 +18,21 @@
 
     <br>
 
-    <mat-form-field floatLabel="always" class="price-field">
+    <mat-form-field floatLabel="always" class="selects-m">
         <mat-label>{{ 'price' | transloco }}</mat-label>
         <input matInput [(ngModel)]="adultPrice" type="number" class="price-input" placeholder="0">
         <!-- <span matPrefix>&nbsp;</span>
     <span matSuffix>.00</span> -->
     </mat-form-field>
 
-    <mat-form-field floatLabel="always" class="price-field">
+    <mat-form-field floatLabel="always" class="selects-m">
         <mat-label>{{ 'price' | transloco }}</mat-label>
         <input matInput [(ngModel)]="childPrice" type="number" class="price-input" placeholder="0">
         <!-- <span matPrefix>&nbsp;</span>
     <span matSuffix>.00</span> -->
     </mat-form-field>
 
-    <mat-form-field class="currency-field">
-        <mat-label>{{ 'currency' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="currency">
-            <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.code }}</mat-option>
-        </mat-select>
-    </mat-form-field>
+
 
     <br>
 
@@ -66,7 +61,14 @@
         </mat-select>
     </mat-form-field>
 
-    <br>
+  
+    <mat-form-field class="selects-m">
+        <mat-label>{{ 'currency' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="currency">
+            <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.code }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'market' | transloco }}</mat-label>
@@ -74,8 +76,6 @@
             <mat-option *ngFor="let m of markets" [value]=" m.id">{{ m.name }}</mat-option>
         </mat-select>
     </mat-form-field>
-
-  <br>
 
 
     <mat-form-field class="selects-m">
@@ -85,8 +85,7 @@
         </mat-select>
     </mat-form-field>
 
-    <br>
-
+  
     <mat-form-field class="selects-m">
         <mat-label>{{ 'board' | transloco }}</mat-label>
         <mat-select [(ngModel)]="selectedBoards" multiple>
@@ -94,8 +93,6 @@
         </mat-select>
     </mat-form-field>
 
-
-    <br>
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'room_type' | transloco }}</mat-label>
