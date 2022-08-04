@@ -16,9 +16,6 @@ export class ContractService {
   }
 
   addContract(contract: Partial<Contract>) {
-    console.log(this.baseUrl);
-
-
     return this.http.post<ListResponseModel<Contract>>(`${this.baseUrl}/add`, contract);
   }
 

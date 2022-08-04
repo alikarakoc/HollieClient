@@ -51,7 +51,7 @@
     <br>
     <mat-form-field class="selects-m">
       <mat-label>{{ 'currency' | transloco }}</mat-label>
-      <mat-select [(ngModel)]="currency" multiple>
+      <mat-select [(ngModel)]="currency">
           <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.code }}</mat-option>
       </mat-select>
   </mat-form-field>

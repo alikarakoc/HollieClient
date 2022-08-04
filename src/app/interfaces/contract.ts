@@ -12,7 +12,7 @@ export interface Contract {
     enteredDate: Date;
     exitDate: Date;
     hotelId: number;
-    contDay : number;
+    contDay? : number;
     //marketId: number;
     //categoryId: number;
     agencyId: number;
