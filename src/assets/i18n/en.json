@@ -70,7 +70,8 @@
     "end": "End Date",
     "value": "Value",
     "adult": "Adult",
-    "child": "Child"
+    "child": "Child",
+    "childAge": "Child Age"
 
 
 }

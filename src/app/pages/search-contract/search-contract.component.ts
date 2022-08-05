@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
@@ -43,6 +43,7 @@ export class SearchContractComponent implements OnInit {
     private snackBar: MatSnackBar
   ) { }
 
+
   hotels: Hotel[] = [];
   contracts: Contract[] = [];
   result: Contract[] = [];
@@ -57,7 +58,8 @@ export class SearchContractComponent implements OnInit {
   boards: any[] = [];
   roomTypes: any[] = [];
   currencies: any[] = [];
-
+   
+  
   clearTable() {
     this.result = [];
     this.table.renderRows();
@@ -128,6 +130,8 @@ export class SearchContractComponent implements OnInit {
     this.cRoomTypeService.getAllCRoomTypes().subscribe(res => {
       this.cRoomTypes = res.data;
     })
+
+ 
   }
 
 

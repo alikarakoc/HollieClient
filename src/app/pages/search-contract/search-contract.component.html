@@ -2,31 +2,17 @@
     <h1 class="title">{{ 'search_contract' | transloco }}</h1>
     <mat-form-field class="mx-2 date">
         <mat-label>{{ 'start' | transloco }}</mat-label>
-        <input [(ngModel)]="startDate" matInput [matDatepicker]="startPicker">
+        <input [(ngModel)]="startDate" matInput [matDatepicker]="startPicker" onkeydown="return false">
         <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
         <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="mx-2 date">
         <mat-label>{{ 'end' | transloco }}</mat-label>
-        <input [(ngModel)]="endDate" matInput [matDatepicker]="endPicker">
+        <input [(ngModel)]="endDate" matInput [matDatepicker]="endPicker" onkeydown="return false">
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
-    <br>
-
-    <mat-form-field class="mx-2 person">
-        <mat-label>{{ 'adult' | transloco }}</mat-label>
-        <input [(ngModel)]="adult" matInput type="number" value="1" min="0">
-    </mat-form-field>
-
-
-    <mat-form-field class="mx-2 person">
-        <mat-label>{{ 'child' | transloco }}</mat-label>
-        <input [(ngModel)]="child" matInput type="number" value="1" min="0">
-    </mat-form-field>
-
-
 
     <mat-form-field class="mx-2 hotel">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
@@ -34,6 +20,38 @@
             <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
         </mat-select>
     </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="mx-2 person">
+        <mat-label>{{ 'adult' | transloco }}</mat-label>
+        <input [(ngModel)]="adult" matInput type="number" value="1" min="0" onkeydown="return false"> 
+    </mat-form-field>
+
+    <mat-form-field class="mx-2 person">
+        <mat-label>{{ 'child' | transloco }}</mat-label>
+        <input [(ngModel)]="child" matInput type="number" value="1" min="0" max="3" onkeydown="return false">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field  *ngIf="child != null && child != 0"   class="mx-2 person">
+        <mat-label>{{ 'childAge' | transloco }}</mat-label>
+        <input  matInput type="number" min="0" max="16" onkeydown="return false" >
+    </mat-form-field>
+
+    <mat-form-field  *ngIf="(child != null) && (child == 2) || (child ==3)"   class="mx-2 person">
+        <mat-label>{{ 'childAge' | transloco }}</mat-label >
+        <input  matInput type="number" min="0" max="16" onkeydown="return false">
+    </mat-form-field>
+
+    <mat-form-field  *ngIf="child != null && child == 3"   class="mx-2 person">
+        <mat-label>{{ 'childAge' | transloco }}</mat-label>
+        <input  matInput type="number" min="0" max="16" onkeydown="return false">
+    </mat-form-field>
+
+ 
+    
 
     <br>
 
@@ -62,46 +80,10 @@
             <td mat-cell *matCellDef="let element">{{ element.name }}</td>
         </ng-container>
 
-        <!-- <ng-container matColumnDef="price">
-            <th mat-header-cell *matHeaderCellDef>{{ 'Per-price' | transloco }}</th>
-            <td mat-cell *matCellDef="let element">{{ element.price }}</td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="currency">
-            <th mat-header-cell *matHeaderCellDef>{{ 'currency' | transloco }}</th>
-            <td mat-cell *matCellDef="let element">{{ getItem('currency', element) }}</td>
-        </ng-container> -->
-
-        <!-- TODO: Şimdilik ID'leri göster -->
         <ng-container matColumnDef="hotel">
             <th mat-header-cell *matHeaderCellDef>{{ 'hotel' | transloco }}</th>
             <td mat-cell *matCellDef="let element">{{ getItem('hotel', element) }}</td>
         </ng-container>
-
-
-        <!-- <ng-container matColumnDef="market">
-            <th mat-header-cell *matHeaderCellDef>{{ 'market' | transloco }}</th>
-            <td mat-cell *matCellDef="let element">{{ getItem('market', element) }}</td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="agency">
-            <th mat-header-cell *matHeaderCellDef>{{ 'agency' | transloco }}</th>
-            <td mat-cell *matCellDef="let element">{{ getItem('agency', element) }}</td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="board">
-            <th mat-header-cell *matHeaderCellDef>{{ 'board' | transloco }}</th>
-            <td mat-cell *matCellDef="let element">{{ getItem('board', element) }}</td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="roomType">
-            <th mat-header-cell *matHeaderCellDef>{{ 'room_type' | transloco }}</th>
-            <td mat-cell *matCellDef="let element">{{ getItem('room_type', element) }}</td>
-        </ng-container> -->
 
         <ng-container matColumnDef="start">
             <th mat-header-cell *matHeaderCellDef>{{ 'start' | transloco }}</th>
