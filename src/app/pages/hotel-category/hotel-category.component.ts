@@ -21,6 +21,13 @@ export class HotelCategoryComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
   dataSource: MatTableDataSource<HotelCategory>;
 
+  value = 'Filter Category ';
+
+  filterCategories(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
 

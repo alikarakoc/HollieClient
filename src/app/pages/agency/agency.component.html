@@ -9,6 +9,16 @@
   </button>
 </div>
 
+<mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput [(ngModel)]="value" (keyup)="filterAgencies($event)" placeholder="Ex. ium" #input>
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+    </button>
+    
+</mat-form-field>
+  
+<div class="mat-elevation-z8">
 <table mat-table [dataSource]="dataSource" matSort>
 
   <ng-container matColumnDef="code">
@@ -47,8 +57,16 @@
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
 </table>
 
+<!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons 
+                 aria-label="Select page of periodic elements">
+  </mat-paginator> -->
+</div>
 <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-element="element">
         <button mat-menu-item (click)="update(element)">{{ 'dialogs.edit' | transloco }}</button>

@@ -21,6 +21,13 @@ export class MarketComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
   dataSource: MatTableDataSource<Market>;
 
+  value = 'Filter Market ';
+
+  filterMarkets(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   @ViewChild(MatTable) table: MatTable<MarketComponent>;
   @ViewChild(MatSort) sort: MatSort;
 

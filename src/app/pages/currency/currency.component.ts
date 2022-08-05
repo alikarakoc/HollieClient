@@ -22,6 +22,13 @@ export class CurrencyComponent implements OnInit {
   columns: string[] = ["code", "name", "value", "actions"];
   dataSource: MatTableDataSource<Currency>;
 
+  value = 'Filter Currency ';
+
+  filterCurrencies(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   @ViewChild(MatTable) table: MatTable<CurrencyComponent>;
   @ViewChild(MatSort) sort: MatSort;
 

@@ -22,6 +22,13 @@ export class BoardComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
   dataSource: MatTableDataSource<Board>;
 
+  value = 'Filter Board ';
+
+  filterBoards(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   @ViewChild(MatTable) table: MatTable<Board>;
   @ViewChild(MatSort) sort: MatSort;
 

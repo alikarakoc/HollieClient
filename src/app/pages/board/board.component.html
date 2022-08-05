@@ -9,6 +9,16 @@
   </button>
 </div>
 
+<mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput [(ngModel)]="value" (keyup)="filterBoards($event)" placeholder="Ex. ium" #input>
+    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+        <mat-icon>close</mat-icon>
+    </button>
+    
+</mat-form-field>
+
+<div class="mat-elevation-z8">
 <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="code">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'code' | transloco }}</th>
@@ -32,7 +42,7 @@
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
 </table>
-
+</div>
 <mat-menu #menu>
     <ng-template matMenuContent let-element="element">
         <button mat-menu-item (click)="update(element)">{{ 'dialogs.edit' | transloco }}</button>
