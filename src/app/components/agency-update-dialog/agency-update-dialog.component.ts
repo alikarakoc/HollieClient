@@ -48,8 +48,10 @@ export class AgencyUpdateDialogComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  
   update() {
+    debugger;
+    
     if (!this.newAgencyName || !this.newAgencyAddress || !this.newAgencyCode || !this.emailControl.value || !this.newAgencyPhone) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;

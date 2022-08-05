@@ -1,4 +1,4 @@
-import { AfterViewInit ,Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as FileSaver from 'file-saver';
@@ -12,7 +12,7 @@ import { AgencyService } from 'src/app/services/agency.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
-import {MatPaginator} from '@angular/material/paginator';
+
 
 
 @Component({
@@ -20,7 +20,7 @@ import {MatPaginator} from '@angular/material/paginator';
   templateUrl: './agency.component.html',
   styleUrls: ['./agency.component.scss'],
 })
-export class AgencyComponent implements OnInit,AfterViewInit{
+export class AgencyComponent implements OnInit{
   columns: string[] = ['code', 'name', 'address', 'phone', 'email', 'actions'];
   dataSource: MatTableDataSource<Agency>;
   value = 'Filter Agency ';
@@ -34,11 +34,6 @@ export class AgencyComponent implements OnInit,AfterViewInit{
 
   @ViewChild(MatTable) table: MatTable<Agency>;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  
- ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
   Agency = 'Agency';
 
   agencies: Agency[] = [];
