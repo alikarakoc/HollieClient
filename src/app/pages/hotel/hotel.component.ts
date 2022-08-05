@@ -16,7 +16,7 @@ import { MatSort } from "@angular/material/sort";
 export class HotelComponent implements OnInit {
   columns: string[] = ["code", "name", "address", "phone", "email", "HotelCategoryId", "actions"];
   dataSource: MatTableDataSource<Hotel>;
-  value = 'Filter Board ';
+  value = '';
 
   filterHotels(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

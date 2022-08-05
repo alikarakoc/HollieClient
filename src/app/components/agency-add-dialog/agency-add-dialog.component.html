@@ -32,12 +32,13 @@
         </mat-form-field>
 
         <br>
-
-        <mat-form-field>
-            <mat-label>{{ 'email' | transloco }}</mat-label>
-            <input [formControl]="emailControl" matInput type="email" maxlength="50" (keyup.enter)="add()" >
-        </mat-form-field>
-
+<div class="example-container">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input matInput placeholder="pat@example.com" [formControl]="emailControl" required>
+            <mat-error *ngIf="emailControl.invalid">{{getErrorMessage()}}</mat-error>
+          </mat-form-field>
+    </div>
 </div>
 
 <div mat-dialog-actions>

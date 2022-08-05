@@ -11,7 +11,7 @@
 
 <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
-    <input matInput [(ngModel)]="value" (keyup)="filterCountries($event)" placeholder="Ex. ium" #input>
+    <input matInput [(ngModel)]="value" (keyup)="filterCountries($event)" placeholder="Search Country" #input>
     <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
         <mat-icon>close</mat-icon>
     </button>

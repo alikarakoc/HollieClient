@@ -22,7 +22,7 @@ export class CurrencyComponent implements OnInit {
   columns: string[] = ["code", "name", "value", "actions"];
   dataSource: MatTableDataSource<Currency>;
 
-  value = 'Filter Currency ';
+  value = '';
 
   filterCurrencies(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

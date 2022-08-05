@@ -10,7 +10,7 @@
 </div>
 <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
-    <input matInput [(ngModel)]="value" (keyup)="filterMarkets($event)" placeholder="Ex. ium" #input>
+    <input matInput [(ngModel)]="value" (keyup)="filterMarkets($event)" placeholder="Search Market" #input>
     <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
         <mat-icon>close</mat-icon>
     </button>

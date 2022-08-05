@@ -20,7 +20,7 @@ import { MatSort } from "@angular/material/sort";
 export class CountryComponent implements OnInit, AfterViewInit {
   columns: string[] = ["code", "name", "actions"];
   dataSource: MatTableDataSource<Country>;
-  value = 'Filter Country ';
+  value = '';
 
   filterCountries(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

@@ -23,7 +23,7 @@ import { MatSort } from "@angular/material/sort";
 export class AgencyComponent implements OnInit{
   columns: string[] = ['code', 'name', 'address', 'phone', 'email', 'actions'];
   dataSource: MatTableDataSource<Agency>;
-  value = 'Filter Agency ';
+  value = '';
 
 
 

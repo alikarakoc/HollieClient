@@ -21,7 +21,7 @@ export class MarketComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
   dataSource: MatTableDataSource<Market>;
 
-  value = 'Filter Market ';
+  value = '';
 
   filterMarkets(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

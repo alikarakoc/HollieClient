@@ -22,7 +22,7 @@ export class RoomTypeComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
   dataSource: MatTableDataSource<RoomType>;
 
-  value = 'Filter RoomType ';
+  value = '';
 
   filterRoomTypes(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

@@ -22,7 +22,7 @@ export class BoardComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
   dataSource: MatTableDataSource<Board>;
 
-  value = 'Filter Board ';
+  value = '';
 
   filterBoards(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
