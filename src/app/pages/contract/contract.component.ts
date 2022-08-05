@@ -21,7 +21,7 @@ export class ContractComponent implements OnInit {
   columns: string[] = ["code", "name", "hotel", "start", "end", "price", "actions", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
-  value = 'Filter Contract ';
+  value = '';
 
   filterContracts(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

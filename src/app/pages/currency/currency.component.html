@@ -1,9 +1,13 @@
 <div class="header">
     <h1>{{ 'currency_title' | transloco }}</h1>
     <span class="spacer"></span>
-    <button mat-flat-button color="primary" class="new-button" (click)="create()">
-        {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Currency' : 'Döviz' }) }}
+
+    <button mat-flat-button color="primary" class="new-button" (click)="updateCurrency()">
+        {{ translocoService.translate('dialogs.update_currency', { name: translocoService.getActiveLang() === 'en' ? 'Update' : 'Güncelle' }) }}
     </button>
+
+    &nbsp; &nbsp;
+
     <button mat-flat-button color="excel" class="excel-button" (click)="exportAsXLSX()">
       <mat-icon >file_download</mat-icon>
   </button>
@@ -33,22 +37,22 @@
       <td mat-cell *matCellDef="let element">{{ element.value }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="actions">
+    <!-- <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>{{ 'actions' | transloco }}</th>
         <td mat-cell *matCellDef="let element">
             <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ element }">
                 <mat-icon>more_vert</mat-icon>
             </button>
         </td>
-    </ng-container>
+    </ng-container> -->
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
 </table>
 
-<mat-menu #menu="matMenu">
+<!-- <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-element="element">
         <button mat-menu-item (click)="update(element)">{{ 'dialogs.edit' | transloco }}</button>
         <button mat-menu-item (click)="delete(element)">{{ 'dialogs.delete' | transloco }}</button>
     </ng-template>
-</mat-menu>
+</mat-menu> -->

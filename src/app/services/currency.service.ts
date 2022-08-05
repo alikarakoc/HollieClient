@@ -17,6 +17,10 @@ export class CurrencyService {
     return this.http.get<ListResponseModel<Currency>>(`${this.baseUrl}/AllCurrency`);
   }
 
+  updateCurrencyValue(): Observable<ListResponseModel<Currency>> {
+    return this.http.get<ListResponseModel<Currency>>(`${this.baseUrl}/updateCurrency`);
+  }
+
   addCurrency(currency: Partial<Currency>) {
     return this.http.post<ListResponseModel<Currency>>(`${this.baseUrl}/add`, currency);
   }

@@ -47,7 +47,8 @@
         "error_date": "Giriş tarihi daha önce olmalıdır.",
         "update_success": "{{ elementName }} başarıyla güncellendi.",
         "add_success": "{{ elementName }} başarıyla tablonuza eklendi.",
-        "delete_success": "{{ elementName }} başarıyla silindi."
+        "delete_success": "{{ elementName }} başarıyla silindi.",
+        "update_currency": "Dövizi Güncelle"
     },
     "name": "İsim",
     "address": "Adres",

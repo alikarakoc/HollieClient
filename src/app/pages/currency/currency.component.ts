@@ -19,7 +19,8 @@ import { MatSort } from "@angular/material/sort";
   styleUrls: ['./currency.component.scss']
 })
 export class CurrencyComponent implements OnInit {
-  columns: string[] = ["code", "name", "value", "actions"];
+  columns: string[] = ["code", "name", "value"];
+  //columns: string[] = ["code", "name", "value", "actions"];
   dataSource: MatTableDataSource<Currency>;
 
   value = '';
@@ -56,48 +57,56 @@ export class CurrencyComponent implements OnInit {
     });
   }
 
-  create() {
-    const dialog = this.dialog.open(CurrencyAddDialogComponent, {
-      data: { table: this.table },
-    });
-
-    dialog.afterClosed().subscribe((result) => {
-      if (result.isAdded) {
-        this.CurrencyService
-          .addCurrency({ name: result.elementName, code: result.elementCode, value: result.elementValue })
-          .subscribe(() => {
-            this.ngOnInit();
-          });
-      }
+  updateCurrency(){
+    this.CurrencyService.updateCurrencyValue().subscribe((res) => {
+      this.ngOnInit();
     });
   }
 
-  delete(element: Currency) {
-    const dialog = this.dialog.open(CurrencyDeleteDialogComponent, {
-      data: { element },
-    });
-    dialog.afterClosed().subscribe((result) => {
-      if (result.isDeleted) {
-        this.CurrencyService.deleteCurrency(element).subscribe((res) => {
-          console.log(element);
-          this.ngOnInit();
-        });
-      }
-    });
-  }
+  // create() {
+  //   const dialog = this.dialog.open(CurrencyAddDialogComponent, {
+  //     data: { table: this.table },
+  //   });
 
-  update(element: Currency) {
-    const dialog = this.dialog.open(CurrencyUpdateDialogComponent, {
-      data: { element },
-    });
+  //   dialog.afterClosed().subscribe((result) => {
+  //     if (result.isAdded) {
+  //       this.CurrencyService
+  //         .addCurrency({ name: result.elementName, code: result.elementCode, value: result.elementValue })
+  //         .subscribe(() => {
+  //           this.ngOnInit();
+  //         });
+  //     }
+  //   });
+  // }
 
-    dialog.afterClosed().subscribe(() => {
-      this.CurrencyService.updateCurrency(element).subscribe((res) => {
+  // delete(element: Currency) {
+  //   const dialog = this.dialog.open(CurrencyDeleteDialogComponent, {
+  //     data: { element },
+  //   });
+  //   dialog.afterClosed().subscribe((result) => {
+  //     if (result.isDeleted) {
+  //       this.CurrencyService.deleteCurrency(element).subscribe((res) => {
+  //         console.log(element);
+  //         this.ngOnInit();
+  //       });
+  //     }
+  //   });
+  // }
 
-        console.log('res data checked');
-        console.log(res.data);
-      });
-    });
-  }
+  // update(element: Currency) {
+  //   const dialog = this.dialog.open(CurrencyUpdateDialogComponent, {
+  //     data: { element },
+  //   });
+
+  //   dialog.afterClosed().subscribe(() => {
+  //     this.CurrencyService.updateCurrency(element).subscribe((res) => {
+
+  //       console.log('res data checked');
+  //       console.log(res.data);
+  //     });
+  //   });
+  // }
+
+ 
 
 }

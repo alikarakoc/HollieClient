@@ -47,7 +47,8 @@
         "error_date": "Enter date should be lower.",
         "update_success": "{{ elementName }} successfully updated.",
         "add_success": "{{ elementName }} successfully added to your table.",
-        "delete_success": "{{ elementName }} successfully deleted."
+        "delete_success": "{{ elementName }} successfully deleted.",
+        "update_currency": "Update Currency"
     },
     "name": "Name",
     "address": "Address",
