@@ -13,7 +13,7 @@
 
 <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
-    <input matInput [(ngModel)]="value" (keyup)="filterRoomTypes($event)" placeholder="Search Room Type" #input>
+    <input maxlength="50" matInput [(ngModel)]="value" (keyup)="filterRoomTypes($event)" placeholder="Search Room Type" #input>
     <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
         <mat-icon>close</mat-icon>
     </button>
