@@ -23,11 +23,6 @@ export class ContractComponent implements OnInit {
 
   value = '';
 
-  filterContracts(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   @ViewChild(MatTable) table: MatTable<Contract>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -142,6 +137,16 @@ export class ContractComponent implements OnInit {
      
     });
 
+  }
+
+  
+  filterContracts(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  clear(){
+    this.ngOnInit();
   }
 
   exportAsXLSX(): void {

@@ -22,11 +22,6 @@ export class CountryComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Country>;
   value = '';
 
-  filterCountries(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   @ViewChild(MatTable) table: MatTable<Country>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -54,6 +49,17 @@ export class CountryComponent implements OnInit, AfterViewInit {
       this.dataSource.sort = this.sort;
     });
   }
+
+  
+  filterCountries(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  clear(){
+    this.ngOnInit();
+  }
+
 
   ngAfterViewInit(): void {
   }

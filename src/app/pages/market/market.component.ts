@@ -23,11 +23,7 @@ export class MarketComponent implements OnInit {
 
   value = '';
 
-  filterMarkets(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
+  
   @ViewChild(MatTable) table: MatTable<MarketComponent>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -56,8 +52,15 @@ export class MarketComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.markets);
       this.dataSource.sort = this.sort;
     });
+  }
 
+  filterMarkets(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
+  clear(){
+    this.ngOnInit();
   }
 
   create() {

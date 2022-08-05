@@ -18,11 +18,6 @@ export class HotelComponent implements OnInit {
   dataSource: MatTableDataSource<Hotel>;
   value = '';
 
-  filterHotels(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   @ViewChild(MatTable) table: MatTable<Hotel>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -68,6 +63,16 @@ export class HotelComponent implements OnInit {
       this.hotelCategories = res.data;
     });
   }
+
+  filterHotels(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
+  clear(){
+    this.ngOnInit();
+  }
+
 
   getCurrentCategory(element: Hotel) {
     return this.hotelCategories.find(c => c.id === element.hotelCategoryId)?.name;

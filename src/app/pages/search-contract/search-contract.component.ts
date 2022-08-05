@@ -65,6 +65,11 @@ export class SearchContractComponent implements OnInit {
     this.table.renderRows();
   }
 
+  
+  clear(){
+    this.ngOnInit();
+  }
+
   exportAsXLSX(): void {
     const arrayToExport = this.result.map(c => {
       return {

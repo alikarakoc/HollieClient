@@ -24,11 +24,6 @@ export class BoardComponent implements OnInit {
 
   value = '';
 
-  filterBoards(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   @ViewChild(MatTable) table: MatTable<Board>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -46,6 +41,7 @@ export class BoardComponent implements OnInit {
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.boards, 'Board');
   }
+  
 
   ngOnInit(): void {
     this.boardService.getAllBoards().subscribe((res) => {
@@ -59,6 +55,17 @@ export class BoardComponent implements OnInit {
     console.log('on init');
 
   }
+
+  
+  filterBoards(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  clear(){
+    this.ngOnInit();
+  }
+
 
   create() {
     const dialog = this.dialog.open(BoardAddDialogComponent, {

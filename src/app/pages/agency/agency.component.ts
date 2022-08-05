@@ -25,13 +25,6 @@ export class AgencyComponent implements OnInit{
   dataSource: MatTableDataSource<Agency>;
   value = '';
 
-
-
-  filterAgencies(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   @ViewChild(MatTable) table: MatTable<Agency>;
   @ViewChild(MatSort) sort: MatSort;
   Agency = 'Agency';
@@ -47,6 +40,8 @@ export class AgencyComponent implements OnInit{
 
  
 
+
+  
   ngOnInit(): void {
    
     this.agencyService.getAllAgencies().subscribe((res) => {
@@ -63,6 +58,16 @@ export class AgencyComponent implements OnInit{
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.agencies, this.Agency);
   }
+
+  filterAgencies(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  clear(){
+    this.ngOnInit();
+  }
+
 
   create() {
     const dialog = this.dialog.open(AgencyAddDialogComponent, {

@@ -22,12 +22,7 @@ export class RoomTypeComponent implements OnInit {
   columns: string[] = ['code', 'name', 'actions'];
   dataSource: MatTableDataSource<RoomType>;
 
-  value = '';
-
-  filterRoomTypes(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  value =  '';
 
   @ViewChild(MatTable) table: MatTable<RoomType>;
   @ViewChild(MatSort) sort: MatSort;
@@ -54,10 +49,20 @@ export class RoomTypeComponent implements OnInit {
       if (res.data!=null){
           this.roomTypes = res.data;
       }
-    
+      
       this.dataSource = new MatTableDataSource(this.roomTypes);
       this.dataSource.sort = this.sort;
     });
+  }
+
+  
+  filterRoomTypes(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  clear(){
+    this.ngOnInit();
   }
 
   update(element: RoomType) {

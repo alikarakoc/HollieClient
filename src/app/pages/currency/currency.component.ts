@@ -25,11 +25,6 @@ export class CurrencyComponent implements OnInit {
 
   value = '';
 
-  filterCurrencies(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   @ViewChild(MatTable) table: MatTable<CurrencyComponent>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -46,15 +41,27 @@ export class CurrencyComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.currencies, 'Currency');
   }
 
+  filterCurrencies(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  
+  clear(){
+    this.ngOnInit();
+  }
+
   ngOnInit(): void {
     this.CurrencyService.getAllCurrency().subscribe((res) => {
       if(res.data!=null){
         this.currencies = res.data;
       }
       
+      
       this.dataSource = new MatTableDataSource<Currency>(this.currencies);
       this.dataSource.sort = this.sort;
     });
+
+    
   }
 
   updateCurrency(){

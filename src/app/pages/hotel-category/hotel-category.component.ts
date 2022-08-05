@@ -23,11 +23,6 @@ export class HotelCategoryComponent implements OnInit {
 
   value = '';
 
-  filterCategories(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
 
@@ -61,6 +56,17 @@ export class HotelCategoryComponent implements OnInit {
     });
    
   }
+
+  
+  filterCategories(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  clear(){
+    this.ngOnInit();
+  }
+  
   ngAfterViewInit(): void {
   }
   
