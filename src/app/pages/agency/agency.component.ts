@@ -43,24 +43,24 @@ export class AgencyComponent implements OnInit{
 
   
   ngOnInit(): void {
-   
     this.agencyService.getAllAgencies().subscribe((res) => {
       if(res.data != null){
         this.agencies = res.data;
       }
-      
-      
-      
       this.dataSource = new MatTableDataSource<Agency>(this.agencies);
       this.dataSource.sort = this.sort;
     });
   }
+  
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.agencies, this.Agency);
   }
 
   filterAgencies(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+    var filterValue = (event.target as HTMLInputElement).value;
+    if(filterValue[0] == 'i' || filterValue[0] == 'i'){
+      filterValue = filterValue.replace('i', 'İ');
+    }
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

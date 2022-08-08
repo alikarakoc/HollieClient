@@ -43,8 +43,8 @@ export class CountryComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.countryService.getAllCountries().subscribe((res) => {
       if(res.data!=null){
-        this.countries = res.data;}
-      
+        this.countries = res.data;
+      }
       this.dataSource = new MatTableDataSource<Country>(this.countries);
       this.dataSource.sort = this.sort;
     });
@@ -52,8 +52,11 @@ export class CountryComponent implements OnInit, AfterViewInit {
 
   
   filterCountries(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    var filterValue : string = (event.target as HTMLInputElement).value;
+    if(filterValue[0] == 'i' || filterValue[0] == 'i'){
+      filterValue = filterValue.replace('i', 'İ');
+    }
+    this.dataSource.filter = filterValue.trim();
   }
 
   clear(){
@@ -106,3 +109,4 @@ export class CountryComponent implements OnInit, AfterViewInit {
     });
   }
 }
+

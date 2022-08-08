@@ -14,7 +14,8 @@
 </div>
 <mat-form-field appearance="standard">
     <mat-label>Filter</mat-label>
-    <input maxlength="50" matInput [(ngModel)]="value" (keyup)="filterCurrencies($event)" placeholder="Search Currency" #input>
+    <input maxlength="50" matInput [(ngModel)]="value" 
+    (keyup)="filterCurrencies($event)" placeholder="Search Currency" #input>
     <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" (click)="clear()" >
         <mat-icon>close</mat-icon>
     </button>

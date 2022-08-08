@@ -155,7 +155,6 @@ export class SearchContractComponent implements OnInit {
       const enterC: Date = this.toDate(contract.enteredDate);
       const exitC: Date = this.toDate(contract.exitDate);
 
-      debugger;
       if (this.startDate !== undefined && this.endDate !== undefined) {
         const start: Date = this.startDate;
         const end: Date = this.endDate;

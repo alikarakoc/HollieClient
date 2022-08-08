@@ -41,9 +41,12 @@ export class CurrencyComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.currencies, 'Currency');
   }
 
+ 
+
   filterCurrencies(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    const filterValue : string = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLocaleUpperCase();
+    
   }
   
   clear(){
@@ -55,7 +58,6 @@ export class CurrencyComponent implements OnInit {
       if(res.data!=null){
         this.currencies = res.data;
       }
-      
       
       this.dataSource = new MatTableDataSource<Currency>(this.currencies);
       this.dataSource.sort = this.sort;

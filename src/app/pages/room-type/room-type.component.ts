@@ -57,7 +57,10 @@ export class RoomTypeComponent implements OnInit {
 
   
   filterRoomTypes(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+    var filterValue = (event.target as HTMLInputElement).value;
+    if(filterValue[0] == 'i' || filterValue[0] == 'i'){
+      filterValue = filterValue.replace('i', 'İ');
+    }
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
