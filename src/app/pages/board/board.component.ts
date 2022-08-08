@@ -30,6 +30,7 @@ export class BoardComponent implements OnInit {
   Board = 'ExcelSheet.xlsx';
 
   boards: Board[] = [];
+  checkButtonCount:number = 0;
 
   constructor(
     public boardService: BoardService,
@@ -71,10 +72,11 @@ export class BoardComponent implements OnInit {
 
 
   create() {
+    if(this.checkButtonCount < 1) {
     const dialog = this.dialog.open(BoardAddDialogComponent, {
-      data: { table: this.table },
+      data: { table: this.table } ,
     });
-
+  
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.boardService
@@ -84,8 +86,12 @@ export class BoardComponent implements OnInit {
             this.ngOnInit();
           });
       }
+      this.checkButtonCount = 0;
     });
   }
+  this.checkButtonCount += 1;
+  }
+
 
   update(element: Board) {
     const dialog = this.dialog.open(BoardUpdateDialogComponent, {

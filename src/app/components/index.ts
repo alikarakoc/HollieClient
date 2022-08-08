@@ -38,3 +38,7 @@ export { ContractAddDialogComponent } from './contract-add-dialog/contract-add-d
 export { ContractDeleteDialogComponent } from './contract-delete-dialog/contract-delete-dialog.component';
 export { ContractUpdateDialogComponent } from './contract-update-dialog/contract-update-dialog.component';
 export { ContractDetailsComponent } from './contract-details/contract-details.component';
+
+export { RoomAddDialogComponent } from './room-add-dialog/room-add-dialog.component';
+export { RoomDeleteDialogComponent } from './room-delete-dialog/room-delete-dialog.component';
+export { RoomUpdateDialogComponent } from './room-update-dialog/room-update-dialog.component';

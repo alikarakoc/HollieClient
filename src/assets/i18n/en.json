@@ -7,6 +7,7 @@
     "room_type_title": "Room Types",
     "market_title": "Markets",
     "board_title": "Boards",
+    "room_title": "Rooms",
     "contract_title": "Contracts",
     "currency_title": "Currencies",
     "search_contract": "Search Contract",
@@ -51,6 +52,8 @@
         "update_currency": "Update Currency"
     },
     "name": "Name",
+    "bed": "Yatak",
+    "slot": "Slot",
     "address": "Address",
     "phone": "Phone",
     "code": "Code",

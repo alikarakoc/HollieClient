@@ -1,0 +1,57 @@
+<h1 mat-dialog-title>
+  {{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Hotel' :
+  'Otel' }) }}
+</h1>
+
+<div mat-dialog-content>
+
+  <mat-form-field>
+    <mat-label>{{ 'code' | transloco }}</mat-label>
+    <input matInput [(ngModel)]="newRoomCode" (keyup.enter)="update()">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>{{ 'name' | transloco }}</mat-label>
+    <input matInput [(ngModel)]="newRoomName" (keyup.enter)="update()">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>{{ 'slot' | transloco }}</mat-label>
+    <textarea matInput [(ngModel)]="newRoomSlot" (keyup.enter)="update()"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'bed' | transloco }}</mat-label>
+    <textarea matInput [(ngModel)]="newRoomBed" (keyup.enter)="update()"></textarea>
+  </mat-form-field>
+
+  <br>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>{{ 'roomtype' | transloco }}</mat-label>
+    <mat-select matInput [(ngModel)]="newRoomTypeId">
+      <mat-option *ngFor="let c of roomTypes" [value]="c.id">{{ c.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>{{ 'hotel' | transloco }}</mat-label>
+    <mat-select matInput [(ngModel)]="newRoomTypeId">
+      <mat-option *ngFor="let c of hotels" [value]="c.id">{{ c.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="update()">Update</button>
+  <button mat-flat-button color="accent" mat-dialog-close>Cancel</button>
+</div>

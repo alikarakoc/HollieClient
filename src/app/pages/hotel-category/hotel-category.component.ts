@@ -25,6 +25,7 @@ export class HotelCategoryComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
+  checkButtonCount: number = 0;
 
   HotelCategory= 'ExcelSheet.xlsx';
 
@@ -74,6 +75,7 @@ export class HotelCategoryComponent implements OnInit {
   
 
   create() {
+    if(this.checkButtonCount < 1) {
     const dialog = this.dialog.open(HotelCategoryAddDialogComponent, {
       data: { table: this.table },
     });
@@ -86,8 +88,11 @@ export class HotelCategoryComponent implements OnInit {
             this.ngOnInit();
           });
       }
+      this.checkButtonCount = 0;
     });
   }
+  this.checkButtonCount += 1;
+}
 
   update(element: HotelCategory) {
     const dialog = this.dialog.open(HotelCategoryUpdateDialogComponent, {

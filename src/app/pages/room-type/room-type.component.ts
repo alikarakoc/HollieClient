@@ -30,6 +30,7 @@ export class RoomTypeComponent implements OnInit {
   RoomType = 'ExcelSheet.xlsx';
 
   roomTypes: RoomType[] = [];
+  checkButtonCount: number = 0;
 
 
   constructor(
@@ -69,12 +70,16 @@ export class RoomTypeComponent implements OnInit {
   }
 
   update(element: RoomType) {
+    if(this.checkButtonCount < 1) {
     const dialog = this.dialog.open(RoomTypeUpdateDialogComponent, {
       data: { element, table: this.table },
     });
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {
+        if(this.checkButtonCount > 0) {
+          this.checkButtonCount = 0;
+        }
         this.roomTypeService
           .updateRoomType(element)
           .subscribe(() => {
@@ -85,34 +90,49 @@ export class RoomTypeComponent implements OnInit {
       }
     });
   }
+  this.checkButtonCount += 1;
+}
 
   createNewRoomType() {
+    if(this.checkButtonCount < 1) {
     const dialog = this.dialog.open(RoomTypeAddDialogComponent, {
       data: { table: this.table },
     });
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
+        if(this.checkButtonCount > 0) {
+          this.checkButtonCount = 0;
+        }
         this.roomTypeService
           .addRoomType({ name: result.elementName, code: result.elementCode })
           .subscribe(() => {
             this.ngOnInit();
           });
       }
+      this.checkButtonCount = 0;
     });
   }
+  this.checkButtonCount += 1;
+}
 
   delete(element: RoomType) {
+    if(this.checkButtonCount < 1) {
     const dialog = this.dialog.open(RoomTypeDeleteDialogComponent, {
       data: { element, table: this.table },
     });
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
+        if(this.checkButtonCount > 0) {
+          this.checkButtonCount = 0;
+        }
         this.roomTypeService
           .deleteRoomType(element)
           .subscribe(() => this.ngOnInit());
       }
     });
   }
+  this.checkButtonCount += 1;
+}
 }

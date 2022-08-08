@@ -5,6 +5,7 @@
     "hotel_title": "Oteller",
     "hotel_category_title": "Otel Türleri",
     "room_type_title": "Oda Tipleri",
+    "room_title": "Odalar",
     "market_title": "Marketler",
     "board_title": "Tablolar",
     "contract_title": "Kontratlar",
@@ -51,6 +52,8 @@
         "update_currency": "Dövizi Güncelle"
     },
     "name": "İsim",
+    "bed": "Bed",
+    "slot": "Slot",
     "address": "Adres",
     "phone": "Telefon",
     "code": "Kod",
