@@ -5,6 +5,8 @@ import { MatTable } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
 import {  Contract } from 'src/app/interfaces';
 import { AgencyService, BoardService, ContractService, CurrencyService, HotelService, MarketService, RoomTypeService } from "src/app/services";
+import {RoomService } from "src/app/services/room.service";
+
 
 interface DialogData {
   element: Contract;
@@ -29,6 +31,7 @@ export class ContractDeleteDialogComponent implements OnInit {
 
   hotels: any[] = [];
   markets: any[] = [];
+  rooms: any[] = [];
   agencies: any[] = [];
   boards: any[] = [];
   roomTypes: any[] = [];

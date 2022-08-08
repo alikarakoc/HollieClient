@@ -7,14 +7,17 @@ import { ContractService } from 'src/app/services/contract.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { Contract } from 'src/app/interfaces';
 import { HotelService, MarketService, HotelCategoryService, AgencyService, BoardService, RoomTypeService, CurrencyService } from 'src/app/services';
+import { RoomService } from 'src/app/services/room.service';
 import { CAgencyService } from 'src/app/services/cagency.service';
 import { CAgency } from 'src/app/interfaces/cagency';
 import { CRoomType } from 'src/app/interfaces/croomtype';
 import { CMarket } from 'src/app/interfaces/cmarket';
+import { CRoom } from 'src/app/interfaces/croom';
 import { CBoard } from 'src/app/interfaces/cboard';
 import { CBoardService } from 'src/app/services/cboard.service';
 import { CRoomTypeService } from 'src/app/services/croomtype.service';
 import { CMarketService } from 'src/app/services/cmarket.service';
+import { CRoomService } from 'src/app/services/croom.service';
 
 
 interface DialogData {
@@ -40,6 +43,7 @@ export class ContractAddDialogComponent implements OnInit {
   selectedAgencies: CAgency[];
   selectedBoards: CBoard[];
   selectedRoomTypes: CRoomType[];
+  selectedRooms: CRoom[];
   currency: number;
   listId: number;
   contractId: number;
@@ -51,10 +55,12 @@ export class ContractAddDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private hotelService: HotelService,
     private marketService: MarketService,
+    private roomService: RoomService,
     private agencyService: AgencyService,
     private cagencyService: CAgencyService,
     private cboardService: CBoardService,
     private croomTypeService: CRoomTypeService,
+    private croomService: CRoomService,
     private cmarketService: CMarketService,
     private boardService: BoardService,
     private roomTypeService: RoomTypeService,
@@ -74,6 +80,7 @@ export class ContractAddDialogComponent implements OnInit {
   hotels: any[] = [];
   markets: any[] = [];
   agencies: any[] = [];
+  rooms: any[] = [];
   boards: any[] = [];
   roomTypes: any[] = [];
   currencies: any[] = [];
@@ -81,6 +88,7 @@ export class ContractAddDialogComponent implements OnInit {
   cAgencies: any[] = [];
   cBoards: any[] = [];
   cMarkets : any[] =[];
+  cRooms : any[] =[];
   cRoomTypes: any[] = [];
 
   ngOnInit(): void {
@@ -92,6 +100,11 @@ export class ContractAddDialogComponent implements OnInit {
     this.marketService.getAllMarkets().subscribe(res => {
       if (res.data !== null) this.markets = res.data;
       else this.markets = [];
+    });
+
+    this.roomService.getAllRooms().subscribe(res => {
+      if (res.data !== null) this.rooms = res.data;
+      else this.rooms = [];
     });
 
     this.agencyService.getAllAgencies().subscribe(res => {
@@ -130,8 +143,13 @@ export class ContractAddDialogComponent implements OnInit {
     });
 
     this.croomTypeService.getAllCRoomTypes().subscribe(res => {
-      if (res.data !== null) this.cRoomTypes = res.data;
-      else this.cRoomTypes = [];
+      if (res.data !== null) this.cRooms = res.data;
+      else this.cRooms = [];
+    });
+
+    this.croomService.getAllCRooms().subscribe(res => {
+      if (res.data !== null) this.cRooms = res.data;
+      else this.cRooms = [];
     });
 
     this.cmarketService.getAllCMarkets().subscribe(res => {
@@ -217,6 +235,7 @@ export class ContractAddDialogComponent implements OnInit {
         agencyList: this.selectedAgencies,
         boardList: this.selectedBoards,
         marketList: this.selectedMarkets,
+        roomList: this.selectedRooms,
         roomTypeList: this.selectedRoomTypes
       }
     });

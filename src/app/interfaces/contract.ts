@@ -2,6 +2,7 @@ import { CAgency } from "./cagency";
 import { CBoard } from "./cboard";
 import { CMarket } from "./cmarket";
 import { CRoomType } from "./croomtype";
+import { CRoom } from "./croom";
 
 export interface Contract {
     name: string;
@@ -18,6 +19,7 @@ export interface Contract {
     agencyId: number;
     agencyList: CAgency[];
     boardList: CBoard[];
+    roomList: CBoard[];
     marketList: CMarket[];
     roomTypeList: CRoomType[];
     //boardId: number;
