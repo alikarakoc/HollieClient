@@ -26,6 +26,7 @@ export class MarketComponent implements OnInit {
   
   @ViewChild(MatTable) table: MatTable<MarketComponent>;
   @ViewChild(MatSort) sort: MatSort;
+  checkButtonCount: number = 0;
 
   Market = 'ExcelSheet.xlsx';
 
@@ -64,6 +65,7 @@ export class MarketComponent implements OnInit {
   }
 
   create() {
+    if(this.checkButtonCount < 1 ) {
     const dialog = this.dialog.open(MarketAddDialogComponent, {
       data: { table: this.table },
     });
@@ -78,8 +80,11 @@ export class MarketComponent implements OnInit {
             this.ngOnInit();
           });
       }
+      this.checkButtonCount = 0;
     });
   }
+  this.checkButtonCount += 1;
+}
 
   update(element: Market) {
     const dialog = this.dialog.open(MarketUpdateDialogComponent, {

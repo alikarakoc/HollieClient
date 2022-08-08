@@ -30,6 +30,7 @@ export class AgencyComponent implements OnInit{
   Agency = 'Agency';
 
   agencies: Agency[] = [];
+  checkButtonCount:number = 0;
   //tuana
   constructor(
     public agencyService: AgencyService,
@@ -70,6 +71,7 @@ export class AgencyComponent implements OnInit{
 
 
   create() {
+    if(this.checkButtonCount < 1) {
     const dialog = this.dialog.open(AgencyAddDialogComponent, {
       data: { table: this.table }
     });
@@ -82,8 +84,11 @@ export class AgencyComponent implements OnInit{
             this.ngOnInit();
           });
       }
+      this.checkButtonCount = 0;
     });
   }
+  this.checkButtonCount += 1;
+}
 
   update(element: Agency) {
     const dialog = this.dialog.open(AgencyUpdateDialogComponent, {

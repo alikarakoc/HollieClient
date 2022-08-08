@@ -24,6 +24,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatTable) table: MatTable<Country>;
   @ViewChild(MatSort) sort: MatSort;
+  checkButtonCount:number = 0;
 
   Country = 'Country';
 
@@ -76,20 +77,25 @@ export class CountryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  create() {
-    const dialog = this.dialog.open(CountryAddDialogComponent, {
-      data: { table: this.table },
-    });
+  create() {    
+    if(this.checkButtonCount < 1){
+      const dialog = this.dialog.open(CountryAddDialogComponent, {
+        data: { table: this.table,  deneme: this.checkButtonCount  },
+      });
 
-    dialog.afterClosed().subscribe((result) => {
-      if (result.isAdded) {
-        this.countryService
-          .addCountry(result.element)
-          .subscribe(() => {
-            this.ngOnInit();
-          });
-      }
-    });
+      dialog.afterClosed().subscribe((result) => {
+        if (result.isAdded) {
+          this.countryService
+            .addCountry(result.element)
+            .subscribe(() => {
+              this.ngOnInit();
+            });
+        }
+        this.checkButtonCount = 0;
+      });
+    }
+    this.checkButtonCount += 1;
+
   }
 
   delete(element: Country) {
