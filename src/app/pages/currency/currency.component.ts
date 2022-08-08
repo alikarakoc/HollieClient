@@ -27,6 +27,7 @@ export class CurrencyComponent implements OnInit {
 
   @ViewChild(MatTable) table: MatTable<CurrencyComponent>;
   @ViewChild(MatSort) sort: MatSort;
+  checkButtonCount:number = 0;
 
   currencies: Currency[] = [];
 
@@ -70,21 +71,25 @@ export class CurrencyComponent implements OnInit {
     });
   }
 
-  // create() {
-  //   const dialog = this.dialog.open(CurrencyAddDialogComponent, {
-  //     data: { table: this.table },
-  //   });
+  create() {
+    if(this.checkButtonCount < 1) {
+    const dialog = this.dialog.open(CurrencyAddDialogComponent, {
+      data: { table: this.table },
+    });
 
-  //   dialog.afterClosed().subscribe((result) => {
-  //     if (result.isAdded) {
-  //       this.CurrencyService
-  //         .addCurrency({ name: result.elementName, code: result.elementCode, value: result.elementValue })
-  //         .subscribe(() => {
-  //           this.ngOnInit();
-  //         });
-  //     }
-  //   });
-  // }
+    dialog.afterClosed().subscribe((result) => {
+      if (result.isAdded) {
+        this.CurrencyService
+          .addCurrency({ name: result.elementName, code: result.elementCode, value: result.elementValue })
+          .subscribe(() => {
+            this.ngOnInit();
+          });
+      }
+      this.checkButtonCount = 0;
+    });
+  }
+  this.checkButtonCount += 1;
+}
 
   // delete(element: Currency) {
   //   const dialog = this.dialog.open(CurrencyDeleteDialogComponent, {
