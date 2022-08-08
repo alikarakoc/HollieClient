@@ -29,6 +29,7 @@ export class ContractComponent implements OnInit {
   Contrats = 'Contract.xlsx';
 
   contracts: Contract[] = [];
+  checkButtonCount:number = 0;
 
   constructor(
     public contractService: ContractService,
@@ -175,22 +176,26 @@ export class ContractComponent implements OnInit {
   }
 
   create() {
-
-    const dialog = this.dialog.open(ContractAddDialogComponent, { data: { table: this.table } });
-
+    if(this.checkButtonCount < 1) {
+      const dialog = this.dialog.open(ContractAddDialogComponent, { 
+        data: { table: this.table } ,
+      });
+    
+    
     dialog.afterClosed().subscribe((result) => {
       console.log(result.element);
       if (result.isAdded) {
-
         this.contractService
           .addContract(result.element)
           .subscribe(() => {
             this.ngOnInit();
           });
       }
+      this.checkButtonCount = 0;
     });
 
-
+  }
+  this.checkButtonCount += 1;
   }
 
   delete(element: Contract) {
