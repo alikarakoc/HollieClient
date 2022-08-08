@@ -12,6 +12,9 @@ import {
   HotelAddDialogComponent,
   HotelDeleteDialogComponent,
   HotelUpdateDialogComponent,
+  RoomAddDialogComponent,
+  RoomDeleteDialogComponent,
+  RoomUpdateDialogComponent,
   AgencyAddDialogComponent,
   AgencyDeleteDialogComponent,
   AgencyUpdateDialogComponent,
@@ -41,8 +44,9 @@ import {
 } from './components';
 
 // Modules
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent } from './pages';
+import { AgencyComponent,CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent } from './pages';
 import { HomeComponent } from './pages/home/home.component';
+import { RoomComponent } from './pages/room/room.component';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -75,6 +79,11 @@ registerLocaleData(localeTR);
     CountryAddDialogComponent,
     CountryUpdateDialogComponent,
     CountryDeleteDialogComponent,
+
+    RoomComponent,
+    RoomAddDialogComponent,
+    RoomUpdateDialogComponent,
+    RoomDeleteDialogComponent,
 
     AgencyComponent,
     AgencyAddDialogComponent,
