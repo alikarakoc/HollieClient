@@ -1,10 +1,13 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
 import { AllFormsModule, MaterialModule, CdkModule, TranslocoRootModule } from './modules';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -53,6 +56,8 @@ import { AsyncPipe, registerLocaleData } from "@angular/common";
 import localeTR from '@angular/common/locales/tr';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/dialog";
 import { ExcelService } from './services/excel.service';
+import { FilterPipe } from './pipes/filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 registerLocaleData(localeTR);
 
@@ -111,7 +116,10 @@ registerLocaleData(localeTR);
     ContractDeleteDialogComponent,
     ContractUpdateDialogComponent,
 
+    
+
     ErrorComponent,
+      FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -121,6 +129,12 @@ registerLocaleData(localeTR);
     MaterialModule,
     CdkModule,
     HttpClientModule,
+    FormsModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatSelectModule,
     TranslocoRootModule
   ],
   providers: [
