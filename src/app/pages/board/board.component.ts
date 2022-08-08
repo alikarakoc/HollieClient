@@ -60,7 +60,7 @@ export class BoardComponent implements OnInit {
   
   filterBoards(event: Event) {
     var filterValue = (event.target as HTMLInputElement).value;
-    if(filterValue[0] == 'i' || filterValue[0] == 'i'){
+    if(filterValue[0] == 'i'){
       filterValue = filterValue.replace('i', 'İ');
     }
     this.dataSource.filter = filterValue.trim().toLowerCase();

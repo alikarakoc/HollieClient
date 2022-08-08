@@ -54,7 +54,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
   
   filterCountries(event: Event) {
     var filterValue : string = (event.target as HTMLInputElement).value;
-    if(filterValue[0] == 'i' || filterValue[0] == 'i'){
+    if(filterValue[0] == 'i'){
       filterValue = filterValue.replace('i', 'İ');
     }
     this.dataSource.filter = filterValue.trim();

@@ -66,7 +66,6 @@ export class HotelComponent implements OnInit {
   }
 
   filterHotels(event: Event) {
-    debugger;
     var filterValue = (event.target as HTMLInputElement).value;
     if(filterValue[0] == 'i'){
       filterValue = filterValue.replace('i', 'İ');
