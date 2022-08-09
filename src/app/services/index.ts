@@ -4,10 +4,6 @@ export { AgencyService } from './agency.service';
 export { HotelService } from './hotel.service';
 export { MarketService } from './market.service';
 export { BoardService } from './board.service';
-
-/**
- * AAARGH
- */
 export { HotelCategoryService } from './hotel-category.service';
 export { CurrencyService } from './currency.service';
 export { ContractService } from './contract.service';
@@ -15,4 +11,3 @@ export { ExcelService } from './excel.service';
 export { CAgencyService } from './cagency.service';
 export { CBoardService } from './cboard.service';
 export { CMarketService } from './cmarket.service';
-export { CRoomTypeService } from './croomtype.service';

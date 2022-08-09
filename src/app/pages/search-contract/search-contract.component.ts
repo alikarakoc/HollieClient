@@ -5,7 +5,7 @@ import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { TranslocoService } from "@ngneat/transloco";
 import { ContractDetailsComponent } from 'src/app/components';
 import { Contract, Hotel } from "src/app/interfaces";
-import { ContractService, HotelService, ExcelService, CBoardService, CAgencyService, CMarketService, CRoomTypeService, RoomTypeService, AgencyService, BoardService, CurrencyService, MarketService } from "src/app/services";
+import { ContractService, HotelService, ExcelService, CBoardService, CAgencyService, CMarketService, RoomTypeService, AgencyService, BoardService, CurrencyService, MarketService } from "src/app/services";
 
 @Component({
   selector: 'app-search-contract',
@@ -37,7 +37,6 @@ export class SearchContractComponent implements OnInit {
     private cAgencyService: CAgencyService,
     private cBoardService: CBoardService,
     private cMarketService: CMarketService,
-    private cRoomTypeService: CRoomTypeService,
     private excelService: ExcelService,
     private translocoService: TranslocoService,
     private snackBar: MatSnackBar
@@ -82,7 +81,6 @@ export class SearchContractComponent implements OnInit {
         markets: this.getItem('market', c).toString(),
         agencies: this.getItem('agency', c).toString(),
         boards: this.getItem('board', c).toString(),
-        roomTypes: this.getItem('room_type', c).toString(),
         startDate: c.enteredDate,
         endDate: c.exitDate
       }
@@ -131,11 +129,6 @@ export class SearchContractComponent implements OnInit {
     this.cMarketService.getAllCMarkets().subscribe(res => {
       this.cMarkets = res.data;
     });
-
-    this.cRoomTypeService.getAllCRoomTypes().subscribe(res => {
-      this.cRoomTypes = res.data;
-    })
-
  
   }
 
@@ -195,7 +188,7 @@ export class SearchContractComponent implements OnInit {
         contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
         markets: this.markets, agencies: this.agencies, currencies: this.currencies,
         boards: this.boards, cAgencies: this.cAgencies, cBoards: this.cBoards,
-        cRoomTypes: this.cRoomTypes, cMarkets: this.cMarkets
+        cMarkets: this.cMarkets
       }
     });
 
@@ -205,7 +198,7 @@ export class SearchContractComponent implements OnInit {
     return new Date(v);
   }
 
-  getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: Contract): any[] | any {
+  getItem(type: "agency" | "board" | "market" | "hotel" | "currency", element: Contract): any[] | any {
     switch (type) {
       case 'agency':
         // return element.agencyIds.map(i => this.agencies.find(a => a.id === i));
@@ -216,11 +209,6 @@ export class SearchContractComponent implements OnInit {
         // return element.boardIds.map(i => this.boards.find(b => b.id === i));
         const idBoard = this.cBoards.filter(cB => cB.listId === element.id).map(cB => cB.boardId);
         return idBoard.map(i => this.boards.find(b => b.id === i).name);
-
-      case 'room_type':
-        // return element.roomTypeIds.map(i => this.roomTypes.find(r => r.id === i));
-        const idRoom = this.cRoomTypes.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
-        return idRoom.map(i => this.roomTypes.find(r => r.id === i).name);
 
       case 'market':
         // return element.marketIds.map(i => this.markets.find(m => m.id === i));

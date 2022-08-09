@@ -68,16 +68,16 @@
     <br>
 
     <mat-form-field class="selects-m">
-        <mat-label>{{ 'room_type' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="selectedRoomTypes" multiple>
-            <mat-option *ngFor="let r of roomTypes" [value]="{roomTypeId: r.id}">{{ r.name }}</mat-option>
+        <mat-label>{{ 'room' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="selectedRooms" multiple>
+            <mat-option *ngFor="let r of rooms" [value]="{roomId: r.id}">{{ r.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 
     <mat-form-field class="selects-m">
-        <mat-label>{{ 'room' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="selectedRooms" multiple>
-            <mat-option *ngFor="let r of rooms" [value]="{roomId: r.id}">{{ r.name }}</mat-option>
+        <mat-label>{{ 'board' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="selectedBoards" multiple>
+            <mat-option *ngFor="let b of boards" [value]="{boardId: b.id}">{{ b.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 
@@ -99,12 +99,7 @@
 
     <br>
     
-    <mat-form-field class="selects-m">
-        <mat-label>{{ 'board' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="selectedBoards" multiple>
-            <mat-option *ngFor="let b of boards" [value]="{boardId: b.id}">{{ b.name }}</mat-option>
-        </mat-select>
-    </mat-form-field>
+    
 
 </div>
 

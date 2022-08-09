@@ -73,9 +73,9 @@ export class ContractDetailsComponent implements OnInit {
         const idBoard = this.data.cBoards.filter(cB => cB.listId === element.id).map(cB => cB.boardId);
         return idBoard.map(i => this.boards.find(b => b.id === i).name);
 
-      case 'room_type':
-        const idRoomType = this.data.cRoomTypes.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
-        return idRoomType.map(i => this.roomTypes.find(r => r.id === i).name);
+      // case 'room_type':
+      //   const idRoomType = this.data.cRoomTypes.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
+      //   return idRoomType.map(i => this.roomTypes.find(r => r.id === i).name);
 
       case 'market':
         const idMarket = this.data.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);

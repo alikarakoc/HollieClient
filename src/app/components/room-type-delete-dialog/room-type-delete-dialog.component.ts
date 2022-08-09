@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { RoomType, Contract } from 'src/app/interfaces';
 import { CRoomType } from 'src/app/interfaces/croomtype';
-import { CRoomTypeService, ContractService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
@@ -24,15 +23,11 @@ export class RoomTypeDeleteDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<RoomTypeDeleteDialogComponent>,
     public translocoService: TranslocoService,
-    private croomtypeservice: CRoomTypeService
   ) { }
   croomtype: CRoomType[];
 
   ngOnInit(): void {
-    this.croomtypeservice.getAllCRoomTypes().subscribe(res => {
-      if (res.data != null) this.croomtype = res.data;
-      else this.croomtype = [];
-    });
+
   }
 
   delete() {

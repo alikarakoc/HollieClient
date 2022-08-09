@@ -9,7 +9,6 @@ import { AgencyService, BoardService, ContractService, CurrencyService, HotelSer
 import { CAgencyService } from 'src/app/services/cagency.service';
 import { CBoardService } from 'src/app/services/cboard.service';
 import { CMarketService } from 'src/app/services/cmarket.service';
-import { CRoomTypeService } from 'src/app/services/croomtype.service';
 import { CRoomService } from 'src/app/services/croom.service';
 import { RoomService } from 'src/app/services/room.service';
 import { ExcelService } from 'src/app/services/excel.service';
@@ -46,7 +45,6 @@ export class ContractComponent implements OnInit {
     private currencyService: CurrencyService,
     private cagencyService: CAgencyService,
     private cboardService: CBoardService,
-    private croomTypeService: CRoomTypeService,
     private cmarketService: CMarketService,
     private croomService : CRoomService,
     private excelService: ExcelService
@@ -114,11 +112,6 @@ export class ContractComponent implements OnInit {
      }
     });
 
-    this.croomTypeService.getAllCRoomTypes().subscribe(res => {
-      if(res.data!=null){
-        this.cRoomTypes = res.data;
-      }      
-    });
 
     this.cmarketService.getAllCMarkets().subscribe(res => {
       if(res.data!=null){
@@ -228,7 +221,7 @@ export class ContractComponent implements OnInit {
       element: element, roomTypes: this.roomTypes, hotels: this.hotels,
       markets: this.markets, rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
       boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
-      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets, cRooms:this.cRooms  } });
+      cMarkets:this.cMarkets, cRooms:this.cRooms  } });
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {
@@ -242,7 +235,7 @@ export class ContractComponent implements OnInit {
       contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
       markets: this.markets, rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
       boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
-      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets, cRooms:this.cRooms } });
+      cMarkets:this.cMarkets, cRooms:this.cRooms } });
 
   }
 

@@ -15,7 +15,6 @@ import { CMarket } from 'src/app/interfaces/cmarket';
 import { CRoom } from 'src/app/interfaces/croom';
 import { CBoard } from 'src/app/interfaces/cboard';
 import { CBoardService } from 'src/app/services/cboard.service';
-import { CRoomTypeService } from 'src/app/services/croomtype.service';
 import { CMarketService } from 'src/app/services/cmarket.service';
 import { CRoomService } from 'src/app/services/croom.service';
 
@@ -59,7 +58,6 @@ export class ContractAddDialogComponent implements OnInit {
     private agencyService: AgencyService,
     private cagencyService: CAgencyService,
     private cboardService: CBoardService,
-    private croomTypeService: CRoomTypeService,
     private croomService: CRoomService,
     private cmarketService: CMarketService,
     private boardService: BoardService,
@@ -142,11 +140,6 @@ export class ContractAddDialogComponent implements OnInit {
       else this.cBoards = [];
     });
 
-    this.croomTypeService.getAllCRoomTypes().subscribe(res => {
-      if (res.data !== null) this.cRooms = res.data;
-      else this.cRooms = [];
-    });
-
     this.croomService.getAllCRooms().subscribe(res => {
       if (res.data !== null) this.cRooms = res.data;
       else this.cRooms = [];
@@ -159,17 +152,6 @@ export class ContractAddDialogComponent implements OnInit {
   }
 
   add() {
-    // const predicate = (a: Omit<Contract, 'id'>) =>
-    //   a.hotelId=== this.hotel &&
-    //   a.marketIds === this.market &&
-    //   a.agencyId === this.agency &&
-    //   a.code === this.contractCode &&
-    //   a.name === this.name &&
-    //   a.price === this.price &&
-    //   a.boardId === this.board;
-
-    // const condition = this.contractService.contracts.some(predicate);
-
     this.contractService.getAllContracts().subscribe((res) => {
       if (res.data.some(c => c.code === this.contractCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'contract' : 'sözleşme' }), "OK");
@@ -178,26 +160,10 @@ export class ContractAddDialogComponent implements OnInit {
       }
     });
 
-    // if (!this.contractCode || !this.hotel || !this.market || !this.agency || !this.board || !this.name || !this.price) {
-    //   this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
-    //   return;
-    // }
-
-
     if (this.start > this.end) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
       return;
     }
-
-
-    // console.log(this.selectedMarkets, this.selectedAgencies, this.selectedBoards, this.selectedRoomTypes);
-
-
-    // if (condition) {
-    //   this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'Contract' : 'Sözleşme' }), 'OK');
-    //   return;
-    // }
-
     this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.name }));
 
     
@@ -208,14 +174,6 @@ export class ContractAddDialogComponent implements OnInit {
 
 
   closeDialog() {
-    console.log(this.contractCode);
-
-    // const agencyList = this.selectedAgencies.map(agency => {
-    //   return { agencyId: agency }
-    // })
-
-    // console.log(agencyList);
-
     this.dialogRef.close({
       isAdded: true,
       element: {
@@ -226,11 +184,6 @@ export class ContractAddDialogComponent implements OnInit {
         enteredDate: this.start,
         exitDate: this.end,
         hotelId: this.hotel,
-       
-        //marketId: this.selectedMarkets,
-        // agencyId: this.selectedAgencies,
-        //boardId: this.selectedBoards,
-        //roomtypeId: this.selectedRoomTypes,
         currencyId: this.currency,
         agencyList: this.selectedAgencies,
         boardList: this.selectedBoards,
