@@ -1,76 +1,80 @@
-<div class="header">
-    <h1>{{ 'room_title' | transloco }}</h1>
-    <span class="spacer"></span>
-    <button mat-flat-button color="primary" class="new-button" (click)="create()">
-        {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Room'
-        : 'Oda' }) }}
-    </button>
-    <button mat-flat-button color="excel" class="excel-button" (click)="exportAsXLSX()">
-        <mat-icon>file_download</mat-icon>
-    </button>
-</div>
+<app-navbar>
+    <div class="header">
+        <h1>{{ 'room_title' | transloco }}</h1>
+        <span class="spacer"></span>
+        <button mat-flat-button color="primary" class="new-button" (click)="create()">
+            {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ?
+            'Room'
+            : 'Oda' }) }}
+        </button>
+        <button mat-flat-button color="excel" class="excel-button" (click)="exportAsXLSX()">
+            <mat-icon>file_download</mat-icon>
+        </button>
+    </div>
 
-<mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
-    <input maxlength="50" matInput [(ngModel)]="value" (keyup)="filterRooms($event)" placeholder="Search Room" #input>
-    <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" (click)="clear()" >
-        <mat-icon>close</mat-icon>
-    </button>
-    
-</mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input maxlength="50" matInput [(ngModel)]="value" (keyup)="filterRooms($event)" placeholder="Search Room"
+            #input>
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" (click)="clear()">
+            <mat-icon>close</mat-icon>
+        </button>
 
-<table mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="code">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'code' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.code }}</td>
-    </ng-container>
+    </mat-form-field>
 
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'name' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'code' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ element.code }}</td>
+        </ng-container>
 
-    <ng-container matColumnDef="bed">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'bed' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.bed }}</td>
-    </ng-container>
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'name' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
 
-    <ng-container matColumnDef="slot">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'slot' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.slot }}</td>
-    </ng-container>
+        <ng-container matColumnDef="bed">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'bed' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ element.bed }}</td>
+        </ng-container>
 
-   <ng-container matColumnDef="HotelId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'hotel' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ getCurrentHotel(element) }}</td>
-    </ng-container>
+        <ng-container matColumnDef="slot">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'slot' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ element.slot }}</td>
+        </ng-container>
 
-    <ng-container matColumnDef="roomTypeId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'room_type' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ getCurrentRoomType(element) }}</td>
-    </ng-container>
+        <ng-container matColumnDef="HotelId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'hotel' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ getCurrentHotel(element) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="roomTypeId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'room_type' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ getCurrentRoomType(element) }}</td>
+        </ng-container>
 
 
-    <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>{{ 'actions' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">
-            <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ element }">
-                <mat-icon>more_vert</mat-icon>
-            </button>
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>{{ 'actions' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ element }">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="columns"></tr>
-    <tr mat-row *matRowDef="let row; columns: columns"></tr>
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
 
-    <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr>
-</table>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
 
-<mat-menu #menu="matMenu">
-    <ng-template matMenuContent let-element="element">
-        <button mat-menu-item (click)="update(element)">{{ 'dialogs.edit' | transloco }}</button>
-        <button mat-menu-item (click)="delete(element)">{{ 'dialogs.delete' | transloco }}</button>
-    </ng-template>
-</mat-menu>
+    <mat-menu #menu="matMenu">
+        <ng-template matMenuContent let-element="element">
+            <button mat-menu-item (click)="update(element)">{{ 'dialogs.edit' | transloco }}</button>
+            <button mat-menu-item (click)="delete(element)">{{ 'dialogs.delete' | transloco }}</button>
+        </ng-template>
+    </mat-menu>
+</app-navbar>

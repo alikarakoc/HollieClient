@@ -1,294 +1,300 @@
-<h1>{{ 'home_title' | transloco }}</h1>
+<app-navbar>
+    <h1>{{ 'home_title' | transloco }}</h1>
 
-<h3>{{ 'home.home_paragraph' | transloco }}</h3>
+    <h3>{{ 'home.home_paragraph' | transloco }}</h3>
 
-<ng-template #noData>
-    No Data
-</ng-template>
+    <ng-template #noData>
+        No Data
+    </ng-template>
 
-<div class="row my-2">
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-title>{{ 'agency_title' | transloco }}</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list" *ngIf="agencies !== null; else noData">
-                <mat-list-item role="listitem" *ngFor="let item of agencies | slice:0:3; let last = last;">
-                    {{ item.name }}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/agencies">{{ 'home.see_more' | transloco }}</button>
-        </mat-card-actions>
-    </mat-card>
+    <div class="row my-2">
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-title>{{ 'agency_title' | transloco }}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list" *ngIf="agencies !== null; else noData">
+                    <mat-list-item role="listitem" *ngFor="let item of agencies | slice:0:3; let last = last;">
+                        {{ item.name }}
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" routerLink="/agencies">{{ 'home.see_more' | transloco }}</button>
+            </mat-card-actions>
+        </mat-card>
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-title>{{ 'board_title' | transloco }}</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list" *ngIf="boards !== null; else noData">
-                <mat-list-item role="listitem" *ngFor="let item of boards | slice:0:3; let last = last;">
-                    {{ item.name }}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/board">{{ 'home.see_more' | transloco }}</button>
-        </mat-card-actions>
-    </mat-card>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-title>{{ 'board_title' | transloco }}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list" *ngIf="boards !== null; else noData">
+                    <mat-list-item role="listitem" *ngFor="let item of boards | slice:0:3; let last = last;">
+                        {{ item.name }}
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" routerLink="/board">{{ 'home.see_more' | transloco }}</button>
+            </mat-card-actions>
+        </mat-card>
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-title>{{ 'country_title' | transloco }}</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list" *ngIf="countries !== null; else noData">
-                <mat-list-item role="listitem" *ngFor="let item of countries | slice:0:3; let last = last;">
-                    {{ item.name }}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/countries">{{ 'home.see_more' | transloco }}</button>
-        </mat-card-actions>
-    </mat-card>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-title>{{ 'country_title' | transloco }}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list" *ngIf="countries !== null; else noData">
+                    <mat-list-item role="listitem" *ngFor="let item of countries | slice:0:3; let last = last;">
+                        {{ item.name }}
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" routerLink="/countries">{{ 'home.see_more' | transloco
+                    }}</button>
+            </mat-card-actions>
+        </mat-card>
 
-</div>
+    </div>
 
-<div class="row my-2">
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-title>{{ 'hotel_title' | transloco }}</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list" *ngIf="hotels !== null; else noData">
-                <mat-list-item role="listitem" *ngFor="let item of hotels | slice:0:3; let last = last;">
-                    {{ item.name }}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/hotels">{{ 'home.see_more' | transloco }}</button>
-        </mat-card-actions>
-    </mat-card>
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-title>{{ 'hotel_category_title' | transloco }}</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list" *ngIf="hotelCategories !== null; else noData">
-                <mat-list-item role="listitem" *ngFor="let item of hotelCategories | slice:0:3; let last = last">
-                    {{ item.name }}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/hotel-categories">{{ 'home.see_more' | transloco
-                }}</button>
-        </mat-card-actions>
-    </mat-card>
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-title>{{ 'market_title' | transloco }}</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list" *ngIf="markets !== null; else noData">
-                <mat-list-item role="listitem" *ngFor="let item of markets | slice:0:3; let last = last">
-                    {{ item.name }}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/market">{{ 'home.see_more' | transloco }}</button>
-        </mat-card-actions>
-    </mat-card>
+    <div class="row my-2">
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-title>{{ 'hotel_title' | transloco }}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list" *ngIf="hotels !== null; else noData">
+                    <mat-list-item role="listitem" *ngFor="let item of hotels | slice:0:3; let last = last;">
+                        {{ item.name }}
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" routerLink="/hotels">{{ 'home.see_more' | transloco }}</button>
+            </mat-card-actions>
+        </mat-card>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-title>{{ 'hotel_category_title' | transloco }}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list" *ngIf="hotelCategories !== null; else noData">
+                    <mat-list-item role="listitem" *ngFor="let item of hotelCategories | slice:0:3; let last = last">
+                        {{ item.name }}
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" routerLink="/hotel-categories">{{ 'home.see_more' | transloco
+                    }}</button>
+            </mat-card-actions>
+        </mat-card>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-title>{{ 'market_title' | transloco }}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list" *ngIf="markets !== null; else noData">
+                    <mat-list-item role="listitem" *ngFor="let item of markets | slice:0:3; let last = last">
+                        {{ item.name }}
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" routerLink="/market">{{ 'home.see_more' | transloco }}</button>
+            </mat-card-actions>
+        </mat-card>
 
-</div>
+    </div>
 
-<div class="row my-2">
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-title>{{ 'room_type_title' | transloco }}</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list" *ngIf="roomTypes !== null; else noData">
-                <mat-list-item role="listitem" *ngFor="let item of roomTypes | slice:0:3; let last = last">
-                    {{ item.name }}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/room-types">{{ 'home.see_more' | transloco }}</button>
-        </mat-card-actions>
-    </mat-card>
+    <div class="row my-2">
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-title>{{ 'room_type_title' | transloco }}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list" *ngIf="roomTypes !== null; else noData">
+                    <mat-list-item role="listitem" *ngFor="let item of roomTypes | slice:0:3; let last = last">
+                        {{ item.name }}
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" routerLink="/room-types">{{ 'home.see_more' | transloco
+                    }}</button>
+            </mat-card-actions>
+        </mat-card>
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-title>{{ 'contract_title' | transloco }}</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list" *ngIf="contracts !== null; else noData">
-                <mat-list-item role="listitem" *ngFor="let item of contracts | slice:0:3; let last = last">
-                    {{ item.name }}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/contracts">{{ 'home.see_more' | transloco }}</button>
-        </mat-card-actions>
-    </mat-card>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-title>{{ 'contract_title' | transloco }}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list" *ngIf="contracts !== null; else noData">
+                    <mat-list-item role="listitem" *ngFor="let item of contracts | slice:0:3; let last = last">
+                        {{ item.name }}
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" routerLink="/contracts">{{ 'home.see_more' | transloco
+                    }}</button>
+            </mat-card-actions>
+        </mat-card>
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-title>{{ 'currency_title' | transloco }}</mat-card-title>
-        <mat-card-content>
-            <mat-list role="list" *ngIf="currencies !== null; else noData">
-                <mat-list-item role="listitem" *ngFor="let item of currencies | slice:0:3; let last = last">
-                    <!-- {{ item.code }}/{{ item.value }} -->
-                    <!-- &nbsp;
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-title>{{ 'currency_title' | transloco }}</mat-card-title>
+            <mat-card-content>
+                <mat-list role="list" *ngIf="currencies !== null; else noData">
+                    <mat-list-item role="listitem" *ngFor="let item of currencies | slice:0:3; let last = last">
+                        <!-- {{ item.code }}/{{ item.value }} -->
+                        <!-- &nbsp;
                     <span>/TRY</span> -->
-                    <!-- {{ item.name }}: {{ item.value }} -->
-                    {{ item.value | currency: item.code : 'symbol-narrow' : '1.2-2'}}
-                    <mat-divider *ngIf="!last"></mat-divider>
-                </mat-list-item>
-            </mat-list>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-flat-button color="accent" routerLink="/currencies">{{ 'home.see_more' | transloco }}</button>
-        </mat-card-actions>
-    </mat-card>
-</div>
+                        <!-- {{ item.name }}: {{ item.value }} -->
+                        {{ item.value | currency: item.code : 'symbol-narrow' : '1.2-2'}}
+                        <mat-divider *ngIf="!last"></mat-divider>
+                    </mat-list-item>
+                </mat-list>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-flat-button color="accent" routerLink="/currencies">{{ 'home.see_more' | transloco
+                    }}</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
 
-<mat-divider class="my-3"></mat-divider>
+    <mat-divider class="my-3"></mat-divider>
 
-<div class="row">
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-content>
-            <div class="media d-flex">
-                <div class="align-self-center">
-                    <!-- <i class="icon-globe font-large-2 float-left"></i> -->
-                    <mat-icon class="icon">work</mat-icon>
+    <div class="row">
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-content>
+                <div class="media d-flex">
+                    <div class="align-self-center">
+                        <!-- <i class="icon-globe font-large-2 float-left"></i> -->
+                        <mat-icon class="icon">work</mat-icon>
+                    </div>
+                    <div class="media-body text-right">
+                        <mat-card-title>{{ agencies !== null ? agencies.length : 0 }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'agency_title' | transloco }}</mat-card-subtitle>
+                    </div>
                 </div>
-                <div class="media-body text-right">
-                    <mat-card-title>{{ agencies !== null ? agencies.length : 0 }}</mat-card-title>
-                    <mat-card-subtitle>{{ 'agency_title' | transloco }}</mat-card-subtitle>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+            </mat-card-content>
+        </mat-card>
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-content>
-            <div class="media d-flex">
-                <div class="align-self-center">
-                    <!-- <i class="icon-globe font-large-2 float-left"></i> -->
-                    <mat-icon class="icon">assignment</mat-icon>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-content>
+                <div class="media d-flex">
+                    <div class="align-self-center">
+                        <!-- <i class="icon-globe font-large-2 float-left"></i> -->
+                        <mat-icon class="icon">assignment</mat-icon>
+                    </div>
+                    <div class="media-body text-right">
+                        <mat-card-title>{{ boards !== null ? boards.length : 0 }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'board_title' | transloco }}</mat-card-subtitle>
+                    </div>
                 </div>
-                <div class="media-body text-right">
-                    <mat-card-title>{{ boards !== null ? boards.length : 0 }}</mat-card-title>
-                    <mat-card-subtitle>{{ 'board_title' | transloco }}</mat-card-subtitle>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+            </mat-card-content>
+        </mat-card>
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-content>
-            <div class="media d-flex">
-                <div class="align-self-center">
-                    <!-- <i class="icon-globe font-large-2 float-left"></i> -->
-                    <mat-icon class="icon">public</mat-icon>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-content>
+                <div class="media d-flex">
+                    <div class="align-self-center">
+                        <!-- <i class="icon-globe font-large-2 float-left"></i> -->
+                        <mat-icon class="icon">public</mat-icon>
+                    </div>
+                    <div class="media-body text-right">
+                        <mat-card-title>{{ countries !== null ? countries.length : 0 }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'country_title' | transloco }}</mat-card-subtitle>
+                    </div>
                 </div>
-                <div class="media-body text-right">
-                    <mat-card-title>{{ countries !== null ? countries.length : 0 }}</mat-card-title>
-                    <mat-card-subtitle>{{ 'country_title' | transloco }}</mat-card-subtitle>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
-<div class="row my-2">
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="row my-2">
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-content>
-            <div class="media d-flex">
-                <div class="align-self-center">
-                    <!-- <i class="icon-globe font-large-2 float-left"></i> -->
-                    <mat-icon class="icon">apartment</mat-icon>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-content>
+                <div class="media d-flex">
+                    <div class="align-self-center">
+                        <!-- <i class="icon-globe font-large-2 float-left"></i> -->
+                        <mat-icon class="icon">apartment</mat-icon>
+                    </div>
+                    <div class="media-body text-right">
+                        <mat-card-title>{{ hotels !== null ? hotels.length : 0 }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'hotel_title' | transloco }}</mat-card-subtitle>
+                    </div>
                 </div>
-                <div class="media-body text-right">
-                    <mat-card-title>{{ hotels !== null ? hotels.length : 0 }}</mat-card-title>
-                    <mat-card-subtitle>{{ 'hotel_title' | transloco }}</mat-card-subtitle>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+            </mat-card-content>
+        </mat-card>
 
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-content>
-            <div class="media d-flex">
-                <div class="align-self-center">
-                    <mat-icon class="icon">beach_access</mat-icon>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-content>
+                <div class="media d-flex">
+                    <div class="align-self-center">
+                        <mat-icon class="icon">beach_access</mat-icon>
+                    </div>
+                    <div class="media-body text-right">
+                        <mat-card-title>{{ hotelCategories !== null ? hotelCategories.length : 0 }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'hotel_category_title' | transloco }}</mat-card-subtitle>
+                    </div>
                 </div>
-                <div class="media-body text-right">
-                    <mat-card-title>{{ hotelCategories !== null ? hotelCategories.length : 0 }}</mat-card-title>
-                    <mat-card-subtitle>{{ 'hotel_category_title' | transloco }}</mat-card-subtitle>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+            </mat-card-content>
+        </mat-card>
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-content>
-            <div class="media d-flex">
-                <div class="align-self-center">
-                    <mat-icon class="icon">storefront</mat-icon>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-content>
+                <div class="media d-flex">
+                    <div class="align-self-center">
+                        <mat-icon class="icon">storefront</mat-icon>
+                    </div>
+                    <div class="media-body text-right">
+                        <mat-card-title>{{ markets !== null ? markets.length : 0 }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'market_title' | transloco }}</mat-card-subtitle>
+                    </div>
                 </div>
-                <div class="media-body text-right">
-                    <mat-card-title>{{ markets !== null ? markets.length : 0 }}</mat-card-title>
-                    <mat-card-subtitle>{{ 'market_title' | transloco }}</mat-card-subtitle>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="row my-2">
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-content>
+                <div class="media d-flex">
+                    <div class="align-self-center">
+                        <!-- <i class="icon-globe font-large-2 float-left"></i> -->
+                        <mat-icon class="icon">bed</mat-icon>
+                    </div>
+                    <div class="media-body text-right">
+                        <mat-card-title>{{ roomTypes !== null ? roomTypes.length : 0 }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'room_type_title' | transloco }}</mat-card-subtitle>
+                    </div>
                 </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
-<div class="row my-2">
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-content>
-            <div class="media d-flex">
-                <div class="align-self-center">
-                    <!-- <i class="icon-globe font-large-2 float-left"></i> -->
-                    <mat-icon class="icon">bed</mat-icon>
-                </div>
-                <div class="media-body text-right">
-                    <mat-card-title>{{ roomTypes !== null ? roomTypes.length : 0 }}</mat-card-title>
-                    <mat-card-subtitle>{{ 'room_type_title' | transloco }}</mat-card-subtitle>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+            </mat-card-content>
+        </mat-card>
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-content>
-            <div class="media d-flex">
-                <div class="align-self-center">
-                    <!-- <i class="icon-globe font-large-2 float-left"></i> -->
-                    <mat-icon class="icon">description</mat-icon>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-content>
+                <div class="media d-flex">
+                    <div class="align-self-center">
+                        <!-- <i class="icon-globe font-large-2 float-left"></i> -->
+                        <mat-icon class="icon">description</mat-icon>
+                    </div>
+                    <div class="media-body text-right">
+                        <mat-card-title>{{ contracts !== null ? contracts.length : 0 }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'contract_title' | transloco }}</mat-card-subtitle>
+                    </div>
                 </div>
-                <div class="media-body text-right">
-                    <mat-card-title>{{ contracts !== null ? contracts.length : 0 }}</mat-card-title>
-                    <mat-card-subtitle>{{ 'contract_title' | transloco }}</mat-card-subtitle>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
+            </mat-card-content>
+        </mat-card>
 
-    <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
-        <mat-card-content>
-            <div class="media d-flex">
-                <div class="align-self-center">
-                    <!-- <i class="icon-globe font-large-2 float-left"></i> -->
-                    <mat-icon class="icon">payments</mat-icon>
+        <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+            <mat-card-content>
+                <div class="media d-flex">
+                    <div class="align-self-center">
+                        <!-- <i class="icon-globe font-large-2 float-left"></i> -->
+                        <mat-icon class="icon">payments</mat-icon>
+                    </div>
+                    <div class="media-body text-right">
+                        <mat-card-title>{{ currencies !== null ? currencies.length : 0 }}</mat-card-title>
+                        <mat-card-subtitle>{{ 'currency_title' | transloco }}</mat-card-subtitle>
+                    </div>
                 </div>
-                <div class="media-body text-right">
-                    <mat-card-title>{{ currencies !== null ? currencies.length : 0 }}</mat-card-title>
-                    <mat-card-subtitle>{{ 'currency_title' | transloco }}</mat-card-subtitle>
-                </div>
-            </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</app-navbar>
