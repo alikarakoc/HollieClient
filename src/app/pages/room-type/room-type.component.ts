@@ -83,8 +83,6 @@ export class RoomTypeComponent implements OnInit {
         this.roomTypeService
           .updateRoomType(element)
           .subscribe(() => {
-            console.log(element);
-
             this.ngOnInit();
           });
       }

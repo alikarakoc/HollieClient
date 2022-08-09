@@ -17,7 +17,7 @@ import { RoomDeleteDialogComponent, RoomUpdateDialogComponent } from 'src/app/co
   styleUrls: ['./room.component.scss']
 })
 export class RoomComponent implements OnInit {
-  columns: string[] = ["code", "name", "bed","slot" , "roomTypeId","HotelId", "actions" ];
+  columns: string[] = ["code", "name", "bed","slot", "HotelId", "roomTypeId", "actions"  ];
   dataSource: MatTableDataSource<Room>;
   value = '';
 
@@ -58,7 +58,6 @@ export class RoomComponent implements OnInit {
       if(res.data!=null){
          this.rooms = res.data;
       }
-     
       this.dataSource = new MatTableDataSource<Room>(this.rooms);
       this.dataSource.sort = this.sort;
     });
@@ -91,15 +90,14 @@ export class RoomComponent implements OnInit {
     return this.roomTypes.find(c => c.id === element.roomTypeId)?.name;
   }
 
-  getCurrentHotel(element: Hotel) {
-    return this.hotels.find(c => c.id === element.id)?.name;
+ 
+  
+  getCurrentHotel(element: Room) {
+    return this.hotels.find(c => c.id === element.hotelId)?.name;
   }
 
   create() {
-    console.log(this.rooms);
-
     const dialog = this.dialog.open(RoomAddDialogComponent, { data: { table: this.table } });
-
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.roomService
@@ -114,7 +112,6 @@ export class RoomComponent implements OnInit {
 
   update(element: Room) {
     const dialog = this.dialog.open(RoomUpdateDialogComponent, { data: { element } });
-
     dialog.afterClosed().subscribe(result => {
       if (result.isUpdated) {
         this.roomService.updateRoom(element).subscribe(() => this.ngOnInit());
@@ -126,10 +123,10 @@ export class RoomComponent implements OnInit {
     const dialog = this.dialog.open(RoomDeleteDialogComponent, {
       data: { element },
     });
+    
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
         this.roomService.deleteRoom(element).subscribe((res) => {
-          console.log(element);
           this.ngOnInit();
         });
       }

@@ -17,7 +17,6 @@ interface DialogData {
   cBoards: any[];
   cRooms: any[];
   cRoomTypes: any[];
-
   contract: Contract;
 }
 
@@ -26,6 +25,7 @@ interface DialogData {
   templateUrl: './contract-details.component.html',
   styleUrls: ['./contract-details.component.scss']
 })
+
 export class ContractDetailsComponent implements OnInit {
   contract: Contract;
   hotels: any[];
@@ -82,8 +82,8 @@ export class ContractDetailsComponent implements OnInit {
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
       
       case 'room':
-        const idRoom = this.data.cRooms.filter(cK => cK.listId === element.id).map(cK => cK.roomId);
-        return idRoom.map(i => this.rooms.find(k => k.id === i).name);
+        const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
+        return idRoom.map(i => this.rooms.find(r => r.id === i).name);
 
       case 'hotel':
         return this.data.hotels.find(h => h.id === element.hotelId)?.name;

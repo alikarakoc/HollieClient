@@ -40,16 +40,16 @@
         <td mat-cell *matCellDef="let element">{{ element.slot }}</td>
     </ng-container>
 
+   <ng-container matColumnDef="HotelId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'hotel' | transloco }}</th>
+        <td mat-cell *matCellDef="let element">{{ getCurrentHotel(element) }}</td>
+    </ng-container>
 
     <ng-container matColumnDef="roomTypeId">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'room_type' | transloco }}</th>
         <td mat-cell *matCellDef="let element">{{ getCurrentRoomType(element) }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="HotelId">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'hotel' | transloco }}</th>
-        <td mat-cell *matCellDef="let element">{{ getCurrentHotel(element) }}</td>
-    </ng-container>
 
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>{{ 'actions' | transloco }}</th>
@@ -62,9 +62,10 @@
 
     <tr mat-header-row *matHeaderRowDef="columns"></tr>
     <tr mat-row *matRowDef="let row; columns: columns"></tr>
+
     <tr class="mat-row" *matNoDataRow>
         <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-      </tr>
+    </tr>
 </table>
 
 <mat-menu #menu="matMenu">

@@ -15,7 +15,6 @@ export class CRoomService {
     constructor(private http: HttpClient) { }
 
     getAllCRooms(): Observable<ListResponseModel<CRoom>> {
-
         return this.http.get<ListResponseModel<CRoom>>(`${this.baseUrl}/AllCRooms`);
     }
 

@@ -63,21 +63,19 @@ export class RoomAddDialogComponent implements OnInit {
   }
 
   add() {
-
     const predicate = (a: Omit<Room, 'id'>) =>
       a.code === this.roomCode &&
       a.name === this.roomName &&
       a.roomTypeId === this.roomTypeId &&
-      a.HotelId === this.hotelId &&
+      a.hotelId === this.hotelId &&
       a.slot === this.roomSlot &&
       a.bed === this.roomBed;
 
     const condition = this.roomService.rooms.some(predicate);
 
     this.roomService.getAllRooms().subscribe((res) => {
-      // categories = res.data;
       if (res.data.some(c => c.code === this.roomCode)) {
-        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel türü' }), "OK");
+        this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'room type' : 'oda tipi' }), "OK");
         this.roomCode = "";
         return;
       }
@@ -101,19 +99,16 @@ export class RoomAddDialogComponent implements OnInit {
   }
 
   closeDialog() {
-    console.log(this.roomTypeId);
-
     this.dialogRef.close({
       isAdded: true,
       element: {
         code: this.roomCode,
         name: this.roomName,
-        roomtypeid: this.roomTypeId,
-        hotelid: this.hotelId,
+        roomtypeId: this.roomTypeId,
+        hotelId: this.hotelId,
         slot: this.roomSlot,
         bed: this.roomBed
       }
     });
-
   }
 }

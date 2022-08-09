@@ -3,20 +3,14 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dial
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from '@angular/material/table';
-import { ContractDeleteDialogComponent } from "../contract-delete-dialog/contract-delete-dialog.component";
 import { TranslocoService } from '@ngneat/transloco';
 import { Contract } from 'src/app/interfaces';
-import { HotelService, MarketService, HotelCategoryService, AgencyService, BoardService, RoomTypeService, 
-  ContractService, CurrencyService, CAgencyService, CBoardService, CRoomTypeService,CMarketService  } from 'src/app/services';
-import { RoomService, } from 'src/app/services/room.service';
-import { CRoomService, } from 'src/app/services/croom.service';
+import { HotelService, ContractService } from 'src/app/services';
 import { CMarket } from 'src/app/interfaces/cmarket';
 import { CRoom } from 'src/app/interfaces/croom';
 import { CAgency } from 'src/app/interfaces/cagency';
 import { CBoard } from 'src/app/interfaces/cboard';
 import { CRoomType } from 'src/app/interfaces/croomtype';
-import { FormControl } from '@angular/forms';
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 
 interface DialogData {
   element: Contract;
@@ -57,13 +51,12 @@ export class ContractUpdateDialogComponent implements OnInit {
   selectedAgencies: any[] = this.data.element.agencyList;
   selectedBoards: any[] = this.data.element.boardList;
   selectedMarkets: any[] = this.data.element.marketList;
-  selectedRooms: any[] = this.data.element.roomList;
   selectedRoomTypes: any[] = this.data.element.roomTypeList;
+  selectedRooms: any[] = this.data.element.roomList;
   
 
   constructor(
     public translocoService: TranslocoService,
-    private hotelService: HotelService,
     private dialogRef: MatDialogRef<ContractUpdateDialogComponent>,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
@@ -91,8 +84,8 @@ export class ContractUpdateDialogComponent implements OnInit {
   selectedValue: any[] = [];
   cAgencies: any[] = [];
   cBoards: any[] = [];
-  cMarkets : any[] =[];
-  cRooms : any[] =[];
+  cMarkets : any[] = [];
+  cRooms : any[] = [];
   cRoomTypes: any[] = [];
 
 
@@ -104,15 +97,15 @@ export class ContractUpdateDialogComponent implements OnInit {
     const idBoard = this.data.cBoards.filter(cB => cB.listId === this.data.element.id).map(cB => cB.boardId);
     this.selectedBoards= idBoard;
 
-
-    const iMarket = this.data.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
-    this.selectedMarkets = iMarket;
-
-    const iRoom = this.data.cRooms.filter(cD => cD.listId === this.data.element.id).map(cD => cD.roomId);
-    this.selectedMarkets = iRoom;
+    const idMarket = this.data.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
+    this.selectedMarkets = idMarket;
 
     const idRoomType = this.data.cRoomTypes.filter(cR => cR.listId === this.data.element.id).map(cR => cR.roomTypeId);
     this.selectedRoomTypes = idRoomType;
+
+    const idRoom = this.data.cRooms.filter(cR => cR.listId === this.data.element.id).map(cR => cR.roomId);
+    this.selectedRooms = idRoom;
+
      
   }
 

@@ -24,7 +24,7 @@ interface DialogData {
 export class RoomUpdateDialogComponent implements OnInit {
   newRoomCode : string = this.data.element.code;
   newRoomTypeId: number = this.data.element.roomTypeId;
-  newHotelId: number = this.data.element.HotelId;
+  newHotelId: number = this.data.element.hotelId;
   newRoomName: string = this.data.element.name;
   newRoomBed: string = this.data.element.bed;
   newRoomSlot: number = this.data.element.slot
@@ -72,7 +72,6 @@ export class RoomUpdateDialogComponent implements OnInit {
     const otherRooms = this.rooms.filter(c => c.code !== this.newRoomCode && c.name !== this.newRoomName && c.bed !== this.newRoomBed && c.slot !== this.newRoomSlot);
 
     if (otherRooms.findIndex(c =>c.code == this.newRoomCode.toString()) >-1){
-      console.log(this.newRoomName);
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
       this.ngOnInit();
       return;
@@ -86,10 +85,7 @@ export class RoomUpdateDialogComponent implements OnInit {
       this.newRoomBed = "";
       return;
     }
-
-
-    console.log(this.newRoomTypeId);
-
+    
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newRoomName }));
     this.data.dialogRef?.close();
     this.data.element.code = this.newRoomCode;
@@ -97,8 +93,7 @@ export class RoomUpdateDialogComponent implements OnInit {
     this.data.element.slot = this.newRoomSlot;
     this.data.element.bed = this.newRoomBed;
     this.data.element.roomTypeId = this.newRoomTypeId;
-    this.data.element.HotelId = this.newHotelId;
-    console.log(this.data.element);
+    this.data.element.hotelId = this.newHotelId;
     this.data.table?.renderRows();
     this.dialogRef.close({ isUpdated: true });
   }

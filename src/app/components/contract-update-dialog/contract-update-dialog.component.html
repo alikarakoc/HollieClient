@@ -15,7 +15,9 @@
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput maxlength="50" [(ngModel)]="name" (keyup.enter)="update()">
     </mat-form-field> 
+
     <br>
+
     <mat-form-field class="datepicker">
         <mat-label>{{ 'start' | transloco }}</mat-label>
         <input matInput [(ngModel)]="start" [matDatepicker]="startPicker">
@@ -34,35 +36,17 @@
 
     <br>
 
-   
-
     <mat-form-field floatLabel="always" class="selects-m">
         <mat-label>{{ 'Adult Price' | transloco }}</mat-label>
         <input matInput [(ngModel)]="adultPrice" type="number" class="price-input" placeholder="0">
-        <!-- <span matPrefix>&nbsp;</span>
-    <span matSuffix>.00</span> -->
     </mat-form-field>
 
     <mat-form-field floatLabel="always" class="selects-m">
         <mat-label>{{ 'Children Price' | transloco }}</mat-label>
         <input matInput [(ngModel)]="childPrice" type="number" class="price-inpput" placeholder="0">
-        <!-- <span matPrefix>&nbsp;</span>
-    <span matSuffix>.00</span> -->
     </mat-form-field>
-
-
 
     <br>
-
-
-
-    <mat-form-field class="selects-m">
-        <mat-label>{{ 'hotel' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="hotel">
-            <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
-        </mat-select>
-    </mat-form-field>
-
   
     <mat-form-field class="selects-m">
         <mat-label>{{ 'currency' | transloco }}</mat-label>
@@ -71,8 +55,17 @@
         </mat-select>
     </mat-form-field>
 
-
+    
     <mat-form-field class="selects-m">
+        <mat-label>{{ 'hotel' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="hotel">
+            <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field  class="selects-m">
         <mat-label>{{ 'market' | transloco }}</mat-label>
         <mat-select [(ngModel)]="selectedMarkets" multiple>
             <mat-option *ngFor="let m of markets" [value]=" m.id">{{ m.name }}</mat-option>
@@ -87,10 +80,11 @@
         </mat-select>
     </mat-form-field>
 
+    <br>
   
     <mat-form-field class="selects-m">
         <mat-label>{{ 'board' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="selectedBoards" multiple>
+        <mat-select  [(ngModel)]="selectedBoards" multiple>
             <mat-option *ngFor="let b of boards" [value]=" b.id">{{ b.name }}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -103,9 +97,11 @@
         </mat-select>
     </mat-form-field>
 
+    <br>
+
     <mat-form-field class="selects-m">
         <mat-label>{{ 'room' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="selectedRooms" multiple>
+        <mat-select class="full-box" [(ngModel)]="selectedRooms" multiple>
             <mat-option *ngFor="let r of rooms" [value]=" r.id">{{ r.name }}</mat-option>
         </mat-select>
     </mat-form-field>

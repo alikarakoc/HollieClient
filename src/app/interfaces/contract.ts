@@ -19,7 +19,7 @@ export interface Contract {
     agencyId: number;
     agencyList: CAgency[];
     boardList: CBoard[];
-    roomList: CBoard[];
+    roomList: CRoom[];
     marketList: CMarket[];
     roomTypeList: CRoomType[];
     //boardId: number;

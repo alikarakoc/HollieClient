@@ -4,7 +4,7 @@ import { MatSort } from "@angular/material/sort";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { TranslocoService } from '@ngneat/transloco';
 import { ContractAddDialogComponent, ContractDeleteDialogComponent, ContractDetailsComponent, ContractUpdateDialogComponent } from "src/app/components";
-import { Contract, Currency, Hotel } from 'src/app/interfaces';
+import { Contract } from 'src/app/interfaces';
 import { AgencyService, BoardService, ContractService, CurrencyService, HotelService, MarketService, RoomTypeService } from 'src/app/services';
 import { CAgencyService } from 'src/app/services/cagency.service';
 import { CBoardService } from 'src/app/services/cboard.service';
@@ -48,6 +48,7 @@ export class ContractComponent implements OnInit {
     private cboardService: CBoardService,
     private croomTypeService: CRoomTypeService,
     private cmarketService: CMarketService,
+    private croomService : CRoomService,
     private excelService: ExcelService
   ) { }
 
@@ -60,78 +61,81 @@ export class ContractComponent implements OnInit {
   currencies: any[] = [];
   cAgencies: any[] = [];
   cBoards: any[] = [];
-  cRooms: any[] = [];
   cMarkets: any[] = [];
   cRoomTypes: any[] = [];
+  cRooms: any[] = [];
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
       if (res.data!=null){
         this.hotels = res.data;
-    }
+      }
     });
 
     this.marketService.getAllMarkets().subscribe(res => {
-
       if (res.data!=null){
         this.markets = res.data;
-    }
-
+      }
     });
 
     this.agencyService.getAllAgencies().subscribe(res => {
       if(res.data!=null){
         this.agencies = res.data;
       }
-      
     });
 
     this.roomTypeService.getAllRoomTypes().subscribe(res => {
       if(res.data!=null){
-          this.roomTypes = res.data;
+        this.roomTypes = res.data;
       }
-    
     });
 
     this.currencyService.getAllCurrency().subscribe(res => {
       if(res.data!=null){
-         this.currencies = res.data;
+        this.currencies = res.data;
       }
-     
     });
 
     this.boardService.getAllBoards().subscribe(res => {
       if(res.data!=null){
-        this.boards = res.data;
+       this.boards = res.data;
       }
-      
     });
 
     this.cagencyService.getAllCAgencies().subscribe(res => {
       if(res.data!=null){
-           this.cAgencies = res.data;
+        this.cAgencies = res.data;
       }
-   
     });
 
     this.cboardService.getAllCBoards().subscribe(res => {
       if(res.data!=null){
-          this.cBoards = res.data;
-         }
+       this.cBoards = res.data;
+     }
     });
 
     this.croomTypeService.getAllCRoomTypes().subscribe(res => {
       if(res.data!=null){
         this.cRoomTypes = res.data;
-      }
-      
+      }      
     });
 
     this.cmarketService.getAllCMarkets().subscribe(res => {
       if(res.data!=null){
         this.cMarkets = res.data;
       }
-      
+    });
+
+    this.croomService.getAllCRooms().subscribe(res => {
+      if(res.data!=null){
+        this.cRooms = res.data;
+      }
+    });
+
+    this.roomService.getAllRooms().subscribe(res => {
+      if(res.data!=null){
+        this.rooms = res.data;
+      }
     });
 
     this.contractService.getAllContracts().subscribe(res => {
@@ -140,7 +144,6 @@ export class ContractComponent implements OnInit {
       this.dataSource = new MatTableDataSource<Contract>(this.contracts);
       this.dataSource.sort = this.sort;
       }
-     
     });
 
   }
@@ -221,11 +224,12 @@ export class ContractComponent implements OnInit {
   }
 
   update(element: Contract) {
-    const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: { element: element, roomTypes: this.roomTypes, hotels: this.hotels,
-      markets: this.markets,rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
+    const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: { 
+      element: element, roomTypes: this.roomTypes, hotels: this.hotels,
+      markets: this.markets, rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
       boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
-      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets,cRooms:this.cRooms  } });
-    //console.log("elemennt1 : " + element);
+      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets, cRooms:this.cRooms  } });
+
     dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {
         this.contractService.updateContract(element).subscribe(() => this.ngOnInit());
@@ -234,12 +238,11 @@ export class ContractComponent implements OnInit {
   }
 
   seeDetails(element: Contract) {
-
     this.dialog.open(ContractDetailsComponent, { data: { 
       contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
-      markets: this.markets,rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
+      markets: this.markets, rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
       boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
-      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets,cRooms:this.cRooms } });
+      cRoomTypes: this.cRoomTypes, cMarkets:this.cMarkets, cRooms:this.cRooms } });
 
   }
 

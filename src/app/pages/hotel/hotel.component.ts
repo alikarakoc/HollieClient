@@ -83,8 +83,6 @@ export class HotelComponent implements OnInit {
   }
 
   create() {
-    console.log(this.hotels);
-
     if(this.checkButtonCount < 1 ) {
     const dialog = this.dialog.open(HotelAddDialogComponent, { data: { table: this.table } });
 
@@ -120,7 +118,6 @@ export class HotelComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
         this.hotelService.deleteHotel(element).subscribe((res) => {
-          console.log(element);
           this.ngOnInit();
         });
       }

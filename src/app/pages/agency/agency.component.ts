@@ -39,9 +39,6 @@ export class AgencyComponent implements OnInit{
     private excelService: ExcelService
   ) { }
 
- 
-
-
   
   ngOnInit(): void {
     this.agencyService.getAllAgencies().subscribe((res) => {

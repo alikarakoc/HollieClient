@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>
-  {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Hotel' : 'Otel' }) }}
+  {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Room' : 'Oda' }) }}
 </h1>
 
 <div mat-dialog-content>
@@ -20,31 +20,29 @@
 
   <mat-form-field>
     <mat-label>{{ 'bed' | transloco }}</mat-label>
-    <textarea matInput [(ngModel)]="roomBed" maxlength="200" (keyup.enter)="add()"></textarea>
+    <textarea  class="slot-bed" matInput [(ngModel)]="roomBed" maxlength="200" (keyup.enter)="add()"></textarea>
   </mat-form-field>
 
   <br>
 
   <mat-form-field>
     <mat-label>{{ 'slot' | transloco }}</mat-label>
-    <textarea matInput [(ngModel)]="roomSlot" maxlength="3" (keyup.enter)="add()"></textarea>
+    <textarea class="slot-bed" matInput type="number" [(ngModel)]="roomSlot" maxlength="3" (keyup.enter)="add()"></textarea>
   </mat-form-field>
-
- 
 
   <br>
 
   <mat-form-field>
     <mat-label>{{ 'roomtype' | transloco }}</mat-label>
     <mat-select [(ngModel)]="roomTypeId">
-      <mat-option *ngFor="let c of roomTypes" [value]="c.id">{{ c.name }}</mat-option>
+      <mat-option *ngFor="let c of roomTypes" type="number" [value]="c.id">{{ c.name }}</mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>{{ 'hotel' | transloco }}</mat-label>
-    <mat-select [(ngModel)]="roomTypeId">
-      <mat-option *ngFor="let c of hotels" [value]="c.id">{{ c.name }}</mat-option>
+    <mat-select [(ngModel)]="hotelId">
+      <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
     </mat-select>
   </mat-form-field>
 
