@@ -27,7 +27,7 @@ export class RoomService {
   }
 
   updateRoom(room: Partial<Room>) {
-    return this.http.put<ListResponseModel<Room>>(`${this.baseUrl}/update?Id=${room.id}`, room);
+    return this.http.put<ListResponseModel<Room>>(`${this.baseUrl}/update`, room );
   }
 
 
