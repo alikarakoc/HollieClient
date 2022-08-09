@@ -100,13 +100,9 @@ export class ContractUpdateDialogComponent implements OnInit {
     const idMarket = this.data.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
     this.selectedMarkets = idMarket;
 
-    const idRoomType = this.data.cRoomTypes.filter(cR => cR.listId === this.data.element.id).map(cR => cR.roomTypeId);
-    this.selectedRoomTypes = idRoomType;
-
     const idRoom = this.data.cRooms.filter(cR => cR.listId === this.data.element.id).map(cR => cR.roomId);
     this.selectedRooms = idRoom;
 
-     
   }
 
   contracts: Contract[] = [];

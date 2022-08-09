@@ -19,7 +19,7 @@ import { ExcelService } from 'src/app/services/excel.service';
   styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent implements OnInit {
-  columns: string[] = ["code", "name", "hotel", "start", "end", "price", "actions", "seeDetails"];
+  columns: string[] = ["code", "name", "hotel", "start", "end", "adultPrice", "childPrice", "actions", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
   value = '';
@@ -267,7 +267,7 @@ export class ContractComponent implements OnInit {
 
  
       case 'currency':
-        return this.currencies.find(c => c.id === element.currencyId)?.name;
+        return this.currencies.find(c => c.id === element.currencyId)?.code;
         
     }
   }
