@@ -1,6 +1,7 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Contract } from "src/app/interfaces";
+import { ReplaySubject } from 'rxjs';
+import { Agency, Contract } from "src/app/interfaces";
 
 
 interface DialogData {
@@ -67,7 +68,10 @@ export class ContractDetailsComponent implements OnInit {
     switch (type) {
       case 'agency':
         const idAgency = this.data.cAgencies.filter(cA => cA.listId === element.id).map(cA => cA.agencyId);
-        return idAgency.map(i => this.agencies.find(a => a.id === i).name);
+        let agencies = idAgency.map(i => this.agencies.find(a => a.id === i).name).toString();
+        agencies.split(",", idAgency.length);
+        return agencies.replace(",","\n");
+        
 
       case 'board':
         const idBoard = this.data.cBoards.filter(cB => cB.listId === element.id).map(cB => cB.boardId);

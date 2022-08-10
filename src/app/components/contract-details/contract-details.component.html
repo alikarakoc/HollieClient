@@ -1,47 +1,91 @@
-<h1 mat-dialog-title>Contract Details</h1>
+<div class="toast fade show hover-overlay" role="alert" aria-live="assertive" aria-atomic="true" class="animate__animated animate__bounceInDown">
+    <div class="toast-header">
+      <strong class="me-auto">Contract Details <small>({{contract.name}})</small> </strong>
+      
+      <button mat-dialog-close type="button" class="btn btn-primary" data-bs-dismiss="toast" aria-label="Close" fill="none" stroke="none">
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" class="bi bi-check2-square" fill="currentColor" viewBox="0 0 1em 1em">
+         <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+            <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+        </svg> Back </button>
+    </div>
+    <div class="toast-body">
 
-<div mat-dialog-content>
-    <p>
-        <strong>{{ 'code' | transloco }}</strong>:&nbsp;{{ contract.code }}
-    </p>
-    <p>
-        <strong>{{ 'name' | transloco }}</strong>:&nbsp;{{ contract.name }}
-    </p>
-    <p>
-        <strong>{{ 'adultPrice' | transloco }}</strong>:&nbsp;{{ contract.adultPrice }} ({{ getItem('currency') }})
-    </p>
-    <p>
-        <strong>{{ 'childPrice' | transloco }}</strong>:&nbsp;{{ contract.childPrice }} ({{ getItem('currency') }})
-    </p>
-    <p>
-        <strong>{{ 'start' | transloco }}</strong>:&nbsp;{{ toDate(contract.enteredDate) | localizedDate }}
-    </p>
-    <p>
-        <strong>{{ 'end' | transloco }}</strong>:&nbsp;{{ toDate(contract.exitDate) | localizedDate }}
-    </p>
-    <p>
-        <strong>{{ 'hotel' | transloco }}</strong>:&nbsp;{{ getItem('hotel') }}
-    </p>
-    <p>
-        <strong>{{ 'market' | transloco }}</strong>:&nbsp;{{ getItem('market') }}
-    </p>
-    <p>
-        <strong>{{ 'agency' | transloco }}</strong>:&nbsp;{{ getItem('agency') }}
-    </p>
-    <p>
-        <strong>{{ 'board' | transloco }}</strong>:&nbsp;{{ getItem('board') }}
-    </p>
-    <p>
-        <strong>{{ 'room' | transloco }}</strong>:&nbsp;{{ getItem('room') }}
-    </p>
-    <p>
-        <strong>{{ 'room_type' | transloco }}</strong>:&nbsp;{{ getItem('room_type') }} NEED FİX
-    </p>
-    <p>
-        <strong>Days</strong>:&nbsp;{{ contract.contDay }}
-    </p>
-</div>
-
-<div mat-dialog-actions>
-    <button mat-dialog-close mat-flat-button color="primary">OK</button>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong mat-line>{{ 'Code' | transloco }} : </strong> 
+        {{ contract.code }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'Name' | transloco }} : </strong>
+        {{ contract.name }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'adultPrice' | transloco }} : </strong>
+        {{ contract.adultPrice }} {{ getItem('currency') }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'childPrice' | transloco }} : </strong>
+        {{ contract.childPrice }} {{ getItem('currency') }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'start' | transloco }} : </strong>
+        {{ toDate(contract.enteredDate) | localizedDate }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'end' | transloco }} : </strong>
+        {{ toDate(contract.exitDate) | localizedDate }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'hotel' | transloco }} : </strong>
+        {{ getItem('hotel') }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'Market' | transloco }} : </strong>
+        {{ getItem('market') }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'Agency' | transloco }} : </strong>
+        {{ getItem('agency') }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'Board' | transloco }} : </strong>
+        {{ getItem('board') }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong mat-line>{{ 'Room' | transloco }} : </strong> 
+        {{getItem('room') }} 
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'Room Type' | transloco }} : </strong>
+        {{ getItem('room_type') }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>Days : </strong>
+        {{ contract.contDay }}
+    </mat-card-content>
+    </div>
 </div>
