@@ -19,27 +19,6 @@
   <br>
 
   <mat-form-field>
-    <mat-label>{{ 'bed' | transloco }}</mat-label>
-    <textarea  class="slot-bed" matInput [(ngModel)]="roomBed" maxlength="200" (keyup.enter)="add()"></textarea>
-  </mat-form-field>
-
-  <br>
-
-  <mat-form-field>
-    <mat-label>{{ 'slot' | transloco }}</mat-label>
-    <textarea class="slot-bed" matInput type="number" [(ngModel)]="roomSlot" maxlength="3" (keyup.enter)="add()"></textarea>
-  </mat-form-field>
-
-  <br>
-
-  <mat-form-field>
-    <mat-label>{{ 'roomtype' | transloco }}</mat-label>
-    <mat-select [(ngModel)]="roomTypeId">
-      <mat-option *ngFor="let c of roomTypes" type="number" [value]="c.id">{{ c.name }}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
     <mat-label>{{ 'hotel' | transloco }}</mat-label>
     <mat-select [(ngModel)]="hotelId">
       <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
@@ -47,6 +26,26 @@
   </mat-form-field>
 
   <br>
+
+  <mat-form-field>
+    <mat-label>{{ 'room_type' | transloco }}</mat-label>
+    <mat-select [(ngModel)]="roomTypeId">
+      <mat-option *ngFor="let r of roomTypes" [value]="r.id">{{ r.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+<!-- 
+  <section class="example-section">
+    <label class="example-margin"> {{ 'clean' | transloco }} </label>
+    &nbsp; &nbsp;&nbsp;&nbsp;
+    <mat-radio-group [(ngModel)]="clean">
+      <mat-radio-button class="example-margin" value=true>Clean</mat-radio-button>
+      &nbsp; &nbsp;&nbsp;&nbsp;
+      <mat-radio-button class="example-margin" value=false>Dirty</mat-radio-button>
+    </mat-radio-group>
+  </section> -->
+
 
 </div>
 

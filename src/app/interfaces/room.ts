@@ -1,11 +1,10 @@
 export interface Room {
-    code: string;
     id?: number; 
-    roomTypeId: number;
-    hotelId: number;
+    code: string;
     name: string;
-    slot: number;
-    bed: string;
+    hotelId: number;
+    roomTypeId: number;
+    clean: boolean;
     status: boolean;
 }
   

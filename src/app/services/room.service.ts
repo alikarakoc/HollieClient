@@ -23,7 +23,7 @@ export class RoomService {
   }
 
   deleteRoom(room: Partial<Room>) {
-    return this.http.delete<ListResponseModel<Room>>(`${this.baseUrl}/delete?Id=${room.id}`);
+    return this.http.delete<ListResponseModel<Room>>(`${this.baseUrl}/delete`,{ body: room });
   }
 
   updateRoom(room: Partial<Room>) {

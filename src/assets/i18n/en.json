@@ -54,7 +54,6 @@
     },
     "name": "Name",
     "bed": "Yatak",
-    "slot": "Slot",
     "address": "Address",
     "phone": "Phone",
     "code": "Code",
@@ -76,7 +75,9 @@
     "value": "Value",
     "adult": "Adult",
     "child": "Child",
-    "childAge": "Child Age"
+    "person": "Person",
+    "childAge": "Child Age",
+    "clean": "Clean"
 
 
 }

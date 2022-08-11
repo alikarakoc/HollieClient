@@ -23,11 +23,10 @@ interface DialogData {
 })
 export class RoomUpdateDialogComponent implements OnInit {
   newRoomCode : string = this.data.element.code;
-  newRoomTypeId: number = this.data.element.roomTypeId;
-  newHotelId: number = this.data.element.hotelId;
   newRoomName: string = this.data.element.name;
-  newRoomBed: string = this.data.element.bed;
-  newRoomSlot: number = this.data.element.slot
+  newHotelId: number = this.data.element.hotelId;
+  newRoomTypeId: number = this.data.element.roomTypeId;
+  //cleanStatus: boolean = this.data.element.clean;
 
 
   sameCodeCheck = false;
@@ -64,12 +63,17 @@ export class RoomUpdateDialogComponent implements OnInit {
 
 
   update() {
-    if (!this.newRoomName || !this.newRoomCode || !this.newRoomBed || !this.newRoomSlot) {
+    if (!this.newRoomName || !this.newRoomCode || !this.newHotelId || !this.newRoomTypeId ) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
     const otherRoomCode = this.rooms;
-    const otherRooms = this.rooms.filter(c => c.code !== this.newRoomCode && c.name !== this.newRoomName && c.bed !== this.newRoomBed && c.slot !== this.newRoomSlot);
+    const otherRooms = this.rooms.filter(c => 
+      c.code !== this.newRoomCode && 
+      c.name !== this.newRoomName && 
+      c.hotelId !== this.newHotelId && 
+      c.roomTypeId !== this.newRoomTypeId);
+      //c.clean !== this.cleanStatus 
 
     if (otherRooms.findIndex(c =>c.code == this.newRoomCode.toString()) >-1){
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
@@ -77,12 +81,19 @@ export class RoomUpdateDialogComponent implements OnInit {
       return;
 
     }
-    if (otherRooms.some(c => c.code === this.newRoomCode && c.name === this.newRoomName && c.bed === this.newRoomBed && c.slot === this.newRoomSlot)) {
+    if (otherRooms.some(c => 
+      c.code === this.newRoomCode && 
+      c.name === this.newRoomName && 
+      c.hotelId === this.newHotelId && 
+      //c.clean === this.cleanStatus
+      c.roomTypeId === this.newRoomTypeId
+       )) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
       this.newRoomCode = "";
       this.newRoomName = "";
-      this.newRoomSlot = 0;
-      this.newRoomBed = "";
+      this.newHotelId = 0;
+      this.newRoomTypeId = 0;
+      //this.cleanStatus = false;
       return;
     }
     
@@ -90,10 +101,9 @@ export class RoomUpdateDialogComponent implements OnInit {
     this.data.dialogRef?.close();
     this.data.element.code = this.newRoomCode;
     this.data.element.name = this.newRoomName;
-    this.data.element.slot = this.newRoomSlot;
-    this.data.element.bed = this.newRoomBed;
-    this.data.element.roomTypeId = this.newRoomTypeId;
     this.data.element.hotelId = this.newHotelId;
+    this.data.element.roomTypeId = this.newRoomTypeId;
+    //this.data.element.clean = this.cleanStatus;
     this.data.table?.renderRows();
     this.dialogRef.close({ isUpdated: true });
   }
@@ -110,7 +120,12 @@ export class RoomUpdateDialogComponent implements OnInit {
 
     dialog.afterClosed().subscribe(result => {
       if (result.isDeleted) {
-        this.roomService.deleteRoom({ code: this.newRoomCode, bed: this.newRoomBed, slot: this.newRoomSlot,roomTypeId: this.newRoomTypeId }).subscribe(() => {
+        this.roomService.deleteRoom({ 
+          code: this.newRoomCode, 
+          name: this.newRoomName, 
+          hotelId: this.newHotelId,
+          //clean: this.cleanStatus,
+          roomTypeId: this.newRoomTypeId }).subscribe(() => {
           this.ngOnInit();
         });
       }

@@ -54,7 +54,6 @@
     },
     "name": "İsim",
     "bed": "Bed",
-    "slot": "Slot",
     "address": "Adres",
     "phone": "Telefon",
     "code": "Kod",
@@ -76,6 +75,8 @@
     "value": "Değer",
     "adult": "Yetişkin",
     "child": "Çocuk",
-    "childAge:" : "Çocuk Yaşı"
+    "person": "Kişi",
+    "childAge" : "Çocuk Yaşı",
+    "clean" : "Temiz" 
 
 }

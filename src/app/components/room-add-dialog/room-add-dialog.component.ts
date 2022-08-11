@@ -18,10 +18,9 @@ type FormType<C> = FormControl<C | null>;
 interface FormData {
   code: FormType<string>;
   name: FormType<string>;
-  roomtypeid: FormType<number>;
+  roomtypeId: FormType<number>;
   hotelId: FormType<number>;
-  slot: FormType<number>;
-  bed: FormType<string>;
+  clean: FormType<Boolean>
 }
 
 @Component({
@@ -34,8 +33,7 @@ export class RoomAddDialogComponent implements OnInit {
   roomName: string;
   roomTypeId: number;
   hotelId: number;
-  roomSlot: number;
-  roomBed: string;
+  //clean: boolean;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -63,13 +61,14 @@ export class RoomAddDialogComponent implements OnInit {
   }
 
   add() {
+    debugger;
     const predicate = (a: Omit<Room, 'id'>) =>
       a.code === this.roomCode &&
       a.name === this.roomName &&
       a.roomTypeId === this.roomTypeId &&
       a.hotelId === this.hotelId &&
-      a.slot === this.roomSlot &&
-      a.bed === this.roomBed;
+      a.roomTypeId === this.roomTypeId;
+      //a.clean === this.clean;
 
     const condition = this.roomService.rooms.some(predicate);
 
@@ -81,7 +80,7 @@ export class RoomAddDialogComponent implements OnInit {
       }
     });
 
-    if (!this.roomCode || !this.roomName || !this.roomSlot|| !this.roomBed) {
+    if (!this.roomCode || !this.roomName || !this.hotelId|| !this.roomTypeId) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
       return;
     }
@@ -96,6 +95,7 @@ export class RoomAddDialogComponent implements OnInit {
 
     this.closeDialog();
     this.data.table.renderRows();
+    
   }
 
   closeDialog() {
@@ -104,11 +104,12 @@ export class RoomAddDialogComponent implements OnInit {
       element: {
         code: this.roomCode,
         name: this.roomName,
-        roomtypeId: this.roomTypeId,
         hotelId: this.hotelId,
-        slot: this.roomSlot,
-        bed: this.roomBed
+        roomtypeId: this.roomTypeId
+        //clean: this.clean
       }
+      
     });
+    
   }
 }

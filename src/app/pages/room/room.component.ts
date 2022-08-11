@@ -17,7 +17,8 @@ import { RoomDeleteDialogComponent, RoomUpdateDialogComponent } from 'src/app/co
   styleUrls: ['./room.component.scss']
 })
 export class RoomComponent implements OnInit {
-  columns: string[] = ["code", "name", "bed","slot", "HotelId", "roomTypeId", "actions"  ];
+  columns: string[] = ["code", "name", "HotelId", "roomTypeId",  "actions"  ];
+  //columns: string[] = ["code", "name", "HotelId", "roomTypeId", "clean", "actions"  ];
   dataSource: MatTableDataSource<Room>;
   value = '';
 
@@ -45,9 +46,9 @@ export class RoomComponent implements OnInit {
       return {
         code: r.code,
         name: r.name,
-        slot: r.slot,
+        hotel: this.getCurrentHotel(r),
         roomtype: this.getCurrentRoomType(r),
-        bed: r.bed
+        clean: r.clean
       }
     })
     this.excelService.exportAsExcelFile(arrayToExport, 'Room');
@@ -90,7 +91,6 @@ export class RoomComponent implements OnInit {
     return this.roomTypes.find(c => c.id === element.roomTypeId)?.name;
   }
 
- 
   
   getCurrentHotel(element: Room) {
     return this.hotels.find(c => c.id === element.hotelId)?.name;
@@ -117,6 +117,9 @@ export class RoomComponent implements OnInit {
         this.roomService.updateRoom(element).subscribe(() => this.ngOnInit());
       }
     });
+
+    console.log(element);
+    
   }
 
   delete(element: Room) {
