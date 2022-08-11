@@ -14,6 +14,8 @@ import { TranslocoService } from '@ngneat/transloco';
 interface DialogData {
   element: RoomType;
   table: MatTable<any>;
+  dialogRef: MatDialogRef<any>;
+  hotels: any[];
 }
 
 @Component({
@@ -24,6 +26,10 @@ interface DialogData {
 export class RoomTypeUpdateDialogComponent implements OnInit {
   newType: string = this.dialogData.element.name;
   newCode: string = this.dialogData.element.code;
+  newHotelId: number = this.dialogData.element.hotelId;
+  newMaxAD: number = this.dialogData.element.maxAD;
+  newMaxCH: number = this.dialogData.element.maxCH;
+  newPax: number = this.dialogData.element.pax;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public dialogData: DialogData,
@@ -32,9 +38,15 @@ export class RoomTypeUpdateDialogComponent implements OnInit {
     private roomTypeService: RoomTypeService,
     private dialog: MatDialog,
     public translocoService: TranslocoService
-  ) { }
+  ) { 
+    this.hotels = this.dialogData.hotels;
+  }
+  hotels: any[] = [];
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+  
+    
+  }
 
   closeDialog() {
     this.dialogRef.close({
@@ -61,6 +73,10 @@ export class RoomTypeUpdateDialogComponent implements OnInit {
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.dialogData.element.name }));
     this.dialogData.element.name = this.newType;
     this.dialogData.element.code = this.newCode;
+    this.dialogData.element.hotelId = this.newHotelId;
+    this.dialogData.element.maxAD = this.newMaxAD;
+    this.dialogData.element.maxCH = this.newMaxCH;
+    this.dialogData.element.pax = this.newPax;
     this.closeDialog();
     this.dialogData.table.renderRows();
   }

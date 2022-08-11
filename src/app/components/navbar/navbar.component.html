@@ -18,7 +18,6 @@
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/room">{{ 'room_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/contracts">{{ 'contract_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/search-contract">{{ 'search_contract' | transloco }}</a>
-      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/index">{{ 'index' | transloco }}</a>
       <ng-container *ngIf="isHandset | async">
         <mat-divider></mat-divider>
         <div style="text-align: center;">

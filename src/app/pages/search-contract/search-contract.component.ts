@@ -74,8 +74,6 @@ export class SearchContractComponent implements OnInit {
       return {
         code: c.code,
         name: c.name,
-        adultPrice: c.adultPrice,
-        childPrice:c.childPrice,
         currency: this.getItem('currency', c),
         hotels: this.getItem('hotel', c),
         markets: this.getItem('market', c).toString(),

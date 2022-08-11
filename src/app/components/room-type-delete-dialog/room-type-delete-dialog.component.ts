@@ -5,11 +5,13 @@ import { MatTable } from '@angular/material/table';
 import { RoomType, Contract } from 'src/app/interfaces';
 import { CRoomType } from 'src/app/interfaces/croomtype';
 import { TranslocoService } from '@ngneat/transloco';
+import { RoomTypeService } from 'src/app/services';
 
 interface DialogData {
   element: RoomType;
   table: MatTable<any>;
   dialogRef: MatDialogRef<any>;
+
 }
 
 @Component({
@@ -23,25 +25,19 @@ export class RoomTypeDeleteDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<RoomTypeDeleteDialogComponent>,
     public translocoService: TranslocoService,
+    private roomTypeService: RoomTypeService
   ) { }
-  croomtype: CRoomType[];
 
   ngOnInit(): void {
 
   }
 
   delete() {
-    const condition = this.croomtype.some(c => c.roomTypeId === this.data.element.id);
-
-    if (condition) {
-      this.snackBar.open('This category is using with another column.', "OK");
-      return;
-    }
-    this.snackBar.open(this.translocoService.translate('dialogs.delete_success', { elementName: this.data.element.name }));
-    // this.roomTypeService.deleteRoomType(this.data.element);
-    this.dialogRef.close({ isDeleted: true });
-    this.data.dialogRef.close();
-    this.data.table.renderRows();
+    this.snackBar.open(this.translocoService.translate('dialogs.delete_success'));
+    this.closeDialog({ isDeleted: true });
+    this.data.dialogRef?.close();
+    this.roomTypeService.deleteRoomType(this.data.element);
+    this.data.table?.renderRows();
   }
 
   closeDialog({ isDeleted }: { isDeleted: boolean; }) {

@@ -24,10 +24,10 @@ export class RoomTypeService {
   }
 
   deleteRoomType(roomType: Partial<RoomType>) {
-    return this.httpClient.delete<ListResponseModel<RoomType>>(`${this.baseUrl}/delete?Id=${roomType.id}`)
+    return this.httpClient.delete<ListResponseModel<RoomType>>(`${this.baseUrl}/delete`, { body: roomType })
   }
 
   updateRoomType(roomType: Partial<RoomType>) {
-    return this.httpClient.put<ListResponseModel<RoomType>>(`${this.baseUrl}/update?Id=${roomType.id}`, roomType);
+    return this.httpClient.put<ListResponseModel<RoomType>>(`${this.baseUrl}/update`, roomType);
   }
 }

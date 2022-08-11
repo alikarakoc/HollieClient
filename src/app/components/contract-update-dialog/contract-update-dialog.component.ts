@@ -42,8 +42,6 @@ export class ContractUpdateDialogComponent implements OnInit {
   id = this.data.element.id;
   code: string = this.data.element.code;
   name: string = this.data.element.name;
-  adultPrice: number = this.data.element.adultPrice;
-  childPrice: number = this.data.element.childPrice;
   start: Date = this.data.element.enteredDate;
   end: Date = this.data.element.exitDate;
   hotel: number = this.data.element.hotelId;
@@ -51,7 +49,6 @@ export class ContractUpdateDialogComponent implements OnInit {
   selectedAgencies: any[] = this.data.element.agencyList;
   selectedBoards: any[] = this.data.element.boardList;
   selectedMarkets: any[] = this.data.element.marketList;
-  selectedRoomTypes: any[] = this.data.element.roomTypeList;
   selectedRooms: any[] = this.data.element.roomList;
   
 
@@ -108,7 +105,7 @@ export class ContractUpdateDialogComponent implements OnInit {
   contracts: Contract[] = [];
 
   update() {
-    if (!this.code || !this.name || !this.end || !this.start  || !this.adultPrice) {
+    if (!this.code || !this.name || !this.end || !this.start ) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
@@ -120,8 +117,6 @@ export class ContractUpdateDialogComponent implements OnInit {
     const otherContracts = this.contracts.filter(c =>
       c.code !== this.code &&
       c.name !== this.name &&
-      c.adultPrice !== this.adultPrice &&
-      c.childPrice !== this.childPrice &&
       c.hotelId !== this.hotel &&
       c.currencyId !== this.currency &&
       c.enteredDate !== this.start &&
@@ -129,8 +124,6 @@ export class ContractUpdateDialogComponent implements OnInit {
       if (otherContracts.some(c =>
       c.code === this.code &&
       c.name === this.name &&
-      c.adultPrice === this.adultPrice &&
-      c.childPrice === this.childPrice &&
 
       c.hotelId === this.hotel &&
       //c.marketId === this.market &&
@@ -140,8 +133,6 @@ export class ContractUpdateDialogComponent implements OnInit {
       c.currencyId === this.currency)) {this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'contract' : 'kontrakt' }), "OK");
       this.code = "";
       this.name = "";
-      this.adultPrice == null;
-      this.childPrice == null;
       this.start == null,
         this.end == null,
         this.hotel == null;
@@ -186,13 +177,13 @@ export class ContractUpdateDialogComponent implements OnInit {
       this.selectedRooms[i] = room;
      };
 
-     for(let i = 0; i < this.selectedRoomTypes.length; i++){
-      const roomType : CRoomType = {
-        roomTypeId: 0
-      };
-      roomType.roomTypeId = this.selectedRoomTypes[i];
-      this.selectedRoomTypes[i] = roomType;
-     };
+    //  for(let i = 0; i < this.selectedRoomTypes.length; i++){
+    //   const roomType : CRoomType = {
+    //     roomTypeId: 0
+    //   };
+    //   roomType.roomTypeId = this.selectedRoomTypes[i];
+    //   this.selectedRoomTypes[i] = roomType;
+    //  };
 
    
     
@@ -200,8 +191,6 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.data.dialogRef?.close();
     this.data.element.code = this.code;
     this.data.element.name = this.name;
-    this.data.element.adultPrice = this.adultPrice;
-    this.data.element.childPrice = this.childPrice;
     this.data.element.enteredDate = this.start;
     this.data.element.exitDate = this.end;
     this.data.element.hotelId = this.hotel;
@@ -210,7 +199,6 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.data.element.marketList = this.selectedMarkets;
     this.data.element.roomList = this.selectedRooms;
     this.data.element.boardList = this.selectedBoards;
-    this.data.element.roomTypeList = this.selectedRoomTypes;
     
     console.log("this.data.element"+this.data.element);
     this.dialogRef.close({ isUpdated: true });

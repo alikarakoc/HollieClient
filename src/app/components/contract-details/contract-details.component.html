@@ -15,73 +15,97 @@
         <strong mat-line>{{ 'Code' | transloco }} : </strong> 
         {{ contract.code }}
     </mat-card-content>
+
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'Name' | transloco }} : </strong>
         {{ contract.name }}
     </mat-card-content>
+
     <mat-divider></mat-divider>
-    <mat-card-content class="user-select-all">
+
+    <!-- <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'adultPrice' | transloco }} : </strong>
         {{ contract.adultPrice }} {{ getItem('currency') }}
     </mat-card-content>
+    
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'childPrice' | transloco }} : </strong>
         {{ contract.childPrice }} {{ getItem('currency') }}
-    </mat-card-content>
+    </mat-card-content> -->
+
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'start' | transloco }} : </strong>
         {{ toDate(contract.enteredDate) | localizedDate }}
     </mat-card-content>
+
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'end' | transloco }} : </strong>
         {{ toDate(contract.exitDate) | localizedDate }}
     </mat-card-content>
+
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'hotel' | transloco }} : </strong>
         {{ getItem('hotel') }}
     </mat-card-content>
+
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'Market' | transloco }} : </strong>
         {{ getItem('market') }}
     </mat-card-content>
+
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'Agency' | transloco }} : </strong>
         {{ getItem('agency') }}
     </mat-card-content>
+
     <mat-divider></mat-divider>
+    
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'Board' | transloco }} : </strong>
         {{ getItem('board') }}
     </mat-card-content>
+
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong mat-line>{{ 'Room' | transloco }} : </strong> 
         {{getItem('room') }} 
     </mat-card-content>
+
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'Room Type' | transloco }} : </strong>
         {{ getItem('room_type') }}
     </mat-card-content>
+
     <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>Days : </strong>

@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { RoomType } from 'src/app/interfaces';
-import { RoomTypeService } from 'src/app/services';
+import { HotelService, RoomTypeService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
 
 interface DialogData {
@@ -18,16 +18,27 @@ interface DialogData {
 export class RoomTypeAddDialogComponent implements OnInit {
   roomTypeName: string;
   roomTypeCode: string;
+  roomTypeHotelId: number;
+  roomTypeMaxCH:  number;
+  roomTypeMaxAD: number;
+  roomTypePax: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
     private dialogRef: MatDialogRef<RoomTypeAddDialogComponent>,
     private snackBar: MatSnackBar,
     private roomTypeService: RoomTypeService,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private hotelService: HotelService
   ) { }
 
-  ngOnInit(): void { }
+  hotels: any[] = [];
+  ngOnInit(): void { 
+    this.hotelService.getAllHotels().subscribe(res => {
+      if (res.data !== null) this.hotels = res.data;
+      else this.hotels = [];
+    });
+  }
 
   add() {
     if (!this.roomTypeName || !this.roomTypeCode) {
@@ -58,8 +69,12 @@ export class RoomTypeAddDialogComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close({
       isAdded: true,
-      elementName: this.roomTypeName,
-      elementCode: this.roomTypeCode
+      name: this.roomTypeName,
+      code: this.roomTypeCode,
+      hotelId: this.roomTypeHotelId,
+      maxCH : this.roomTypeMaxCH,
+      maxAD :this.roomTypeMaxAD,
+      pax: this.roomTypePax
     });
   }
 

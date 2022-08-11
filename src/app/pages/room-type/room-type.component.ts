@@ -6,8 +6,8 @@ import {
   RoomTypeDeleteDialogComponent,
   RoomTypeUpdateDialogComponent,
 } from 'src/app/components';
-import { RoomType } from 'src/app/interfaces';
-import { RoomTypeService } from 'src/app/services';
+import { Hotel, RoomType } from 'src/app/interfaces';
+import { HotelService, RoomTypeService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
@@ -19,7 +19,7 @@ import { MatSort } from "@angular/material/sort";
   styleUrls: ['./room-type.component.scss'],
 })
 export class RoomTypeComponent implements OnInit {
-  columns: string[] = ['code', 'name', 'actions'];
+  columns: string[] = ['code', 'name', 'hotelId', 'maxAD', 'maxCH', 'pax', 'actions'];
   dataSource: MatTableDataSource<RoomType>;
 
   value =  '';
@@ -30,6 +30,7 @@ export class RoomTypeComponent implements OnInit {
   RoomType = 'ExcelSheet.xlsx';
 
   roomTypes: RoomType[] = [];
+  hotels: Hotel[] = [];
   checkButtonCount: number = 0;
 
 
@@ -37,7 +38,8 @@ export class RoomTypeComponent implements OnInit {
     private dialog: MatDialog,
     public roomTypeService: RoomTypeService,
     public translocoService: TranslocoService,
-    private excelService: ExcelService
+    private excelService: ExcelService,
+    private hotelService: HotelService
   ) { }
 
   exportAsXLSX(): void {
@@ -50,10 +52,15 @@ export class RoomTypeComponent implements OnInit {
       if (res.data!=null){
           this.roomTypes = res.data;
       }
-      
       this.dataSource = new MatTableDataSource(this.roomTypes);
       this.dataSource.sort = this.sort;
     });
+
+    this.hotelService.getAllHotels().subscribe((res) =>{
+      if (res.data!=null){
+        this.hotels = res.data;
+    }
+    })
   }
 
   
@@ -72,14 +79,11 @@ export class RoomTypeComponent implements OnInit {
   update(element: RoomType) {
     if(this.checkButtonCount < 1) {
     const dialog = this.dialog.open(RoomTypeUpdateDialogComponent, {
-      data: { element, table: this.table },
+      data: { element, table: this.table, hotels: this.hotels },
     });
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {
-        if(this.checkButtonCount > 0) {
-          this.checkButtonCount = 0;
-        }
         this.roomTypeService
           .updateRoomType(element)
           .subscribe(() => {
@@ -88,7 +92,6 @@ export class RoomTypeComponent implements OnInit {
       }
     });
   }
-  this.checkButtonCount += 1;
 }
 
   createNewRoomType() {
@@ -103,7 +106,14 @@ export class RoomTypeComponent implements OnInit {
           this.checkButtonCount = 0;
         }
         this.roomTypeService
-          .addRoomType({ name: result.elementName, code: result.elementCode })
+          .addRoomType({ 
+            name: result.name, 
+            code: result.code, 
+            hotelId: result.hotelId,
+            maxAD: result.maxAD, 
+            maxCH: result.maxCH,
+            pax: result.pax,  
+          })
           .subscribe(() => {
             this.ngOnInit();
           });
@@ -112,25 +122,32 @@ export class RoomTypeComponent implements OnInit {
     });
   }
   this.checkButtonCount += 1;
-}
+  }
 
   delete(element: RoomType) {
     if(this.checkButtonCount < 1) {
     const dialog = this.dialog.open(RoomTypeDeleteDialogComponent, {
-      data: { element, table: this.table },
+      data: { element, table: this.table},
     });
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
-        if(this.checkButtonCount > 0) {
-          this.checkButtonCount = 0;
-        }
         this.roomTypeService
           .deleteRoomType(element)
           .subscribe(() => this.ngOnInit());
       }
     });
   }
-  this.checkButtonCount += 1;
+  }
+  
+  getItem(type:  "hotel" , element: RoomType) {
+    switch (type) {
+      case 'hotel':
+          return this.hotels.find(h => h.id === element.hotelId)?.name;
+    }
+  }
 }
-}
+
+
+
+

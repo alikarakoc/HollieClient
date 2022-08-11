@@ -8,22 +8,17 @@ export interface Contract {
     name: string;
     id?: number;
     code: string;
-    adultPrice: number;
-    childPrice:number;
-    enteredDate: Date;
-    exitDate: Date;
     hotelId: number;
     contDay? : number;
-    //marketId: number;
-    //categoryId: number;
-    agencyId: number;
+    currencyId: number;
+    enteredDate: Date;
+    exitDate: Date;
+    adp: number;
+    ch07: number;
+    ch14: number;
     agencyList: CAgency[];
     boardList: CBoard[];
     roomList: CRoom[];
     marketList: CMarket[];
-    roomTypeList: CRoomType[];
-    //boardId: number;
-    //roomTypeId: number;
-    currencyId: number;
     status: boolean;
 }

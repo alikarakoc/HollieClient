@@ -14,6 +14,36 @@
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput maxlength="50" [(ngModel)]="newType" (keyup.enter)="updateRoomType()">
     </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="selects-m">
+        <mat-label>{{ 'hotel' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="newHotelId">
+            <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    
+
+    <mat-form-field>
+        <mat-label>{{ 'adult' | transloco }}</mat-label>
+        <input [(ngModel)]="newMaxAD" matInput type="number" value="1" min="0" max="3"  (keyup.enter)="updateRoomType()">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label>{{ 'child' | transloco }}</mat-label>
+        <input [(ngModel)]="newMaxCH" matInput type="number" value="1" min="0" max="3" (keyup.enter)="updateRoomType()" >
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label>{{ 'person' | transloco }}</mat-label>
+        <input [(ngModel)]="newPax" matInput type="number" value="1" min="0" max="3" (keyup.enter)="updateRoomType()" >
+    </mat-form-field>
 </div>
 
 <div mat-dialog-actions>
