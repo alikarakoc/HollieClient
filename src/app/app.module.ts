@@ -54,23 +54,22 @@ import {
   ContractDeleteDialogComponent,
   ContractUpdateDialogComponent,
 
+  HotelFeatureAddDialogComponent,
+  HotelFeatureUpdateDialogComponent,
+  HotelFeatureDeleteDialogComponent,
+
   ContractDetailsComponent,
 
 } from './components';
 
-import { HotelFeatureAddDialogComponent } from 'src/app/components/hotel-feature-add-dialog/hotel-feature-add-dialog.component';
-import { HotelFeatureUpdateDialogComponent } from 'src/app/components/hotel-feature-update-dialog/hotel-feature-update-dialog.component';
-import { HotelFeatureDeleteDialogComponent } from 'src/app/components/hotel-feature-delete-dialog/hotel-feature-delete-dialog.component';
+
 
 
 // Modules
 import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, 
   HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, 
-  ContractComponent, SearchContractComponent,  } from './pages';
+  ContractComponent, SearchContractComponent, HomeComponent, RoomComponent, HotelFeatureComponent } from './pages';
 
-import { HomeComponent } from './pages/home/home.component';
-import { RoomComponent } from './pages/room/room.component';
-import { HotelFeatureComponent } from './pages/hotel-feature/hotel-feature.component';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';

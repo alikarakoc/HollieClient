@@ -7,6 +7,8 @@ import { HotelCategoryService, HotelService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
+import { HotelFeature } from 'src/app/interfaces/hotel-feature';
+import { HotelFeatureService } from 'src/app/services/hotel-feature';
 
 @Component({
   selector: 'app-hotel',
@@ -14,7 +16,7 @@ import { MatSort } from "@angular/material/sort";
   styleUrls: ['./hotel.component.scss']
 })
 export class HotelComponent implements OnInit {
-  columns: string[] = ["code", "name", "address", "phone", "email", "HotelCategoryId", "actions"];
+  columns: string[] = ["code", "name", "address", "phone", "email", "hotelCategoryId","hotelFeatureId", "actions"];
   dataSource: MatTableDataSource<Hotel>;
   value = '';
 
@@ -26,6 +28,7 @@ export class HotelComponent implements OnInit {
 
   hotels: Hotel[] = [];
   hotelCategories: HotelCategory[] = [];
+  hotelFeatures: HotelFeature[] = [];
 
 
   constructor(
@@ -33,6 +36,7 @@ export class HotelComponent implements OnInit {
     private dialog: MatDialog,
     public translocoService: TranslocoService,
     private hotelCategoryService: HotelCategoryService,
+    private hotelFeatureService: HotelFeatureService,
     private excelService: ExcelService
   ) { }
 
@@ -43,6 +47,7 @@ export class HotelComponent implements OnInit {
         name: h.name,
         address: h.address,
         category: this.getCurrentCategory(h),
+        feature: this.getCurrentFeature(h),
         phone: h.phone,
         email: h.email
       }
@@ -63,6 +68,10 @@ export class HotelComponent implements OnInit {
     this.hotelCategoryService.getAllHotels().subscribe(res => {
       this.hotelCategories = res.data;
     });
+
+    this.hotelFeatureService.getAllFeatures().subscribe(res => {
+      this.hotelFeatures = res.data;
+    });
   }
 
   filterHotels(event: Event) {
@@ -80,6 +89,11 @@ export class HotelComponent implements OnInit {
 
   getCurrentCategory(element: Hotel) {
     return this.hotelCategories.find(c => c.id === element.hotelCategoryId)?.name;
+  }
+
+  getCurrentFeature(element: Hotel) {
+    let s  = this.hotelFeatures.find(c => c.id === element.hotelFeatureId);
+    return "[ " + s?.babyTop + " - " + s?.childTop + " - " + s?.teenTop + " ]"
   }
 
   create() {

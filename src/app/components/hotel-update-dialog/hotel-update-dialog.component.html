@@ -44,6 +44,16 @@
   <br>
 
   <mat-form-field>
+    <mat-label>{{ 'feature' | transloco }}</mat-label>
+    <mat-select matInput [(ngModel)]="newHotelFeatureId">
+      <mat-option *ngFor="let c of hotelFeatures" [value]="c.id">
+        {{ c.code }} &nbsp; [ {{ c.babyTop }} - {{ c.childTop }} - {{ c.teenTop }} ]</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
     <mat-label>{{ 'email' | transloco }}</mat-label>
     <input matInput [formControl]="emailControl" (keyup.enter)="update()">
   </mat-form-field>

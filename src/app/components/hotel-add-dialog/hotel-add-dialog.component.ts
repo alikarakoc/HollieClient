@@ -7,6 +7,8 @@ import { Hotel, HotelCategory } from 'src/app/interfaces';
 import { HotelService } from 'src/app/services/hotel.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { HotelCategoryService } from 'src/app/services';
+import { HotelFeature } from 'src/app/interfaces/hotel-feature';
+import { HotelFeatureService } from 'src/app/services/hotel-feature';
 
 interface DialogData {
   table: MatTable<Hotel>;
@@ -20,7 +22,8 @@ interface FormData {
   address: FormType<string>;
   phone: FormType<string /* Phone */>;
   email: FormType<string>;
-  HotelCategoryId: FormType<number>;
+  hotelCategoryId: FormType<number>;
+  hotelFeatureId: FormType<number>;
 }
 
 @Component({
@@ -35,6 +38,7 @@ export class HotelAddDialogComponent implements OnInit {
   hotelEmail: string;
   hotelAddress: string;
   hotelCategoryId: number;
+  hotelFeatureId: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -42,21 +46,24 @@ export class HotelAddDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<HotelAddDialogComponent>,
     private hotelService: HotelService,
     public translocoService: TranslocoService,
-    private hotelCategoryService: HotelCategoryService
+    private hotelCategoryService: HotelCategoryService,
+    private hotelFeatureService: HotelFeatureService
   ) { }
 
   hotelCategories: HotelCategory[] = [];
+  hotelFeatures: HotelFeature[] = [];
 
   emailControl = new FormControl('', [Validators.required, Validators.email]);
-
-  // phoneControl = new FormControl('', [Validators.required,Validators.minLength(9)])
-
-  // phoneControl = new FormControl('', [Validators.required, Validators.minLength(11), Validators.maxLength(11)])
 
   ngOnInit(): void {
     this.hotelCategoryService.getAllHotels().subscribe(res => {
       if (res.data !== null) this.hotelCategories = res.data
       else this.hotelCategories = []
+    });
+
+    this.hotelFeatureService.getAllFeatures().subscribe((res) => {
+      if(res.data !== null) this.hotelFeatures = res.data;
+      else this.hotelFeatures = [];
     })
   }
 
@@ -69,22 +76,19 @@ export class HotelAddDialogComponent implements OnInit {
       a.address === this.hotelAddress &&
       a.phone === this.hotelPhone &&
       a.hotelCategoryId === this.hotelCategoryId &&
+      a.hotelFeatureId === this.hotelFeatureId &&
       a.email === this.emailControl.value;
 
     const condition = this.hotelService.hotels.some(predicate);
 
     this.hotelService.getAllHotels().subscribe((res) => {
-      // categories = res.data;
       if (res.data.some(c => c.code === this.hotelCode)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { data: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel türü' }), "OK");
         this.hotelCode = "";
         return;
       }
     });
-    // if (this.phoneControl.hasError('phone')) {
-    //   this.snackBar.open(this.translocoService.translate('dialogs.error_phone'));
-    //   return;
-    // }
+    
     if (this.hotelPhone.length != 11){
       this.snackBar.open(this.translocoService.translate('dialogs.error_phone'), "OK");
       return;
@@ -120,7 +124,7 @@ export class HotelAddDialogComponent implements OnInit {
   }
 
   closeDialog() {
-    console.log(this.hotelCategoryId);
+    console.log(this.hotelFeatureId);
 
     this.dialogRef.close({
       isAdded: true,
@@ -130,7 +134,8 @@ export class HotelAddDialogComponent implements OnInit {
         phone: this.hotelPhone,
         email: this.emailControl.value,
         address: this.hotelAddress,
-        HotelCategoryId: this.hotelCategoryId
+        hotelCategoryId: this.hotelCategoryId,
+        hotelFeatureId: this.hotelFeatureId
       }
     });
 

@@ -4,8 +4,7 @@
         <span class="spacer"></span>
         <button mat-flat-button color="primary" class="new-button" (click)="create()">
             {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ?
-            'Hotel'
-            : 'Otel' }) }}
+            'Hotel' : 'Otel' }) }}
         </button>
         <button mat-flat-button color="excel" class="excel-button" (click)="exportAsXLSX()">
             <mat-icon>file_download</mat-icon>
@@ -48,9 +47,14 @@
             <td mat-cell *matCellDef="let element">{{ element.email }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="HotelCategoryId">
+        <ng-container matColumnDef="hotelCategoryId">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'category' | transloco }}</th>
             <td mat-cell *matCellDef="let element">{{ getCurrentCategory(element) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="hotelFeatureId">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'feature' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ getCurrentFeature(element) }}</td>
         </ng-container>
 
         <ng-container matColumnDef="actions">

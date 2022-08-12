@@ -9,3 +9,6 @@ export { BoardComponent } from './board/board.component';
 export { CurrencyComponent } from './currency/currency.component';
 export { ContractComponent } from './contract/contract.component';
 export { SearchContractComponent } from './search-contract/search-contract.component';
+export { HomeComponent } from './home/home.component';
+export { RoomComponent } from './room/room.component';
+export { HotelFeatureComponent } from './hotel-feature/hotel-feature.component';

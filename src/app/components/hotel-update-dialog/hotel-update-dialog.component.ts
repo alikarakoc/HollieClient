@@ -7,6 +7,8 @@ import { HotelCategoryService, HotelService } from "src/app/services";
 import { HotelDeleteDialogComponent } from "../hotel-delete-dialog/hotel-delete-dialog.component";
 import { TranslocoService } from '@ngneat/transloco';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HotelFeatureService } from 'src/app/services/hotel-feature';
+import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 
 interface DialogData {
   element: Hotel;
@@ -22,6 +24,7 @@ interface DialogData {
 export class HotelUpdateDialogComponent implements OnInit {
   newHotelCode : string = this.data.element.code;
   newHotelCategoryId: number = this.data.element.hotelCategoryId;
+  newHotelFeatureId: number = this.data.element.hotelFeatureId;
   newHotelName: string = this.data.element.name;
   newHotelAddress: string = this.data.element.address;
   newHotelPhone: string = this.data.element.phone;
@@ -37,13 +40,16 @@ export class HotelUpdateDialogComponent implements OnInit {
     private hotelService: HotelService,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    public translocoService: TranslocoService
-    , private hotelCategoryService: HotelCategoryService,
+    public translocoService: TranslocoService, 
+    private hotelCategoryService: HotelCategoryService,
+    private hotelFeatureService: HotelFeatureService
   ) { }
 
   emailControl = new FormControl('', [Validators.required,Validators.email]);
 
   hotelCategories: HotelCategory[] = []
+  hotelFeatures: HotelFeature[] = [];
+  hotels: Hotel[] = [];
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
@@ -52,18 +58,28 @@ export class HotelUpdateDialogComponent implements OnInit {
 
     this.hotelCategoryService.getAllHotels().subscribe(res => {
       this.hotelCategories = res.data;
+    });
+
+    this.hotelFeatureService.getAllFeatures().subscribe((res) => {
+      this.hotelFeatures = res.data;
     })
   }
 
-  hotels: Hotel[] = [];
 
   update() {
-    if (!this.newHotelCode || !this.newHotelAddress || !this.newHotelCategoryId || !this.emailControl.value || !this.newHotelName || !this.newHotelPhone) {
+    if (!this.newHotelCode ) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
-    const otherHotelCode = this.hotels;
-    const otherHotels = this.hotels.filter(c => c.code !== this.newHotelCode && c.name !== this.newHotelName && c.address !== this.newHotelAddress && c.phone !== this.newHotelPhone && c.email !== this.newHotelEmail && c.hotelCategoryId !== this.newHotelCategoryId);
+
+    const otherHotels = this.hotels.filter(c => 
+      c.code !== this.newHotelCode && 
+      c.name !== this.newHotelName && 
+      c.address !== this.newHotelAddress && 
+      c.phone !== this.newHotelPhone && 
+      c.email !== this.newHotelEmail && 
+      c.hotelCategoryId !== this.newHotelCategoryId &&
+      c.hotelFeatureId !== this.newHotelFeatureId);
 
     if (this.emailControl.hasError('email')) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_email'));
@@ -75,14 +91,17 @@ export class HotelUpdateDialogComponent implements OnInit {
     }
 
     if (otherHotels.findIndex(c =>c.code == this.newHotelCode.toString()) >-1){
-      console.log(this.newHotelName);
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
       this.ngOnInit();
       return;
 
     }
-    if (otherHotels.some(c => c.code === this.newHotelCode && c.name === this.newHotelName && c.address === this.newHotelAddress && c.phone === this.newHotelPhone && c.email === this.newHotelEmail)) {
-      console.log(this.newHotelCode, this.newHotelName, this.newHotelEmail, this.newHotelPhone, this.newHotelAddress);
+    if (otherHotels.some(c => 
+      c.code === this.newHotelCode && 
+      c.name === this.newHotelName && 
+      c.address === this.newHotelAddress && 
+      c.phone === this.newHotelPhone && 
+      c.email === this.newHotelEmail)) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel' : 'otel' }), "OK");
       this.newHotelCode = "";
       this.newHotelName = "";
@@ -93,7 +112,6 @@ export class HotelUpdateDialogComponent implements OnInit {
     }
 
 
-    console.log(this.newHotelCategoryId);
 
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newHotelName }));
     this.data.dialogRef?.close();
@@ -103,7 +121,9 @@ export class HotelUpdateDialogComponent implements OnInit {
     this.data.element.email = this.emailControl.value!;
     this.data.element.address = this.newHotelAddress;
     this.data.element.hotelCategoryId = this.newHotelCategoryId;
-    console.log(this.data.element);
+    this.data.element.hotelFeatureId = this.newHotelFeatureId;
+
+
     this.data.table?.renderRows();
     // this.hotelService.updateHotel(this.data.element)
     this.dialogRef.close({ isUpdated: true });
@@ -114,19 +134,6 @@ export class HotelUpdateDialogComponent implements OnInit {
 
   }
 
-  delete() {
-    const dialog = this.dialog.open(HotelDeleteDialogComponent, {
-      data: { element: this.data.element, dialogRef: this.dialogRef }
-    });
-
-    dialog.afterClosed().subscribe(result => {
-      if (result.isDeleted) {
-        this.hotelService.deleteHotel({ code: this.newHotelCode, name: this.newHotelName, address: this.newHotelAddress, phone: this.newHotelPhone, email: this.newHotelEmail, hotelCategoryId: this.newHotelCategoryId }).subscribe(() => {
-          this.ngOnInit();
-        });
-      }
-    });
-  }
 
 }
 

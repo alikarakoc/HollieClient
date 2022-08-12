@@ -32,20 +32,22 @@
     type="number" [(ngModel)]="hotelPhone" matInput type="phone" maxlength="11" placeholder="(555) 555-5555" (keyup.enter)="add()">
   </mat-form-field>
 
-  <!-- <mat-form-field>
-    <mat-label>{{'phone'| transloco}}</mat-label>
-    <input
-    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-    type="number" matInput [formControl]="phoneControl" #input maxlength="11" placeholder="(05* *** ****)"
-    >
-  </mat-form-field> -->
-
   <br>
 
   <mat-form-field>
     <mat-label>{{ 'category' | transloco }}</mat-label>
     <mat-select [(ngModel)]="hotelCategoryId">
       <mat-option *ngFor="let c of hotelCategories" [value]="c.id">{{ c.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field>
+    <mat-label>{{ 'feature' | transloco }}</mat-label>
+    <mat-select [(ngModel)]="hotelFeatureId">
+      <mat-option *ngFor="let c of hotelFeatures" [value]="c.id">
+        {{ c.code }} &nbsp; [ {{ c.babyTop }} - {{ c.childTop }} - {{ c.teenTop }} ] </mat-option>
     </mat-select>
   </mat-form-field>
 

@@ -81,6 +81,7 @@
     "clean" : "Temiz",
     "babyTop": "Bebek Yaş Aralığı",
     "childTop": "Çocuk Yaş Aralığı",
-    "teenTop": "Genç Yaş Aralığı"
+    "teenTop": "Genç Yaş Aralığı",
+    "feature": "Özellik"
 
 }

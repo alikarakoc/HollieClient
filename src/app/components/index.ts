@@ -42,3 +42,7 @@ export { ContractDetailsComponent } from './contract-details/contract-details.co
 export { RoomAddDialogComponent } from './room-add-dialog/room-add-dialog.component';
 export { RoomDeleteDialogComponent } from './room-delete-dialog/room-delete-dialog.component';
 export { RoomUpdateDialogComponent } from './room-update-dialog/room-update-dialog.component';
+
+export { HotelFeatureAddDialogComponent } from './hotel-feature-add-dialog/hotel-feature-add-dialog.component';
+export { HotelFeatureUpdateDialogComponent } from './hotel-feature-update-dialog/hotel-feature-update-dialog.component';
+export { HotelFeatureDeleteDialogComponent } from './hotel-feature-delete-dialog/hotel-feature-delete-dialog.component';
