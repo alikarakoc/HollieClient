@@ -23,11 +23,11 @@ export class AgencyService {
     return this.http.post<ListResponseModel<Agency>>(`${this.baseUrl}/add`, agency);
    }
 
-  deleteAgency(agency: Partial<Agency>) { 
-    return this.http.delete<ListResponseModel<Agency>>(`${this.baseUrl}/delete?Id=${agency.id}`);
+  deleteAgency(agency: Partial<Agency>) {
+    return this.http.delete<ListResponseModel<Agency>>(`${this.baseUrl}/delete`, {body:agency });
   }
 
   updateAgency(agency: Partial<Agency>) {
-    return this.http.put<ListResponseModel<Agency>>(`${this.baseUrl}/update?Id=${agency.id}`, agency);
+    return this.http.put<ListResponseModel<Agency>>(`${this.baseUrl}/update`, agency);
   }
 }

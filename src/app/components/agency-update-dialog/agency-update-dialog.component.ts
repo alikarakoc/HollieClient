@@ -12,11 +12,14 @@ import { TranslocoService } from '@ngneat/transloco';
 import { MatTable } from '@angular/material/table';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ThisReceiver } from '@angular/compiler';
+import { AMarket } from 'src/app/interfaces/amarket';
 
 interface DialogData {
   element: Agency;
   table: MatTable<any>;
   dialogRef: MatDialogRef<any>;
+  markets: any[];
+  aMarkets: any[];
 }
 
 
@@ -27,11 +30,14 @@ interface DialogData {
 })
 export class AgencyUpdateDialogComponent implements OnInit {
 
+  agency = this.data.element;
+  id = this.data.element.id;
   newAgencyCode: string = this.data.element.code;
   newAgencyName: string = this.data.element.name;
   newAgencyEmail: string = this.data.element.email;
   newAgencyAddress: string = this.data.element.address;
   newAgencyPhone: string = this.data.element.phone;
+  newselectedMarkets: any[] = this.data.element.marketList;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -40,18 +46,27 @@ export class AgencyUpdateDialogComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     public translocoService: TranslocoService
-  ) { }
+  ) {
+    this.markets = this.data.markets;
+    // this.aMarkets = this.data.aMarkets;
+   }
+   aMarkets : any[] = [];
+   markets: any[] = [];
+   selectedValue: any[] = [];
 
   emailControl = new FormControl('', [Validators.required,Validators.email]);
 
   agencies: any[] = [];
 
   ngOnInit(): void {
+    const idMarket = this.data.aMarkets.filter(aM => aM.listId === this.data.element.id).map(aM => aM.marketId);
+    this.newselectedMarkets = idMarket;
+
   }
-  
+
   update() {
-    
-    if (!this.newAgencyName || !this.newAgencyAddress || !this.newAgencyCode || !this.emailControl.value || !this.newAgencyPhone) {
+
+    if (!this.newAgencyName || !this.newAgencyAddress || !this.newAgencyCode || !this.emailControl.value || !this.newAgencyPhone || !this.newselectedMarkets) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
@@ -79,7 +94,20 @@ export class AgencyUpdateDialogComponent implements OnInit {
         return;
       }
 
+
+
+
+    for(let i = 0; i < this.newselectedMarkets.length; i++){
+      const market : AMarket = {
+        marketId: 0
+      };
+      market.marketId = this.newselectedMarkets[i];
+      this.newselectedMarkets[i] = market;
+     };
+
     });
+
+
 
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newAgencyName }));
     this.data.dialogRef?.close();
@@ -91,6 +119,7 @@ export class AgencyUpdateDialogComponent implements OnInit {
     this.data.element.email = this.emailControl.value!;
     this.data.element.address = this.newAgencyAddress;
     this.data.element.phone = this.newAgencyPhone;
+    this.data.element.marketList = this.newselectedMarkets;
 
     console.log(this.data.element);
     this.data.table?.renderRows();

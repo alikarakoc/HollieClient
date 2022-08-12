@@ -71,7 +71,6 @@ export class AgencyComponent implements OnInit{
     switch (type) {
       case 'market':
 
-        console.log(this.aMarkets);
 
         const idMarket = this.aMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
@@ -126,7 +125,7 @@ export class AgencyComponent implements OnInit{
 
   update(element: Agency) {
     const dialog = this.dialog.open(AgencyUpdateDialogComponent, {
-      data: { element }
+      data: { element, markets: this.markets, aMarkets:this.aMarkets}
     });
 
     dialog.afterClosed().subscribe((result) => {

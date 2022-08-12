@@ -62,6 +62,7 @@ export class AgencyAddDialogComponent implements OnInit {
     this.aMarketService.getAllAMarkets().subscribe(res => {
       if (res.data !== null) this.aMarkets = res.data;
       else this.aMarkets = [];
+
     });
    }
 

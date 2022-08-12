@@ -36,6 +36,15 @@
             <input [formControl]="emailControl" matInput type="email"  (keyup.enter)="update()">
         </mat-form-field>
 
+        <br>
+
+        <mat-form-field class="selects-m">
+          <mat-label>{{ 'market' | transloco }}</mat-label>
+          <mat-select [(ngModel)]="newselectedMarkets" multiple>
+              <mat-option *ngFor="let m of markets" [value]="{marketId: m.id}">{{ m.name }}</mat-option>
+          </mat-select>
+      </mat-form-field>
+
 </div>
 
 <div mat-dialog-actions>
