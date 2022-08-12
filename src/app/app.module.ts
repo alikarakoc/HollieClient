@@ -15,41 +15,62 @@ import {
   HotelAddDialogComponent,
   HotelDeleteDialogComponent,
   HotelUpdateDialogComponent,
+
   RoomAddDialogComponent,
   RoomDeleteDialogComponent,
   RoomUpdateDialogComponent,
+
   AgencyAddDialogComponent,
   AgencyDeleteDialogComponent,
   AgencyUpdateDialogComponent,
+
   CountryAddDialogComponent,
   CountryDeleteDialogComponent,
   CountryUpdateDialogComponent,
+
   HotelCategoryAddDialogComponent,
   HotelCategoryDeleteDialogComponent,
   HotelCategoryUpdateDialogComponent,
+
   NavbarComponent,
+
   RoomTypeAddDialogComponent,
   RoomTypeDeleteDialogComponent,
   RoomTypeUpdateDialogComponent,
+
   MarketAddDialogComponent,
   MarketDeleteDialogComponent,
   MarketUpdateDialogComponent,
+
   BoardAddDialogComponent,
   BoardDeleteDialogComponent,
   BoardUpdateDialogComponent,
+
   CurrencyAddDialogComponent,
   CurrencyDeleteDialogComponent,
   CurrencyUpdateDialogComponent,
+
   ContractAddDialogComponent,
   ContractDeleteDialogComponent,
   ContractUpdateDialogComponent,
+
   ContractDetailsComponent,
+
 } from './components';
 
+import { HotelFeatureAddDialogComponent } from 'src/app/components/hotel-feature-add-dialog/hotel-feature-add-dialog.component';
+import { HotelFeatureUpdateDialogComponent } from 'src/app/components/hotel-feature-update-dialog/hotel-feature-update-dialog.component';
+import { HotelFeatureDeleteDialogComponent } from 'src/app/components/hotel-feature-delete-dialog/hotel-feature-delete-dialog.component';
+
+
 // Modules
-import { AgencyComponent,CountryComponent, ErrorComponent, HotelCategoryComponent, HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent } from './pages';
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, 
+  HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, 
+  ContractComponent, SearchContractComponent,  } from './pages';
+
 import { HomeComponent } from './pages/home/home.component';
 import { RoomComponent } from './pages/room/room.component';
+import { HotelFeatureComponent } from './pages/hotel-feature/hotel-feature.component';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -125,7 +146,10 @@ registerLocaleData(localeTR);
     ContractDeleteDialogComponent,
     ContractUpdateDialogComponent,
 
-    
+    HotelFeatureComponent,
+    HotelFeatureAddDialogComponent,
+    HotelFeatureUpdateDialogComponent,
+    HotelFeatureDeleteDialogComponent,
 
     ErrorComponent,
       FilterPipe,

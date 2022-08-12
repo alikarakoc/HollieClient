@@ -12,6 +12,7 @@
     "contract_title": "Contracts",
     "currency_title": "Currencies",
     "search_contract": "Search Contract",
+    "hotel_feature":   "Hotel Features",
     "search": "Search",
     "results": "Results",
     "Total-price": "Total price",
@@ -77,7 +78,10 @@
     "child": "Child",
     "person": "Person",
     "childAge": "Child Age",
-    "clean": "Clean"
+    "clean": "Clean",
+    "babyTop": "Baby Age Range",
+    "childTop": "Child Age Range",
+    "teenTop": "Teenager Age Range"
 
 
 }

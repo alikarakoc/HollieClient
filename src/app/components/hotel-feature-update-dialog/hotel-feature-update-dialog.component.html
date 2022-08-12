@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>
+    {{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Hotel Category' : 'Otel Tipi' }) }}
+</h1>
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <mat-label>{{ 'code' | transloco }}</mat-label>
+        <input matInput maxlength="20" [(ngModel)]="newCode" (keyup.enter)="update()">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="selects-m">
+        <mat-label>{{ 'hotel' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="newHotelId">
+            <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label>{{ 'babyTop' | transloco }}</mat-label>
+        <input [(ngModel)]="newBabyTop" matInput type="number" value="1" min="0" (keyup.enter)="update()">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label>{{ 'childTop' | transloco }}</mat-label>
+        <input [(ngModel)]="newChildTop" matInput type="number" value="1" min="0" (keyup.enter)="update()">
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field>
+        <mat-label>{{ 'teenTop' | transloco }}</mat-label>
+        <input [(ngModel)]="newTeenTop" matInput type="number" value="1" min="0" (keyup.enter)="update()">
+    </mat-form-field>
+
+</div>
+
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" (click)="update()">{{ 'dialogs.update' | transloco }}</button>
+    <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
+</div>

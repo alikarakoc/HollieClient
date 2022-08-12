@@ -1,0 +1,71 @@
+<app-navbar>
+    <div class="header">
+        <h1>{{ 'hotel_feature' | transloco }}</h1>
+        <span class="spacer"></span>
+        <button mat-flat-button color="primary" class="new-button" (click)="create()">
+            {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ?
+            'Hotel Feature' : 'Otel Özellikleri' }) }}
+        </button>
+        <button mat-flat-button color="excel" class="excel-button" (click)="exportAsXLSX()">
+            <mat-icon>file_download</mat-icon>
+        </button>
+    </div>
+    <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input maxlength="50" matInput [(ngModel)]="value" (keyup)="filterCategories($event)"
+            placeholder="Search Hotel Feature" #input>
+        <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" (click)="clear()">
+            <mat-icon>close</mat-icon>
+        </button>
+
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
+            <td mat-cell *matCellDef="let element">{{ element.code }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="hotel">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'hotel' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ getItem('hotel', element) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="babyTop">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'babyTop' | transloco }}</th>
+            <td mat-cell *matCellDef="let element"> 0 - {{ element.babyTop }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="childTop">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'childTop' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ element.babyTop +1 }} - {{ element.childTop }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="teenTop">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'teenTop' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">{{ element.childTop+1}} - {{ element.teenTop }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>{{ 'actions' | transloco }}</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{ element }">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columns"></tr>
+        <tr mat-row *matRowDef="let row; columns: columns"></tr>
+        <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+        </tr>
+    </table>
+
+    <mat-menu #menu>
+        <ng-template matMenuContent let-element="element">
+            <button mat-menu-item (click)="update(element)">{{ 'dialogs.edit' | transloco }}</button>
+            <button mat-menu-item (click)="delete(element)">{{ 'dialogs.delete' | transloco }}</button>
+        </ng-template>
+    </mat-menu>
+</app-navbar>

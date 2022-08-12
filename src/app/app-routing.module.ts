@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent } from "./pages";
 import { HomeComponent } from "./pages/home/home.component";
+import { HotelFeatureComponent } from './pages/hotel-feature/hotel-feature.component';
 import { RoomComponent } from './pages/room/room.component';
 
 const routes: Routes = [
@@ -56,6 +57,10 @@ const routes: Routes = [
   {
     path: "room",
     component: RoomComponent
+  },
+  {
+    path: "hotel-features",
+    component: HotelFeatureComponent
   },
   {
     path: "**",

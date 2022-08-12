@@ -6,5 +6,6 @@ export interface Hotel {
   phone: string;
   email: string;
   hotelCategoryId: number;
+  hotelFeatureId: number;
   status: boolean;
 }

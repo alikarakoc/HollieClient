@@ -61,7 +61,6 @@ export class RoomAddDialogComponent implements OnInit {
   }
 
   add() {
-    debugger;
     const predicate = (a: Omit<Room, 'id'>) =>
       a.code === this.roomCode &&
       a.name === this.roomName &&

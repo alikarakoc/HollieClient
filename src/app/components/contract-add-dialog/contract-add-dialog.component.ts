@@ -6,7 +6,7 @@ import { MatTable } from '@angular/material/table';
 import { ContractService } from 'src/app/services/contract.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { Contract } from 'src/app/interfaces';
-import { HotelService, MarketService, HotelCategoryService, AgencyService, BoardService, RoomTypeService, CurrencyService } from 'src/app/services';
+import { HotelService, MarketService, AgencyService, BoardService, RoomTypeService, CurrencyService } from 'src/app/services';
 import { RoomService } from 'src/app/services/room.service';
 import { CAgencyService } from 'src/app/services/cagency.service';
 import { CAgency } from 'src/app/interfaces/cagency';

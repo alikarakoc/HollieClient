@@ -12,6 +12,7 @@
     "contract_title": "Kontratlar",
     "currency_title": "Döviz Kurları",
     "search_contract": "Kontrat Ara",
+    "hotel_feature":  "Otel Özellikleri",
     "search": "Ara",
     "results": "Sonuçlar",
     "Total-price": "Toplam Tutar",
@@ -77,6 +78,9 @@
     "child": "Çocuk",
     "person": "Kişi",
     "childAge" : "Çocuk Yaşı",
-    "clean" : "Temiz" 
+    "clean" : "Temiz",
+    "babyTop": "Bebek Yaş Aralığı",
+    "childTop": "Çocuk Yaş Aralığı",
+    "teenTop": "Genç Yaş Aralığı"
 
 }
