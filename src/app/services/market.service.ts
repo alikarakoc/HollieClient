@@ -14,10 +14,6 @@ export class MarketService {
 
   constructor(private http: HttpClient) { }
 
-  getMarket(): Observable<ListResponseModel<Market>> {
-    return this.http.get<ListResponseModel<Market>>(`${this.baseUrl}/AllMarkets`);
-  }
-
   getAllMarkets(): Observable<ListResponseModel<Market>> {
     return this.http.get<ListResponseModel<Market>>(`${this.baseUrl}/AllMarkets`);
   }

@@ -3,10 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
-import { Agency } from 'src/app/interfaces';
+import { Agency,Market } from 'src/app/interfaces';
 import { AgencyService } from 'src/app/services/agency.service';
+import { MarketService } from 'src/app/services/market.service';
+import { AMarketService } from 'src/app/services/amarket.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
+import { AMarket } from 'src/app/interfaces/amarket';
 
 interface DialogData {
   table: MatTable<Agency>;
@@ -25,14 +28,22 @@ export class AgencyAddDialogComponent implements OnInit {
   agencyPhone: string;
   agencyEmail: string;
   agencyAddress: string;
+  MarketId: string;
+  selectedMarkets: AMarket[];
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<AgencyAddDialogComponent>,
     private agencyService: AgencyService,
-    public translocoService: TranslocoService
+    public translocoService: TranslocoService,
+    private marketService: MarketService,
+    private aMarketService: AMarketService,
   ) { }
+
+  markets: any[] = [];
+  aMarkets : any[] =[];
 
   emailControl = new FormControl('', [Validators.required,Validators.email]);
 
@@ -43,10 +54,19 @@ export class AgencyAddDialogComponent implements OnInit {
     return this.emailControl.hasError('email') ? 'Not a valid email' : '';
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.marketService.getAllMarkets().subscribe(res => {
+      if(res.data !== null) this.markets = res.data
+      else this.markets = []
+    })
+    this.aMarketService.getAllAMarkets().subscribe(res => {
+      if (res.data !== null) this.aMarkets = res.data;
+      else this.aMarkets = [];
+    });
+   }
 
   add() {
-    if (!this.agencyCode || !this.agencyAddress || !this.emailControl.value || !this.agencyName || !this.agencyPhone ) {
+    if (!this.agencyCode || !this.agencyAddress || !this.emailControl.value || !this.agencyName || !this.agencyPhone || !this.selectedMarkets) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
@@ -68,6 +88,7 @@ export class AgencyAddDialogComponent implements OnInit {
         this.agencyPhone = "";
         this.agencyAddress = "";
         this.agencyEmail = "";
+        this.MarketId = "";
 
         return;
 
@@ -90,7 +111,10 @@ export class AgencyAddDialogComponent implements OnInit {
       elementCode: this.agencyCode,
       elementAddress: this.agencyAddress,
       elementEmail: this.emailControl.value,
-      elementPhone: this.agencyPhone
+      elementPhone: this.agencyPhone,
+      elementMarket: this.selectedMarkets,
+
     });
+    console.log(this.selectedMarkets);
   }
 }

@@ -7,11 +7,13 @@ import {
   AgencyDeleteDialogComponent,
   AgencyUpdateDialogComponent,
 } from 'src/app/components';
-import { Agency } from 'src/app/interfaces';
+import { Agency,Market } from 'src/app/interfaces';
 import { AgencyService } from 'src/app/services/agency.service';
+import { AMarketService } from 'src/app/services/amarket.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
+import { MarketService } from 'src/app/services';
 
 
 
@@ -21,7 +23,7 @@ import { MatSort } from "@angular/material/sort";
   styleUrls: ['./agency.component.scss'],
 })
 export class AgencyComponent implements OnInit{
-  columns: string[] = ['code', 'name', 'address', 'phone', 'email', 'actions'];
+  columns: string[] = ['code', 'name', 'address', 'phone', 'email','market', 'actions'];
   dataSource: MatTableDataSource<Agency>;
   value = '';
 
@@ -29,17 +31,22 @@ export class AgencyComponent implements OnInit{
   @ViewChild(MatSort) sort: MatSort;
   Agency = 'Agency';
 
+  markets: any[] = [];
+  aMarkets: any[] = [];
   agencies: Agency[] = [];
+
   checkButtonCount:number = 0;
   //tuana
   constructor(
     public agencyService: AgencyService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
+    private aMarketService: AMarketService,
+    private marketService: MarketService,
     private excelService: ExcelService
   ) { }
 
-  
+
   ngOnInit(): void {
     this.agencyService.getAllAgencies().subscribe((res) => {
       if(res.data != null){
@@ -48,8 +55,38 @@ export class AgencyComponent implements OnInit{
       this.dataSource = new MatTableDataSource<Agency>(this.agencies);
       this.dataSource.sort = this.sort;
     });
+    this.marketService.getAllMarkets().subscribe((res) => {
+      if(res.data != null){
+        this.markets = res.data;
+      }
+    });
+    this.aMarketService.getAllAMarkets().subscribe(res => {
+      if(res.data!=null){
+        this.aMarkets = res.data;
+      }
+    });
   }
-  
+
+  getItem(type:"market", element: Agency) {
+    switch (type) {
+      case 'market':
+
+        console.log(this.aMarkets);
+
+        const idMarket = this.aMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
+        return idMarket.map(i => this.markets.find(m => m.id === i).name);
+    }
+  }
+
+  getCurrentMarket(element: Market){
+    return this.markets.find(c=> c.id ===element.id)?.name;
+  }
+
+  // getItem(element:Agency){
+  //   const idMarket = this.aMarkets.filter(aM => aM.listId === element.id).map(aM => aM.marketId);
+  //       return idMarket.map(i => this.markets.find(m => m.id === i).name);
+  // }
+
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.agencies, this.Agency);
   }
@@ -76,7 +113,7 @@ export class AgencyComponent implements OnInit{
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.agencyService
-          .addAgency({ name: result.elementName, code: result.elementCode, address: result.elementAddress, email: result.elementEmail, phone: result.elementPhone })
+          .addAgency({ name: result.elementName, code: result.elementCode, address: result.elementAddress, email: result.elementEmail, phone: result.elementPhone, marketList:result.elementMarket })
           .subscribe(() => {
             this.ngOnInit();
           });
