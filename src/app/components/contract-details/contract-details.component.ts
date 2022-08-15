@@ -32,6 +32,7 @@ export class ContractDetailsComponent implements OnInit {
   hotels: any[];
   markets: any[];
   agencies: any[];
+  gun: number;
   boards: any[];
   rooms: any[];
   currencies: any[];
@@ -63,7 +64,7 @@ export class ContractDetailsComponent implements OnInit {
     
   }
 
-  getItem(type: "agency" | "board" | "room_type" | "market" | "room"| "hotel" | "currency") {
+  getItem(type: "agency" | "board" | "room_type" | "market" |"date" | "room"| "hotel" | "currency") {
     const element = this.contract;
     switch (type) {
       case 'agency':
@@ -94,7 +95,10 @@ export class ContractDetailsComponent implements OnInit {
         const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
         return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
 
-     
+        case 'date':
+          this.gun = (-1*(new Date(this.contract.enteredDate).getTime() - new Date(this.contract.exitDate).getTime()) / (1000 * 60 * 60 * 24));
+            console.log(this.gun)
+            return (-1*(new Date(this.contract.enteredDate).getTime() - new Date(this.contract.exitDate).getTime()) / (1000 * 60 * 60 * 24));
 
       case 'hotel':
         return this.data.hotels.find(h => h.id === element.hotelId)?.name;

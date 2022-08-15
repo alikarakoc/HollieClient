@@ -24,6 +24,7 @@ export class SearchContractComponent implements OnInit {
   endDate?: Date;
   adult?: number;
   adp?: number;
+  gun: number;
   contDay?: number;
   cH07?: number;
   cH14?: number;
@@ -50,7 +51,7 @@ export class SearchContractComponent implements OnInit {
     private snackBar: MatSnackBar
   ) { }
 
-
+  contract: Contract;
   hotels: Hotel[] = [];
   contracts: Contract[] = [];
   result: Contract[] = [];
@@ -60,12 +61,12 @@ export class SearchContractComponent implements OnInit {
   cBoards: any[] = [];
   cMarkets: any[] = [];
   cRoomTypes: any[] = [];
-
   markets: any[] = [];
   agencies: any[] = [];
   boards: any[] = [];
   roomTypes: any[] = [];
   currencies: any[] = [];
+  contDays? = (1);
    
   
   clearTable() {
@@ -96,6 +97,7 @@ export class SearchContractComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.hotelService.getAllHotels().subscribe(res => {
       if (res.data !== null) this.hotels = res.data;
       else this.hotels = [];
@@ -148,6 +150,8 @@ export class SearchContractComponent implements OnInit {
         this.rooms = res.data;
       }
     });
+
+    
  
   }
 
@@ -222,7 +226,7 @@ export class SearchContractComponent implements OnInit {
     return new Date(v);
   }
 
-  getItem(type: "agency" | "board" | "market" |"room" | "hotel" | "currency", element: Contract): any[] | any {
+  getItem(type: "agency" | "board" | "market" |"date" |"room" | "hotel" | "currency", element: Contract): any[] | any {
     switch (type) {
       case 'agency':
         // return element.agencyIds.map(i => this.agencies.find(a => a.id === i));
@@ -242,6 +246,12 @@ export class SearchContractComponent implements OnInit {
         case 'room':
           const idRoom = this.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
           return idRoom.map(i => this.rooms.find(r => r.id === i).name);
+
+          case 'date':
+            this.gun = (-1*(new Date(element.enteredDate).getTime() - new Date(element.exitDate).getTime()) / (1000 * 60 * 60 * 24));
+            console.log(this.gun)
+            return this.gun
+            
 
      // case 'room':
        // const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);

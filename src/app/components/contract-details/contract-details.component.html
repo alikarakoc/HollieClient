@@ -95,16 +95,23 @@
     
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
-        <strong>{{ 'Board' | transloco }} : </strong>
+        <strong>{{ 'board' | transloco }} : </strong>
         {{ getItem('board') }}
     </mat-card-content>
 
     <mat-divider></mat-divider>
 
+ <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'room' | transloco }} : </strong>
+        {{ getItem('room') }}
+    </mat-card-content>
+    <mat-divider></mat-divider>
+
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
-        <strong>{{ 'Room' | transloco }} : </strong>
-        {{ getItem('room') }}
+        <strong>{{ 'days' | transloco }} : </strong>
+        {{ getItem('date') }}
     </mat-card-content>
     <mat-divider></mat-divider>
 
