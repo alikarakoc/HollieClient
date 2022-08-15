@@ -24,21 +24,6 @@
         {{ contract.name }}
     </mat-card-content>
 
-    <mat-divider></mat-divider>
-
-    <!-- <mat-card-content class="user-select-all">
-        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
-        <strong>{{ 'adultPrice' | transloco }} : </strong>
-        {{ contract.adultPrice }} {{ getItem('currency') }}
-    </mat-card-content>
-    
-    <mat-divider></mat-divider>
-
-    <mat-card-content class="user-select-all">
-        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
-        <strong>{{ 'childPrice' | transloco }} : </strong>
-        {{ contract.childPrice }} {{ getItem('currency') }}
-    </mat-card-content> -->
 
     <mat-divider></mat-divider>
 
@@ -63,6 +48,32 @@
         <strong>{{ 'hotel' | transloco }} : </strong>
         {{ getItem('hotel') }}
     </mat-card-content>
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'adultPrice' | transloco }} : </strong>
+        {{ contract.adp }}
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'childPrice7' | transloco }} : </strong>
+        {{ contract.cH07 }}
+    </mat-card-content>
+
+    <mat-divider></mat-divider>
+
+    <mat-card-content class="user-select-all">
+        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
+        <strong>{{ 'childPrice14' | transloco }} : </strong>
+        {{ contract.cH14 }}
+    </mat-card-content>
+
+
 
     <mat-divider></mat-divider>
 
@@ -92,24 +103,19 @@
 
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
-        <strong mat-line>{{ 'Room' | transloco }} : </strong> 
-        {{getItem('room') }} 
+        <strong>{{ 'Room' | transloco }} : </strong>
+        {{ getItem('room') }}
     </mat-card-content>
-
     <mat-divider></mat-divider>
 
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
-        <strong>{{ 'Room Type' | transloco }} : </strong>
+        <strong>{{ 'room_type' | transloco }} : </strong>
         {{ getItem('room_type') }}
     </mat-card-content>
 
-    <mat-divider></mat-divider>
 
-    <mat-card-content class="user-select-all">
-        <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
-        <strong>Days : </strong>
-        {{ contract.contDay }}
-    </mat-card-content>
+
+
     </div>
 </div>

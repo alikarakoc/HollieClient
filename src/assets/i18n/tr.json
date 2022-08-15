@@ -71,6 +71,8 @@
     "price": "Fiyat",
     "adultPrice": "Yetişkin Fiyat",
     "childPrice": "Çocuk Fiyat",
+    "childPrice7": "Çocuk Fiyatı (7 yaşından küçük)",
+    "childPrice14": "Çocuk Fiyat (14 yaşından küçük)",
     "start": "Başlangıç Tarihi",
     "end": "Bitiş Tarihi",
     "value": "Değer",

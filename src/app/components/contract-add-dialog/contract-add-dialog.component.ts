@@ -33,7 +33,7 @@ export class ContractAddDialogComponent implements OnInit {
   contractCode: string;
   name: string;
   price: number;
-  adultPrice:number;
+  adp:number;
   childPrice:number;
   start: Date;
   end: Date;
@@ -47,6 +47,8 @@ export class ContractAddDialogComponent implements OnInit {
   listId: number;
   contractId: number;
   contDay :number;
+  ch07: number;
+  ch14: number;
 
   constructor(
     public translocoService: TranslocoService,
@@ -179,10 +181,12 @@ export class ContractAddDialogComponent implements OnInit {
       element: {
         code: this.contractCode,
         name: this.name,
-        adultPrice: this.adultPrice,
+        adp: this.adp,
         childPrice: this.childPrice,
         enteredDate: this.start,
         exitDate: this.end,
+        ch07:this.ch07,
+        ch14:this.ch14,
         hotelId: this.hotel,
         currencyId: this.currency,
         agencyList: this.selectedAgencies,

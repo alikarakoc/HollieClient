@@ -14,8 +14,8 @@ export interface Contract {
     enteredDate: Date;
     exitDate: Date;
     adp: number;
-    ch07: number;
-    ch14: number;
+    cH07: number;
+    cH14: number;
     agencyList: CAgency[];
     boardList: CBoard[];
     roomList: CRoom[];

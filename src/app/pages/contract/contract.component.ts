@@ -218,8 +218,8 @@ export class ContractComponent implements OnInit {
     const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: { 
       element: element, roomTypes: this.roomTypes, hotels: this.hotels,
       markets: this.markets, rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
-      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
-      cMarkets:this.cMarkets, cRooms:this.cRooms  } });
+      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,cRooms: this.cRooms, 
+      cMarkets:this.cMarkets  } });
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {
