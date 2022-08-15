@@ -3,5 +3,6 @@ export interface Currency {
     id?: number;
     code: string;
     value: number;
+    unit: number;
     status: boolean;
 }

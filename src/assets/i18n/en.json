@@ -59,6 +59,7 @@
     "address": "Address",
     "phone": "Phone",
     "code": "Code",
+    "unit": "Unit",
     "email": "Email",
     "actions": "Actions",
     "category": "Category",

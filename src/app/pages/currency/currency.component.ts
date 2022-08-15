@@ -19,7 +19,7 @@ import { MatSort } from "@angular/material/sort";
   styleUrls: ['./currency.component.scss']
 })
 export class CurrencyComponent implements OnInit {
-  columns: string[] = ["code", "name", "value"];
+  columns: string[] = ["code", "name","unit","value"];
   //columns: string[] = ["code", "name", "value", "actions"];
   dataSource: MatTableDataSource<Currency>;
 

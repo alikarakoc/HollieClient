@@ -59,6 +59,7 @@
     "address": "Adres",
     "phone": "Telefon",
     "code": "Kod",
+    "unit": "Birim",
     "email": "Email",
     "actions": "İşlemler",
     "category": "Otel Türü",
