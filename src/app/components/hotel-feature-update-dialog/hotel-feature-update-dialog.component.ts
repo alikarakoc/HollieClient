@@ -21,7 +21,7 @@ interface DialogData {
 })
 export class HotelFeatureUpdateDialogComponent implements OnInit {
   newCode: string = this.data.element.code;
-  newHotelId: number = this.data.element.hotelId;
+  newName: string = this.data.element.name;
   newBabyTop: number = this.data.element.babyTop;
   newChildTop: number = this.data.element.childTop;
   newTeenTop: number = this.data.element.teenTop;
@@ -72,10 +72,10 @@ export class HotelFeatureUpdateDialogComponent implements OnInit {
 
     }
 
-    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCode }));
+    this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newName }));
     this.data.dialogRef?.close();
     this.data.element.code = this.newCode;
-    this.data.element.hotelId = this.newHotelId;
+    this.data.element.name = this.newName;
     this.data.element.babyTop = this.newBabyTop;
     this.data.element.childTop = this.newChildTop;
     this.data.element.teenTop = this.newTeenTop;

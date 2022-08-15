@@ -45,13 +45,15 @@ export class RoomAddDialogComponent implements OnInit {
     private hotelService: HotelService
   ) { }
 
+  
+  allRoomTypes: RoomType[] = [];
   roomTypes: RoomType[] = [];
   hotels: Hotel[] = [];
 
   ngOnInit(): void {
     this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      if (res.data !== null) this.roomTypes = res.data
-      else this.roomTypes = []
+      if (res.data !== null) this.allRoomTypes = res.data
+      else this.allRoomTypes = []
     })
 
     this.hotelService.getAllHotels().subscribe(res => {
@@ -65,8 +67,7 @@ export class RoomAddDialogComponent implements OnInit {
       a.code === this.roomCode &&
       a.name === this.roomName &&
       a.roomTypeId === this.roomTypeId &&
-      a.hotelId === this.hotelId &&
-      a.roomTypeId === this.roomTypeId;
+      a.hotelId === this.hotelId;
       //a.clean === this.clean;
 
     const condition = this.roomService.rooms.some(predicate);
@@ -77,7 +78,14 @@ export class RoomAddDialogComponent implements OnInit {
         this.roomCode = "";
         return;
       }
+        
     });
+
+    for(let i = 0; i < this.allRoomTypes.length; i++){
+      if(this.allRoomTypes[i].hotelId == this.hotelId){
+        this.roomTypes.push(this.allRoomTypes[i]);
+      }
+    }
 
     if (!this.roomCode || !this.roomName || !this.hotelId|| !this.roomTypeId) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
@@ -90,6 +98,8 @@ export class RoomAddDialogComponent implements OnInit {
     }
 
 
+
+
     this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.roomName }));
 
     this.closeDialog();
@@ -97,6 +107,7 @@ export class RoomAddDialogComponent implements OnInit {
     
   }
 
+  
   closeDialog() {
     this.dialogRef.close({
       isAdded: true,
@@ -111,4 +122,14 @@ export class RoomAddDialogComponent implements OnInit {
     });
     
   }
+
+  
+  getItem(type:  "room_type" , element: Room) {
+    switch (type) {
+      case 'room_type':
+        const idRoomType = this.allRoomTypes.filter(cR => cR.hotelId === element.hotelId).map(cR => cR.hotelId);
+        console.log(idRoomType);
+        
+        //return idRoomType.map(i => this.roomTypes.find(r => r.id === i).name);
+    }}
 }

@@ -19,7 +19,7 @@ import { Hotel } from 'src/app/interfaces';
 })
 
 export class HotelFeatureComponent implements OnInit {
-  columns: string[] = ['code', 'hotel', 'babyTop', 'childTop', 'teenTop', 'actions'];
+  columns: string[] = ['code', 'name', 'babyTop', 'childTop', 'teenTop', 'actions'];
   dataSource: MatTableDataSource<HotelFeature>;
   value: '';
 
@@ -83,7 +83,7 @@ export class HotelFeatureComponent implements OnInit {
         this.hotelFeatureService
           .addFeature({  
             code: result.code,
-            hotelId : result.hotelId,
+            name : result.name,
             babyTop: result.babyTop,
             childTop: result.childTop,
             teenTop: result.teenTop, })
@@ -123,11 +123,11 @@ export class HotelFeatureComponent implements OnInit {
     });
   }
 
-  getItem(type:  "hotel" , element: HotelFeature) {
-    switch (type) {
-      case 'hotel':
-        return this.hotels.find(h => h.id === element.hotelId)?.name;
-    }}
+  // getItem(type:  "hotel" , element: HotelFeature) {
+  //   switch (type) {
+  //     case 'hotel':
+  //       return this.hotels.find(h => h.id === element.id)?.name;
+  //   }}
 
 
 

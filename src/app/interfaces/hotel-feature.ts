@@ -1,7 +1,7 @@
 export interface HotelFeature {
     id: number;
     code :string;
-    hotelId: number,
+    name: string,
     babyTop: number;
     childTop: number;
     teenTop: number;
