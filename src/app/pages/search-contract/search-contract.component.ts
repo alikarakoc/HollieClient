@@ -5,6 +5,8 @@ import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { TranslocoService } from "@ngneat/transloco";
 import { ContractDetailsComponent } from 'src/app/components';
 import { Contract, Hotel } from "src/app/interfaces";
+import { CRoomService } from 'src/app/services/croom.service';
+import { RoomService } from 'src/app/services/room.service';
 import { ContractService, HotelService, ExcelService, CBoardService, CAgencyService, CMarketService, RoomTypeService, AgencyService, BoardService, CurrencyService, MarketService } from "src/app/services";
 
 @Component({
@@ -13,7 +15,7 @@ import { ContractService, HotelService, ExcelService, CBoardService, CAgencyServ
   styleUrls: ['./search-contract.component.scss']
 })
 export class SearchContractComponent implements OnInit {
-  columns: string[] = ["code", "name", "hotel", "start", "end", "Total-Price", "seeDetails"];
+  columns: string[] = ["code", "name", "hotel","adp","cH07","cH14", "start", "end", "Total-Price", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
   @ViewChild(MatTable) table: MatTable<SearchContractComponent>;
@@ -21,6 +23,10 @@ export class SearchContractComponent implements OnInit {
   startDate?: Date;
   endDate?: Date;
   adult?: number;
+  adp?: number;
+  contDay?: number;
+  cH07?: number;
+  cH14?: number;
   child?: number;
   hotelIds: number[];
   totalPrice: number;
@@ -32,12 +38,14 @@ export class SearchContractComponent implements OnInit {
     private marketService: MarketService,
     private agencyService: AgencyService,
     private boardService: BoardService,
+    private roomService: RoomService,
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
     private cAgencyService: CAgencyService,
     private cBoardService: CBoardService,
     private cMarketService: CMarketService,
     private excelService: ExcelService,
+    private croomService : CRoomService,
     private translocoService: TranslocoService,
     private snackBar: MatSnackBar
   ) { }
@@ -46,7 +54,8 @@ export class SearchContractComponent implements OnInit {
   hotels: Hotel[] = [];
   contracts: Contract[] = [];
   result: Contract[] = [];
-
+  rooms: any[] = [];
+  cRooms: any[] = [];
   cAgencies: any[] = [];
   cBoards: any[] = [];
   cMarkets: any[] = [];
@@ -127,6 +136,18 @@ export class SearchContractComponent implements OnInit {
     this.cMarketService.getAllCMarkets().subscribe(res => {
       this.cMarkets = res.data;
     });
+
+    this.croomService.getAllCRooms().subscribe(res => {
+      if(res.data!=null){
+        this.cRooms = res.data;
+      }
+    });
+
+    this.roomService.getAllRooms().subscribe(res => {
+      if(res.data!=null){
+        this.rooms = res.data;
+      }
+    });
  
   }
 
@@ -139,6 +160,11 @@ export class SearchContractComponent implements OnInit {
       return;
     }
     console.log(this.adult+"   "+this.child );
+    console.log(this.adp);
+    console.log(this.cH07);
+    console.log(this.cH14);
+    console.log(this.contDay);
+    
 
 
     for (const contract of this.contracts) {
@@ -186,7 +212,7 @@ export class SearchContractComponent implements OnInit {
         contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
         markets: this.markets, agencies: this.agencies, currencies: this.currencies,
         boards: this.boards, cAgencies: this.cAgencies, cBoards: this.cBoards,
-        cMarkets: this.cMarkets
+        cMarkets: this.cMarkets,cRooms: this.cRooms,rooms: this.rooms
       }
     });
 
@@ -196,7 +222,7 @@ export class SearchContractComponent implements OnInit {
     return new Date(v);
   }
 
-  getItem(type: "agency" | "board" | "market" | "hotel" | "currency", element: Contract): any[] | any {
+  getItem(type: "agency" | "board" | "market" |"room" | "hotel" | "currency", element: Contract): any[] | any {
     switch (type) {
       case 'agency':
         // return element.agencyIds.map(i => this.agencies.find(a => a.id === i));
@@ -212,6 +238,14 @@ export class SearchContractComponent implements OnInit {
         // return element.marketIds.map(i => this.markets.find(m => m.id === i));
         const idMarket = this.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
+
+        case 'room':
+          const idRoom = this.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
+          return idRoom.map(i => this.rooms.find(r => r.id === i).name);
+
+     // case 'room':
+       // const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
+       // return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
 
       case 'hotel':
         return this.hotels.find(h => h.id === element.hotelId)?.name;
