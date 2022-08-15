@@ -71,6 +71,8 @@
     "price": "Price",
     "adultPrice": "Adult Price",
     "childPrice": "Child Price",
+    "childPrice7": "Child Price (younger than 7)",
+    "childPrice14": "Child Price (younger than 14)",
     "start": "Start Date",
     "end": "End Date",
     "value": "Value",

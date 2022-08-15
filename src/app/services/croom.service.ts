@@ -10,7 +10,7 @@ import { CRoom } from '../interfaces/croom';
     providedIn: 'root'
 })
 export class CRoomService {
-    crooms: CRoomService[] = [];
+    crooms: CRoom[] = [];
     baseUrl = `${environment.baseUrl}/CRoom`;
     constructor(private http: HttpClient) { }
 

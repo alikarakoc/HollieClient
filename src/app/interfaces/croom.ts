@@ -1,6 +1,6 @@
 export interface CRoom {
     id? : number;
-    listId? : number;
     roomId : number;
+    listId? : number;
     status?: boolean;
 }
