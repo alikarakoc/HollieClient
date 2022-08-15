@@ -20,8 +20,8 @@
 
   <mat-form-field>
     <mat-label>{{ 'hotel' | transloco }}</mat-label>
-    <mat-select [(ngModel)]="hotelId">
-      <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
+    <mat-select [(ngModel)]="hotelId" (ngModelChange)="onChange($event)">
+      <mat-option *ngFor="let h of hotels" [value]="h.id"  >{{ h.name }}</mat-option>
     </mat-select>
   </mat-form-field>
 
@@ -35,7 +35,7 @@
   </mat-form-field>
 
   <br>
-<!-- 
+<!--
   <section class="example-section">
     <label class="example-margin"> {{ 'clean' | transloco }} </label>
     &nbsp; &nbsp;&nbsp;&nbsp;

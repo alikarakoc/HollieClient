@@ -97,6 +97,8 @@ export class AgencyUpdateDialogComponent implements OnInit {
 
 
 
+    });
+
     for(let i = 0; i < this.newselectedMarkets.length; i++){
       const market : AMarket = {
         marketId: 0
@@ -104,9 +106,6 @@ export class AgencyUpdateDialogComponent implements OnInit {
       market.marketId = this.newselectedMarkets[i];
       this.newselectedMarkets[i] = market;
      };
-
-    });
-
 
 
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newAgencyName }));

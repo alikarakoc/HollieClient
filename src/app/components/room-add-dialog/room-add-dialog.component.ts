@@ -45,7 +45,7 @@ export class RoomAddDialogComponent implements OnInit {
     private hotelService: HotelService
   ) { }
 
-  
+
   allRoomTypes: RoomType[] = [];
   roomTypes: RoomType[] = [];
   hotels: Hotel[] = [];
@@ -60,6 +60,15 @@ export class RoomAddDialogComponent implements OnInit {
       if (res.data !== null) this.hotels = res.data
       else this.hotels = []
     })
+  }
+
+  onChange(event :any){
+    this.roomTypes = [];
+    for(let i = 0; i < this.allRoomTypes.length; i++){
+      if(this.allRoomTypes[i].hotelId == this.hotelId){
+        this.roomTypes.push(this.allRoomTypes[i]);
+      }
+    }
   }
 
   add() {
@@ -78,14 +87,10 @@ export class RoomAddDialogComponent implements OnInit {
         this.roomCode = "";
         return;
       }
-        
+
     });
 
-    for(let i = 0; i < this.allRoomTypes.length; i++){
-      if(this.allRoomTypes[i].hotelId == this.hotelId){
-        this.roomTypes.push(this.allRoomTypes[i]);
-      }
-    }
+
 
     if (!this.roomCode || !this.roomName || !this.hotelId|| !this.roomTypeId) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'));
@@ -104,10 +109,10 @@ export class RoomAddDialogComponent implements OnInit {
 
     this.closeDialog();
     this.data.table.renderRows();
-    
+
   }
 
-  
+
   closeDialog() {
     this.dialogRef.close({
       isAdded: true,
@@ -118,18 +123,18 @@ export class RoomAddDialogComponent implements OnInit {
         roomtypeId: this.roomTypeId
         //clean: this.clean
       }
-      
+
     });
-    
+
   }
 
-  
+
   getItem(type:  "room_type" , element: Room) {
     switch (type) {
       case 'room_type':
         const idRoomType = this.allRoomTypes.filter(cR => cR.hotelId === element.hotelId).map(cR => cR.hotelId);
         console.log(idRoomType);
-        
+
         //return idRoomType.map(i => this.roomTypes.find(r => r.id === i).name);
     }}
 }
