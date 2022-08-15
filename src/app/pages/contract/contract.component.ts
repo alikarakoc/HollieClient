@@ -194,7 +194,10 @@ export class ContractComponent implements OnInit {
   create() {
     if(this.checkButtonCount < 1) {
       const dialog = this.dialog.open(ContractAddDialogComponent, { 
-        data: { table: this.table } ,
+        data: { table: this.table, roomTypes: this.roomTypes, hotels: this.hotels,
+          markets: this.markets, rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
+          boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,cRooms: this.cRooms, 
+          cMarkets:this.cMarkets  } ,
       });
     
     

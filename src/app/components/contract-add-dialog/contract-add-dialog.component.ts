@@ -21,6 +21,21 @@ import { CRoomService } from 'src/app/services/croom.service';
 
 interface DialogData {
   table: MatTable<Contract>;
+  dialogRef: MatDialogRef<any>;
+  hotels: any[];
+  markets: any[];
+  rooms: any[];
+  agencies: any[];
+  boards: any[];
+  currencies: any[];
+  hotelCategories: any[];
+  roomTypes: any[];
+  cMarkets: any[];
+  cRooms: any[];
+  cAgencies: any[];
+  cBoards: any[];
+  cRoomTypes: any[];
+
 }
 
 @Component({
@@ -68,7 +83,15 @@ export class ContractAddDialogComponent implements OnInit {
     private contractService: ContractService,
 
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { }
+  ) { 
+    this.markets = this.data.markets;
+    this.rooms = this.data.rooms;
+    this.agencies = this.data.agencies;
+    this.boards = this.data.boards;
+    this.roomTypes = this.data.roomTypes;
+    this.hotels = this.data.hotels;
+    this.currencies = this.data.currencies;
+  }
 
   myFilter = (d: Date | null): boolean => {
     let dun = new Date();
@@ -92,65 +115,14 @@ export class ContractAddDialogComponent implements OnInit {
   cRoomTypes: any[] = [];
 
   ngOnInit(): void {
-    this.hotelService.getAllHotels().subscribe(res => {
-      if (res.data !== null) this.hotels = res.data;
-      else this.hotels = [];
-    });
-
-    this.marketService.getAllMarkets().subscribe(res => {
-      if (res.data !== null) this.markets = res.data;
-      else this.markets = [];
-    });
-
-    this.roomService.getAllRooms().subscribe(res => {
-      if (res.data !== null) this.rooms = res.data;
-      else this.rooms = [];
-    });
-
-    this.agencyService.getAllAgencies().subscribe(res => {
-      if (res.data !== null) this.agencies = res.data;
-      else this.agencies = [];
-    });
-
-    this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      if (res.data !== null) this.roomTypes = res.data;
-      else this.roomTypes = [];
-    });
-
-    this.currencyService.getAllCurrency().subscribe(res => {
-      if (res.data !== null) this.currencies = res.data;
-      else this.currencies = []
-    });
-
-    this.boardService.getAllBoards().subscribe(res => {
-      if (res.data !== null) this.boards = res.data;
-      else this.boards = []
-    });
-
     this.contractService.getAllContracts().subscribe(res => {
       if (res.data !== null) this.contracts = res.data;
       else this.contracts = [];
     });
 
-    this.cagencyService.getAllCAgencies().subscribe(res => {
-      if (res.data !== null) this.cAgencies = res.data;
-      else this.cAgencies = [];
-    });
+    
 
-    this.cboardService.getAllCBoards().subscribe(res => {
-      if (res.data !== null) this.cBoards = res.data;
-      else this.cBoards = [];
-    });
-
-    this.croomService.getAllCRooms().subscribe(res => {
-      if (res.data !== null) this.cRooms = res.data;
-      else this.cRooms = [];
-    });
-
-    this.cmarketService.getAllCMarkets().subscribe(res => {
-      if (res.data !== null) this.cMarkets = res.data;
-      else this.cMarkets = [];
-    });
+    
   }
 
   add() {
