@@ -10,12 +10,16 @@
 
     <br>
 
-    <mat-form-field class="selects-m">
+    <mat-form-field>
+        <mat-label>{{ 'name' | transloco }}</mat-label>
+        <input matInput maxlength="20" [(ngModel)]="newName" (keyup.enter)="update()">
+    </mat-form-field>
+    <!-- <mat-form-field class="selects-m">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
         <mat-select [(ngModel)]="newHotelId">
             <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
         </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
 
     <br>
 

@@ -12,6 +12,8 @@ import { CMarketService } from 'src/app/services/cmarket.service';
 import { CRoomService } from 'src/app/services/croom.service';
 import { RoomService } from 'src/app/services/room.service';
 import { ExcelService } from 'src/app/services/excel.service';
+import { HotelFeatureService } from 'src/app/services/hotel-feature';
+import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 
 @Component({
   selector: 'app-contract',
@@ -19,7 +21,7 @@ import { ExcelService } from 'src/app/services/excel.service';
   styleUrls: ['./contract.component.scss'],
 })
 export class ContractComponent implements OnInit {
-  columns: string[] = ["code", "name", "hotel", "start", "end", "actions", "seeDetails"];
+  columns: string[] = ["code", "name", "hotel", "feature","start", "end", "actions", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
   value = '';
@@ -47,6 +49,7 @@ export class ContractComponent implements OnInit {
     private cboardService: CBoardService,
     private cmarketService: CMarketService,
     private croomService : CRoomService,
+    private hotelFeatureService: HotelFeatureService,
     private excelService: ExcelService
   ) { }
 
@@ -62,6 +65,7 @@ export class ContractComponent implements OnInit {
   cMarkets: any[] = [];
   cRoomTypes: any[] = [];
   cRooms: any[] = [];
+  hotelFeatures: HotelFeature[] =[];
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
@@ -129,6 +133,15 @@ export class ContractComponent implements OnInit {
       if(res.data!=null){
         this.rooms = res.data;
       }
+    });
+
+    this.hotelFeatureService.getAllFeatures().subscribe(res=>{
+      if(res.data !== null){
+        this.hotelFeatures = res.data;
+      }
+      console.log(this.hotelFeatures);
+      
+
     });
 
     this.contractService.getAllContracts().subscribe(res => {
@@ -237,10 +250,12 @@ export class ContractComponent implements OnInit {
 
   }
 
+  
+
+
   getItem(type: "agency" | "board" | "room_type" | "market"| "room" | "hotel" | "currency", element: Contract) {
     switch (type) {
       case 'agency':
-       
         const idAgency = this.cAgencies.filter(cA => cA.listId === element.id).map(cA => cA.agencyId);
         return idAgency.map(i => this.agencies.find(a => a.id === i).name);
 
@@ -268,6 +283,16 @@ export class ContractComponent implements OnInit {
         return this.currencies.find(c => c.id === element.currencyId)?.code;
         
     }
+  }
+
+  getCurrentFeature(element: Contract){
+    const feature = this.hotels.filter(cM => cM.id === element.hotelId).map(cM => cM.hotelFeatureId);
+
+    let fBaby = feature.map(i => this.hotelFeatures.find(m => m.id === i)?.babyTop);
+    let fChild = feature.map(i => this.hotelFeatures.find(m => m.id === i)?.childTop);
+    let fTeen = feature.map(i => this.hotelFeatures.find(m => m.id === i)?.teenTop);
+  
+    return "[ " + fBaby + " - " + fChild + " - " + fTeen + " ]"
   }
 
 }

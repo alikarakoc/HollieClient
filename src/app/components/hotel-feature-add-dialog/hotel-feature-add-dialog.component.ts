@@ -19,7 +19,7 @@ interface DialogData {
 })
 export class HotelFeatureAddDialogComponent implements OnInit {
   code: string;
-  hotelId: number;
+  name: string;
   babyTop: number;
   childTop: number;
   teenTop: number;
@@ -45,7 +45,7 @@ export class HotelFeatureAddDialogComponent implements OnInit {
   }
 
   add(){
-    if (!this.code || !this.hotelId || !this.babyTop || !this.childTop || !this.teenTop) {
+    if (!this.code || !this.name || !this.babyTop || !this.childTop || !this.teenTop) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
@@ -53,7 +53,7 @@ export class HotelFeatureAddDialogComponent implements OnInit {
     this.hotelFeatureService.getAllFeatures().subscribe((res) => {
       if(res.data !== null && res.data.some(f => 
         f.code === this.code ||
-        f.hotelId === this.hotelId ||
+        f.name === this.name ||
         f.babyTop === this.babyTop ||
         f.childTop === this.childTop ||
         f.teenTop === this.teenTop )){
@@ -72,7 +72,7 @@ export class HotelFeatureAddDialogComponent implements OnInit {
     this.dialogRef.close({
       isAdded: true,
       code: this.code,
-      hotelId: this.hotelId,
+      name: this.name,
       babyTop: this.babyTop,
       childTop: this.childTop,
       teenTop: this.teenTop
