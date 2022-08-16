@@ -8,6 +8,8 @@ import { Contract, Hotel } from "src/app/interfaces";
 import { CRoomService } from 'src/app/services/croom.service';
 import { RoomService } from 'src/app/services/room.service';
 import { ContractService, HotelService, ExcelService, CBoardService, CAgencyService, CMarketService, RoomTypeService, AgencyService, BoardService, CurrencyService, MarketService } from "src/app/services";
+import { HotelFeatureService } from 'src/app/services/hotel-feature';
+import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 
 @Component({
   selector: 'app-search-contract',
@@ -15,22 +17,23 @@ import { ContractService, HotelService, ExcelService, CBoardService, CAgencyServ
   styleUrls: ['./search-contract.component.scss']
 })
 export class SearchContractComponent implements OnInit {
-  columns: string[] = ["code", "name", "hotel","adp","cH07","cH14", "start", "end", "Total-Price", "seeDetails"];
+  columns: string[] = ["code", "name", "hotel", "adp", "cH1", "cH2", "cH3", "start", "end", "Total-Price", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
   @ViewChild(MatTable) table: MatTable<SearchContractComponent>;
 
   startDate?: Date;
   endDate?: Date;
-  adult?: number;
+  adult: number;
   adp?: number;
   gun: number;
   contDay?: number;
-  cH07?: number;
-  cH14?: number;
+  child1: number;
+  child2: number;
+  child3: number;
   child?: number;
   hotelIds: number[];
-  totalPrice: number;
+  totalPrice: number = 0;
 
   constructor(
     private hotelService: HotelService,
@@ -46,8 +49,9 @@ export class SearchContractComponent implements OnInit {
     private cBoardService: CBoardService,
     private cMarketService: CMarketService,
     private excelService: ExcelService,
-    private croomService : CRoomService,
+    private croomService: CRoomService,
     private translocoService: TranslocoService,
+    private hotelFeatureService: HotelFeatureService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -66,16 +70,22 @@ export class SearchContractComponent implements OnInit {
   boards: any[] = [];
   roomTypes: any[] = [];
   currencies: any[] = [];
-  contDays? = (1);
-   
-  
+  contDays?= (1);
+  features: HotelFeature[] = [];
+  contBabyTop: any;
+  contChildTop: any;
+  contTeenTop: any;
+  contChildAges: any[] = [];
+
+
+
   clearTable() {
     this.result = [];
     this.table.renderRows();
   }
 
-  
-  clear(){
+
+  clear() {
     this.ngOnInit();
   }
 
@@ -140,20 +150,36 @@ export class SearchContractComponent implements OnInit {
     });
 
     this.croomService.getAllCRooms().subscribe(res => {
-      if(res.data!=null){
+      if (res.data != null) {
         this.cRooms = res.data;
       }
     });
 
+    this.hotelFeatureService.getAllFeatures().subscribe(res => {
+      if (res.data != null) {
+        this.features = res.data;
+      }
+    })
+
     this.roomService.getAllRooms().subscribe(res => {
-      if(res.data!=null){
+      if (res.data != null) {
         this.rooms = res.data;
       }
     });
-
-    
- 
   }
+
+  onChangeChild1(event: any) {
+    console.log("child1: " + event);
+  }
+
+  onChangeChild2(event: any) {
+    console.log("child2: " + event);
+  }
+
+  onChangeChild3(event: any) {
+    console.log("child3: " + event);
+  }
+
 
 
   applyFilter() {
@@ -163,12 +189,6 @@ export class SearchContractComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
       return;
     }
-    console.log(this.adult+"   "+this.child );
-    console.log(this.adp);
-    console.log(this.cH07);
-    console.log(this.cH14);
-    console.log(this.contDay);
-    
 
 
     for (const contract of this.contracts) {
@@ -198,13 +218,52 @@ export class SearchContractComponent implements OnInit {
         }
       };
 
+      if (this.result.length === 0) {
+        this.snackBar.open(this.translocoService.translate('contract_not_found'));
+      }
+
     }
+
+    if (this.child1 != null) {
+      this.contChildAges.push(this.child1);
+    }
+    if (this.child2 != null) {
+      this.contChildAges.push(this.child2);
+    }
+    if (this.child3 != null) {
+      this.contChildAges.push(this.child3);
+    }
+
     this.table.renderRows();
 
-    if (this.result.length === 0) {
-      this.snackBar.open(this.translocoService.translate('contract_not_found'));
-    }
+
   }
+
+  getCurrentTotalPrice(contract: Contract) {
+    this.totalPrice = this.adult * contract.adp ;
+    let s = this.hotels.find(c => c.id === contract.hotelId);
+    this.contBabyTop = this.features.find(c => c.id === s?.hotelFeatureId)?.babyTop;
+    this.contChildTop = this.features.find(c => c.id === s?.hotelFeatureId)?.childTop;
+    this.contTeenTop = this.features.find(c => c.id === s?.hotelFeatureId)?.teenTop;
+
+    for (let c = 0; c < this.contChildAges.length; c++) {
+      if (this.contChildAges[c] <= this.contBabyTop) {
+        this.totalPrice = this.totalPrice + contract.cH1;
+      }
+      else if (this.contChildAges[c] <= this.contChildTop) {
+        this.totalPrice = this.totalPrice + contract.cH2;
+      }
+      else if (this.contChildAges[c] <= this.contTeenTop) {
+        this.totalPrice = this.totalPrice + contract.cH3;
+      }
+      else{
+        this.totalPrice = this.totalPrice + contract.adp;
+      }
+    }
+
+    return this.totalPrice;
+  }
+
 
   clearInputs() {
   }
@@ -216,7 +275,7 @@ export class SearchContractComponent implements OnInit {
         contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
         markets: this.markets, agencies: this.agencies, currencies: this.currencies,
         boards: this.boards, cAgencies: this.cAgencies, cBoards: this.cBoards,
-        cMarkets: this.cMarkets,cRooms: this.cRooms,rooms: this.rooms
+        cMarkets: this.cMarkets, cRooms: this.cRooms, rooms: this.rooms
       }
     });
 
@@ -226,7 +285,7 @@ export class SearchContractComponent implements OnInit {
     return new Date(v);
   }
 
-  getItem(type: "agency" | "board" | "market" |"date" |"room" | "hotel" | "currency", element: Contract): any[] | any {
+  getItem(type: "agency" | "board" | "market" | "date" | "room" | "hotel" | "currency", element: Contract): any[] | any {
     switch (type) {
       case 'agency':
         // return element.agencyIds.map(i => this.agencies.find(a => a.id === i));
@@ -243,19 +302,18 @@ export class SearchContractComponent implements OnInit {
         const idMarket = this.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
-        case 'room':
-          const idRoom = this.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
-          return idRoom.map(i => this.rooms.find(r => r.id === i).name);
+      case 'room':
+        const idRoom = this.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
+        return idRoom.map(i => this.rooms.find(r => r.id === i).name);
 
-          case 'date':
-            this.gun = (-1*(new Date(element.enteredDate).getTime() - new Date(element.exitDate).getTime()) / (1000 * 60 * 60 * 24));
-            console.log(this.gun)
-            return this.gun
-            
+      case 'date':
+        this.gun = (-1 * (new Date(element.enteredDate).getTime() - new Date(element.exitDate).getTime()) / (1000 * 60 * 60 * 24));
+        return this.gun
 
-     // case 'room':
-       // const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
-       // return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
+
+      // case 'room':
+      // const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
+      // return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
 
       case 'hotel':
         return this.hotels.find(h => h.id === element.hotelId)?.name;

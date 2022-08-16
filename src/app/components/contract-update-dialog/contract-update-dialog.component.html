@@ -9,14 +9,14 @@
         <input matInput maxlength="20" [(ngModel)]="code" (keyup.enter)="update()">
     </mat-form-field>
 
-    <br>
+    
 
     <mat-form-field>
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput maxlength="50" [(ngModel)]="name" (keyup.enter)="update()">
     </mat-form-field> 
 
-    <br>
+   
 
     <mat-form-field class="datepicker">
         <mat-label>{{ 'start' | transloco }}</mat-label>
@@ -25,7 +25,7 @@
         <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
 
-    <br>
+   
 
     <mat-form-field class="datepicker">
         <mat-label>{{ 'end' | transloco }}</mat-label>
@@ -34,19 +34,30 @@
         <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
 
-    <br>
 
-    <!-- <mat-form-field floatLabel="always" class="selects-m">
-        <mat-label>{{ 'Adult Price' | transloco }}</mat-label>
+
+     <mat-form-field floatLabel="always" class="selects-m">
+        <mat-label>{{ 'adultPrice' | transloco }}</mat-label>
         <input matInput [(ngModel)]="adultPrice" type="number" class="price-input" placeholder="0">
-    </mat-form-field>
+    </mat-form-field> 
 
     <mat-form-field floatLabel="always" class="selects-m">
-        <mat-label>{{ 'Children Price' | transloco }}</mat-label>
-        <input matInput [(ngModel)]="childPrice" type="number" class="price-inpput" placeholder="0">
-    </mat-form-field> -->
+        <mat-label>{{ 'childPrice' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="childPrice1" type="number" class="price-input" placeholder="0">
+    </mat-form-field> 
 
-    <br>
+
+    <mat-form-field floatLabel="always" class="selects-m">
+        <mat-label>{{ 'childPrice' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="childPrice2" type="number" class="price-input" placeholder="0">
+    </mat-form-field> 
+
+    <mat-form-field floatLabel="always" class="selects-m">
+        <mat-label>{{ 'childPrice' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="childPrice3" type="number" class="price-input" placeholder="0">
+    </mat-form-field> 
+
+   
   
     <mat-form-field class="selects-m">
         <mat-label>{{ 'currency' | transloco }}</mat-label>
@@ -63,7 +74,7 @@
         </mat-select>
     </mat-form-field>
 
-    <br>
+    
 
     <mat-form-field  class="selects-m">
         <mat-label>{{ 'market' | transloco }}</mat-label>
@@ -80,7 +91,7 @@
         </mat-select>
     </mat-form-field>
 
-    <br>
+   
   
     <mat-form-field class="selects-m">
         <mat-label>{{ 'board' | transloco }}</mat-label>
@@ -97,7 +108,7 @@
         </mat-select>
     </mat-form-field> -->
 
-    <br>
+    
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'room' | transloco }}</mat-label>

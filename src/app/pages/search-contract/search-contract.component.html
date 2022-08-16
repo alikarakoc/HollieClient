@@ -38,17 +38,17 @@
 
         <mat-form-field *ngIf="child != null && child != 0" class="mx-2 person">
             <mat-label>{{ 'childAge' | transloco }}</mat-label>
-            <input matInput type="number" min="0" max="16" onkeydown="return false">
+            <input matInput type="number" [(ngModel)]="child1" (ngModelChange)="onChangeChild1($event)" min="0" max="16" onkeydown="return false">
         </mat-form-field>
 
         <mat-form-field *ngIf="(child != null) && (child == 2) || (child ==3)" class="mx-2 person">
             <mat-label>{{ 'childAge' | transloco }}</mat-label>
-            <input matInput type="number" min="0" max="16" onkeydown="return false">
+            <input matInput type="number" [(ngModel)]="child2" (ngModelChange)="onChangeChild2($event)" min="0" max="16" onkeydown="return false">
         </mat-form-field>
 
         <mat-form-field *ngIf="child != null && child == 3" class="mx-2 person">
             <mat-label>{{ 'childAge' | transloco }}</mat-label>
-            <input matInput type="number" min="0" max="16" onkeydown="return false">
+            <input matInput type="number" [(ngModel)]="child3" (ngModelChange)="onChangeChild3($event)" min="0" max="16" onkeydown="return false">
         </mat-form-field>
 
 
@@ -92,14 +92,19 @@
                 <td mat-cell *matCellDef="let element">{{ element.adp }}</td>
             </ng-container>
 
-            <ng-container matColumnDef="cH07">
+            <ng-container matColumnDef="cH1">
                 <th mat-header-cell *matHeaderCellDef>{{ 'ch07' | transloco }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.cH07 }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.cH1 }}</td>
             </ng-container>
 
-            <ng-container matColumnDef="cH14">
+            <ng-container matColumnDef="cH2">
+                <th mat-header-cell *matHeaderCellDef>{{ 'ch07' | transloco }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.cH2 }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="cH3">
                 <th mat-header-cell *matHeaderCellDef>{{ 'ch14' | transloco }}</th>
-                <td mat-cell *matCellDef="let element">{{ element.cH14 }}</td>
+                <td mat-cell *matCellDef="let element">{{ element.cH3 }}</td>
             </ng-container>
 
             <ng-container matColumnDef="start">
@@ -115,8 +120,8 @@
             <ng-container matColumnDef="Total-Price">
                 <th mat-header-cell *matHeaderCellDef>{{ 'Total-price' | transloco }}</th>
                 <td width="100" mat-cell *matCellDef="let element" >
-                   
-                    {{ getItem('date', element)*element.adp  }}&nbsp;&nbsp;&nbsp;
+                   {{ getCurrentTotalPrice(element) }}
+                    <!-- {{ getItem('date', element)*element.adp  }}&nbsp;&nbsp;&nbsp; -->
                     <!-- {{ element.adp * adult! * element.contDay + element.ch07 * child! *element.contDay}}&nbsp;&nbsp;&nbsp; -->
                     <!-- {{ element.childPrice * child! * element.contDay }}&nbsp;&nbsp;&nbsp; -->
                     {{ getItem('currency', element) }}

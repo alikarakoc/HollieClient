@@ -45,7 +45,11 @@ export class ContractUpdateDialogComponent implements OnInit {
   start: Date = this.data.element.enteredDate;
   end: Date = this.data.element.exitDate;
   hotel: number = this.data.element.hotelId;
+  adultPrice: number = this.data.element.adp;
   currency: number = this.data.element.currencyId;
+  childPrice1: number = this.data.element.cH1;
+  childPrice2: number = this.data.element.cH2;
+  childPrice3: number = this.data.element.cH3;
   selectedAgencies: any[] = this.data.element.agencyList;
   selectedBoards: any[] = this.data.element.boardList;
   selectedMarkets: any[] = this.data.element.marketList;
@@ -195,6 +199,10 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.data.element.exitDate = this.end;
     this.data.element.hotelId = this.hotel;
     this.data.element.currencyId = this.currency;
+    this.data.element.adp = this.adultPrice;
+    this.data.element.cH1 = this.childPrice1;
+    this.data.element.cH2 = this.childPrice2;
+    this.data.element.cH3 = this.childPrice3;
     this.data.element.agencyList = this.selectedAgencies;
     this.data.element.marketList = this.selectedMarkets;
     this.data.element.roomList = this.selectedRooms;
