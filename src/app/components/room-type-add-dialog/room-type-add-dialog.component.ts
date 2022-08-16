@@ -10,6 +10,7 @@ interface DialogData {
   table: MatTable<RoomType>;
 }
 
+
 @Component({
   selector: 'app-room-type-add-dialog',
   templateUrl: './room-type-add-dialog.component.html',
@@ -23,6 +24,8 @@ export class RoomTypeAddDialogComponent implements OnInit {
   roomTypeMaxAD: number;
   roomTypePax: number;
 
+
+
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: DialogData,
     private dialogRef: MatDialogRef<RoomTypeAddDialogComponent>,
@@ -32,8 +35,10 @@ export class RoomTypeAddDialogComponent implements OnInit {
     private hotelService: HotelService
   ) { }
 
+
+
   hotels: any[] = [];
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
       if (res.data !== null) this.hotels = res.data;
       else this.hotels = [];

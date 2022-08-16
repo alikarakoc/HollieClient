@@ -3,45 +3,38 @@
 </h1>
 
 <div mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field class="textInput">
         <mat-label>{{ 'code' | transloco }}</mat-label>
         <input matInput maxlength="20" [(ngModel)]="roomTypeCode" (keyup.enter)="add()">
     </mat-form-field>
 
-    <br>
-
-    <mat-form-field>
+    <mat-form-field class="textInput">
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput maxlength="50" [(ngModel)]="roomTypeName" (keyup.enter)="add()">
     </mat-form-field>
 
-    <br>
-
-    <mat-form-field class="selects-m">
+    <mat-form-field class="textInput">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
         <mat-select [(ngModel)]="roomTypeHotelId">
             <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
         </mat-select>
     </mat-form-field>
-
-    <br>
-
-    <mat-form-field>
+<div class="containers">
+    <mat-form-field class="input">
         <mat-label>{{ 'adult' | transloco }}</mat-label>
         <input [(ngModel)]="roomTypeMaxAD" matInput type="number" value="1" min="0" max="15" >
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="input">
         <mat-label>{{ 'child' | transloco }}</mat-label>
         <input [(ngModel)]="roomTypeMaxCH" matInput type="number" value="1" min="0" max="5" >
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="input">
         <mat-label>{{ 'person' | transloco }}</mat-label>
         <input [(ngModel)]="roomTypePax" matInput type="number" value="1" min="0" max="20" >
     </mat-form-field>
-
-
+  </div>
 </div>
 
 <div mat-dialog-actions>

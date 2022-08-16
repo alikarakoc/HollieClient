@@ -181,10 +181,11 @@ export class SearchContractComponent implements OnInit {
   }
 
 
-
   applyFilter() {
-    this.clearTable();
 
+    this.contChildAges=[];
+
+    this.result = [];
     if (this.startDate! > this.endDate!) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
       return;
@@ -222,6 +223,7 @@ export class SearchContractComponent implements OnInit {
         this.snackBar.open(this.translocoService.translate('contract_not_found'));
       }
 
+      this.table.renderRows();
     }
 
     if (this.child1 != null) {
@@ -234,8 +236,12 @@ export class SearchContractComponent implements OnInit {
       this.contChildAges.push(this.child3);
     }
 
-    this.table.renderRows();
+    // this.table.renderRows();
 
+    for(let i=0; i < this.contChildAges.length; i++){
+      console.log("child array"+this.contChildAges[i]);
+
+    }
 
   }
 
@@ -245,6 +251,8 @@ export class SearchContractComponent implements OnInit {
     this.contBabyTop = this.features.find(c => c.id === s?.hotelFeatureId)?.babyTop;
     this.contChildTop = this.features.find(c => c.id === s?.hotelFeatureId)?.childTop;
     this.contTeenTop = this.features.find(c => c.id === s?.hotelFeatureId)?.teenTop;
+    // console.log(this.totalPrice+ ': total price 1');
+
 
     for (let c = 0; c < this.contChildAges.length; c++) {
       if (this.contChildAges[c] <= this.contBabyTop) {
@@ -259,10 +267,12 @@ export class SearchContractComponent implements OnInit {
       else{
         this.totalPrice = this.totalPrice + contract.adp;
       }
-    }
+      // console.log(this.totalPrice);
 
+    }
     return this.totalPrice;
   }
+
 
 
   clearInputs() {
