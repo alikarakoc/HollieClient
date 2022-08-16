@@ -20,7 +20,7 @@
         </button>
 
     </mat-form-field>
-
+    <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="code">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'code' | transloco }}</th>
@@ -72,7 +72,7 @@
             <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
         </tr>
     </table>
-
+  </div>
     <mat-menu #menu="matMenu">
         <ng-template matMenuContent let-element="element">
             <button mat-menu-item (click)="update(element)">{{ 'dialogs.edit' | transloco }}</button>

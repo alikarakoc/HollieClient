@@ -71,6 +71,7 @@
                 <mat-icon>file_download</mat-icon>
             </button>
         </div>
+        <div class="mat-elevation-z8">
         <table mat-table [dataSource]="result">
             <ng-container matColumnDef="code">
                 <th mat-header-cell *matHeaderCellDef>{{ 'code' | transloco }}</th>
@@ -140,5 +141,6 @@
             <tr mat-header-row *matHeaderRowDef="columns"></tr>
             <tr mat-row *matRowDef="let row; columns: columns"></tr>
         </table>
+      </div>
     </div>
 </app-navbar>
