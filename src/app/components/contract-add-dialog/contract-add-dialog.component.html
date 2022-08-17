@@ -4,21 +4,19 @@
 </h1>
 
 <div mat-dialog-content>
-
-    <mat-form-field>
+<div class="containers">
+    <mat-form-field class="upper">
         <mat-label>{{ 'code' | transloco }}</mat-label>
         <input matInput maxlength="20" [(ngModel)]="contractCode" (keyup.enter)="add()">
     </mat-form-field>
 
-    <br>
-
-    <mat-form-field>
+    <mat-form-field class="upper">
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput maxlength="50" [(ngModel)]="name" (keyup.enter)="add()">
     </mat-form-field>
+  </div>
 
-    <br>
-
+  <div class="containers">
     <mat-form-field class="datepicker">
         <mat-label>{{ 'start' | transloco }}</mat-label>
         <input matInput [matDatepickerFilter]="myFilter" [(ngModel)]="start" [matDatepicker]="startPicker">
@@ -26,38 +24,37 @@
         <mat-datepicker #startPicker></mat-datepicker>
     </mat-form-field>
 
-    <br>
-
     <mat-form-field class="datepicker">
         <mat-label>{{ 'end' | transloco }}</mat-label>
         <input matInput [matDatepickerFilter]="myFilter" [(ngModel)]="end" [matDatepicker]="endPicker">
         <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
         <mat-datepicker #endPicker></mat-datepicker>
     </mat-form-field>
+  </div>
 
-    <br>
-
-    <mat-form-field floatLabel="always" class="selects-m">
+  <div class="containers">
+    <mat-form-field floatLabel="always" class="selects-a">
         <mat-label>{{ 'adultPrice' | transloco }}</mat-label>
         <input matInput [(ngModel)]="adp" type="number" class="price-input" placeholder="0">
     </mat-form-field>
 
-    <mat-form-field floatLabel="always" class="selects-m">
+    <mat-form-field floatLabel="always" class="selects-a">
         <mat-label>{{ 'childPrice' | transloco }}</mat-label>
         <input matInput [(ngModel)]=" ch1" type="number" class="price-input" placeholder="0">
     </mat-form-field>
 
-    <mat-form-field floatLabel="always" class="selects-m">
+    <mat-form-field floatLabel="always" class="selects-a">
         <mat-label>{{ 'childPrice' | transloco }}</mat-label>
         <input matInput [(ngModel)]=" ch2" type="number" class="price-input" placeholder="0">
     </mat-form-field>
 
-    <mat-form-field floatLabel="always" class="selects-m">
+    <mat-form-field floatLabel="always" class="selects-a">
         <mat-label>{{ 'childPrice' | transloco }}</mat-label>
         <input matInput [(ngModel)]=" ch3" type="number" class="price-input" placeholder="0">
     </mat-form-field>
-    <br>
+  </div>
 
+  <div class="containers">
     <mat-form-field class="selects-m">
         <mat-label>{{ 'currency' | transloco }}</mat-label>
         <mat-select [(ngModel)]="currency">
@@ -71,9 +68,8 @@
             <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
         </mat-select>
     </mat-form-field>
-
-    <br>
-
+  </div>
+  <div class="containers">
     <mat-form-field class="selects-m">
         <mat-label>{{ 'room' | transloco }}</mat-label>
         <mat-select [(ngModel)]="selectedRoomTypes" multiple>
@@ -87,9 +83,8 @@
             <mat-option *ngFor="let b of boards" [value]="{boardId: b.id}">{{ b.name }}</mat-option>
         </mat-select>
     </mat-form-field>
-
-    <br>
-
+  </div>
+    <div class="containers">
     <mat-form-field class="selects-m">
         <mat-label>{{ 'market' | transloco }}</mat-label>
         <mat-select [(ngModel)]="selectedMarkets" (ngModelChange)="onChangeMarket($event)" multiple>
@@ -104,10 +99,10 @@
             <!-- {agencyId: a.id} -->
         </mat-select>
     </mat-form-field>
+  </div>
 
-    <br>
-    
-    
+
+
 
 </div>
 

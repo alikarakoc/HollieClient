@@ -2,5 +2,22 @@
     background-color:rgb(99, 95, 95);
     height: 30px;
     color:rgb(153, 150, 150);
-    
+}
+.containers{
+  display: flex;
+  margin:0 auto 0 auto;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+.selects-a{
+  width: 110px;
+  margin-right: 3px;;
+}
+.datepicker{
+  margin-right: 3px;
+  max-width: 222px;
+}
+.upper{
+  width: 400px !important;
+  margin-right: 3px;
 }
