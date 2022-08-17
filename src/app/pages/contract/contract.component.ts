@@ -9,11 +9,13 @@ import { AgencyService, BoardService, ContractService, CurrencyService, HotelSer
 import { CAgencyService } from 'src/app/services/cagency.service';
 import { CBoardService } from 'src/app/services/cboard.service';
 import { CMarketService } from 'src/app/services/cmarket.service';
-import { CRoomService } from 'src/app/services/croom.service';
+import { CRoomTypeService } from 'src/app/services/croomtype.service';
 import { RoomService } from 'src/app/services/room.service';
 import { ExcelService } from 'src/app/services/excel.service';
 import { HotelFeatureService } from 'src/app/services/hotel-feature';
 import { HotelFeature } from 'src/app/interfaces/hotel-feature';
+import { AMarketService } from 'src/app/services/amarket.service';
+import { AMarket } from 'src/app/interfaces/amarket';
 
 @Component({
   selector: 'app-contract',
@@ -42,13 +44,13 @@ export class ContractComponent implements OnInit {
     private marketService: MarketService,
     private agencyService: AgencyService,
     private boardService: BoardService,
-    private roomService: RoomService,
+    //private roomService: RoomService,
     private roomTypeService: RoomTypeService,
     private currencyService: CurrencyService,
     private cagencyService: CAgencyService,
     private cboardService: CBoardService,
     private cmarketService: CMarketService,
-    private croomService : CRoomService,
+    private croomTypeService : CRoomTypeService,
     private hotelFeatureService: HotelFeatureService,
     private excelService: ExcelService
   ) { }
@@ -57,14 +59,14 @@ export class ContractComponent implements OnInit {
   markets: any[] = [];
   agencies: any[] = [];
   boards: any[] = [];
-  rooms: any[] = [];
+  //rooms: any[] = [];
   roomTypes: any[] = [];
   currencies: any[] = [];
   cAgencies: any[] = [];
   cBoards: any[] = [];
   cMarkets: any[] = [];
   cRoomTypes: any[] = [];
-  cRooms: any[] = [];
+  //cRooms: any[] = [];
   hotelFeatures: HotelFeature[] =[];
 
   ngOnInit(): void {
@@ -123,23 +125,23 @@ export class ContractComponent implements OnInit {
       }
     });
 
-    this.croomService.getAllCRooms().subscribe(res => {
+    this.croomTypeService.getAllCRoomTypes().subscribe(res => {
       if(res.data!=null){
-        this.cRooms = res.data;
+        this.cRoomTypes = res.data;
       }
     });
 
-    this.roomService.getAllRooms().subscribe(res => {
-      if(res.data!=null){
-        this.rooms = res.data;
-      }
-    });
+    // this.roomService.getAllRooms().subscribe(res => {
+    //   if(res.data!=null){
+    //     this.rooms = res.data;
+    //   }
+    // });
+
 
     this.hotelFeatureService.getAllFeatures().subscribe(res=>{
       if(res.data !== null){
         this.hotelFeatures = res.data;
       }
-      console.log(this.hotelFeatures);
       
 
     });
@@ -174,7 +176,7 @@ export class ContractComponent implements OnInit {
         name: c.name,
         currency: this.getItem('currency', c),
         hotels: this.getItem('hotel', c),
-        rooms: this.getItem('room', c).toString(),
+        //rooms: this.getItem('room', c).toString(),
         markets: this.getItem('market', c).toString(),
         agencies: this.getItem('agency', c).toString(),
         boards: this.getItem('board', c).toString(),
@@ -195,9 +197,9 @@ export class ContractComponent implements OnInit {
     if(this.checkButtonCount < 1) {
       const dialog = this.dialog.open(ContractAddDialogComponent, { 
         data: { table: this.table, roomTypes: this.roomTypes, hotels: this.hotels,
-          markets: this.markets, rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
-          boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,cRooms: this.cRooms, 
-          cMarkets:this.cMarkets  } ,
+          markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
+          boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,cRoomTypes: this.cRoomTypes, 
+          cMarkets:this.cMarkets } ,
       });
     
     
@@ -233,9 +235,9 @@ export class ContractComponent implements OnInit {
   update(element: Contract) {
     const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: { 
       element: element, roomTypes: this.roomTypes, hotels: this.hotels,
-      markets: this.markets, rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
-      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,cRooms: this.cRooms, 
-      cMarkets:this.cMarkets  } });
+      markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
+      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
+      cRoomTypes: this.cRoomTypes,  cMarkets:this.cMarkets  } });
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {
@@ -247,16 +249,16 @@ export class ContractComponent implements OnInit {
   seeDetails(element: Contract) {
     this.dialog.open(ContractDetailsComponent, { data: { 
       contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
-      markets: this.markets, rooms: this.rooms, agencies: this.agencies, currencies:this.currencies, 
+      markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
       boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
-      cMarkets:this.cMarkets, cRooms:this.cRooms } });
+      cMarkets:this.cMarkets, cRoomTypes:this.cRoomTypes } });
 
   }
 
   
 
 
-  getItem(type: "agency" | "board" | "room_type" | "market"| "room" | "hotel" | "currency", element: Contract) {
+  getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: Contract) {
     switch (type) {
       case 'agency':
         const idAgency = this.cAgencies.filter(cA => cA.listId === element.id).map(cA => cA.agencyId);
@@ -274,9 +276,9 @@ export class ContractComponent implements OnInit {
         const idMarket = this.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
-      case 'room':
-          const idRoom = this.cRooms.filter(cM => cM.listId === element.id).map(cM => cM.roomId);
-          return idRoom.map(i => this.rooms.find(m => m.id === i).name);
+      // case 'room':
+      //     const idRoomType = this.cRoomTypes.filter(cM => cM.listId === element.id).map(cM => cM.roomId);
+      //     return idRoomType.map(i => this.rooms.find(m => m.id === i).name);
   
       case 'hotel':
         return this.hotels.find(h => h.id === element.hotelId)?.name;

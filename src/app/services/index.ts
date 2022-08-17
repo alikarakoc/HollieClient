@@ -11,4 +11,4 @@ export { ExcelService } from './excel.service';
 export { CAgencyService } from './cagency.service';
 export { CBoardService } from './cboard.service';
 export { CMarketService } from './cmarket.service';
-export { CRoomService } from './croom.service';
+export { CRoomTypeService } from './croomtype.service';

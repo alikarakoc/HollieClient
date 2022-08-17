@@ -5,7 +5,7 @@ import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { TranslocoService } from "@ngneat/transloco";
 import { ContractDetailsComponent } from 'src/app/components';
 import { Contract, Hotel } from "src/app/interfaces";
-import { CRoomService } from 'src/app/services/croom.service';
+import { CRoomTypeService } from 'src/app/services/croomtype.service';
 import { RoomService } from 'src/app/services/room.service';
 import { ContractService, HotelService, ExcelService, CBoardService, CAgencyService, CMarketService, RoomTypeService, AgencyService, BoardService, CurrencyService, MarketService } from "src/app/services";
 import { HotelFeatureService } from 'src/app/services/hotel-feature';
@@ -49,7 +49,7 @@ export class SearchContractComponent implements OnInit {
     private cBoardService: CBoardService,
     private cMarketService: CMarketService,
     private excelService: ExcelService,
-    private croomService: CRoomService,
+    private croomTypeService: CRoomTypeService,
     private translocoService: TranslocoService,
     private hotelFeatureService: HotelFeatureService,
     private snackBar: MatSnackBar
@@ -149,9 +149,9 @@ export class SearchContractComponent implements OnInit {
       this.cMarkets = res.data;
     });
 
-    this.croomService.getAllCRooms().subscribe(res => {
+    this.croomTypeService.getAllCRoomTypes().subscribe(res => {
       if (res.data != null) {
-        this.cRooms = res.data;
+        this.cRoomTypes = res.data;
       }
     });
 
@@ -322,7 +322,7 @@ export class SearchContractComponent implements OnInit {
 
 
       // case 'room':
-      // const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
+      // const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.);
       // return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
 
       case 'hotel':

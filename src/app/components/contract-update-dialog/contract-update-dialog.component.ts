@@ -7,7 +7,6 @@ import { TranslocoService } from '@ngneat/transloco';
 import { Contract } from 'src/app/interfaces';
 import { HotelService, ContractService } from 'src/app/services';
 import { CMarket } from 'src/app/interfaces/cmarket';
-import { CRoom } from 'src/app/interfaces/croom';
 import { CAgency } from 'src/app/interfaces/cagency';
 import { CBoard } from 'src/app/interfaces/cboard';
 import { CRoomType } from 'src/app/interfaces/croomtype';
@@ -25,7 +24,7 @@ interface DialogData {
   hotelCategories: any[];
   roomTypes: any[];
   cMarkets: any[];
-  cRooms: any[];
+ //cRooms: any[];
   cAgencies: any[];
   cBoards: any[];
   cRoomTypes: any[];
@@ -53,7 +52,7 @@ export class ContractUpdateDialogComponent implements OnInit {
   selectedAgencies: any[] = this.data.element.agencyList;
   selectedBoards: any[] = this.data.element.boardList;
   selectedMarkets: any[] = this.data.element.marketList;
-  selectedRooms: any[] = this.data.element.roomList;
+  selectedRoomTypes: any[] = this.data.element.roomTypeList;
   
 
   constructor(
@@ -86,7 +85,7 @@ export class ContractUpdateDialogComponent implements OnInit {
   cAgencies: any[] = [];
   cBoards: any[] = [];
   cMarkets : any[] = [];
-  cRooms : any[] = [];
+  //cRooms : any[] = [];
   cRoomTypes: any[] = [];
 
 
@@ -101,8 +100,8 @@ export class ContractUpdateDialogComponent implements OnInit {
     const idMarket = this.data.cMarkets.filter(cM => cM.listId === this.data.element.id).map(cM => cM.marketId);
     this.selectedMarkets = idMarket;
 
-    const idRoom = this.data.cRooms.filter(cR => cR.listId === this.data.element.id).map(cR => cR.roomId);
-    this.selectedRooms = idRoom;
+    const idRoomType = this.data.cRoomTypes.filter(cR => cR.listId === this.data.element.id).map(cR => cR.roomTypeId);
+    this.selectedRoomTypes = idRoomType;
 
   }
 
@@ -173,12 +172,12 @@ export class ContractUpdateDialogComponent implements OnInit {
       this.selectedMarkets[i] = market;
      };
 
-     for(let i = 0; i < this.selectedRooms.length; i++){
-      const room : CRoom = {
-        roomId: 0
+     for(let i = 0; i < this.selectedRoomTypes.length; i++){
+      const roomType : CRoomType = {
+        roomTypeId: 0
       };
-      room.roomId = this.selectedRooms[i];
-      this.selectedRooms[i] = room;
+      roomType.roomTypeId = this.selectedRoomTypes[i];
+      this.selectedRoomTypes[i] = roomType;
      };
 
     //  for(let i = 0; i < this.selectedRoomTypes.length; i++){
@@ -205,7 +204,7 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.data.element.cH3 = this.childPrice3;
     this.data.element.agencyList = this.selectedAgencies;
     this.data.element.marketList = this.selectedMarkets;
-    this.data.element.roomList = this.selectedRooms;
+    this.data.element.roomTypeList = this.selectedRoomTypes;
     this.data.element.boardList = this.selectedBoards;
     
     console.log("this.data.element"+this.data.element);

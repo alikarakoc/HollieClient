@@ -67,7 +67,7 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="hotel">
+        <mat-select [(ngModel)]="hotel" (ngModelChange)="onChangeHotel($event)">
             <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -76,8 +76,8 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'room' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="selectedRooms" multiple>
-            <mat-option *ngFor="let r of rooms" [value]="{roomId: r.id}">{{ r.name }}</mat-option>
+        <mat-select [(ngModel)]="selectedRoomTypes" multiple>
+            <mat-option *ngFor="let r of hotelRoomTypes" [value]="{roomTypeId: r.id}">{{ r.name }}</mat-option>
         </mat-select>
     </mat-form-field>
 
@@ -92,7 +92,7 @@
 
     <mat-form-field class="selects-m">
         <mat-label>{{ 'market' | transloco }}</mat-label>
-        <mat-select [(ngModel)]="selectedMarkets" multiple>
+        <mat-select [(ngModel)]="selectedMarkets" (ngModelChange)="onChangeMarket($event)" multiple>
             <mat-option *ngFor="let m of markets" [value]="{marketId: m.id}">{{ m.name }}</mat-option>
         </mat-select>
     </mat-form-field>
@@ -100,7 +100,8 @@
     <mat-form-field class="selects-m">
         <mat-label>{{ 'agency' | transloco }}</mat-label>
         <mat-select [(ngModel)]="selectedAgencies" multiple>
-            <mat-option *ngFor="let a of agencies" [value]="{agencyId: a.id}">{{ a.name }}</mat-option>
+            <mat-option *ngFor="let a of marketAgencies" [value]="{agencyId: a.id}">{{ a.name }}</mat-option>
+            <!-- {agencyId: a.id} -->
         </mat-select>
     </mat-form-field>
 
