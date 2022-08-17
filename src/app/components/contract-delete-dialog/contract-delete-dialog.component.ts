@@ -45,8 +45,6 @@ export class ContractDeleteDialogComponent implements OnInit {
     this.closeDialog({ isDeleted: true });
     this.data.dialogRef?.close();
     this.contractService.deleteContract(this.data.element);
-    console.log("deleted contract");
-    console.log(this.data.element);
     this.data.table?.renderRows();
   }
 

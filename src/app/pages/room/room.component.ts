@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { RoomAddDialogComponent} from "src/app/components/room-add-dialog/room-add-dialog.component";
@@ -10,6 +10,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
 import { RoomDeleteDialogComponent, RoomUpdateDialogComponent } from 'src/app/components';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-room',
@@ -21,7 +22,7 @@ export class RoomComponent implements OnInit {
   //columns: string[] = ["code", "name", "HotelId", "roomTypeId", "clean", "actions"  ];
   dataSource: MatTableDataSource<Room>;
   value = '';
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<Room>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -33,6 +34,7 @@ export class RoomComponent implements OnInit {
 
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public roomService: RoomService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
@@ -61,16 +63,18 @@ export class RoomComponent implements OnInit {
       }
       this.dataSource = new MatTableDataSource<Room>(this.rooms);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
     });
 
     this.roomTypeService.getAllRoomTypes().subscribe(res => {
       this.roomTypes = res.data;
-      
+
     });
 
     this.hotelService.getAllHotels().subscribe(res => {
       this.hotels = res.data;
-      
+
     });
   }
 
@@ -81,7 +85,7 @@ export class RoomComponent implements OnInit {
     }
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
+
   clear(){
     this.ngOnInit();
   }
@@ -91,7 +95,7 @@ export class RoomComponent implements OnInit {
     return this.roomTypes.find(c => c.id === element.roomTypeId)?.name;
   }
 
-  
+
   getCurrentHotel(element: Room) {
     return this.hotels.find(c => c.id === element.hotelId)?.name;
   }
@@ -119,14 +123,14 @@ export class RoomComponent implements OnInit {
     });
 
     console.log(element);
-    
+
   }
 
   delete(element: Room) {
     const dialog = this.dialog.open(RoomDeleteDialogComponent, {
       data: { element },
     });
-    
+
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
         this.roomService.deleteRoom(element).subscribe((res) => {

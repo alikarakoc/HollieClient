@@ -23,7 +23,7 @@ export class HotelFeatureAddDialogComponent implements OnInit {
   babyTop: number;
   childTop: number;
   teenTop: number;
-  
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private snackBar: MatSnackBar,
@@ -32,11 +32,10 @@ export class HotelFeatureAddDialogComponent implements OnInit {
     public translocoService: TranslocoService,
     private hotelService: HotelService
   ) { }
-  
+
   hotels: any[] = [];
 
   ngOnInit(): void {
-    console.log(this.translocoService.getActiveLang());
 
     this.hotelService.getAllHotels().subscribe(res => {
       if (res.data !== null) this.hotels = res.data;
@@ -49,9 +48,9 @@ export class HotelFeatureAddDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
     }
-    
+
     this.hotelFeatureService.getAllFeatures().subscribe((res) => {
-      if(res.data !== null && res.data.some(f => 
+      if(res.data !== null && res.data.some(f =>
         f.code === this.code ||
         f.name === this.name ||
         f.babyTop === this.babyTop ||

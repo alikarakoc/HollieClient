@@ -34,8 +34,6 @@ export class CountryDeleteDialogComponent implements OnInit {
     this.closeDialog({ isDeleted: true });
     this.data.dialogRef?.close();
     this.countryService.deleteCountry(this.data.element);
-    console.log("deleted country");
-    console.log(this.data.element);
     this.data.table?.renderRows();
   }
 

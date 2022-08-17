@@ -49,11 +49,9 @@ export class NavbarComponent implements OnInit {
     // this.overlay.getContainerElement().classList.add("darkMode")
     // const darkMode = this.toggleControl.value;
     this.toggleControl.valueChanges.subscribe((darkMode) => {
-      // console.log(darkMode);
 
       this.getTheme(darkMode);
 
-      // console.log(this.overlay.getContainerElement().classList);
     });
   }
 

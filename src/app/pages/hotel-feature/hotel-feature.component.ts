@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { TranslocoService } from '@ngneat/transloco';
@@ -11,6 +11,7 @@ import { HotelFeatureUpdateDialogComponent } from 'src/app/components/hotel-feat
 import { HotelFeatureDeleteDialogComponent } from 'src/app/components/hotel-feature-delete-dialog/hotel-feature-delete-dialog.component';
 import { HotelService } from 'src/app/services';
 import { Hotel } from 'src/app/interfaces';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-hotel-feature',
@@ -22,16 +23,17 @@ export class HotelFeatureComponent implements OnInit {
   columns: string[] = ['code', 'name', 'babyTop', 'childTop', 'teenTop', 'actions'];
   dataSource: MatTableDataSource<HotelFeature>;
   value: '';
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<HotelFeatureComponent>;
   checkButtonCount: number = 0;
-  
+
   HotelFeature = 'ExcelSheet.xlsx';
   features: HotelFeature[] = [];
   hotels: Hotel[] = [];
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public hotelFeatureService: HotelFeatureService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
@@ -41,7 +43,7 @@ export class HotelFeatureComponent implements OnInit {
 
   exportAsXLSX():void {
     this.excelService.exportAsExcelFile(this.features, 'HotelFeatures');
-  }  
+  }
 
   ngOnInit(): void {
     this.hotelFeatureService.getAllFeatures().subscribe((res)=>{
@@ -51,6 +53,8 @@ export class HotelFeatureComponent implements OnInit {
 
       this.dataSource = new MatTableDataSource<HotelFeature>(this.features);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
     });
 
     this.hotelService.getAllHotels().subscribe((res)=>{
@@ -81,7 +85,7 @@ export class HotelFeatureComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.hotelFeatureService
-          .addFeature({  
+          .addFeature({
             code: result.code,
             name : result.name,
             babyTop: result.babyTop,
@@ -105,7 +109,7 @@ export class HotelFeatureComponent implements OnInit {
 
     dialog.afterClosed().subscribe(() => {
       this.hotelFeatureService.updateFeature(element).subscribe((res) => {
-      
+
       });
     });
   }

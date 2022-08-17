@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from "@angular/material/sort";
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
@@ -23,7 +24,7 @@ export class BoardComponent implements OnInit {
   dataSource: MatTableDataSource<Board>;
 
   value = '';
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<Board>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -33,6 +34,7 @@ export class BoardComponent implements OnInit {
   checkButtonCount:number = 0;
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public boardService: BoardService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
@@ -42,22 +44,23 @@ export class BoardComponent implements OnInit {
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.boards, 'Board');
   }
-  
+
 
   ngOnInit(): void {
     this.boardService.getAllBoards().subscribe((res) => {
       if(res.data!=null){
         this.boards = res.data;
       }
-      
+
       this.dataSource = new MatTableDataSource<Board>(this.boards);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+    this.dataSource.paginator = this.paginator;
     });
-    console.log('on init');
 
   }
 
-  
+
   filterBoards(event: Event) {
     var filterValue = (event.target as HTMLInputElement).value;
     if(filterValue[0] == 'i'){
@@ -76,7 +79,7 @@ export class BoardComponent implements OnInit {
     const dialog = this.dialog.open(BoardAddDialogComponent, {
       data: { table: this.table } ,
     });
-  
+
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.boardService

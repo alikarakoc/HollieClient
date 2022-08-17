@@ -52,8 +52,6 @@ export class AgencyDeleteDialogComponent implements OnInit {
     this.closeDialog({ isDeleted: true });
     this.data.dialogRef.close();
     this.agencyService.deleteAgency(this.data.element);
-    console.log("deleted agency");
-    console.log(this.data.element);
     this.data.table?.renderRows();
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from "@angular/material/sort";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
@@ -16,6 +16,7 @@ import { HotelFeatureService } from 'src/app/services/hotel-feature';
 import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 import { AMarketService } from 'src/app/services/amarket.service';
 import { AMarket } from 'src/app/interfaces/amarket';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-contract',
@@ -27,7 +28,7 @@ export class ContractComponent implements OnInit {
   dataSource: MatTableDataSource<Contract>;
 
   value = '';
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<Contract>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -37,6 +38,7 @@ export class ContractComponent implements OnInit {
   checkButtonCount:number = 0;
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public contractService: ContractService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
@@ -142,7 +144,7 @@ export class ContractComponent implements OnInit {
       if(res.data !== null){
         this.hotelFeatures = res.data;
       }
-      
+
 
     });
 
@@ -151,12 +153,14 @@ export class ContractComponent implements OnInit {
          this.contracts = res.data;
       this.dataSource = new MatTableDataSource<Contract>(this.contracts);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
       }
     });
 
   }
 
-  
+
   filterContracts(event: Event) {
     var filterValue = (event.target as HTMLInputElement).value;
     if(filterValue[0] == 'i'){
@@ -195,14 +199,14 @@ export class ContractComponent implements OnInit {
 
   create() {
     if(this.checkButtonCount < 1) {
-      const dialog = this.dialog.open(ContractAddDialogComponent, { 
+      const dialog = this.dialog.open(ContractAddDialogComponent, {
         data: { table: this.table, roomTypes: this.roomTypes, hotels: this.hotels,
-          markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
-          boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,cRoomTypes: this.cRoomTypes, 
+          markets: this.markets, agencies: this.agencies, currencies:this.currencies,
+          boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,cRoomTypes: this.cRoomTypes,
           cMarkets:this.cMarkets } ,
       });
-    
-    
+
+
     dialog.afterClosed().subscribe((result) => {
       console.log(result.element);
       if (result.isAdded) {
@@ -233,10 +237,10 @@ export class ContractComponent implements OnInit {
   }
 
   update(element: Contract) {
-    const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: { 
+    const dialog = this.dialog.open(ContractUpdateDialogComponent, { data: {
       element: element, roomTypes: this.roomTypes, hotels: this.hotels,
-      markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
-      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
+      markets: this.markets, agencies: this.agencies, currencies:this.currencies,
+      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,
       cRoomTypes: this.cRoomTypes,  cMarkets:this.cMarkets  } });
 
     dialog.afterClosed().subscribe((result) => {
@@ -247,15 +251,15 @@ export class ContractComponent implements OnInit {
   }
 
   seeDetails(element: Contract) {
-    this.dialog.open(ContractDetailsComponent, { data: { 
+    this.dialog.open(ContractDetailsComponent, { data: {
       contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
-      markets: this.markets, agencies: this.agencies, currencies:this.currencies, 
-      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards, 
+      markets: this.markets, agencies: this.agencies, currencies:this.currencies,
+      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,
       cMarkets:this.cMarkets, cRoomTypes:this.cRoomTypes } });
 
   }
 
-  
+
 
 
   getItem(type: "agency" | "board" | "room_type" | "market" | "hotel" | "currency", element: Contract) {
@@ -279,14 +283,14 @@ export class ContractComponent implements OnInit {
       // case 'room':
       //     const idRoomType = this.cRoomTypes.filter(cM => cM.listId === element.id).map(cM => cM.roomId);
       //     return idRoomType.map(i => this.rooms.find(m => m.id === i).name);
-  
+
       case 'hotel':
         return this.hotels.find(h => h.id === element.hotelId)?.name;
 
- 
+
       case 'currency':
         return this.currencies.find(c => c.id === element.currencyId)?.code;
-        
+
     }
   }
 
@@ -296,7 +300,7 @@ export class ContractComponent implements OnInit {
     let fBaby = feature.map(i => this.hotelFeatures.find(m => m.id === i)?.babyTop);
     let fChild = feature.map(i => this.hotelFeatures.find(m => m.id === i)?.childTop);
     let fTeen = feature.map(i => this.hotelFeatures.find(m => m.id === i)?.teenTop);
-  
+
     return "[ " + fBaby + " - " + fChild + " - " + fTeen + " ]"
   }
 

@@ -61,7 +61,6 @@ export class BoardUpdateDialogComponent implements OnInit {
     this.data.element.code = this.newBoardCode;
     this.data.element.name = this.newBoardName;
 
-    console.log(this.data.element);
     this.data.table?.renderRows();
     this.dialogRef.close({ isUpdated: true });
   }

@@ -48,14 +48,9 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
     }
     const otherHotelCategories = this.hotels;
 
-    console.log(this.hotels);
-    console.log(otherHotelCategories);
-
     if (otherHotelCategories.findIndex(c => c.name == this.newCategoryName.toString() || c.code == this.newCategoryCode.toString()) > -1) {
       { if (otherHotelCategories.some(c => c.name == this.newCategoryName && c.code == this.newCategoryCode )) {
 
-
-          console.log(this.newCategoryName);
             this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
             this.ngOnInit();
             return;
@@ -79,7 +74,6 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
 
         otherHotelCategories.forEach(element => {
           if (element.name == this.newCategoryName || element.code == this.newCategoryCode) {
-            console.log(this.newCategoryName);
             this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'hotel category' : 'otel tipi' }), "OK");
             this.ngOnInit();
             return;
@@ -93,7 +87,6 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       this.data.element.name = this.newCategoryName;
       this.data.element.code = this.newCategoryCode;
       this.hotelCategoryService.updateCategory(this.data.element);
-      console.log(this.data.element);
       this.data.table?.renderRows();
       this.closeDialog();
     }
@@ -105,7 +98,6 @@ export class HotelCategoryUpdateDialogComponent implements OnInit {
       this.data.element.name = this.newCategoryName;
       this.data.element.code = this.newCategoryCode;
       this.hotelCategoryService.updateCategory(this.data.element);
-      console.log(this.data.element);
       this.data.table?.renderRows();
       this.closeDialog();
     }

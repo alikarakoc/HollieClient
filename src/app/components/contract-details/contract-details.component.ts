@@ -43,7 +43,7 @@ export class ContractDetailsComponent implements OnInit {
   cBoards: any[];
   cRooms: any[];
   cRoomTypes: any[];
-  
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData
@@ -61,7 +61,7 @@ export class ContractDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 
   getItem(type: "agency" | "board" | "room_type" | "market" |"date" | "room"| "hotel" | "currency") {
@@ -72,7 +72,7 @@ export class ContractDetailsComponent implements OnInit {
         let agencies = idAgency.map(i => this.agencies.find(a => a.id === i).name).toString();
         agencies.split(",", idAgency.length);
         return agencies.replace(",","\n");
-        
+
 
       case 'board':
         const idBoard = this.data.cBoards.filter(cB => cB.listId === element.id).map(cB => cB.boardId);
@@ -90,14 +90,13 @@ export class ContractDetailsComponent implements OnInit {
       case 'market':
         const idMarket = this.data.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
-      
+
       case 'room':
         const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
         return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
 
         case 'date':
           this.gun = (-1*(new Date(this.contract.enteredDate).getTime() - new Date(this.contract.exitDate).getTime()) / (1000 * 60 * 60 * 24));
-            console.log(this.gun)
             return (-1*(new Date(this.contract.enteredDate).getTime() - new Date(this.contract.exitDate).getTime()) / (1000 * 60 * 60 * 24));
 
       case 'hotel':
@@ -106,5 +105,5 @@ export class ContractDetailsComponent implements OnInit {
       case 'currency':
         return this.data.currencies.find(c => c.id === element.currencyId)?.code;
     }
-} 
+}
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild } from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import * as FileSaver from 'file-saver';
@@ -14,6 +14,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
 import { MarketService } from 'src/app/services';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -27,6 +28,7 @@ export class AgencyComponent implements OnInit{
   dataSource: MatTableDataSource<Agency>;
   value = '';
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<Agency>;
   @ViewChild(MatSort) sort: MatSort;
   Agency = 'Agency';
@@ -38,6 +40,7 @@ export class AgencyComponent implements OnInit{
   checkButtonCount:number = 0;
   //tuana
   constructor(
+    private cdr: ChangeDetectorRef,
     public agencyService: AgencyService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
@@ -48,12 +51,16 @@ export class AgencyComponent implements OnInit{
 
 
   ngOnInit(): void {
+
     this.agencyService.getAllAgencies().subscribe((res) => {
       if(res.data != null){
         this.agencies = res.data;
+
       }
       this.dataSource = new MatTableDataSource<Agency>(this.agencies);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+    this.dataSource.paginator = this.paginator;
     });
     this.marketService.getAllMarkets().subscribe((res) => {
       if(res.data != null){
@@ -65,6 +72,7 @@ export class AgencyComponent implements OnInit{
         this.aMarkets = res.data;
       }
     });
+
   }
 
   getItem(type:"market", element: Agency) {
@@ -144,7 +152,6 @@ export class AgencyComponent implements OnInit{
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
         this.agencyService.deleteAgency(element).subscribe((res) => {
-          console.log(element);
           this.ngOnInit();
 
         });

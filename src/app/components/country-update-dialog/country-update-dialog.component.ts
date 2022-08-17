@@ -60,7 +60,6 @@ export class CountryUpdateDialogComponent implements OnInit {
     this.data.element.code = this.newCountryCode;
     this.data.element.name = this.newCountryName;
 
-    console.log(this.data.element);
     this.data.table?.renderRows();
     this.dialogRef.close({ isUpdated: true });
   }

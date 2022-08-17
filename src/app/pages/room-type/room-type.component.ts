@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {
@@ -11,6 +11,7 @@ import { HotelService, RoomTypeService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class RoomTypeComponent implements OnInit {
   dataSource: MatTableDataSource<RoomType>;
 
   value =  '';
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<RoomType>;
   @ViewChild(MatSort) sort: MatSort;
 
@@ -35,6 +36,7 @@ export class RoomTypeComponent implements OnInit {
 
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private dialog: MatDialog,
     public roomTypeService: RoomTypeService,
     public translocoService: TranslocoService,
@@ -54,6 +56,8 @@ export class RoomTypeComponent implements OnInit {
       }
       this.dataSource = new MatTableDataSource(this.roomTypes);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
     });
 
     this.hotelService.getAllHotels().subscribe((res) =>{
@@ -63,7 +67,7 @@ export class RoomTypeComponent implements OnInit {
     })
   }
 
-  
+
   filterRoomTypes(event: Event) {
     var filterValue = (event.target as HTMLInputElement).value;
     if(filterValue[0] == 'i'){
@@ -106,13 +110,13 @@ export class RoomTypeComponent implements OnInit {
           this.checkButtonCount = 0;
         }
         this.roomTypeService
-          .addRoomType({ 
-            name: result.name, 
-            code: result.code, 
+          .addRoomType({
+            name: result.name,
+            code: result.code,
             hotelId: result.hotelId,
-            maxAD: result.maxAD, 
+            maxAD: result.maxAD,
             maxCH: result.maxCH,
-            pax: result.pax,  
+            pax: result.pax,
           })
           .subscribe(() => {
             this.ngOnInit();
@@ -139,7 +143,7 @@ export class RoomTypeComponent implements OnInit {
     });
   }
   }
-  
+
   getItem(type:  "hotel" , element: RoomType) {
     switch (type) {
       case 'hotel':

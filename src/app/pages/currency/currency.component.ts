@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
@@ -11,6 +11,7 @@ import {
 } from 'src/app/components';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -26,12 +27,14 @@ export class CurrencyComponent implements OnInit {
   value = '';
 
   @ViewChild(MatTable) table: MatTable<CurrencyComponent>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   checkButtonCount:number = 0;
 
   currencies: Currency[] = [];
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public translocoService: TranslocoService,
     private dialog: MatDialog,
     public CurrencyService: CurrencyService,
@@ -42,14 +45,14 @@ export class CurrencyComponent implements OnInit {
     this.excelService.exportAsExcelFile(this.currencies, 'Currency');
   }
 
- 
+
 
   filterCurrencies(event: Event) {
     const filterValue : string = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLocaleUpperCase();
-    
+
   }
-  
+
   clear(){
     this.ngOnInit();
   }
@@ -59,12 +62,14 @@ export class CurrencyComponent implements OnInit {
       if(res.data!=null){
         this.currencies = res.data;
       }
-      
+
       this.dataSource = new MatTableDataSource<Currency>(this.currencies);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
     });
 
-    
+
   }
 
   updateCurrency(){
@@ -93,34 +98,6 @@ export class CurrencyComponent implements OnInit {
   this.checkButtonCount += 1;
 }
 
-  // delete(element: Currency) {
-  //   const dialog = this.dialog.open(CurrencyDeleteDialogComponent, {
-  //     data: { element },
-  //   });
-  //   dialog.afterClosed().subscribe((result) => {
-  //     if (result.isDeleted) {
-  //       this.CurrencyService.deleteCurrency(element).subscribe((res) => {
-  //         console.log(element);
-  //         this.ngOnInit();
-  //       });
-  //     }
-  //   });
-  // }
 
-  // update(element: Currency) {
-  //   const dialog = this.dialog.open(CurrencyUpdateDialogComponent, {
-  //     data: { element },
-  //   });
-
-  //   dialog.afterClosed().subscribe(() => {
-  //     this.CurrencyService.updateCurrency(element).subscribe((res) => {
-
-  //       console.log('res data checked');
-  //       console.log(res.data);
-  //     });
-  //   });
-  // }
-
- 
 
 }

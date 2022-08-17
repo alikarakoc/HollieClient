@@ -60,8 +60,6 @@ export class MarketUpdateDialogComponent implements OnInit {
     this.data.dialogRef?.close();
     this.data.element.code = this.newMarketCode;
     this.data.element.name = this.newMarketName;
-
-    console.log(this.data.element);
     this.data.table?.renderRows();
     // this.hotelService.updateHotel(this.data.element)
     this.dialogRef.close({ isUpdated: true });

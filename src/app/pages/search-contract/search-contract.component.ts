@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
@@ -10,6 +10,7 @@ import { RoomService } from 'src/app/services/room.service';
 import { ContractService, HotelService, ExcelService, CBoardService, CAgencyService, CMarketService, RoomTypeService, AgencyService, BoardService, CurrencyService, MarketService } from "src/app/services";
 import { HotelFeatureService } from 'src/app/services/hotel-feature';
 import { HotelFeature } from 'src/app/interfaces/hotel-feature';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-search-contract',
@@ -20,6 +21,7 @@ export class SearchContractComponent implements OnInit {
   columns: string[] = ["code", "name", "hotel", "adp", "cH1", "cH2", "cH3", "start", "end", "Total-Price", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<SearchContractComponent>;
 
   startDate?: Date;
@@ -36,6 +38,7 @@ export class SearchContractComponent implements OnInit {
   totalPrice: number = 0;
 
   constructor(
+    private cdr: ChangeDetectorRef,
     private hotelService: HotelService,
     private dialog: MatDialog,
     private contractService: ContractService,
@@ -115,6 +118,9 @@ export class SearchContractComponent implements OnInit {
 
     this.contractService.getAllContracts().subscribe(res => {
       this.contracts = res.data;
+      this.dataSource = new MatTableDataSource(this.contracts);
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
     });
 
     this.marketService.getAllMarkets().subscribe(res => {
@@ -251,7 +257,6 @@ export class SearchContractComponent implements OnInit {
     this.contBabyTop = this.features.find(c => c.id === s?.hotelFeatureId)?.babyTop;
     this.contChildTop = this.features.find(c => c.id === s?.hotelFeatureId)?.childTop;
     this.contTeenTop = this.features.find(c => c.id === s?.hotelFeatureId)?.teenTop;
-    // console.log(this.totalPrice+ ': total price 1');
 
 
     for (let c = 0; c < this.contChildAges.length; c++) {
@@ -267,7 +272,6 @@ export class SearchContractComponent implements OnInit {
       else{
         this.totalPrice = this.totalPrice + contract.adp;
       }
-      // console.log(this.totalPrice);
 
     }
     return this.totalPrice;

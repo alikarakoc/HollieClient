@@ -82,7 +82,6 @@ export class AgencyUpdateDialogComponent implements OnInit {
     this.agencyService.getAllAgencies().subscribe(res => {
       const otherAgencies = res.data.filter(c => c.id !== this.data.element.id && c.name !== this.newAgencyName);
       if (res.data !== null && otherAgencies.some(c => c.code === this.newAgencyCode)) {
-        console.log(this.newAgencyCode, this.newAgencyName);
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'agency' : 'acenta' }), "OK");
         this.newAgencyCode = "";
         this.newAgencyName = "";
@@ -111,16 +110,12 @@ export class AgencyUpdateDialogComponent implements OnInit {
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newAgencyName }));
     this.data.dialogRef?.close();
 
-    console.log(this.newAgencyCode, this.newAgencyName);
-
     this.data.element.code = this.newAgencyCode;
     this.data.element.name = this.newAgencyName;
     this.data.element.email = this.emailControl.value!;
     this.data.element.address = this.newAgencyAddress;
     this.data.element.phone = this.newAgencyPhone;
     this.data.element.marketList = this.newselectedMarkets;
-
-    console.log(this.data.element);
     this.data.table?.renderRows();
    this.agencyService.updateAgency(this.data.element)
     this.dialogRef.close({ isUpdated: true });

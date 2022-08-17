@@ -48,8 +48,6 @@ export class CurrencyDeleteDialogComponent implements OnInit {
     this.snackBar.open(this.translocoService.translate('dialogs.delete_success', { elementName: this.data.element.name }));
     this.closeDialog({ isDeleted: true });
     this.data.dialogRef?.close();
-    console.log("deleted currency");
-    console.log(this.data.element);
     this.data.table?.renderRows();
   }
 

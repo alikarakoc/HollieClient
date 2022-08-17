@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from "@angular/material/sort";
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { TranslocoService } from "@ngneat/transloco";
@@ -23,7 +24,7 @@ export class MarketComponent implements OnInit {
 
   value = '';
 
-  
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<MarketComponent>;
   @ViewChild(MatSort) sort: MatSort;
   checkButtonCount: number = 0;
@@ -33,6 +34,7 @@ export class MarketComponent implements OnInit {
   markets: Market[] = [];
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public marketService: MarketService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
@@ -48,10 +50,10 @@ export class MarketComponent implements OnInit {
       if(res.data != null){
         this.markets = res.data;
       }
-      
-      console.log(res.data);
       this.dataSource = new MatTableDataSource(this.markets);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
     });
   }
 

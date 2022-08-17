@@ -88,7 +88,7 @@ export class HotelAddDialogComponent implements OnInit {
         return;
       }
     });
-    
+
     if (this.hotelPhone.length != 11){
       this.snackBar.open(this.translocoService.translate('dialogs.error_phone'), "OK");
       return;
@@ -112,8 +112,6 @@ export class HotelAddDialogComponent implements OnInit {
       this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'Hotel' : 'Otel' }), 'OK');
       return;
     }
-    console.log(this.emailControl.value);
-    // console.log(this.phoneControl.value);
 
 
 
@@ -124,7 +122,6 @@ export class HotelAddDialogComponent implements OnInit {
   }
 
   closeDialog() {
-    console.log(this.hotelFeatureId);
 
     this.dialogRef.close({
       isAdded: true,

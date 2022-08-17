@@ -50,8 +50,6 @@ export class MarketDeleteDialogComponent implements OnInit {
     this.closeDialog({ isDeleted: true });
     this.data.dialogRef?.close();
     this.marketService.deleteMarket(this.data.element);
-    console.log("deleted market");
-    console.log(this.data.element);
     this.data.table?.renderRows();
   }
 

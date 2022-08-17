@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
 import {
@@ -11,6 +11,7 @@ import { CountryService } from "src/app/services";
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-country',
@@ -21,7 +22,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
   columns: string[] = ["code", "name", "actions"];
   dataSource: MatTableDataSource<Country>;
   value = '';
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<Country>;
   @ViewChild(MatSort) sort: MatSort;
   checkButtonCount:number = 0;
@@ -31,6 +32,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
   countries: Country[] = [];
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public countryService: CountryService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
@@ -48,10 +50,12 @@ export class CountryComponent implements OnInit, AfterViewInit {
       }
       this.dataSource = new MatTableDataSource<Country>(this.countries);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
     });
   }
 
-  
+
   filterCountries(event: Event) {
     var filterValue : string = (event.target as HTMLInputElement).value;
     if(filterValue[0] == 'i'){
@@ -80,7 +84,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
     });
   }
 
-  create() {    
+  create() {
     if(this.checkButtonCount < 1){
       const dialog = this.dialog.open(CountryAddDialogComponent, {
         data: { table: this.table,  deneme: this.checkButtonCount  },

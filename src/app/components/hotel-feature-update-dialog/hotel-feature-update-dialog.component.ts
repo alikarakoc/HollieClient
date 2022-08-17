@@ -52,12 +52,12 @@ export class HotelFeatureUpdateDialogComponent implements OnInit {
       }
     })
 
-    
+
   }
 
 
   update(){
-    
+
     if (!this.newCode) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_required'), "OK");
       return;
@@ -79,8 +79,6 @@ export class HotelFeatureUpdateDialogComponent implements OnInit {
     this.data.element.babyTop = this.newBabyTop;
     this.data.element.childTop = this.newChildTop;
     this.data.element.teenTop = this.newTeenTop;
-
-    console.log(this.data.element);
     this.data.table?.renderRows();
     this.dialogRef.close({ isUpdated: true });
   }

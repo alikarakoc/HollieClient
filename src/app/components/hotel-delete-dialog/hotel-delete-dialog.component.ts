@@ -49,8 +49,6 @@ export class HotelDeleteDialogComponent implements OnInit {
     this.closeDialog({ isDeleted: true });
     this.data.dialogRef?.close();
     this.hotelService.deleteHotel(this.data.element);
-    console.log("deleted hotel");
-    console.log(this.data.element);
     this.data.table?.renderRows();
   }
 

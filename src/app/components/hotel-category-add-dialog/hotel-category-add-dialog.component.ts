@@ -28,7 +28,6 @@ export class HotelCategoryAddDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.translocoService.getActiveLang());
   }
 
   add() {

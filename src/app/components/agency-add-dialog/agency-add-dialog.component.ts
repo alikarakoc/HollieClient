@@ -116,6 +116,5 @@ export class AgencyAddDialogComponent implements OnInit {
       elementMarket: this.selectedMarkets,
 
     });
-    console.log(this.selectedMarkets);
   }
 }

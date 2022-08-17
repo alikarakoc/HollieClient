@@ -1,4 +1,4 @@
-import { AfterViewInit , Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit , ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import {
@@ -11,6 +11,7 @@ import { HotelCategoryService } from 'src/app/services';
 import { TranslocoService } from '@ngneat/transloco';
 import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-hotel-category',
@@ -22,7 +23,7 @@ export class HotelCategoryComponent implements OnInit {
   dataSource: MatTableDataSource<HotelCategory>;
 
   value = '';
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatTable) table: MatTable<HotelCategoryComponent>;
   checkButtonCount: number = 0;
@@ -36,6 +37,7 @@ export class HotelCategoryComponent implements OnInit {
   // };
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public hotelCategoryService: HotelCategoryService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
@@ -51,13 +53,15 @@ export class HotelCategoryComponent implements OnInit {
       if(res.data!=null){
          this.hotels = res.data;
       }
-     
+
       this.dataSource = new MatTableDataSource<HotelCategory>(this.hotels);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
     });
   }
 
-  
+
   filterCategories(event: Event) {
     var filterValue = (event.target as HTMLInputElement).value;
     if(filterValue[0] == 'i'){
@@ -69,10 +73,10 @@ export class HotelCategoryComponent implements OnInit {
   clear(){
     this.ngOnInit();
   }
-  
+
   ngAfterViewInit(): void {
   }
-  
+
 
   create() {
     if(this.checkButtonCount < 1) {
@@ -101,10 +105,6 @@ export class HotelCategoryComponent implements OnInit {
 
     dialog.afterClosed().subscribe(() => {
       this.hotelCategoryService.updateCategory(element).subscribe((res) => {
-        // this.hotel.name = element.name;
-        // this.hotel.id = element.id;
-        console.log('res data checked');
-        console.log(res.data);
       });
     });
   }
@@ -116,7 +116,6 @@ export class HotelCategoryComponent implements OnInit {
     dialog.afterClosed().subscribe((result) => {
       if (result.isDeleted) {
         this.hotelCategoryService.deleteCategory(element).subscribe((res) => {
-          console.log(element);
           this.ngOnInit();
         });
       }

@@ -133,7 +133,6 @@ export class RoomAddDialogComponent implements OnInit {
     switch (type) {
       case 'room_type':
         const idRoomType = this.allRoomTypes.filter(cR => cR.hotelId === element.hotelId).map(cR => cR.hotelId);
-        console.log(idRoomType);
 
         //return idRoomType.map(i => this.roomTypes.find(r => r.id === i).name);
     }}

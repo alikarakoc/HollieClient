@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from "@angular/material/dialog";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { HotelAddDialogComponent, HotelDeleteDialogComponent, HotelUpdateDialogComponent } from "src/app/components";
@@ -9,6 +9,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
 import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 import { HotelFeatureService } from 'src/app/services/hotel-feature';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-hotel',
@@ -19,7 +20,7 @@ export class HotelComponent implements OnInit {
   columns: string[] = ["code", "name", "address", "phone", "email", "hotelCategoryId","hotelFeatureId", "actions"];
   dataSource: MatTableDataSource<Hotel>;
   value = '';
-
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<Hotel>;
   @ViewChild(MatSort) sort: MatSort;
   checkButtonCount: number = 0;
@@ -32,6 +33,7 @@ export class HotelComponent implements OnInit {
 
 
   constructor(
+    private cdr: ChangeDetectorRef,
     public hotelService: HotelService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
@@ -59,10 +61,13 @@ export class HotelComponent implements OnInit {
     this.hotelService.getAllHotels().subscribe((res) => {
       if(res.data!=null){
          this.hotels = res.data;
+
       }
-     
+
       this.dataSource = new MatTableDataSource<Hotel>(this.hotels);
       this.dataSource.sort = this.sort;
+      this.cdr.detectChanges();
+      this.dataSource.paginator = this.paginator;
     });
 
     this.hotelCategoryService.getAllHotels().subscribe(res => {
@@ -81,7 +86,7 @@ export class HotelComponent implements OnInit {
     }
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
+
   clear(){
     this.ngOnInit();
   }

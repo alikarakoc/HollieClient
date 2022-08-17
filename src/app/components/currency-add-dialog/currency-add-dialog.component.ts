@@ -29,7 +29,6 @@ export class CurrencyAddDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log(this.translocoService.getActiveLang());
   }
 
   add() {
@@ -61,7 +60,6 @@ export class CurrencyAddDialogComponent implements OnInit {
       elementCode: this.currencyCode,
       elementValue: this.currencyValue
     });
-    console.log(this.currencyCode);
   }
 
 

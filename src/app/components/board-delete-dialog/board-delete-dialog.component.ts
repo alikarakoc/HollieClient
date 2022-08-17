@@ -48,8 +48,6 @@ export class BoardDeleteDialogComponent implements OnInit {
     this.closeDialog({ isDeleted: true });
     this.data.dialogRef?.close();
     this.boardService.deleteBoard(this.data.element);
-    console.log("deleted board");
-    console.log(this.data.element);
     this.data.table?.renderRows();
   }
 

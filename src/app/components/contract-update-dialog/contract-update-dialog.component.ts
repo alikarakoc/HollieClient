@@ -36,7 +36,7 @@ interface DialogData {
   styleUrls: ['./contract-update-dialog.component.scss']
 })
 export class ContractUpdateDialogComponent implements OnInit {
-  
+
   contract = this.data.element;
   id = this.data.element.id;
   code: string = this.data.element.code;
@@ -53,7 +53,7 @@ export class ContractUpdateDialogComponent implements OnInit {
   selectedBoards: any[] = this.data.element.boardList;
   selectedMarkets: any[] = this.data.element.marketList;
   selectedRoomTypes: any[] = this.data.element.roomTypeList;
-  
+
 
   constructor(
     public translocoService: TranslocoService,
@@ -62,7 +62,7 @@ export class ContractUpdateDialogComponent implements OnInit {
     private dialog: MatDialog,
     private contractService: ContractService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { 
+  ) {
     //this.contract = this.data.element;
     this.markets = this.data.markets;
     this.rooms = this.data.rooms;
@@ -72,7 +72,7 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.hotels = this.data.hotels;
     this.currencies = this.data.currencies;
   }
- 
+
   hotels: any[] = [];
   rooms: any[] = [];
   markets: any[] = [];
@@ -140,10 +140,10 @@ export class ContractUpdateDialogComponent implements OnInit {
         this.end == null,
         this.hotel == null;
       this.currency == null;
-      
-      
+
+
       return;
-   
+
     }
 
     for(let i = 0; i < this.selectedAgencies.length; i++){
@@ -162,8 +162,8 @@ export class ContractUpdateDialogComponent implements OnInit {
       board.boardId = this.selectedBoards[i];
       this.selectedBoards[i] = board;
      };
-     
-     
+
+
      for(let i = 0; i < this.selectedMarkets.length; i++){
       const market : CMarket = {
         marketId: 0
@@ -188,8 +188,8 @@ export class ContractUpdateDialogComponent implements OnInit {
     //   this.selectedRoomTypes[i] = roomType;
     //  };
 
-   
-    
+
+
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.name }));
     this.data.dialogRef?.close();
     this.data.element.code = this.code;
@@ -206,15 +206,14 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.data.element.marketList = this.selectedMarkets;
     this.data.element.roomTypeList = this.selectedRoomTypes;
     this.data.element.boardList = this.selectedBoards;
-    
-    console.log("this.data.element"+this.data.element);
+
     this.dialogRef.close({ isUpdated: true });
     this.data.table?.renderRows();
   }
 
   closeDialog() {
     this.dialogRef.close();
-   
+
 
   }
 
