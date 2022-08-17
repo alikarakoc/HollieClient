@@ -73,6 +73,7 @@
     "market": "Market",
     "room_type": "Oda Tipi",
     "price": "Fiyat",
+    "Filter": "Ara",
     "adultPrice": "Yetişkin Fiyat",
     "childPrice": "Çocuk Fiyat",
     "start": "Başlangıç Tarihi",

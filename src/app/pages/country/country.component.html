@@ -12,7 +12,7 @@
     </div>
 
     <mat-form-field appearance="standard">
-        <mat-label>Filter</mat-label>
+        <mat-label>{{ 'Filter' | transloco }}</mat-label>
         <input maxlength="50" matInput [(ngModel)]="value" (keyup)="filterCountries($event)"
             placeholder="Search Country" #input>
         <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" (click)="clear()">
