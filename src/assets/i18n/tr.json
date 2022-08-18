@@ -81,6 +81,8 @@
     "value": "Değer",
     "adult": "Yetişkin",
     "child": "Çocuk",
+    "baby": "Bebek",
+    "teenager": "Genç",
     "person": "Kişi",
     "childAge" : "Çocuk Yaşı",
     "clean" : "Temiz",

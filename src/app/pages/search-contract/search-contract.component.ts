@@ -118,7 +118,7 @@ export class SearchContractComponent implements OnInit {
 
     this.contractService.getAllContracts().subscribe(res => {
       this.contracts = res.data;
-      this.dataSource = new MatTableDataSource(this.contracts);
+      this.dataSource = new MatTableDataSource(this.result);
       this.cdr.detectChanges();
       this.dataSource.paginator = this.paginator;
     });
