@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { AllFormsModule, MaterialModule, CdkModule, TranslocoRootModule } from './modules';
 import { HttpClientModule } from '@angular/common/http';
-
+import { GanttModule } from '@syncfusion/ej2-angular-gantt'
 import {
   HotelAddDialogComponent,
   HotelDeleteDialogComponent,
@@ -69,6 +69,7 @@ import {
 import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, 
   HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, 
   ContractComponent, SearchContractComponent, HomeComponent, RoomComponent, HotelFeatureComponent } from './pages';
+  import { ContractGranttComponent } from '../app/pages/contract-grantt/contract-grantt.component';
 
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
@@ -88,13 +89,14 @@ registerLocaleData(localeTR);
 @NgModule({
   declarations: [
     LocalizedDatePipe,
+    
 
     AppComponent,
     HomeComponent,
     NavbarComponent,
     SearchContractComponent,
     ContractDetailsComponent,
-
+    ContractGranttComponent,
     RoomTypeComponent,
     RoomTypeUpdateDialogComponent,
     RoomTypeAddDialogComponent,
@@ -159,6 +161,7 @@ registerLocaleData(localeTR);
     BrowserAnimationsModule,
     AllFormsModule,
     MaterialModule,
+    GanttModule,
     CdkModule,
     HttpClientModule,
     FormsModule,
