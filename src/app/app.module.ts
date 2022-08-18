@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { AllFormsModule, MaterialModule, CdkModule, TranslocoRootModule } from './modules';
 import { HttpClientModule } from '@angular/common/http';
-import { GanttModule } from '@syncfusion/ej2-angular-gantt'
+import { GanttModule, EditService, ToolbarService,SelectionService } from '@syncfusion/ej2-angular-gantt'
 import {
   HotelAddDialogComponent,
   HotelDeleteDialogComponent,
@@ -189,6 +189,9 @@ registerLocaleData(localeTR);
         width: '26vw'
       }
     },
+    EditService,
+    ToolbarService,
+    SelectionService,
     ExcelService,
     AsyncPipe
   ],

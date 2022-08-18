@@ -1,6 +1,11 @@
 <app-navbar>
 <ejs-gantt height="490px"
     [dataSource]="contracts"
-    [taskFields]="taskSettings">
+    [taskFields]="taskSettings"
+    [columns]="columnSettings"
+    [editSettings]="editOptions"
+    [toolbar]="toolbarOptions"
+    [allowSelection]="true"
+    [allowPdfExport]="true">
 </ejs-gantt>
 </app-navbar>
