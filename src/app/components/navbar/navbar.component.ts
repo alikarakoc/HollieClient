@@ -16,6 +16,7 @@ import { map, Observable, shareReplay } from "rxjs";
 export class NavbarComponent implements OnInit {
   toggleControl: FormControl;
   @HostBinding('class') className = '';
+  panelOpenState = false;
 
   constructor(
     private translocoService: TranslocoService,
