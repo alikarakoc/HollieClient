@@ -64,24 +64,24 @@ export class ContractDetailsComponent implements OnInit {
 
   }
 
-  getItem(type: "agency" | "board" | "room_type" | "market" |"date" | "room"| "hotel" | "currency") {
+  getItem(type: "agency" | "board" | "room_type" | "market" | "date" | "room" | "hotel" | "currency") {
     const element = this.contract;
     switch (type) {
       case 'agency':
         const idAgency = this.data.cAgencies.filter(cA => cA.listId === element.id).map(cA => cA.agencyId);
         let agencies = idAgency.map(i => this.agencies.find(a => a.id === i).name).toString();
         agencies.split(",", idAgency.length);
-        return agencies.replace(",","\n");
+        return agencies.replace(",", "\n");
 
 
       case 'board':
         const idBoard = this.data.cBoards.filter(cB => cB.listId === element.id).map(cB => cB.boardId);
         return idBoard.map(i => this.boards.find(b => b.id === i)?.name);
 
-        case 'room_type':
-          const idRoomType = this.data.cRooms.filter(cRT => cRT.listId === element.id).map(cRT => cRT.roomTypeId);
-          //idRoomType.map(this.data.rooms.filter(cR => cR.listId === element.id).map(cRT => cRT.roomId));
-          return idRoomType.map(i => this.roomTypes.find(rt => rt.id === i)?.name);
+      case 'room_type':
+        const idRoomType = this.data.cRooms.filter(cRT => cRT.listId === element.id).map(cRT => cRT.roomTypeId);
+        //idRoomType.map(this.data.rooms.filter(cR => cR.listId === element.id).map(cRT => cRT.roomId));
+        return idRoomType.map(i => this.roomTypes.find(rt => rt.id === i)?.name);
 
       // case 'room_type':
       //   const idRoomType = this.data.cRoomTypes.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
@@ -95,9 +95,9 @@ export class ContractDetailsComponent implements OnInit {
         const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
         return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
 
-        case 'date':
-          this.gun = (-1*(new Date(this.contract.enteredDate).getTime() - new Date(this.contract.exitDate).getTime()) / (1000 * 60 * 60 * 24));
-            return (-1*(new Date(this.contract.enteredDate).getTime() - new Date(this.contract.exitDate).getTime()) / (1000 * 60 * 60 * 24));
+      case 'date':
+        this.gun = (-1 * (new Date(this.contract.enteredDate).getTime() - new Date(this.contract.exitDate).getTime()) / (1000 * 60 * 60 * 24));
+        return (-1 * (new Date(this.contract.enteredDate).getTime() - new Date(this.contract.exitDate).getTime()) / (1000 * 60 * 60 * 24));
 
       case 'hotel':
         return this.data.hotels.find(h => h.id === element.hotelId)?.name;
@@ -105,5 +105,5 @@ export class ContractDetailsComponent implements OnInit {
       case 'currency':
         return this.data.currencies.find(c => c.id === element.currencyId)?.code;
     }
-}
+  }
 }

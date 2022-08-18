@@ -1,22 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { ContractService } from 'src/app/services/contract.service';
 import { TranslocoService } from '@ngneat/transloco';
 import { Agency, Contract } from 'src/app/interfaces';
-import { HotelService, MarketService, AgencyService, BoardService, RoomTypeService, CurrencyService } from 'src/app/services';
-import { RoomService } from 'src/app/services/room.service';
-import { CAgencyService } from 'src/app/services/cagency.service';
 import { CAgency } from 'src/app/interfaces/cagency';
 import { CRoomType } from 'src/app/interfaces/croomtype';
 import { CMarket } from 'src/app/interfaces/cmarket';
 import { CBoard } from 'src/app/interfaces/cboard';
-import { CBoardService } from 'src/app/services/cboard.service';
-import { CMarketService } from 'src/app/services/cmarket.service';
-import { CRoomTypeService } from 'src/app/services/croomtype.service';
-import { AMarket } from 'src/app/interfaces/amarket';
 import { AMarketService } from 'src/app/services/amarket.service';
 
 
