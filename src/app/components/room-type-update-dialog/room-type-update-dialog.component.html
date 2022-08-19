@@ -2,48 +2,44 @@
     {{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Room Type' : 'Oda Tipi' }) }}
 </h1>
 
-<div mat-dialog-content>
-    <mat-form-field>
+<div mat-dialog-content class="row">
+    <div class="row">
+    <mat-form-field class="col-6">
         <mat-label>{{ 'code' | transloco }}</mat-label>
         <input matInput maxlength="20" [(ngModel)]="newCode" (keyup.enter)="updateRoomType()">
     </mat-form-field>
 
-    <br>
-
-    <mat-form-field>
+    <mat-form-field class="col-6">
         <mat-label>{{ 'name' | transloco }}</mat-label>
         <input matInput maxlength="50" [(ngModel)]="newType" (keyup.enter)="updateRoomType()">
     </mat-form-field>
+</div>
 
-    <br>
-
-    <mat-form-field class="selects-m">
+ <div class="row">
+    <mat-form-field class="col-12">
         <mat-label>{{ 'hotel' | transloco }}</mat-label>
         <mat-select [(ngModel)]="newHotelId">
             <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
         </mat-select>
     </mat-form-field>
-
+</div>
     
-
-    <mat-form-field>
+<div class="row">
+    <mat-form-field class="col-4">
         <mat-label>{{ 'adult' | transloco }}</mat-label>
         <input [(ngModel)]="newMaxAD" matInput type="number" value="1" min="0" max="15"  (keyup.enter)="updateRoomType()">
     </mat-form-field>
 
-    <br>
-
-    <mat-form-field>
+    <mat-form-field class="col-4">
         <mat-label>{{ 'child' | transloco }}</mat-label>
         <input [(ngModel)]="newMaxCH" matInput type="number" value="1" min="0" max="5" (keyup.enter)="updateRoomType()" >
     </mat-form-field>
 
-    <br>
-
-    <mat-form-field>
+    <mat-form-field class="col-4">
         <mat-label>{{ 'person' | transloco }}</mat-label>
         <input [(ngModel)]="newPax" matInput type="number" value="1" min="0" max="20" (keyup.enter)="updateRoomType()" >
     </mat-form-field>
+</div>
 </div>
 
 <div mat-dialog-actions>

@@ -186,7 +186,6 @@ registerLocaleData(localeTR);
       useValue: {
         disableClose: true,
         // hasBackdrop: false,
-        width: '26vw'
       }
     },
     EditService,

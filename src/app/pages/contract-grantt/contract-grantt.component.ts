@@ -42,7 +42,7 @@ export class ContractGranttComponent implements OnInit {
   ngOnInit(): void {
     this.timelineSettings = {
       topTier: {
-          unit: 'Month',
+          unit: 'Day',
           format: 'MMM dd, y',
       },
       bottomTier: {
