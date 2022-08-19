@@ -4,6 +4,7 @@ import { MatTableDataSource } from "@angular/material/table";
 import { map, Observable, shareReplay } from "rxjs";
 import DatalabelsPlugin from 'chartjs-plugin-datalabels';
 import { ChartConfiguration, ChartData, ChartEvent, ChartType } from 'chart.js';
+import { Chart} from 'node_modules/chart.js'
 import { Agency, Board, Contract, Country, Currency, Hotel, HotelCategory, Market, RoomType, Room } from "src/app/interfaces";
 import { ContractService, CountryService, CurrencyService, HotelCategoryService, HotelService, MarketService, RoomTypeService } from "src/app/services";
 import { AgencyService } from "src/app/services/agency.service";
@@ -16,6 +17,7 @@ import { RoomService } from "src/app/services/room.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+
 
   constructor(
     public agencyService: AgencyService,
@@ -42,7 +44,7 @@ export class HomeComponent implements OnInit {
   currencies: Currency[] = [];
   rooms: Room[] = [];
   notAvailabel: number=0;
-
+  Availabel: number=0;
 
   ngOnInit(): void {
 
@@ -83,17 +85,12 @@ export class HomeComponent implements OnInit {
     });
     this.roomService.getAllRooms().subscribe((res)=> {
       this.rooms=res.data;
-       this.notAvailabel = this.rooms.filter(f => f.reservation == true).length;
-      alert(this.notAvailabel);
-
+       this.notAvailabel = this.rooms.filter(f => f.reservation == false).length;
+       this.Availabel = this.rooms.filter(f => f.reservation == true).length;
+      this.test(this.notAvailabel,this.Availabel);
     });
-    console.log("aa");
-
-
   }
-Length(){
-  this.pieChartData;
-}
+
   public pieChartOptions: ChartConfiguration['options'] = {
 
     responsive: true,
@@ -130,14 +127,27 @@ Length(){
 
 // }
 
-public pieChartData: ChartData<'pie', number[], string | string[]> = {
+test(notAvailabel : number,Availabel:number):any{
+  var myChart = new Chart("baseChart", {
+    type: 'pie',
+    data: {
+        labels: ['Available','Not Available'],
+        datasets: [{
+            label: '# of Votes',
+            data: [notAvailabel,Availabel],
+        }]
+    },
+});
+}
 
-  labels: [ 'Available','Not Available' ],
-  datasets: [ {
-    data: [3, 5 ],
-    backgroundColor:['#FFAB40','#2196F3']
-  }]
-};
+// public pieChartData: ChartData<'pie', number[], string | string[]> = {
+
+//   labels: [ 'Available','Not Available' ],
+//   datasets: [ {
+//     data: [this.notAvailabel, 5 ],
+//     backgroundColor:['#FFAB40','#2196F3']
+//   }]
+// };
 
 public pieChartType: ChartType = 'pie';
 public pieChartPlugins = [ DatalabelsPlugin ];
