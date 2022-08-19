@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>
-  {{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Hotel' :
-  'Otel' }) }}
+  {{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === 'en' ? 'Room' :
+  'Oda' }) }}
 </h1>
 
 <div mat-dialog-content>
@@ -25,7 +25,7 @@
       <mat-option *ngFor="let c of hotels" [value]="c.id">{{ c.name }}</mat-option>
     </mat-select>
   </mat-form-field>
- 
+
   <br>
 
   <mat-form-field>
@@ -34,8 +34,10 @@
       <mat-option *ngFor="let c of roomTypes" [value]="c.id">{{ c.name }}</mat-option>
     </mat-select>
   </mat-form-field>
-  
+
   <br>
+
+  <mat-checkbox [(ngModel)]="newReservation" (change)="onChange($event)">Reserved</mat-checkbox>
 
   <!-- <section class="example-section">
     <label class="example-margin"> {{ 'clean' | transloco }} </label>
@@ -46,10 +48,6 @@
       <mat-radio-button class="example-margin" value="false">Dirty</mat-radio-button>
     </mat-radio-group>
   </section> -->
-
-
-
-
 </div>
 
 <div mat-dialog-actions>
