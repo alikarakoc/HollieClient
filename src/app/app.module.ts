@@ -63,11 +63,11 @@ import {
 } from './components';
 
 
-
-
+import { NgChartsModule } from 'ng2-charts';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 // Modules
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, 
-  HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent, 
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent,
+  HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent,
   ContractComponent, SearchContractComponent, HomeComponent, RoomComponent, HotelFeatureComponent } from './pages';
   import { ContractGranttComponent } from '../app/pages/contract-grantt/contract-grantt.component';
 
@@ -82,14 +82,15 @@ import localeTR from '@angular/common/locales/tr';
 import { MAT_DIALOG_DEFAULT_OPTIONS } from "@angular/material/dialog";
 import { ExcelService } from './services/excel.service';
 import { FilterPipe } from './pipes/filter.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 registerLocaleData(localeTR);
 
 @NgModule({
   declarations: [
     LocalizedDatePipe,
-    
+
 
     AppComponent,
     HomeComponent,
@@ -157,6 +158,7 @@ registerLocaleData(localeTR);
   ],
   imports: [
     BrowserModule,
+    MatCheckboxModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     AllFormsModule,
@@ -170,7 +172,9 @@ registerLocaleData(localeTR);
     MatInputModule,
     MatIconModule,
     MatSelectModule,
-    TranslocoRootModule
+    TranslocoRootModule,
+    ReactiveFormsModule,
+    NgChartsModule,
   ],
   providers: [
     {

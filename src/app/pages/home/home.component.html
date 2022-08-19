@@ -6,8 +6,22 @@
     <ng-template #noData>
         No Data
     </ng-template>
+    <button mat-flat-button color="primary" (click)="Length()">deneme</button>
+    <div>
+      <div>
+        <div class="chart">
+          <canvas baseChart
+                  [data]="pieChartData"
+                  [type]="pieChartType"
+                  [options]="pieChartOptions"
+                  [plugins]="pieChartPlugins">
+          </canvas>
+        </div>
+      </div>
+    </div>
 
     <div class="row my-2">
+
         <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
             <mat-card-title>{{ 'agency_title' | transloco }}</mat-card-title>
             <mat-card-content>
@@ -22,6 +36,21 @@
                 <button mat-flat-button color="accent" routerLink="/agencies">{{ 'home.see_more' | transloco }}</button>
             </mat-card-actions>
         </mat-card>
+
+          <!-- <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
+              <mat-card-title>{{ 'room' | transloco }}</mat-card-title>
+              <mat-card-content>
+                  <mat-list role="list" *ngIf="rooms !== null; else noData">
+                      <mat-list-item role="listitem" *ngFor="let item of rooms | slice:0:3; let last = last;">
+                          {{ item.name }}
+                          <mat-divider *ngIf="!last"></mat-divider>
+                      </mat-list-item>
+                  </mat-list>
+              </mat-card-content>
+              <mat-card-actions>
+                  <button mat-flat-button color="accent" routerLink="/room">{{ 'home.see_more' | transloco }}</button>
+              </mat-card-actions>
+          </mat-card> -->
 
         <mat-card class="mx-1" [ngClass]="{ 'col-md-6': (isHandset$ | async), 'col-md-4': !(isHandset$ | async) }">
             <mat-card-title>{{ 'board_title' | transloco }}</mat-card-title>

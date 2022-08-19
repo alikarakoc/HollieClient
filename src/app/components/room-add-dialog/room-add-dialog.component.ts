@@ -33,7 +33,9 @@ export class RoomAddDialogComponent implements OnInit {
   roomName: string;
   roomTypeId: number;
   hotelId: number;
+  roomReservation:boolean=false;
   //clean: boolean;
+
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -76,9 +78,12 @@ export class RoomAddDialogComponent implements OnInit {
       a.code === this.roomCode &&
       a.name === this.roomName &&
       a.roomTypeId === this.roomTypeId &&
-      a.hotelId === this.hotelId;
-      //a.clean === this.clean;
+      a.hotelId === this.hotelId &&
+      a.reservation === this.roomReservation;
 
+    alert(this.roomReservation);
+      //a.clean === this.clean;
+      // a.reserved===this.roomReserved;
     const condition = this.roomService.rooms.some(predicate);
 
     this.roomService.getAllRooms().subscribe((res) => {
@@ -120,13 +125,12 @@ export class RoomAddDialogComponent implements OnInit {
         code: this.roomCode,
         name: this.roomName,
         hotelId: this.hotelId,
-        roomtypeId: this.roomTypeId
-        //clean: this.clean
+        roomtypeId: this.roomTypeId,
+        reservation:this.roomReservation,
       }
-
     });
-
   }
+
 
 
   getItem(type:  "room_type" , element: Room) {

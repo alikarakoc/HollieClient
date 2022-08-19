@@ -11,6 +11,7 @@ import { ExcelService } from 'src/app/services/excel.service';
 import { MatSort } from "@angular/material/sort";
 import { RoomDeleteDialogComponent, RoomUpdateDialogComponent } from 'src/app/components';
 import { MatPaginator } from '@angular/material/paginator';
+import { elementAt } from 'rxjs';
 
 @Component({
   selector: 'app-room',
@@ -18,10 +19,13 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./room.component.scss']
 })
 export class RoomComponent implements OnInit {
-  columns: string[] = ["code", "name", "HotelId", "roomTypeId",  "actions"  ];
+  columns: string[] = ["code", "name", "HotelId", "roomTypeId", "reserved", "actions" ];
   //columns: string[] = ["code", "name", "HotelId", "roomTypeId", "clean", "actions"  ];
   dataSource: MatTableDataSource<Room>;
   value = '';
+  reserve:boolean;
+
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<Room>;
   @ViewChild(MatSort) sort: MatSort;
@@ -31,6 +35,7 @@ export class RoomComponent implements OnInit {
   rooms: Room[] = [];
   roomTypes: RoomType[] = [];
   hotels: Hotel[] = [];
+  available: any[]=[];
 
 
   constructor(
@@ -55,6 +60,9 @@ export class RoomComponent implements OnInit {
     })
     this.excelService.exportAsExcelFile(arrayToExport, 'Room');
   }
+  // checkCheckBoxvalue(event:any){
+  //   console.log(event.target.checked)
+  // }
 
   ngOnInit(): void {
     this.roomService.getAllRooms().subscribe((res) => {
@@ -90,6 +98,20 @@ export class RoomComponent implements OnInit {
     this.ngOnInit();
   }
 
+  onChange(event:any){
+
+    if(event.checked){
+
+      this.available = this.rooms.filter(f => f.reservation == true);
+      this.dataSource.data = this.available;
+    }
+    else{
+      this.dataSource = new MatTableDataSource<Room>(this.rooms);
+    }
+    this.dataSource.sort = this.sort;
+    this.cdr.detectChanges();
+    this.dataSource.paginator = this.paginator;
+  }
 
   getCurrentRoomType(element: Room) {
     return this.roomTypes.find(c => c.id === element.roomTypeId)?.name;
@@ -98,6 +120,17 @@ export class RoomComponent implements OnInit {
 
   getCurrentHotel(element: Room) {
     return this.hotels.find(c => c.id === element.hotelId)?.name;
+  }
+
+  get(element: Room) {
+    if(element.reservation){
+      return "Not Available"
+    }
+    else{
+      return "Available"
+    }
+
+
   }
 
   create() {

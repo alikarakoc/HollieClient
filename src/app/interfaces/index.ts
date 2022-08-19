@@ -1,3 +1,5 @@
+import { from } from 'rxjs';
+
 export { Base } from './base';
 export { RoomType } from './room-type';
 export { Country } from './country';
@@ -8,3 +10,4 @@ export { Board } from './board';
 export { Market } from './market';
 export { Currency } from './currency';
 export { Contract } from './contract';
+export { Room } from './room';
