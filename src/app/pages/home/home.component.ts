@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   contracts: Contract[] = [];
   currencies: Currency[] = [];
   rooms: Room[] = [];
-  notAvailabel: number;
+  notAvailabel: number=0;
 
 
   ngOnInit(): void {
@@ -83,14 +83,35 @@ export class HomeComponent implements OnInit {
     });
     this.roomService.getAllRooms().subscribe((res)=> {
       this.rooms=res.data;
+       this.notAvailabel = this.rooms.filter(f => f.reservation == true).length;
+      alert(this.notAvailabel);
+
     });
+    console.log("aa");
+
+
   }
+Length(){
+  this.pieChartData;
+}
   public pieChartOptions: ChartConfiguration['options'] = {
+
     responsive: true,
     plugins: {
       legend: {
         display: true,
         position: 'top',
+        labels:{
+          color: '#ffffff'
+        },
+        title: {
+          display: true,
+          text: 'Fullness Ratio',
+          color: '#ffffff',
+          font: {
+            size: 22,
+          },
+      }
       },
       datalabels: {
         formatter: (value, ctx) => {
@@ -101,23 +122,25 @@ export class HomeComponent implements OnInit {
       },
     }
   };
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [ [ 'Download', 'Sales' ], [ 'In', 'Store', 'Sales' ], 'Mail Sales' ],
-    datasets: [ {
-      data: [ 300, 500, 100 ]
-    } ]
-  };
-  public pieChartType: ChartType = 'pie';
-  public pieChartPlugins = [ DatalabelsPlugin ];
 
-Length(){
-  this.notAvailabel = this.rooms.filter(f => f.reservation == true).length;
-  alert(this.notAvailabel);
-}
+// Length(){
 
+//   this.notAvailabel = this.rooms.filter(f => f.reservation == true).length;
+//   alert(this.notAvailabel);
 
+// }
 
+public pieChartData: ChartData<'pie', number[], string | string[]> = {
 
+  labels: [ 'Available','Not Available' ],
+  datasets: [ {
+    data: [3, 5 ],
+    backgroundColor:['#FFAB40','#2196F3']
+  }]
+};
+
+public pieChartType: ChartType = 'pie';
+public pieChartPlugins = [ DatalabelsPlugin ];
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
@@ -126,3 +149,4 @@ Length(){
       shareReplay()
     );
 }
+

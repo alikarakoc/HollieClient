@@ -6,19 +6,10 @@
     <ng-template #noData>
         No Data
     </ng-template>
+
     <button mat-flat-button color="primary" (click)="Length()">deneme</button>
-    <div>
-      <div>
-        <div class="chart">
-          <canvas baseChart
-                  [data]="pieChartData"
-                  [type]="pieChartType"
-                  [options]="pieChartOptions"
-                  [plugins]="pieChartPlugins">
-          </canvas>
-        </div>
-      </div>
-    </div>
+
+
 
     <div class="row my-2">
 
@@ -325,5 +316,17 @@
                 </div>
             </mat-card-content>
         </mat-card>
+    </div>
+    <div>
+      <div>
+        <div class="chart">
+          <canvas baseChart
+                  [data]="pieChartData"
+                  [type]="pieChartType"
+                  [options]="pieChartOptions"
+                  [plugins]="pieChartPlugins">
+          </canvas>
+        </div>
+      </div>
     </div>
 </app-navbar>
