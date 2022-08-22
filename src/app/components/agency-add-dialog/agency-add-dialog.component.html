@@ -1,63 +1,62 @@
 <h1 mat-dialog-title>
-    {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Agency' : 'Acenta' }) }}
+  {{ translocoService.translate('dialogs.add_button', { name: translocoService.getActiveLang() === 'en' ? 'Agency' : 'Acenta' }) }}
 </h1>
 
 <div mat-dialog-content>
+  <div class="row">
+    <mat-form-field class=col-6>
+      <mat-label>{{ 'code' | transloco }}</mat-label>
+      <input matInput maxlength="20" (keyup.enter)="add()" [(ngModel)]="agencyCode">
+    </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>{{ 'code' | transloco }}</mat-label>
-            <input matInput maxlength="20"  (keyup.enter)="add()" [(ngModel)]="agencyCode">
-        </mat-form-field>
+    <mat-form-field class="col-6">
+      <mat-label>{{ 'name' | transloco }}</mat-label>
+      <input matInput maxlength="50" (keyup.enter)="add()" [(ngModel)]="agencyName">
+    </mat-form-field>
+  </div>
 
-        <br>
+  <div class="row">
+    <mat-form-field class=col-6>
+      <mat-label>{{ 'phone' | transloco }}</mat-label>
+      <input
+        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        type="number" [(ngModel)]="agencyPhone" matInput type="phone" maxlength="11" placeholder="(555) 555-5555"
+        (keyup.enter)="add()">
+    </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>{{ 'name' | transloco }}</mat-label>
-            <input matInput maxlength="50" (keyup.enter)="add()" [(ngModel)]="agencyName">
-        </mat-form-field>
-
-        <br>
-
-        <mat-form-field>
-            <mat-label>{{ 'address' | transloco }}</mat-label>
-            <textarea matInput maxlength="200" (keyup.enter)="add()" [(ngModel)]="agencyAddress"></textarea>
-        </mat-form-field>
-
-        <br>
-
-        <mat-form-field>
-            <mat-label>{{ 'phone' | transloco }}</mat-label>
-            <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-            type="number" [(ngModel)]="agencyPhone" matInput type="phone" maxlength="11" placeholder="(555) 555-5555" (keyup.enter)="add()">
-        </mat-form-field>
-
-        <br>
-
-        <!-- <mat-form-field>
+    <!-- <mat-form-field>
           <mat-label>{{ 'market' | transloco }}</mat-label>
           <mat-select [(ngModel)]="MarketId">
             <mat-option *ngFor="let c of markets" [value]="c.id">{{ c.name }}</mat-option>
           </mat-select>
         </mat-form-field> -->
 
-        <mat-form-field class="selects-m">
-          <mat-label>{{ 'market' | transloco }}</mat-label>
-          <mat-select [(ngModel)]="selectedMarkets" multiple>
-              <mat-option *ngFor="let m of markets" [value]="{marketId: m.id}">{{ m.name }}</mat-option>
-          </mat-select>
-      </mat-form-field>
+    <mat-form-field class="col-6">
+      <mat-label>{{ 'market' | transloco }}</mat-label>
+      <mat-select [(ngModel)]="selectedMarkets" multiple>
+        <mat-option *ngFor="let m of markets" [value]="{marketId: m.id}">{{ m.name }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-        <br>
+  <div class="row">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input matInput placeholder="pat@example.com" [formControl]="emailControl" required>
+      <mat-error *ngIf="emailControl.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+  </div>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Enter your email</mat-label>
-            <input matInput placeholder="pat@example.com" [formControl]="emailControl" required>
-            <mat-error *ngIf="emailControl.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
+  <div class="row">
 
+    <mat-form-field>
+      <mat-label>{{ 'address' | transloco }}</mat-label>
+      <textarea matInput maxlength="200" (keyup.enter)="add()" [(ngModel)]="agencyAddress"></textarea>
+    </mat-form-field>
+  </div>
 </div>
 
 <div mat-dialog-actions>
-    <button mat-flat-button color="primary" (click)="add()">{{ 'dialogs.add' | transloco }}</button>
-    <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
+  <button mat-flat-button color="primary" (click)="add()">{{ 'dialogs.add' | transloco }}</button>
+  <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
 </div>
