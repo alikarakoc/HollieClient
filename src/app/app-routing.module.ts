@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent } from "./pages";
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent, LoginComponent } from "./pages";
 import { ContractGranttComponent } from './pages/contract-grantt/contract-grantt.component';
 import { HomeComponent } from "./pages/home/home.component";
 import { HotelFeatureComponent } from './pages/hotel-feature/hotel-feature.component';
@@ -9,8 +9,13 @@ import { RoomComponent } from './pages/room/room.component';
 const routes: Routes = [
   {
     path: "",
+    component: LoginComponent
+  },
+  {
+    path: "home",
     component: HomeComponent
   },
+  
   {
     path: "home",
     redirectTo: ""
