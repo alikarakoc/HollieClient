@@ -45,11 +45,18 @@ export class LoginComponent implements OnInit {
   onLogin() {
      var user : Login = this.loginForm.value;
 
+     debugger;
      this.loginService
      .loginUser(user)
-     .subscribe(() => {
-       this.isAuth = true;
-       this.router.navigate(['/home'],{relativeTo:this.activatedRoute});
+     .subscribe((res) => { 
+      console.log(res);
+      if(res.isSuccessful === true){
+        this.isAuth = true;
+        this.router.navigate(['/home'],{relativeTo:this.activatedRoute});
+      }
+      else{
+        alert("Wrong username or password")
+      }
      });
      console.log(this.loginForm.value);
    
