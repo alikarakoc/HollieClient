@@ -3,60 +3,60 @@
 </h1>
 
 <div mat-dialog-content>
+  <div class="row">
 
-  <mat-form-field>
+  <mat-form-field  class="col-6">
     <mat-label>{{ 'code' | transloco }}</mat-label>
     <input matInput [(ngModel)]="hotelCode" maxlength="20" (keyup.enter)="add()">
   </mat-form-field>
 
-  <br>
-
-  <mat-form-field>
+  <mat-form-field  class="col-6">
     <mat-label>{{ 'name' | transloco }}</mat-label>
     <input matInput [(ngModel)]="hotelName" maxlength="50" (keyup.enter)="add()">
   </mat-form-field>
+  </div>
 
-  <br>
+  <div class="row">
 
-  <mat-form-field>
+  <mat-form-field class="col-12">
     <mat-label>{{ 'address' | transloco }}</mat-label>
     <textarea matInput [(ngModel)]="hotelAddress" maxlength="200" (keyup.enter)="add()"></textarea>
   </mat-form-field>
+  </div>
+  
+<div class="row">
 
-  <br>
-
-  <mat-form-field>
-    <mat-label>{{ 'phone' | transloco }}</mat-label>
-    <input
-    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-    type="number" [(ngModel)]="hotelPhone" matInput type="phone" maxlength="11" placeholder="(555) 555-5555" (keyup.enter)="add()">
-  </mat-form-field>
-
-  <br>
-
-  <mat-form-field>
+  <mat-form-field class="col-6">
     <mat-label>{{ 'category' | transloco }}</mat-label>
     <mat-select [(ngModel)]="hotelCategoryId">
       <mat-option *ngFor="let c of hotelCategories" [value]="c.id">{{ c.name }}</mat-option>
     </mat-select>
   </mat-form-field>
 
-  <br>
-
-  <mat-form-field>
+  <mat-form-field class="col-6">
     <mat-label>{{ 'feature' | transloco }}</mat-label>
     <mat-select [(ngModel)]="hotelFeatureId">
       <mat-option *ngFor="let c of hotelFeatures" [value]="c.id">
         {{ c.code }} &nbsp; [ {{ c.babyTop }} - {{ c.childTop }} - {{ c.teenTop }} ] </mat-option>
     </mat-select>
   </mat-form-field>
+</div>
 
-  <br>
+<div class="row">
+  <mat-form-field>
+    <mat-label>{{ 'phone' | transloco }}</mat-label>
+    <input
+    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+    type="number" [(ngModel)]="hotelPhone" matInput type="phone" maxlength="11" placeholder="(555) 555-5555" (keyup.enter)="add()">
+  </mat-form-field>
+</div>
 
+<div class="row">
   <mat-form-field>
     <mat-label>{{ 'email' | transloco }}</mat-label>
     <input  [formControl]="emailControl" matInput type="email" maxlength="50" (keyup.enter)="add()">
   </mat-form-field>
+</div>
 
 </div>
 
