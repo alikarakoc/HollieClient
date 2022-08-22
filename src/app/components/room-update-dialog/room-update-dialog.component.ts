@@ -15,6 +15,10 @@ interface DialogData {
   element: Room;
   table: MatTable<any>;
   dialogRef: MatDialogRef<any>;
+  allRoomTypes: any[];
+  rooms: any[];
+  hotels: any[];
+
 }
 
 @Component({
@@ -33,6 +37,11 @@ export class RoomUpdateDialogComponent implements OnInit {
   sameCodeCheck = false;
   sameNameCheck = false;
 
+  allRoomTypes: RoomType[] =[];
+  roomTypes: RoomType[] = []
+  rooms: Room[] = [];
+  hotels: Hotel[] = []
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private dialogRef: MatDialogRef<RoomUpdateDialogComponent>,
@@ -41,26 +50,30 @@ export class RoomUpdateDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
-    private RoomTypeService: RoomTypeService,
-  ) { }
+    private roomTypeService: RoomTypeService,
+  ) {
 
-  roomTypes: RoomType[] = []
-  rooms: Room[] = [];
-  hotels: Hotel[] = []
+    this.allRoomTypes = this.data.allRoomTypes;
+    this.rooms = this.data.rooms;
+    this.hotels = this.data.hotels;
+   }
+
+  
 
 
   ngOnInit(): void {
-    this.roomService.getAllRooms().subscribe(res => {
-      this.rooms = res.data;
-    });
+    const roomTypeFilterhotel = this.allRoomTypes.filter(r => r.hotelId === this.data.element.hotelId);
+    this.roomTypes = roomTypeFilterhotel;
+  }
 
-    this.RoomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data;
-    });
-
-    this.hotelService.getAllHotels().subscribe(res => {
-      this.hotels = res.data;
-    })
+  onChangeHotelUpdate(event :any){
+    console.log(event);
+    this.roomTypes = [];
+    for(let i = 0; i < this.allRoomTypes.length; i++){
+      if(this.allRoomTypes[i].hotelId == this.newHotelId){
+        this.roomTypes.push(this.allRoomTypes[i]);
+      }
+    }
   }
 
 

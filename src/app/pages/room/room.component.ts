@@ -134,7 +134,8 @@ export class RoomComponent implements OnInit {
   }
 
   create() {
-    const dialog = this.dialog.open(RoomAddDialogComponent, { data: { table: this.table } });
+    const dialog = this.dialog.open(RoomAddDialogComponent, { data: { 
+      table: this.table } });
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.roomService
@@ -148,7 +149,7 @@ export class RoomComponent implements OnInit {
   }
 
   update(element: Room) {
-    const dialog = this.dialog.open(RoomUpdateDialogComponent, { data: { element } });
+    const dialog = this.dialog.open(RoomUpdateDialogComponent, { data: { element,  allRoomTypes: this.roomTypes, hotels: this.hotels, rooms: this.rooms  } });
     dialog.afterClosed().subscribe(result => {
       if (result.isUpdated) {
         this.roomService.updateRoom(element).subscribe(() => this.ngOnInit());
