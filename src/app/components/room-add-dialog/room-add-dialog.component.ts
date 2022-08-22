@@ -81,7 +81,7 @@ export class RoomAddDialogComponent implements OnInit {
       a.hotelId === this.hotelId &&
       a.reservation === this.roomReservation;
 
-    alert(this.roomReservation);
+  
       //a.clean === this.clean;
       // a.reserved===this.roomReserved;
     const condition = this.roomService.rooms.some(predicate);
