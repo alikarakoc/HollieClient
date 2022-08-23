@@ -85,8 +85,8 @@ export class HomeComponent implements OnInit {
     });
     this.roomService.getAllRooms().subscribe((res)=> {
       this.rooms=res.data;
-       this.notAvailabel = this.rooms.filter(f => f.reservation == false).length;
-       this.Availabel = this.rooms.filter(f => f.reservation == true).length;
+       this.notAvailabel = this.rooms.filter(f => f.reservation == true).length;
+       this.Availabel = this.rooms.filter(f => f.reservation == false).length;
       this.test(this.notAvailabel,this.Availabel);
     });
   }
@@ -134,9 +134,30 @@ test(notAvailabel : number,Availabel:number):any{
         labels: ['Available','Not Available'],
         datasets: [{
             label: '# of Votes',
-            data: [notAvailabel,Availabel],
+            data: [Availabel,notAvailabel],
+            backgroundColor: ['#F57C00','#2196F3'],
+            hoverBackgroundColor: ['#EF6C00','#0277BD'],
         }]
     },
+    options:{
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+          labels:{
+            color: '#ffffff'
+          },
+          title: {
+            display: true,
+            text: 'Fullness Ratio',
+            color: '#ffffff',
+            font: {
+              size: 22,
+            },
+        }
+        },
+      }
+    }
 });
 }
 

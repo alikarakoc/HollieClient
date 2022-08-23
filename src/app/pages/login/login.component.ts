@@ -14,29 +14,28 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  
 
-  
+
+
  model:any={};
- 
+
 
   constructor(
-    private authService:AuthService, 
+    private authService:AuthService,
     public router: Router,
     private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit():void {
     if(localStorage.getItem("token")){
-      
+
     this.router.navigate(['home']);
     }
-
   }
 
   login(){
     console.log(this.model);
-    
+
     this.authService.login(this.model).subscribe((next)=> {
       const tokenT = localStorage.getItem("token");
      if(tokenT){
@@ -45,17 +44,17 @@ export class LoginComponent implements OnInit {
    },
    error=>{
     console.log(error);
-    
+
     alert("login hatalı");
    })
-    
-    
+
+
   }
   loggedIn(){
     const token=localStorage.getItem("token");
     return token?true:false;
-    
-  
+
+
      }
 
 
