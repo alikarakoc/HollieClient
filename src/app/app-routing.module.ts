@@ -18,10 +18,10 @@ export const routes: Routes = [
     component: HomeComponent, canActivate:[AuthGuard]
   },
   
-  {
-    path: "home",
-    redirectTo: "",canActivate:[AuthGuard]
-  },
+  // {
+  //   path: "home",
+  //   redirectTo: "",canActivate:[AuthGuard]
+  // },
   {
     path: "room-types",
     component: RoomTypeComponent, canActivate:[AuthGuard]

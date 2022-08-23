@@ -12,12 +12,12 @@ export class AuthService {
   constructor(private http:HttpClient) { }
 
   login(model:any) {
-    debugger;
     return this.http.post(this.baseUrl+'/login', model).pipe(
       map((response:any) =>{
        const result=response;
-
+       debugger
         if (result){
+          debugger;
           localStorage.setItem("token",result.data.token)
           console.log(localStorage);
           
@@ -29,7 +29,7 @@ export class AuthService {
   }
   loggedIn(){
     const token:any =localStorage.getItem("token");
-    return token?true:false;
+    return !this.jwtHelper.isTokenExpired(token);
   }
 
 }

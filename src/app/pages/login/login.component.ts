@@ -27,13 +27,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit():void {
+    if(localStorage.getItem("token")){
+      
+    this.router.navigate(['home']);
+    }
+
   }
 
   login(){
     console.log(this.model);
     
     this.authService.login(this.model).subscribe((next)=> {
-  
       const tokenT = localStorage.getItem("token");
      if(tokenT){
       this.router.navigate(['/home'],{relativeTo:this.activatedRoute});
