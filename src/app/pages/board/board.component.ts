@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from "@angular/material/sort";
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { TranslocoService } from "@ngneat/transloco";
 import {
   BoardAddDialogComponent,
@@ -32,14 +33,19 @@ export class BoardComponent implements OnInit {
 
   boards: Board[] = [];
   checkButtonCount:number = 0;
-
+  
   constructor(
+    private router:Router,
     private cdr: ChangeDetectorRef,
     public boardService: BoardService,
     private dialog: MatDialog,
     public translocoService: TranslocoService,
     private excelService: ExcelService
-  ) { }
+  ) { 
+    if(localStorage.length < 2){
+      this.router.navigate(['/login']);
+    }
+  }
 
   exportAsXLSX(): void {
     this.excelService.exportAsExcelFile(this.boards, 'Board');
@@ -47,6 +53,7 @@ export class BoardComponent implements OnInit {
 
 
   ngOnInit(): void {
+  
     this.boardService.getAllBoards().subscribe((res) => {
       if(res.data!=null){
         this.boards = res.data;

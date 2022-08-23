@@ -1,7 +1,7 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routes } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
@@ -84,6 +84,9 @@ import { ExcelService } from './services/excel.service';
 import { FilterPipe } from './pipes/filter.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/common/auth.guard';
+
 
 registerLocaleData(localeTR);
 
@@ -176,8 +179,11 @@ registerLocaleData(localeTR);
     TranslocoRootModule,
     ReactiveFormsModule,
     NgChartsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [
+    AuthGuard,
+   
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: { duration: 3000 },

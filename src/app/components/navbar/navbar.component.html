@@ -5,6 +5,7 @@
     <img class="logo" src="../../../assets/images/hollielogo.png" alt="image">
 
     <mat-nav-list>
+      <button type="input" (click)="logOut()">çıkış</button>
 
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/">{{ 'home_title' | transloco }}</a>
 
@@ -54,7 +55,8 @@
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/board">{{ 'board_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/agencies">{{ 'agency_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/contracts">{{ 'contract_title' | transloco }}</a>
-      <a mat-list-item (click)="closeDrawer(drawer)"
+      <a mat-list-item (click)="closeDrawer(drawer)" 
+   
         routerLink="/search-contract">{{ 'search_contract' | transloco }}</a>
       <ng-container *ngIf="isHandset | async">
         <mat-divider></mat-divider>

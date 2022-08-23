@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Login } from 'src/app/interfaces/login';
 import { LoginService } from 'src/app/services/login.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 
@@ -13,53 +14,45 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  
 
   
-  hide: boolean = false;
-  isAuth: boolean = false;
+ model:any={};
+ 
 
-  constructor(private fb: FormBuilder,
-    private loginService: LoginService,
+  constructor(
+    private authService:AuthService, 
     public router: Router,
     private activatedRoute: ActivatedRoute) {
   }
 
-  ngOnInit() {
+  ngOnInit():void {
   }
 
-  loginForm: FormGroup = this.fb.group({
-    fullName: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(6)]]
-  })
-
-  isAuthenticated(){
-    if(this.isAuth){
-      return true;
-    }
-    else{
-       return false;
-    }
+  login(){
+    console.log(this.model);
+    
+    this.authService.login(this.model).subscribe((next)=> {
+  
+      const tokenT = localStorage.getItem("token");
+     if(tokenT){
+      this.router.navigate(['/home'],{relativeTo:this.activatedRoute});
+     }
+   },
+   error=>{
+    console.log(error);
+    
+    alert("login hatalı");
+   })
+    
+    
   }
+  loggedIn(){
+    const token=localStorage.getItem("token");
+    return token?true:false;
+    
+  
+     }
 
-
-  onLogin() {
-     var user : Login = this.loginForm.value;
-
-     debugger;
-     this.loginService
-     .loginUser(user)
-     .subscribe((res) => { 
-      console.log(res);
-      if(res.isSuccessful === true){
-        this.isAuth = true;
-        this.router.navigate(['/home'],{relativeTo:this.activatedRoute});
-      }
-      else{
-        alert("Wrong username or password")
-      }
-     });
-     console.log(this.loginForm.value);
-   
-  }
 
 }

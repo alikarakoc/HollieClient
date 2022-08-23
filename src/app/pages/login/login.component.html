@@ -1,46 +1,46 @@
 <mat-card>
+
+  <mat-card-content>
+    <form  #form="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()">
+      <input #fullname="ngModel" class="form-control form-control-sm mr-sm-2" required minlength="5" type="text" name="fullname" placeholder="Username" [(ngModel)]="model.fullname">
+      <input #password="ngModel" class="form-control form-control-sm mr-sm-2" required minlength="6" type="password" name="password" placeholder="Password" [(ngModel)]="model.password">
+      <button [disabled]="form.invalid" class="btn btn-success btn-sm my-2 my-sm-0" type="submit">Login</button>
+    </form>
+
+  </mat-card-content>
+</mat-card>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <mat-card>
     <mat-card-content>
-      <div class="header">
-        <P>Sign Into Your Account </P>
-      </div>
-      <form (ngSubmit)="onLogin()" name="loginForm" [formGroup]="loginForm">
-        <div class="fullName">
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Email</mat-label>
-            <input
-              formControlName="fullName"
-              matInput
-              placeholder="Enter email address" required
-            />
-            <!-- <mat-error *ngIf="!loginForm.controls['email'].valid">
-                Email is required
-              </mat-error> -->
-          </mat-form-field>
+      <div class="container" style="margin-top: 100px;">
+        <div class="row">
+            <div class="col-6">
+                <form (ngSubmit)="login()">
+                    <h2>Register</h2>
+                    <hr>
+                    <div class="form-group">
+                        <input type="text" [(ngModel)]="model.name" name="name" class="form-control" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" [(ngModel)]="model.email" name="email" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" [(ngModel)]="model.password" name="password" class="form-control" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
         </div>
-
-        <div>
-          <span>
-            <a class="text-link" class="aLink" routerLink="/auth/forgot-password">Forgot Password?</a>
-          </span>
-          <mat-form-field class="full-width" appearance="outline">
-            <mat-label>Password</mat-label>
-            <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
-            <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
-            [attr.aria-pressed]="hide">
-            <mat-icon>
-                {{hide ? 'visibility_off' : 'visibility'}}
-            </mat-icon>
-        </button>
-        <mat-error *ngIf="!loginForm.controls['password'].valid">
-            Password is required
-          </mat-error>
-        </mat-form-field>
-        </div>
-        <button mat-flat-button color="primary">Login</button>
-      </form>
-
-      <div class="button-row">
-        <p>Create New Account</p>
-      </div>
+    </div>
     </mat-card-content>
-  </mat-card>
+  </mat-card> -->

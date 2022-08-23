@@ -11,12 +11,12 @@ import { Login } from '../interfaces/login';
 })
 export class LoginService {
   user :Login[] = [];
-  baseUrl = `https://localhost:44383/api/User/Login`;
+  baseUrl = `https://localhost:44383/api/User/login`;
 
   constructor( private http : HttpClient) { }
 
   loginUser( user: Partial<Login>): Observable<ListResponseModel<Login>>{
-    debugger;
+   
     return this.http.post<ListResponseModel<Login>>(this.baseUrl, user);
   }
 }

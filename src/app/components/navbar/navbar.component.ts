@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
 import { map, Observable, shareReplay } from "rxjs";
 
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -17,13 +18,15 @@ export class NavbarComponent implements OnInit {
   toggleControl: FormControl;
   @HostBinding('class') className = '';
   panelOpenState = false;
+  model:any={};
 
   constructor(
     private translocoService: TranslocoService,
     private overlay: OverlayContainer,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
-    private asyncPipe: AsyncPipe
+    private asyncPipe: AsyncPipe,
+    
   ) { }
 
   isHandset: Observable<boolean> = this.breakpointObserver
@@ -55,6 +58,7 @@ export class NavbarComponent implements OnInit {
 
     });
   }
+  
 
   getTheme(darkMode: boolean) {
     const darkClassName = 'darkMode';
@@ -68,7 +72,12 @@ export class NavbarComponent implements OnInit {
       localStorage.setItem('mode', 'light');
     }
   }
-
+  
+   logOut(){
+    localStorage.removeItem("token");
+    console.log("logout");
+    this.router.navigate(['/login']);
+   }
   changeLanguage(language: 'tr' | 'en') {
     this.translocoService.setActiveLang(language);
   }
