@@ -57,7 +57,8 @@ export class BoardAddDialogComponent implements OnInit {
     this.dialogRef.close({
       isAdded: true,
       elementName: this.boardName,
-      elementCode: this.boardCode
+      elementCode: this.boardCode,
+      createdUser : localStorage.getItem("username")
     });
   }
 }

@@ -79,7 +79,8 @@ export class RoomTypeAddDialogComponent implements OnInit {
       hotelId: this.roomTypeHotelId,
       maxCH : this.roomTypeMaxCH,
       maxAD :this.roomTypeMaxAD,
-      pax: this.roomTypePax
+      pax: this.roomTypePax,
+      createdUser : localStorage.getItem("username")
     });
   }
 

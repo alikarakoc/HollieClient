@@ -60,7 +60,8 @@ export class HotelCategoryAddDialogComponent implements OnInit {
     this.dialogRef.close({
       isAdded: true,
       elementName: this.categoryName,
-      elementCode: this.categoryCode
+      elementCode: this.categoryCode,
+      createdUser : localStorage.getItem("username")
     });
   }
 }

@@ -91,7 +91,7 @@ export class BoardComponent implements OnInit {
       if (result.isAdded) {
         this.boardService
           .addNewBoard({
-            name: result.elementName, code: result.elementCode
+            name: result.elementName, code: result.elementCode, createdUser: result.createdUser
           }).subscribe(() => {
             this.ngOnInit();
           });

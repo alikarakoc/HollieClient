@@ -1,6 +1,7 @@
 import { AMarket } from "./amarket";
+import { Base } from "./base";
 
-export interface Agency {
+export interface Agency extends Base {
     code: string;
     id?: number;
     name: string;

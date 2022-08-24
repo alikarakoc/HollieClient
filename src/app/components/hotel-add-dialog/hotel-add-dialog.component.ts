@@ -132,7 +132,8 @@ export class HotelAddDialogComponent implements OnInit {
         email: this.emailControl.value,
         address: this.hotelAddress,
         hotelCategoryId: this.hotelCategoryId,
-        hotelFeatureId: this.hotelFeatureId
+        hotelFeatureId: this.hotelFeatureId,
+        createdUser : localStorage.getItem("username")
       }
     });
 

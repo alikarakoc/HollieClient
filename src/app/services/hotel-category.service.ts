@@ -23,10 +23,10 @@ export class HotelCategoryService {
   }
 
   deleteCategory(category: Partial<HotelCategory>) {
-    return this.http.delete<ListResponseModel<HotelCategory>>(`${this.baseUrl}/delete?Id=${category.id}`);
+    return this.http.delete<ListResponseModel<HotelCategory>>(`${this.baseUrl}/delete`, {body: category});
   }
 
   updateCategory(category: Partial<HotelCategory>) {
-    return this.http.put<ListResponseModel<HotelCategory>>(`${this.baseUrl}/update?Id=${category.id}`, category);
+    return this.http.put<ListResponseModel<HotelCategory>>(`${this.baseUrl}/update`, category);
   }
 }

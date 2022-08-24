@@ -1,4 +1,6 @@
-export interface Hotel {
+import { Base } from "./base";
+
+export interface Hotel extends Base{
   code: string;
   id?: number;
   name: string;

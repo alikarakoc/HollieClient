@@ -1,4 +1,6 @@
-export interface HotelFeature {
+import { Base } from "./base";
+
+export interface HotelFeature extends Base{
     id: number;
     code :string;
     name: string,

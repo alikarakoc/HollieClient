@@ -61,8 +61,6 @@ export class CountryAddDialogComponent implements OnInit {
 
     this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.countryName }));
 
-
-
     this.closeDialog();
     this.data.table.renderRows();
   }
@@ -72,7 +70,8 @@ export class CountryAddDialogComponent implements OnInit {
       isAdded: true,
       element: {
         code: this.countryCode,
-        name: this.countryName
+        name: this.countryName,
+        createdUser : localStorage.getItem("username")
       }
     });
   }

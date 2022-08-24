@@ -1,9 +1,10 @@
+import { Base } from "./base";
 import { CAgency } from "./cagency";
 import { CBoard } from "./cboard";
 import { CMarket } from "./cmarket";
 import { CRoomType } from "./croomtype";
 
-export interface Contract {
+export interface Contract extends Base{
     name: string;
     id?: number;
     code: string;

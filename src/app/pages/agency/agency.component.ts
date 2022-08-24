@@ -120,7 +120,14 @@ export class AgencyComponent implements OnInit{
     dialog.afterClosed().subscribe((result) => {
       if (result.isAdded) {
         this.agencyService
-          .addAgency({ name: result.elementName, code: result.elementCode, address: result.elementAddress, email: result.elementEmail, phone: result.elementPhone, marketList:result.elementMarket })
+          .addAgency({ 
+            name: result.elementName, 
+            code: result.elementCode, 
+            address: result.elementAddress, 
+            email: result.elementEmail, 
+            phone: result.elementPhone, 
+            marketList:result.elementMarket,
+           createdUser: result.createdUser })
           .subscribe(() => {
             this.ngOnInit();
           });

@@ -23,11 +23,11 @@ export class HotelService {
   }
 
   deleteHotel(hotel: Partial<Hotel>) {
-    return this.http.delete<ListResponseModel<Hotel>>(`${this.baseUrl}/delete?Id=${hotel.id}`);
+    return this.http.delete<ListResponseModel<Hotel>>(`${this.baseUrl}/delete`, {body: hotel});
   }
 
   updateHotel(hotel: Partial<Hotel>) {
-    return this.http.put<ListResponseModel<Hotel>>(`${this.baseUrl}/update?Id=${hotel.id}`, hotel);
+    return this.http.put<ListResponseModel<Hotel>>(`${this.baseUrl}/update`, hotel);
   }
 
 

@@ -74,7 +74,8 @@ export class HotelFeatureAddDialogComponent implements OnInit {
       name: this.name,
       babyTop: this.babyTop,
       childTop: this.childTop,
-      teenTop: this.teenTop
+      teenTop: this.teenTop,
+      createdUser : localStorage.getItem("username")
     });
   }
 

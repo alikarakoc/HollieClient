@@ -62,7 +62,8 @@ export class MarketAddDialogComponent implements OnInit {
     this.dialogRef.close({
       isAdded: true,
       elementName: this.marketName,
-      elementCode: this.marketCode
+      elementCode: this.marketCode,
+      createdUser : localStorage.getItem("username")
     });
   }
 

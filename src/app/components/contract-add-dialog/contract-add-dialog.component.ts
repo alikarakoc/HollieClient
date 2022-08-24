@@ -193,6 +193,7 @@ export class ContractAddDialogComponent implements OnInit {
         marketList: this.selectedMarkets,
         //roomList: this.selectedRooms,
         roomTypeList: this.selectedRoomTypes,
+        createdUser : localStorage.getItem("username")
       }
     });
 

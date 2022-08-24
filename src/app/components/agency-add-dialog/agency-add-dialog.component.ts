@@ -114,6 +114,7 @@ export class AgencyAddDialogComponent implements OnInit {
       elementEmail: this.emailControl.value,
       elementPhone: this.agencyPhone,
       elementMarket: this.selectedMarkets,
+      createdUser : localStorage.getItem("username")
 
     });
   }

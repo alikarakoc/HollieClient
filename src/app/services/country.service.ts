@@ -23,11 +23,12 @@ export class CountryService {
   }
 
   deleteCountry(country: Partial<Country>) {
-    return this.http.delete<ListResponseModel<Country>>(`${this.baseUrl}/delete?Id=${country.id}`);
+    return this.http.delete<ListResponseModel<Country>>(`${this.baseUrl}/delete`, {body: country});
   }
 
   updateCountry(country: Partial<Country>) {
-    return this.http.put<ListResponseModel<Country>>(`${this.baseUrl}/update?Id=${country.id}`, country);
+    debugger;
+    return this.http.put<ListResponseModel<Country>>(`${this.baseUrl}/update`, country);
   }
 
   constructor(private http: HttpClient) { }

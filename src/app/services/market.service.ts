@@ -27,11 +27,11 @@ export class MarketService {
   }
 
   deleteMarket(market: Partial<Market>) {
-    return this.http.delete<ListResponseModel<Market>>(`${this.baseUrl}/delete?Id=${market.id}`);
+    return this.http.delete<ListResponseModel<Market>>(`${this.baseUrl}/delete`, {body: market});
   }
 
   updateMarket(market: Partial<Market>) {
-    return this.http.put<ListResponseModel<Market>>(`${this.baseUrl}/update?Id=${market.id}`, market);
+    return this.http.put<ListResponseModel<Market>>(`${this.baseUrl}/update`, market);
   }
 }
 

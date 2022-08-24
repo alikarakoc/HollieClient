@@ -55,10 +55,13 @@ export class CountryUpdateDialogComponent implements OnInit {
       return;
     }
 
+
+    
     this.snackBar.open(this.translocoService.translate('dialogs.update_success', { elementName: this.newCountryName }));
     this.data.dialogRef?.close();
     this.data.element.code = this.newCountryCode;
     this.data.element.name = this.newCountryName;
+    this.data.element.updateUser = localStorage.getItem("username") + "";;
 
     this.data.table?.renderRows();
     this.dialogRef.close({ isUpdated: true });

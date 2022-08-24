@@ -77,6 +77,7 @@ export class CountryComponent implements OnInit, AfterViewInit {
       data: { element, table: this.table },
     });
 
+    //element.updatedUser =  localStorage.getItem("username");
     dialog.afterClosed().subscribe(result => {
       if (result.isUpdated) {
         this.countryService.updateCountry(element).subscribe(() => this.ngOnInit());

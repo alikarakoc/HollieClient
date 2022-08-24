@@ -79,7 +79,7 @@ export class MarketComponent implements OnInit {
       if (result.isAdded) {
         this.marketService
           .addMarket({
-            name: result.elementName, code: result.elementCode
+            name: result.elementName, code: result.elementCode, createdUser: result.createdUser
           })
           .subscribe(() => {
             this.ngOnInit();

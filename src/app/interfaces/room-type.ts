@@ -1,4 +1,6 @@
-export interface RoomType {
+import { Base } from "./base";
+
+export interface RoomType extends Base{
     name: string;
     id: number;
     code: string;

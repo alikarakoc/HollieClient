@@ -127,6 +127,7 @@ export class RoomAddDialogComponent implements OnInit {
         hotelId: this.hotelId,
         roomtypeId: this.roomTypeId,
         reservation:this.roomReservation,
+        createdUser : localStorage.getItem("username")
       }
     });
   }
