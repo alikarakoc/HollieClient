@@ -18,6 +18,10 @@ export class MarketService {
     return this.http.get<ListResponseModel<Market>>(`${this.baseUrl}/AllMarkets`);
   }
 
+  getMarketSelectList(): Observable<ListResponseModel<Market>> {
+    return this.http.get<ListResponseModel<Market>>(`${this.baseUrl}/GetMarketSelectList`);
+  }
+
   addMarket(market: Partial<Market>) {
     return this.http.post<ListResponseModel<Market>>(`${this.baseUrl}/add`, market);
   }
