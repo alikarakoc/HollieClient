@@ -76,7 +76,7 @@ export class NavbarComponent implements OnInit {
    logOut(){
     debugger;
     localStorage.removeItem("token");
-    console.log("logout");
+    // console.log("logout");
     this.router.navigate(['/login']);
    }
   changeLanguage(language: 'tr' | 'en') {

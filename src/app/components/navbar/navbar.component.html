@@ -5,7 +5,7 @@
     <img class="logo" src="../../../assets/images/hollielogo.png" alt="image">
 
     <mat-nav-list>
-      <button type="input" (click)="logOut()">çıkış</button>
+
 
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/">{{ 'home_title' | transloco }}</a>
 
@@ -22,8 +22,8 @@
             </a>
             <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/hotels">
               {{ 'hotel_title' | transloco }}
-            </a>           
-           
+            </a>
+
             <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/hotel-features">
               {{ 'hotel_features' | transloco }}
             </a>
@@ -36,28 +36,27 @@
               Room
             </mat-panel-title>
           </mat-expansion-panel-header>
-          <mat-nav-list>     
+          <mat-nav-list>
             <a mat-list-item (click)="closeDrawer(drawer)"
-            routerLink="/room-types">{{ 'room_type_title' | transloco }}</a>       
-            <a mat-list-item (click)="closeDrawer(drawer)" 
-              routerLink="/room">{{ 'room_title' | transloco }}</a>
-           
+              routerLink="/room-types">{{ 'room_type_title' | transloco }}</a>
+            <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/room">{{ 'room_title' | transloco }}</a>
+
           </mat-nav-list>
         </mat-expansion-panel>
 
       </mat-accordion>
-      
+
 
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/currencies">{{ 'currency_title' | transloco }}</a>
-      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/contract-grantt">{{ 'contract-gantt' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)"
+        routerLink="/contract-grantt">{{ 'contract-gantt' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/countries">{{ 'country_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/market">{{ 'market_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/board">{{ 'board_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/agencies">{{ 'agency_title' | transloco }}</a>
       <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/contracts">{{ 'contract_title' | transloco }}</a>
-      <a mat-list-item (click)="closeDrawer(drawer)" 
-   
-        routerLink="/search-contract">{{ 'search_contract' | transloco }}</a>
+      <a mat-list-item (click)="closeDrawer(drawer)" routerLink="/search-contract">{{ 'search_contract' | transloco }}</a>
+      <a mat-list-item type="button" (click)="logOut()">Log Out</a>
       <ng-container *ngIf="isHandset | async">
         <mat-divider></mat-divider>
         <div style="text-align: center;">

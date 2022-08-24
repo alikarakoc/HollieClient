@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.model).subscribe((next)=> {
       const tokenT = localStorage.getItem("token");
      if(tokenT){
-      this.router.navigate(['/home'],{relativeTo:this.activatedRoute});
+      this.router.navigate(['home'],{relativeTo:this.activatedRoute});
      }
    },
    error=>{
