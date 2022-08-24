@@ -208,7 +208,7 @@ export class ContractComponent implements OnInit {
         data: { table: this.table, roomTypes: this.roomTypes, hotels: this.hotels,
           markets: this.markets, agencies: this.agencies, currencies:this.currencies,
           boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,cRoomTypes: this.cRoomTypes,
-          cMarkets:this.cMarkets } ,
+          cMarkets:this.cMarkets, marketAgency : this.marketAgency } ,
       });
 
 

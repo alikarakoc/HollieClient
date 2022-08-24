@@ -29,7 +29,7 @@ interface DialogData {
   cAgencies: any[];
   cBoards: any[];
   cRoomTypes: any[];
-  agencyMarkets: any[];
+  marketAgency: any[];
 
 }
 
@@ -53,7 +53,6 @@ export class ContractAddDialogComponent implements OnInit {
   selectedBoards: CBoard[];
   selectedRoomTypes: CRoomType[];
   hotelRoomTypes: any[] = [];
-  marketAgencies: any[] = [];
   //selectedRooms: CRoom[];
   currency: number;
   listId: number;
@@ -80,7 +79,7 @@ export class ContractAddDialogComponent implements OnInit {
     this.roomTypes = this.data.roomTypes;
     this.hotels = this.data.hotels;
     this.currencies = this.data.currencies;
-    //this.agencyMarkets = this.agencyMarkets;
+    this.marketAgency = this.data.marketAgency;
   }
 
   myFilter = (d: Date | null): boolean => {
@@ -111,12 +110,6 @@ export class ContractAddDialogComponent implements OnInit {
     this.contractService.getAllContracts().subscribe(res => {
       if (res.data !== null) this.contracts = res.data;
       else this.contracts = [];
-    });
-
-    this.marketService.getMarketSelectList().subscribe(res => {
-      if (res.data != null) {
-        this.marketAgency = res.data;
-      }
     });
   }
 
