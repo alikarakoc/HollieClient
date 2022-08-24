@@ -10,6 +10,7 @@ import { CRoomType } from 'src/app/interfaces/croomtype';
 import { CMarket } from 'src/app/interfaces/cmarket';
 import { CBoard } from 'src/app/interfaces/cboard';
 import { AMarketService } from 'src/app/services/amarket.service';
+import { MarketService } from 'src/app/services';
 
 
 interface DialogData {
@@ -68,6 +69,7 @@ export class ContractAddDialogComponent implements OnInit {
     private snackBar: MatSnackBar,
     private contractService: ContractService,
     private agencyMarketService: AMarketService,
+    private marketService: MarketService,
 
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
@@ -101,8 +103,8 @@ export class ContractAddDialogComponent implements OnInit {
   cMarkets: any[] = [];
   //cRooms : any[] =[];
   cRoomTypes: any[] = [];
-  agencyMarkets: any[] = [];
-
+  marketAgency: any[] = [];
+  agencyID: any[] = [];
 
 
   ngOnInit(): void {
@@ -111,9 +113,9 @@ export class ContractAddDialogComponent implements OnInit {
       else this.contracts = [];
     });
 
-    this.agencyMarketService.getAllAMarkets().subscribe(res => {
+    this.marketService.getMarketSelectList().subscribe(res => {
       if (res.data != null) {
-        this.agencyMarkets = res.data;
+        this.marketAgency = res.data;
       }
     });
   }
@@ -128,31 +130,25 @@ export class ContractAddDialogComponent implements OnInit {
   }
 
   onChangeMarket(event: any) {
-    //DUZENLENECEK
-    this.marketAgencies = [];
-    if (this.selectedMarkets != null) {
-      for (let i = 0; i < this.selectedMarkets.length; i++) {
-        let tempA = [];
-        const markets = this.agencyMarkets.filter(m => m.marketId === this.selectedMarkets[i].marketId).map(m => m.listId);
-        let s = markets.map(i => this.agencies.find(a => a.id === i).id).toString();
-        tempA = s.split(',', markets.length);
-
-        for (let i = 0; i < tempA.length; i++) {
-          var num: number = +tempA[i];
-          if (this.marketAgencies.includes(num)) {
-          }
-          else {
-            var num: number = +tempA[i];
-
-            this.marketAgencies.push(num);
-          };
+    this.agencyID = [];
+    for(let i = 0; i < this.selectedMarkets.length; i++){
+      let index = this.marketAgency.findIndex(m => m.marketId == this.selectedMarkets[i].marketId);
+      for(let a =0 ; a < this.marketAgency[index].agencies.length; a++){
+        let agencyid : number = this.marketAgency[index].agencies[a];
+        if(this.agencyID.length == 0){
+          this.agencyID.push(agencyid);
+        }
+        else if(!this.agencyID.includes(agencyid)){
+          this.agencyID.push(agencyid);
         }
       }
+    }
+    for (let x = 0; x < this.agencyID.length; x++) {
+      var pureAgency: Agency = this.agencies.find(a => a.id == this.agencyID[x]);
+      this.agencyID[x] = pureAgency;
+    }
 
-      for (let x = 0; x < this.marketAgencies.length; x++) {
-        var pureAgency: Agency = this.agencies.find(a => a.id == this.marketAgencies[x]);
-        this.marketAgencies[x] = pureAgency;
-      }
+    if(this.selectedAgencies != null){
       for(let i = 0; i < this.selectedAgencies.length; i++){
         const agency : CAgency = {
           agencyId: 0
