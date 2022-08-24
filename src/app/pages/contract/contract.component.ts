@@ -70,6 +70,7 @@ export class ContractComponent implements OnInit {
   cRoomTypes: any[] = [];
   //cRooms: any[] = [];
   hotelFeatures: HotelFeature[] =[];
+  marketAgency : any[] = [];
 
   ngOnInit(): void {
     this.hotelService.getAllHotels().subscribe(res => {
@@ -144,8 +145,12 @@ export class ContractComponent implements OnInit {
       if(res.data !== null){
         this.hotelFeatures = res.data;
       }
+    });
 
-
+    this.marketService.getMarketSelectList().subscribe(res => {
+      if (res.data != null) {
+        this.marketAgency = res.data;
+      }
     });
 
     this.contractService.getAllContracts().subscribe(res => {
@@ -241,7 +246,7 @@ export class ContractComponent implements OnInit {
       element: element, roomTypes: this.roomTypes, hotels: this.hotels,
       markets: this.markets, agencies: this.agencies, currencies:this.currencies,
       boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,
-      cRoomTypes: this.cRoomTypes,  cMarkets:this.cMarkets  } });
+      cRoomTypes: this.cRoomTypes,  cMarkets:this.cMarkets, marketAgency : this.marketAgency  } });
 
     dialog.afterClosed().subscribe((result) => {
       if (result.isUpdated) {

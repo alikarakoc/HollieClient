@@ -74,7 +74,6 @@ export class NavbarComponent implements OnInit {
   }
   
    logOut(){
-    debugger;
     localStorage.removeItem("token");
     // console.log("logout");
     this.router.navigate(['/login']);

@@ -5,7 +5,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable } from '@angular/material/table';
 import { TranslocoService } from '@ngneat/transloco';
 import { Agency, Contract } from 'src/app/interfaces';
-import { HotelService, ContractService } from 'src/app/services';
+import { HotelService, ContractService, MarketService } from 'src/app/services';
 import { CMarket } from 'src/app/interfaces/cmarket';
 import { CAgency } from 'src/app/interfaces/cagency';
 import { CBoard } from 'src/app/interfaces/cboard';
@@ -29,6 +29,7 @@ interface DialogData {
   cAgencies: any[];
   cBoards: any[];
   cRoomTypes: any[];
+  marketAgency: any[];
 }
 
 @Component({
@@ -56,7 +57,6 @@ export class ContractUpdateDialogComponent implements OnInit {
   selectedRoomTypes: any[] = this.data.element.roomTypeList;
   
   hotelRoomTypes: any[] = [];
-  marketAgencies: any[] = [];
 
 
   constructor(
@@ -64,8 +64,7 @@ export class ContractUpdateDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<ContractUpdateDialogComponent>,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
-    private contractService: ContractService,
-    private agencyMarketService: AMarketService,
+    private marketService : MarketService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
     //this.contract = this.data.element;
@@ -76,6 +75,7 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.roomTypes = this.data.roomTypes;
     this.hotels = this.data.hotels;
     this.currencies = this.data.currencies;
+    this.marketAgency = this.data.marketAgency;
   }
 
   hotels: any[] = [];
@@ -92,14 +92,12 @@ export class ContractUpdateDialogComponent implements OnInit {
   cMarkets : any[] = [];
   //cRooms : any[] = [];
   cRoomTypes: any[] = []; 
-  agencyMarkets: any[] = []; 
+  marketAgency: any[] = [];
+  agencyID: any[] = [];
+
 
 
   ngOnInit(): void {
-
-  
-
-    
 
     const idAgency = this.data.cAgencies.filter(cA => cA.listId === this.data.element.id).map(cA => cA.agencyId);
     this.selectedAgencies = idAgency;
@@ -116,11 +114,8 @@ export class ContractUpdateDialogComponent implements OnInit {
     const roomTypeFilterhotel = this.data.roomTypes.filter(r => r.hotelId === this.data.element.hotelId);
     this.roomTypes = roomTypeFilterhotel;
 
-   
 
-    
-
-
+    this.getAgency(this.selectedMarkets, this.marketAgency);
     
   }
 
@@ -137,8 +132,41 @@ export class ContractUpdateDialogComponent implements OnInit {
     }
   }
 
-  onChangeMarket(event: any){
+  getAgency(selectMark : any[], markAgency : any[]){
+    for(let i = 0; i < selectMark.length; i++){
+      let index = markAgency.findIndex(m => m.marketId == selectMark[i]);
+    
+      for(let a =0 ; a < markAgency[index].agencies.length; a++){
+        let agencyid : number = markAgency[index].agencies[a];
+        if(this.agencyID.length == 0){
+          this.agencyID.push(agencyid);
+        }
+        else if(!this.agencyID.includes(agencyid)){
+          this.agencyID.push(agencyid);
+        }
+      }
+    }
+    for (let x = 0; x < this.agencyID.length; x++) {
+      var pureAgency = this.agencies.find(a => a.id == this.agencyID[x]);
+      this.agencyID[x] = pureAgency;
+    }
+  }
 
+  onChangeMarket(event: any){
+    this.agencyID = [];
+    
+    this.getAgency(this.selectedMarkets, this.marketAgency);
+
+    if(this.selectedAgencies != null){
+      for(let i = 0; i < this.selectedAgencies.length; i++){
+        const agency : CAgency = {
+          agencyId: 0
+        };
+        agency.agencyId = +this.selectedAgencies[i];
+        this.selectedAgencies[i] = agency;
+       };
+    }
+    
   }
 
 

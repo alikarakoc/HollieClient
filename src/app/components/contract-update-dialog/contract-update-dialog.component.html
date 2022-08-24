@@ -84,7 +84,7 @@
     <mat-form-field class="col-6">
         <mat-label>{{ 'agency' | transloco }}</mat-label>
         <mat-select [(ngModel)]="selectedAgencies" multiple>
-            <mat-option *ngFor="let a of agencies" [value]=" a.id">{{ a.name }}</mat-option>
+            <mat-option *ngFor="let a of agencyID" [value]=" a.id">{{ a.name }}</mat-option>
         </mat-select>
     </mat-form-field>
   </div>
