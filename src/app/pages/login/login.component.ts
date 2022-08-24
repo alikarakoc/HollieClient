@@ -16,8 +16,8 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
 
-
- model:any={};
+  showPassword : boolean = false;
+  model:any={};
 
 
   constructor(
@@ -57,5 +57,7 @@ export class LoginComponent implements OnInit {
 
      }
 
-
+     showHidePassword() {
+      this.showPassword = !this.showPassword;
+     }
 }

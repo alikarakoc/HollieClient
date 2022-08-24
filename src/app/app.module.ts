@@ -182,7 +182,6 @@ registerLocaleData(localeTR);
     RouterModule.forRoot(routes)
   ],
   providers: [
-    AuthGuard,
    
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
