@@ -15,14 +15,10 @@ export class AuthService {
     return this.http.post(this.baseUrl+'/login', model).pipe(
       map((response:any) =>{
        const result=response;
-       debugger
         if (result){
-          debugger;
           localStorage.setItem("token",result.data.token)
-          console.log(localStorage);
-          
           this.decodedToken=this.jwtHelper.decodeToken(result.data.token);
-          console.log(this.decodedToken);
+         
         }
       })
     )
