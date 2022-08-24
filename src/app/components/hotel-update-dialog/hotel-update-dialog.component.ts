@@ -122,7 +122,7 @@ export class HotelUpdateDialogComponent implements OnInit {
     this.data.element.address = this.newHotelAddress;
     this.data.element.hotelCategoryId = this.newHotelCategoryId;
     this.data.element.hotelFeatureId = this.newHotelFeatureId;
-    this.data.element.updateUser = localStorage.getItem("username") + "";;
+    this.data.element.updatedUser = localStorage.getItem("username") + "";
 
 
     this.data.table?.renderRows();

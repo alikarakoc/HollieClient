@@ -60,7 +60,7 @@ export class BoardUpdateDialogComponent implements OnInit {
     this.data.dialogRef?.close();
     this.data.element.code = this.newBoardCode;
     this.data.element.name = this.newBoardName;
-    this.data.element.updateUser = localStorage.getItem("username") + "";
+    this.data.element.updatedUser = localStorage.getItem("username") + "";
 
     this.data.table?.renderRows();
     this.dialogRef.close({ isUpdated: true });

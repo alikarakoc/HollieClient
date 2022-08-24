@@ -262,6 +262,7 @@ export class ContractUpdateDialogComponent implements OnInit {
     this.data.element.marketList = this.selectedMarkets;
     this.data.element.roomTypeList = this.selectedRoomTypes;
     this.data.element.boardList = this.selectedBoards;
+    this.data.element.updatedUser = localStorage.getItem("username") + "";
 
     this.dialogRef.close({ isUpdated: true });
     this.data.table?.renderRows();

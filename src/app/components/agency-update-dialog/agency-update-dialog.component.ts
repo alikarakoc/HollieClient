@@ -116,7 +116,7 @@ export class AgencyUpdateDialogComponent implements OnInit {
     this.data.element.address = this.newAgencyAddress;
     this.data.element.phone = this.newAgencyPhone;
     this.data.element.marketList = this.newselectedMarkets;
-    this.data.element.updateUser = localStorage.getItem("username") + "";
+    this.data.element.updatedUser = localStorage.getItem("username") + "";
     this.data.table?.renderRows();
    this.agencyService.updateAgency(this.data.element)
     this.dialogRef.close({ isUpdated: true });
