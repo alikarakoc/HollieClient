@@ -104,6 +104,7 @@ export class ContractAddDialogComponent implements OnInit {
   cRoomTypes: any[] = [];
   marketAgency: any[] = [];
   agencyID: any[] = [];
+  commonAgencies: any[] = [];
 
 
   ngOnInit(): void {
@@ -124,21 +125,29 @@ export class ContractAddDialogComponent implements OnInit {
 
   onChangeMarket(event: any) {
     this.agencyID = [];
+    this.commonAgencies = [];
     for(let i = 0; i < this.selectedMarkets.length; i++){
       let index = this.marketAgency.findIndex(m => m.marketId == this.selectedMarkets[i].marketId);
       for(let a =0 ; a < this.marketAgency[index].agencies.length; a++){
         let agencyid : number = this.marketAgency[index].agencies[a];
-        if(this.agencyID.length == 0){
-          this.agencyID.push(agencyid);
-        }
-        else if(!this.agencyID.includes(agencyid)){
-          this.agencyID.push(agencyid);
-        }
+        this.agencyID.push(agencyid);
       }
     }
     for (let x = 0; x < this.agencyID.length; x++) {
-      var pureAgency: Agency = this.agencies.find(a => a.id == this.agencyID[x]);
-      this.agencyID[x] = pureAgency;
+      var count : Number = this.agencyID.filter(y => y == this.agencyID[x]).length;
+      if(count == this.selectedMarkets.length){
+        if(this.commonAgencies.length == 0){
+          this.commonAgencies.push(this.agencyID[x]);
+        }
+        else if(!this.commonAgencies.includes(this.agencyID[x])){
+          this.commonAgencies.push(this.agencyID[x]);
+        }
+      }
+    }
+
+    for (let x = 0; x < this.commonAgencies.length; x++) {
+      var pureAgency: Agency = this.agencies.find(a => a.id == this.commonAgencies[x]);
+      this.commonAgencies[x] = pureAgency;
     }
 
     if(this.selectedAgencies != null){

@@ -94,6 +94,7 @@ export class ContractUpdateDialogComponent implements OnInit {
   cRoomTypes: any[] = []; 
   marketAgency: any[] = [];
   agencyID: any[] = [];
+  commonAgencies: any[] = [];
 
 
 
@@ -138,22 +139,30 @@ export class ContractUpdateDialogComponent implements OnInit {
     
       for(let a =0 ; a < markAgency[index].agencies.length; a++){
         let agencyid : number = markAgency[index].agencies[a];
-        if(this.agencyID.length == 0){
-          this.agencyID.push(agencyid);
-        }
-        else if(!this.agencyID.includes(agencyid)){
-          this.agencyID.push(agencyid);
-        }
+        this.agencyID.push(agencyid);
       }
     }
     for (let x = 0; x < this.agencyID.length; x++) {
-      var pureAgency = this.agencies.find(a => a.id == this.agencyID[x]);
-      this.agencyID[x] = pureAgency;
+      var count : Number = this.agencyID.filter(y => y == this.agencyID[x]).length;
+      if(count == selectMark.length){
+        if(this.commonAgencies.length == 0){
+          this.commonAgencies.push(this.agencyID[x]);
+        }
+        else if(!this.commonAgencies.includes(this.agencyID[x])){
+          this.commonAgencies.push(this.agencyID[x]);
+        }
+      }
+    }
+
+    for (let x = 0; x < this.commonAgencies.length; x++) {
+      var pureAgency = this.agencies.find(a => a.id == this.commonAgencies[x]);
+      this.commonAgencies[x] = pureAgency;
     }
   }
 
   onChangeMarket(event: any){
     this.agencyID = [];
+    this.commonAgencies = [];
     
     this.getAgency(this.selectedMarkets, this.marketAgency);
 
