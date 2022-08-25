@@ -30,12 +30,17 @@ export class RegisterComponent implements OnInit {
   }
 
   register() { 
-
+    this.authService.register(this.model).subscribe(()=> {
+    }, error => {
+      console.log(error);
+    });
+    
   }
 
   showHidePassword() {
     this.showPassword = !this.showPassword;
   }
+  
 
 
 }

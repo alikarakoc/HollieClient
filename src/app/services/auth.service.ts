@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,19 +29,11 @@ export class AuthService {
     const token:any =localStorage.getItem("token");
     return !this.jwtHelper.isTokenExpired(token);
   }
+
   register(model:any) {
-    return this.http.post(this.baseUrl+'/register', model).pipe(
-      map((response:any) =>{
-       const result=response;
-        if (result){
-          localStorage.setItem("token",result.data.token)
-          localStorage.setItem("username", result.data.username)
-          this.decodedToken=this.jwtHelper.decodeToken(result.data.token);
-         
-        }
-      })
-    )
+    return this.http.post(this.baseUrl+'/register', model);
   }
+
   reg(){
     const token:any =localStorage.getItem("token");
     return !this.jwtHelper.isTokenExpired(token);

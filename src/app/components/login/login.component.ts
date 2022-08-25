@@ -16,51 +16,39 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
 
-  showPassword : boolean = false;
-  model:any={};
+  showPassword: boolean = false;
+  model: any = {};
 
 
   constructor(
-    private authService:AuthService,
+    private authService: AuthService,
     public router: Router,
     private activatedRoute: ActivatedRoute) {
   }
 
-  ngOnInit():void {
-    if(localStorage.getItem("token")){
+  ngOnInit(): void {
+    if (localStorage.getItem("token")) {
 
-    this.router.navigate(['home']);
+      this.router.navigate(['home']);
     }
   }
 
-  login(){
-    // console.log(this.model);
+  login() {
 
-    this.authService.login(this.model).subscribe((next)=> {
+    this.authService.login(this.model).subscribe(() => {
       const tokenT = localStorage.getItem("token");
-     if(tokenT){
-      this.router.navigate(['home'],{relativeTo:this.activatedRoute});
-     }
-   },
-   error=>{
-    console.log(error);
-    alert("Hatalı giriş");
-   })
+      if (tokenT) {
+        this.router.navigate(['home'], { relativeTo: this.activatedRoute });
+      }
+    },
+      error => {
+        console.log(error);
+        alert("Hatalı giriş");
+      })
 
 
   }
-  loggedIn(){
-    const token=localStorage.getItem("token");
-    return token?true:false;
-
-
-     }
-
-     showHidePassword() {
-      this.showPassword = !this.showPassword;
-     }
-
-     register() {
-      
-     }
+  showHidePassword() {
+    this.showPassword = !this.showPassword;
+  }
 }

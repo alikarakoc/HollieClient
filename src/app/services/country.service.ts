@@ -27,7 +27,6 @@ export class CountryService {
   }
 
   updateCountry(country: Partial<Country>) {
-    debugger;
     return this.http.put<ListResponseModel<Country>>(`${this.baseUrl}/update`, country);
   }
 
