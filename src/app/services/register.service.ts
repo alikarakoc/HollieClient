@@ -1,31 +1,22 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListResponseModel } from 'src/app/interfaces/listResponseModel';
-import { Register } from 'src/app/interfaces/register';
-import { environment } from 'src/environments/environment';
+import { environment } from "src/environments/environment";
+import { HttpClient } from '@angular/common/http';
+import { ListResponseModel } from '../interfaces/listResponseModel';
+import { Register } from '../interfaces/register';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegisterService {
-  newUser : Register[] = [];
-  baseUrl = `${environment.baseUrl}/Hotels`;
+  user :Register[] = [];
+  baseUrl = `https://localhost:44383/api/User/register`;
 
-constructor(
-  private http : HttpClient
-) { }
+  constructor( private http : HttpClient) { }
 
-register(newUser : Partial<Register>): Observable<ListResponseModel<Register>> {
-  return this.http.post<ListResponseModel<Register>>(this.baseUrl,newUser);
-
-}
-getAll() {
-  return this.http.get<ListResponseModel<Register>>((`${this.baseUrl}/AllUsers`));
-}
-
-delete(id: number) {
-  return this.http.delete(`${this.baseUrl}/users/${id}`);
-}
-
+  registerUser( user: Partial<Register>): Observable<ListResponseModel<Register>>{
+   
+    return this.http.post<ListResponseModel<Register>>(this.baseUrl, user);
+  }
 }

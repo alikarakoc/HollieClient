@@ -3,8 +3,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url("../../../assets/images/login-background2.jpg");
-    background-size: cover;
+    background: inherit;
     height: 100vh;
   }
   
@@ -13,11 +12,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 20vh;
+    width: 20vh;
   }
-  
-  .card {
-    background-color: rgba(255, 255, 255, 0.382);
-  }
-  
-  
-  
