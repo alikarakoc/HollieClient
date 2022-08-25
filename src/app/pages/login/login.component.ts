@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms'
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Login } from 'src/app/interfaces/login';
 import { LoginService } from 'src/app/services/login.service';
@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log(this.model);
+    // console.log(this.model);
 
     this.authService.login(this.model).subscribe((next)=> {
       const tokenT = localStorage.getItem("token");
@@ -44,8 +44,7 @@ export class LoginComponent implements OnInit {
    },
    error=>{
     console.log(error);
-
-    alert("login hatalı");
+    alert("Hatalı giriş");
    })
 
 
@@ -59,5 +58,9 @@ export class LoginComponent implements OnInit {
 
      showHidePassword() {
       this.showPassword = !this.showPassword;
+     }
+
+     register() {
+      
      }
 }

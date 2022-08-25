@@ -1,7 +1,10 @@
 
 <div class="login">
     <div mat-dialog-content class="card w-50">
-      <img class="logo" src="../../../assets/images/hollielogo.png" alt="image">
+      <div class="logo">
+        <img src="../../../assets/images/hollielogo.png" alt="image">
+      </div>
+  
       <h2 class="card-header">Login</h2>
       <div class="card-body">
         <form (ngSubmit)="login()" #form="ngForm">
@@ -17,6 +20,7 @@
               <mat-checkbox class="example-margin" (click)="showHidePassword()">Show Password</mat-checkbox>   
           </div>
           <button class="btn btn-success btn-primary my-2" type="submit">Login</button>
+          <a href="register" type=button class="btn">Register</a>
           
         </form>
       </div>
@@ -24,35 +28,3 @@
   
 </div>
 
-
-
-
-
-
-
-
-
-<!-- <mat-card>
-    <mat-card-content>
-      <div class="container" style="margin-top: 100px;">
-        <div class="row">
-            <div class="col-6">
-                <form (ngSubmit)="login()">
-                    <h2>Register</h2>
-                    <hr>
-                    <div class="form-group">
-                        <input type="text" [(ngModel)]="model.name" name="name" class="form-control" placeholder="Name">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" [(ngModel)]="model.email" name="email" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" [(ngModel)]="model.password" name="password" class="form-control" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    </mat-card-content>
-  </mat-card> -->

@@ -3,12 +3,7 @@
 }
 
 .sidenav {
-  width: 200px;
-}
-
-.logOut{
-  color: red;
-  margin: auto; 
+  width: 15%;
 }
 
 .sidenav .mat-toolbar {
@@ -22,7 +17,9 @@
 }
 
 .grid-container {
-  margin: 20px;
+  // margin: 20px;
+  margin: 2vw;
+  margin-bottom: 2vh;
   // position: fixed;
 }
 
@@ -31,6 +28,7 @@
 }
 
 .logo {
-  width: 130px;
+  width: 10vw;
+  height: 10%vh;
 }
 
