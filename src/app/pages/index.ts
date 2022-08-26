@@ -14,5 +14,7 @@ export { SearchContractComponent } from './search-contract/search-contract.compo
 export { HomeComponent } from './home/home.component';
 export { RoomComponent } from './room/room.component';
 export { HotelFeatureComponent } from './hotel-feature/hotel-feature.component';
-export { LoginComponent } from './login/login.component';
 export { SearchAccommodationComponent } from './search-accommodation/search-accommodation.component';
+export { LoginComponent } from '../components/login/login.component';
+export { RegisterComponent } from 'src/app/components/register/register.component';
+

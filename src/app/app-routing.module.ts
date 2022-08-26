@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RegisterComponent } from 'src/app/components/register/register.component';
+import { LoginRegisterComponent } from 'src/app/pages/Login-Register/Login-Register.component';
 import { AuthGuard } from './guards/common/auth.guard';
 import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent, LoginComponent, SearchAccommodationComponent } from "./pages";
 import { ContractGranttComponent } from './pages/contract-grantt/contract-grantt.component';
@@ -9,9 +11,10 @@ import { RoomComponent } from './pages/room/room.component';
 
 
 export const routes: Routes = [
+ 
   {
     path: "",
-    component: LoginComponent
+    component: LoginRegisterComponent
   },
   {
     path: "home",

@@ -68,7 +68,9 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 // Modules
 import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent,
   HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent,
-  ContractComponent, SearchContractComponent, HomeComponent, RoomComponent, HotelFeatureComponent, LoginComponent, SearchAccommodationComponent } from './pages';
+  ContractComponent, SearchContractComponent, HomeComponent, RoomComponent, HotelFeatureComponent, 
+  LoginComponent, SearchAccommodationComponent} from './pages';
+
   import { ContractGranttComponent } from '../app/pages/contract-grantt/contract-grantt.component';
 
 
@@ -86,6 +88,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/common/auth.guard';
+import { LoginRegisterComponent } from 'src/app/pages/Login-Register/Login-Register.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 registerLocaleData(localeTR);
@@ -97,7 +101,9 @@ registerLocaleData(localeTR);
 
     AppComponent,
     HomeComponent,
+    RegisterComponent,
     LoginComponent,
+    LoginRegisterComponent,
     NavbarComponent,
     SearchContractComponent,
     SearchAccommodationComponent,

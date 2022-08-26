@@ -1,0 +1,44 @@
+<!-- 
+<div class="container">
+    <div mat-dialog-content class="card w-50">
+      <div class="logo">
+        <img src="../../../assets/images/hollielogo.png" alt="image">
+      </div>
+  
+      <h2 class="card-header">Login</h2>
+      <div class="card-body">
+        <form (ngSubmit)="login()" #form="ngForm">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input #fullname="ngModel" class="form-control form-control-sm mr-sm-2" required minlength="5" type="text"
+              name="fullname" placeholder="Username" [(ngModel)]="model.fullname">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input #password="ngModel" class="form-control form-control-sm mr-sm-2" required minlength="6"
+            name="password" placeholder="Password" [type]=" showPassword ? 'text' : 'password' " [(ngModel)]="model.password">
+              <mat-checkbox class="example-margin" (click)="showHidePassword()">Show Password</mat-checkbox>   
+          </div>
+          <button class="btn btn-success btn-primary my-2" type="submit">Login</button>
+          <a href="register" type=button class="btn">Register</a>
+          
+        </form>
+      </div>
+    </div>
+  
+</div> -->
+
+<form (ngSubmit)="login()" #form="ngForm">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input #fullname="ngModel" class="form-control form-control-sm mr-sm-2" required minlength="5" type="text"
+      name="fullname" placeholder="Username" [(ngModel)]="model.fullname">
+  </div>
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input #password="ngModel" class="form-control form-control-sm mr-sm-2" required minlength="6"
+    name="password" placeholder="Password" [type]=" showPassword ? 'text' : 'password' " [(ngModel)]="model.password">
+      <mat-checkbox class="example-margin" (click)="showHidePassword()">Show Password</mat-checkbox>   
+  </div>
+  <button class="btn btn-success btn-primary my-auto mx-2 position-absolute bottom-0 start-50 translate-middle" type="submit">Sign In</button>  
+</form>
