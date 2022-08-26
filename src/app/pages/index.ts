@@ -15,3 +15,4 @@ export { HomeComponent } from './home/home.component';
 export { RoomComponent } from './room/room.component';
 export { HotelFeatureComponent } from './hotel-feature/hotel-feature.component';
 export { LoginComponent } from './login/login.component';
+export { SearchAccommodationComponent } from './search-accommodation/search-accommodation.component';

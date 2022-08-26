@@ -68,7 +68,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 // Modules
 import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent,
   HotelComponent, RoomTypeComponent, MarketComponent, BoardComponent, CurrencyComponent,
-  ContractComponent, SearchContractComponent, HomeComponent, RoomComponent, HotelFeatureComponent, LoginComponent } from './pages';
+  ContractComponent, SearchContractComponent, HomeComponent, RoomComponent, HotelFeatureComponent, LoginComponent, SearchAccommodationComponent } from './pages';
   import { ContractGranttComponent } from '../app/pages/contract-grantt/contract-grantt.component';
 
 
@@ -100,6 +100,7 @@ registerLocaleData(localeTR);
     LoginComponent,
     NavbarComponent,
     SearchContractComponent,
+    SearchAccommodationComponent,
     ContractDetailsComponent,
     ContractGranttComponent,
     RoomTypeComponent,

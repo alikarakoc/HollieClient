@@ -11,20 +11,18 @@ import { ContractService, HotelService, ExcelService, CBoardService, CAgencyServ
 import { HotelFeatureService } from 'src/app/services/hotel-feature';
 import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 import { MatPaginator } from '@angular/material/paginator';
-import { SearchContract } from 'src/app/interfaces/search-contract';
-import { raceWith } from 'rxjs';
 
 @Component({
-  selector: 'app-search-contract',
-  templateUrl: './search-contract.component.html',
-  styleUrls: ['./search-contract.component.scss']
+  selector: 'app-search-accommodation',
+  templateUrl: './search-accommodation.component.html',
+  styleUrls: ['./search-accommodation.component.scss']
 })
-export class SearchContractComponent implements OnInit {
-  columns: string[] = ["code", "name", "hotel", "adp", "cH1", "cH2", "cH3", "start", "end", "seeDetails"];
+export class SearchAccommodationComponent implements OnInit {
+  columns: string[] = ["code", "name", "hotel", "adp", "cH1", "cH2", "cH3", "start", "end", "Total-Price", "seeDetails"];
   dataSource: MatTableDataSource<Contract>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatTable) table: MatTable<SearchContractComponent>;
+  @ViewChild(MatTable) table: MatTable<SearchAccommodationComponent>;
 
   startDate: Date;
   endDate: Date;
@@ -58,8 +56,7 @@ export class SearchContractComponent implements OnInit {
     private translocoService: TranslocoService,
     private hotelFeatureService: HotelFeatureService,
     private snackBar: MatSnackBar
-  ) {
-   }
+  ) { }
 
   contract: Contract;
   hotels: Hotel[] = [];
@@ -177,14 +174,32 @@ export class SearchContractComponent implements OnInit {
     });
   }
 
+  onChangeChild1(event: any) {
+    console.log("child1: " + event);
+  }
+
+  onChangeChild2(event: any) {
+    console.log("child2: " + event);
+  }
+
+  onChangeChild3(event: any) {
+    console.log("child3: " + event);
+  }
+
+
   applyFilter() {
     this.result =[];
     
     const element = {
       beginDate: this.startDate,
       endDate: this.endDate,
-      hotels: this.hotelIds
+      adult : this.adult,
+      numberOfChild: this.numberOfChild,
+      child1Age: this.child1,
+      child2Age: this.child2,
+      child3Age: this.child3
     };
+
 
     this.contractService.searchContract(element).subscribe((res) => {
       if(res.data != null){
@@ -193,9 +208,100 @@ export class SearchContractComponent implements OnInit {
     });
     this.table.renderRows();
 
-  }
+
+    // this.contChildAges=[];
+
+    // this.result = [];
+    // if (this.startDate! > this.endDate!) {
+    //   this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
+    //   return;
+    // }
+
+
+    // for (const contract of this.contracts) {
+
+    //   const enterC: Date = this.toDate(contract.enteredDate);
+    //   const exitC: Date = this.toDate(contract.exitDate);
+
+    //   if (this.startDate !== undefined && this.endDate !== undefined) {
+    //     const start: Date = this.startDate;
+    //     const end: Date = this.endDate;
+    //     //if((start <= enterC && end >= exitC) || (enterC < start && exitC < end) || (enterC > start && exitC > end) || (enterC < start && exitC > end) ){
+    //     if (this.hotelIds != null && this.hotelIds.includes(contract.hotelId) || this.hotelIds == null) {
+    //       if (start <= enterC && end >= exitC) {
+    //         this.result.push(contract);
+    //       }
+    //       else if (enterC <= start && exitC <= end && !(exitC <= start)) {
+    //         this.result.push(contract);
+    //       }
+    //       else if (enterC >= start && exitC >= end && enterC <= end) {
+    //         this.result.push(contract);
+    //       }
+    //       else if (enterC <= start && exitC >= end) {
+    //         this.result.push(contract);
+    //       }
+    //       else {
+    //       }
+    //     }
+    //   };
+
+    //   if (this.result.length === 0) {
+    //     this.snackBar.open(this.translocoService.translate('contract_not_found'));
+    //   }
+
+    //   this.table.renderRows();
+    // }
+
+    // if (this.child1 != null) {
+    //   this.contChildAges.push(this.child1);
+    // }
+    // if (this.child2 != null) {
+    //   this.contChildAges.push(this.child2);
+    // }
+    // if (this.child3 != null) {
+    //   this.contChildAges.push(this.child3);
+    // }
 
   
+
+    // for(let i=0; i < this.contChildAges.length; i++){
+    //   console.log("child array"+this.contChildAges[i]);
+
+    // }
+
+  }
+
+  getCurrentTotalPrice(contract: Contract) {
+    this.totalPrice = this.adult * contract.adp ;
+    let s = this.hotels.find(c => c.id === contract.hotelId);
+    this.contBabyTop = this.features.find(c => c.id === s?.hotelFeatureId)?.babyTop;
+    this.contChildTop = this.features.find(c => c.id === s?.hotelFeatureId)?.childTop;
+    this.contTeenTop = this.features.find(c => c.id === s?.hotelFeatureId)?.teenTop;
+
+
+    for (let c = 0; c < this.contChildAges.length; c++) {
+      if (this.contChildAges[c] <= this.contBabyTop) {
+        this.totalPrice = this.totalPrice + contract.cH1;
+      }
+      else if (this.contChildAges[c] <= this.contChildTop) {
+        this.totalPrice = this.totalPrice + contract.cH2;
+      }
+      else if (this.contChildAges[c] <= this.contTeenTop) {
+        this.totalPrice = this.totalPrice + contract.cH3;
+      }
+      else{
+        this.totalPrice = this.totalPrice + contract.adp;
+      }
+
+    }
+    return this.totalPrice;
+  }
+
+
+
+  clearInputs() {
+  }
+
   seeDetails(element: Contract) {
 
     this.dialog.open(ContractDetailsComponent, {
@@ -238,11 +344,16 @@ export class SearchContractComponent implements OnInit {
         this.gun = (-1 * (new Date(element.enteredDate).getTime() - new Date(element.exitDate).getTime()) / (1000 * 60 * 60 * 24));
         return this.gun
 
+
+      // case 'room':
+      // const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.);
+      // return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
+
       case 'hotel':
         return this.hotels.find(h => h.id === element.hotelId)?.name;
 
       case 'currency':
-        return this.currencies.find(c => c.id === element.currencyId)?.code;
+        return this.currencies.find(c => c.id === element.currencyId)?.name;
     }
   }
 }

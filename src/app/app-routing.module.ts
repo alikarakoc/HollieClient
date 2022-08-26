@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/common/auth.guard';
-import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent, LoginComponent } from "./pages";
+import { AgencyComponent, CountryComponent, ErrorComponent, HotelCategoryComponent, RoomTypeComponent,HotelComponent, MarketComponent, BoardComponent, CurrencyComponent, ContractComponent, SearchContractComponent, LoginComponent, SearchAccommodationComponent } from "./pages";
 import { ContractGranttComponent } from './pages/contract-grantt/contract-grantt.component';
 import { HomeComponent } from "./pages/home/home.component";
 import { HotelFeatureComponent } from './pages/hotel-feature/hotel-feature.component';
@@ -65,6 +65,10 @@ export const routes: Routes = [
   {
     path: "search-contract",
     component: SearchContractComponent, canActivate:[AuthGuard]
+  },
+  {
+    path: "search-accommodation",
+    component: SearchAccommodationComponent, canActivate:[AuthGuard]
   },
   {
     path: "room",

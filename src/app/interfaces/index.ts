@@ -11,3 +11,4 @@ export { Market } from './market';
 export { Currency } from './currency';
 export { Contract } from './contract';
 export { Room } from './room';
+export { SearchContract } from './search-contract'
