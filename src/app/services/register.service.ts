@@ -16,7 +16,6 @@ export class RegisterService {
   constructor( private http : HttpClient) { }
 
   registerUser( user: Partial<Register>): Observable<ListResponseModel<Register>>{
-   
     return this.http.post<ListResponseModel<Register>>(this.baseUrl, user);
   }
 }

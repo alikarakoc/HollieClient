@@ -86,6 +86,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/common/auth.guard';
+import { LoginRegisterComponent } from 'src/app/pages/Login-Register/Login-Register.component';
 
 
 registerLocaleData(localeTR);
@@ -99,6 +100,7 @@ registerLocaleData(localeTR);
     HomeComponent,
     RegisterComponent,
     LoginComponent,
+    LoginRegisterComponent,
     NavbarComponent,
     SearchContractComponent,
     ContractDetailsComponent,

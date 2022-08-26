@@ -1,0 +1,27 @@
+<div class="card-container">
+    <div mat-dialog-content class="card">
+        <div class="logo">
+            <img src="../../../assets/images/hollielogo.png" alt="image">
+        </div>
+        <h2 class="card-header">
+            <div class="nav nav-tabs row" id="tablist" role="tablist">
+                <div class="nav-item " role="presentation">
+                    <button class="nav-link active col-6 justify-content-center" id="login-tab" data-bs-toggle="tab" data-bs-target="#login"
+                        type="button" role="tab" aria-controls="home" aria-selected="true">Sign In</button>
+                    <button class="nav-link col-6 justify-content-center" id="register-tab" data-bs-toggle="tab" data-bs-target="#register"
+                        type="button" role="tab" aria-controls="login" aria-selected="false">Sign Up</button>
+                </div>
+            </div>
+        </h2>
+        <div class="card-body">
+            <div class="tab-content" id="tabcontent">
+                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                    <app-login></app-login>
+                </div>
+                <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                    <app-register></app-register>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
