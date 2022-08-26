@@ -17,6 +17,7 @@ import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 import { AMarketService } from 'src/app/services/amarket.service';
 import { AMarket } from 'src/app/interfaces/amarket';
 import { MatPaginator } from '@angular/material/paginator';
+import { ContractCopyDialogComponent } from 'src/app/components/contract-copy-dialog/contract-copy-dialog.component';
 
 @Component({
   selector: 'app-contract',
@@ -211,7 +212,6 @@ export class ContractComponent implements OnInit {
           cMarkets:this.cMarkets, marketAgency : this.marketAgency } ,
       });
 
-
     dialog.afterClosed().subscribe((result) => {
       console.log(result.element);
       if (result.isAdded) {
@@ -228,6 +228,27 @@ export class ContractComponent implements OnInit {
   this.checkButtonCount += 1;
   }
 
+  copy(element: Contract) {
+    const copyElement: Contract = element;
+    const dialog = this.dialog.open(ContractCopyDialogComponent, { data: {
+      element: copyElement, roomTypes: this.roomTypes, hotels: this.hotels,
+      markets: this.markets, agencies: this.agencies, currencies:this.currencies,
+      boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,
+      cRoomTypes: this.cRoomTypes,  cMarkets:this.cMarkets, marketAgency : this.marketAgency  } });
+      
+      dialog.afterClosed().subscribe((result) => {
+        console.log(result.element);
+        if (result.isAdded) {
+          this.contractService.addContract(result.element).subscribe(() => {
+              this.ngOnInit();
+            });
+        }
+        this.checkButtonCount = 0;
+      });
+    
+     
+  }
+
   delete(element: Contract) {
     const dialog = this.dialog.open(ContractDeleteDialogComponent, {
       data: { element },
@@ -239,6 +260,7 @@ export class ContractComponent implements OnInit {
         });
       }
     });
+
   }
 
   update(element: Contract) {
@@ -254,6 +276,9 @@ export class ContractComponent implements OnInit {
       }
     });
   }
+
+
+  
 
   seeDetails(element: Contract) {
     this.dialog.open(ContractDetailsComponent, { data: {
@@ -310,3 +335,7 @@ export class ContractComponent implements OnInit {
   }
 
 }
+function ContractCopyComponent(ContractCopyComponent: any, arg1: { data: { element: Contract; roomTypes: any[]; hotels: any[]; markets: any[]; agencies: any[]; currencies: any[]; boards: any[]; cAgencies: any[]; cBoards: any[]; cRoomTypes: any[]; cMarkets: any[]; marketAgency: any[]; }; }) {
+  throw new Error('Function not implemented.');
+}
+

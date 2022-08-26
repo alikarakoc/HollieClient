@@ -44,6 +44,7 @@
         "update": "Güncelle",
         "edit": "Değiştir",
         "add": "Ekle",
+        "copy": "Kopyala",
         "add_button": "Yeni {{ name }} Ekle",
         "excel_button": "Excel İndir",
         "delete_title": "\"{{ elementName }}\" adlı nesneyi silmek istediğinizden emin misiniz?",

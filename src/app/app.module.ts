@@ -53,6 +53,7 @@ import {
   ContractAddDialogComponent,
   ContractDeleteDialogComponent,
   ContractUpdateDialogComponent,
+  ContractCopyDialogComponent,
 
   HotelFeatureAddDialogComponent,
   HotelFeatureUpdateDialogComponent,
@@ -118,6 +119,7 @@ registerLocaleData(localeTR);
     CountryAddDialogComponent,
     CountryUpdateDialogComponent,
     CountryDeleteDialogComponent,
+    ContractCopyDialogComponent,
 
     RoomComponent,
     RoomAddDialogComponent,

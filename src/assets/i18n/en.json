@@ -44,6 +44,7 @@
         "update": "Update",
         "edit": "Edit",
         "add": "Add",
+        "copy": "Copy",
         "add_button": "Add New {{ name }}",
         "excel_button": "Download Excel",
         "delete_title": "Are you sure to delete the \"{{ elementName }}\" element?",

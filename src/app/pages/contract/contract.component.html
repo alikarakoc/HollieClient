@@ -89,6 +89,7 @@
         <ng-template matMenuContent let-element="element">
             <button mat-menu-item (click)="update(element)">{{ 'dialogs.edit' | transloco }}</button>
             <button mat-menu-item (click)="delete(element)">{{ 'dialogs.delete' | transloco }}</button>
+            <button mat-menu-item (click)="copy(element)">{{ 'dialogs.copy' | transloco }}</button>
         </ng-template>
     </mat-menu>
 

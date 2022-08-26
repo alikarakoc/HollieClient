@@ -1,0 +1,121 @@
+<h1 mat-dialog-title>
+    {{ translocoService.translate('dialogs.edit_title', { name: translocoService.getActiveLang() === "en" ? "Contract" :
+    "Kontrat" }) }}
+</h1>
+
+<div mat-dialog-content class="row">
+  <div class="row">
+    <mat-form-field class="col-6">
+        <mat-label>{{ 'code' | transloco }}</mat-label>
+        <input matInput maxlength="20" [(ngModel)]="code" (keyup.enter)="copy()">
+    </mat-form-field>
+
+    <mat-form-field class="col-6">
+        <mat-label>{{ 'name' | transloco }}</mat-label>
+        <input matInput maxlength="50" [(ngModel)]="name" (keyup.enter)="copy()">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col-6">
+        <mat-label>{{ 'start' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="start" [matDatepicker]="startPicker">
+        <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="col-6">
+        <mat-label>{{ 'end' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="end" [matDatepicker]="endPicker">
+        <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+     <mat-form-field floatLabel="always" class="col-3">
+        <mat-label>{{ 'adultPrice' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="adultPrice" type="number" class="price-input" placeholder="0">
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always" class="col-3">
+        <mat-label>{{ 'babyPrice' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="childPrice1" type="number" class="price-input" placeholder="0">
+    </mat-form-field>
+
+
+    <mat-form-field floatLabel="always" class="col-3">
+        <mat-label>{{ 'childPrice' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="childPrice2" type="number" class="price-input" placeholder="0">
+    </mat-form-field>
+
+    <mat-form-field floatLabel="always" class="col-3">
+        <mat-label>{{ 'teenPrice' | transloco }}</mat-label>
+        <input matInput [(ngModel)]="childPrice3" type="number" class="price-input" placeholder="0">
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col-6">
+        <mat-label>{{ 'currency' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="currency">
+            <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.code }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field class="col-6">
+      <mat-label>{{ 'board' | transloco }}</mat-label>
+      <mat-select  [(ngModel)]="selectedBoards" multiple>
+          <mat-option *ngFor="let b of boards" [value]=" b.id">{{ b.name }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+
+
+  </div>
+
+  <div class="row">
+    <mat-form-field  class="col-6">
+        <mat-label>{{ 'market' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="selectedMarkets" (ngModelChange)="onChangeMarket($event)" multiple>
+            <mat-option *ngFor="let m of markets" [value]=" m.id">{{ m.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field class="col-6">
+        <mat-label>{{ 'agency' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="selectedAgencies" multiple>
+            <mat-option *ngFor="let a of commonAgencies" [value]=" a.id">{{ a.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="row">
+    <mat-form-field class="col-6">
+      <mat-label>{{ 'hotel' | transloco }}</mat-label>
+      <mat-select [(ngModel)]="hotel" (ngModelChange)="onChangeHotel($event)">
+          <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
+      </mat-select>
+  </mat-form-field>
+
+    <mat-form-field class="col-6">
+        <mat-label>{{ 'room_type' | transloco }}</mat-label>
+        <mat-select [(ngModel)]="selectedRoomTypes" multiple>
+            <mat-option *ngFor="let r of roomTypes" [value]=" r.id">{{ r.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+
+
+    <!-- <mat-form-field class="selects-m">
+        <mat-label>{{ 'room' | transloco }}</mat-label>
+        <mat-select class="full-box" [(ngModel)]="selectedRoomTypes" multiple>
+            <mat-option *ngFor="let r of hotelRoomTypes" [value]=" r.id">{{ r.name }}</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+  </div>
+</div>
+
+<div mat-dialog-actions>
+    <button mat-flat-button color="primary" (click)="copy()">{{ 'dialogs.copy' | transloco }}</button>
+    <button mat-flat-button color="accent" mat-dialog-close>{{ 'dialogs.cancel' | transloco }}</button>
+</div>
