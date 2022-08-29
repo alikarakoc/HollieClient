@@ -126,20 +126,20 @@ export class ContractAddDialogComponent implements OnInit {
   onChangeMarket(event: any) {
     this.agencyID = [];
     this.commonAgencies = [];
-    for(let i = 0; i < this.selectedMarkets.length; i++){
+    for (let i = 0; i < this.selectedMarkets.length; i++) {
       let index = this.marketAgency.findIndex(m => m.marketId == this.selectedMarkets[i].marketId);
-      for(let a =0 ; a < this.marketAgency[index].agencies.length; a++){
-        let agencyid : number = this.marketAgency[index].agencies[a];
+      for (let a = 0; a < this.marketAgency[index].agencies.length; a++) {
+        let agencyid: number = this.marketAgency[index].agencies[a];
         this.agencyID.push(agencyid);
       }
     }
     for (let x = 0; x < this.agencyID.length; x++) {
-      var count : Number = this.agencyID.filter(y => y == this.agencyID[x]).length;
-      if(count == this.selectedMarkets.length){
-        if(this.commonAgencies.length == 0){
+      var count: Number = this.agencyID.filter(y => y == this.agencyID[x]).length;
+      if (count == this.selectedMarkets.length) {
+        if (this.commonAgencies.length == 0) {
           this.commonAgencies.push(this.agencyID[x]);
         }
-        else if(!this.commonAgencies.includes(this.agencyID[x])){
+        else if (!this.commonAgencies.includes(this.agencyID[x])) {
           this.commonAgencies.push(this.agencyID[x]);
         }
       }
@@ -150,14 +150,14 @@ export class ContractAddDialogComponent implements OnInit {
       this.commonAgencies[x] = pureAgency;
     }
 
-    if(this.selectedAgencies != null){
-      for(let i = 0; i < this.selectedAgencies.length; i++){
-        const agency : CAgency = {
+    if (this.selectedAgencies != null) {
+      for (let i = 0; i < this.selectedAgencies.length; i++) {
+        const agency: CAgency = {
           agencyId: 0
         };
         agency.agencyId = +this.selectedAgencies[i];
         this.selectedAgencies[i] = agency;
-       };
+      };
     }
   }
 
@@ -170,11 +170,20 @@ export class ContractAddDialogComponent implements OnInit {
       }
     });
 
+    if (!this.contractCode || !this.name|| !this.adp ||  this.start === new Date(1 / 1 / 1) ||
+      this.end === new Date(1 / 1 / 1) || !this.ch1 || !this.ch2  || !this.ch3  || !this.hotel || !this.currency ||
+      this.selectedAgencies == undefined || this.selectedBoards == undefined || this.selectedMarkets == undefined || this.selectedRoomTypes == undefined) {
+
+      this.snackBar.open(this.translocoService.translate('dialogs.error_required', { elementName: this.name }));
+      return;
+    }
+
     if (this.start > this.end) {
       this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
       return;
     }
     this.snackBar.open(this.translocoService.translate('dialogs.add_success', { elementName: this.name }));
+
 
 
     this.closeDialog();
@@ -200,9 +209,8 @@ export class ContractAddDialogComponent implements OnInit {
         agencyList: this.selectedAgencies,
         boardList: this.selectedBoards,
         marketList: this.selectedMarkets,
-        //roomList: this.selectedRooms,
         roomTypeList: this.selectedRoomTypes,
-        createdUser : localStorage.getItem("username")
+        createdUser: localStorage.getItem("username")
       }
     });
 
