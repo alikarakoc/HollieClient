@@ -40,7 +40,7 @@ export class ContractCopyDialogComponent implements OnInit {
 
   contract = this.data.element;
   id = this.data.element.id;
-  code: string = this.data.element.code;
+  code: string;
   name: string = this.data.element.name;
   start: Date = this.data.element.enteredDate;
   end: Date = this.data.element.exitDate;
@@ -166,7 +166,7 @@ export class ContractCopyDialogComponent implements OnInit {
        };
     }
 
-
+  
   }
 
   copy(){
@@ -184,20 +184,20 @@ export class ContractCopyDialogComponent implements OnInit {
     }
 
     const otherContracts = this.contracts.filter(c =>
-      c.code !== this.code &&
+      //c.code !== this.code &&
       c.name !== this.name &&
       c.hotelId !== this.hotel &&
       c.currencyId !== this.currency &&
       c.enteredDate !== this.start &&
       c.exitDate !== this.end);
     if (otherContracts.some(c =>
-      c.code === this.code &&
+     // c.code === this.code &&
       c.name === this.name &&
 
       c.hotelId === this.hotel &&
       c.currencyId === this.currency)) {
         this.snackBar.open(this.translocoService.translate('dialogs.error_same', { name: this.translocoService.getActiveLang() === 'en' ? 'contract' : 'kontrakt' }), "OK");
-        this.code = "";
+       // this.code = "";
         this.name = "";
         this.start == null,
         this.end == null,
@@ -241,6 +241,7 @@ export class ContractCopyDialogComponent implements OnInit {
       this.selectedRoomTypes[i] = roomType;
      };
 
+    
      this.closeDialog();
      //this.data.table.renderRows();
   }
