@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
 
   showPassword: boolean = false;
   model: any = {}
+  successful: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -26,21 +27,33 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+
   }
 
-  register() { 
-    this.authService.register(this.model).subscribe(()=> {
+  register() {
+    this.authService.register(this.model).subscribe(() => {
+      if (localStorage.getItem("isSuccessful") === "true") {
+        alert("Registration Successful!")
+      }
+      else if (localStorage.getItem("isSuccessful") === "false") {
+        alert("Registration Failed!")
+      }
     }, error => {
       console.log(error);
+      alert("Registration Failed!")
     });
-    
+
   }
 
   showHidePassword() {
     this.showPassword = !this.showPassword;
   }
-  
+
+  successfule() {
+    return this.successful;
+  }
+
+
 
 
 }

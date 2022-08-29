@@ -25,6 +25,7 @@ export class ContractGranttComponent implements OnInit {
     mode: "Auto"
   }
   public columnSettings: object[] = [
+    {field: "id", headerText: "Contract Id"},
     {field: "code", headerText: "Contract Code"},
     {field: "name", headerText: "Name"},
     {field: "enteredDate", headerText: "Entered Date" , format: "dd-MM-yy"},
@@ -32,7 +33,8 @@ export class ContractGranttComponent implements OnInit {
 
   ]
   public taskSettings: object = {
-    id: "code",
+    id: "id",
+    code: "code",
     name: "name",
     startDate: "enteredDate",
     endDate: "exitDate",
@@ -51,16 +53,15 @@ export class ContractGranttComponent implements OnInit {
       },
       
   };
-  this.projectStartDate = new Date('05/01/2022');
+  this.projectStartDate = new Date('01/07/2022');
   this.projectEndDate = new Date('07/28/2023');
   this.gridLines = 'Both';
 
     this.contractService.getAllContracts().subscribe(res => {
       if (res.data!=null){
         this.contracts = res.data;
-
       }
     });
   }
-
+  
 }

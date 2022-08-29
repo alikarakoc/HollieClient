@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-
     this.authService.login(this.model).subscribe(() => {
       const tokenT = localStorage.getItem("token");
       if (tokenT) {
