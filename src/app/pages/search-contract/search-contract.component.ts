@@ -196,18 +196,17 @@ export class SearchContractComponent implements OnInit {
   }
 
   
-  seeDetails(element: Contract) {
-
-    this.dialog.open(ContractDetailsComponent, {
-      data: {
+  
+    seeDetails(element: Contract) {
+      this.dialog.open(ContractDetailsComponent, { data: {
         contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
-        markets: this.markets, agencies: this.agencies, currencies: this.currencies,
-        boards: this.boards, cAgencies: this.cAgencies, cBoards: this.cBoards,
-        cMarkets: this.cMarkets, cRooms: this.cRooms, rooms: this.rooms
-      }
-    });
+        markets: this.markets, agencies: this.agencies, currencies:this.currencies,
+        boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,
+        cMarkets:this.cMarkets, cRoomTypes:this.cRoomTypes } });
+  
+    }
 
-  }
+  
 
   toDate(v: Date | string) {
     return new Date(v);
@@ -230,9 +229,9 @@ export class SearchContractComponent implements OnInit {
         const idMarket = this.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
-      case 'room':
-        const idRoom = this.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
-        return idRoom.map(i => this.rooms.find(r => r.id === i).name);
+      // case 'room':
+      //   const idRoom = this.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
+      //   return idRoom.map(i => this.rooms.find(r => r.id === i).name);
 
       case 'date':
         this.gun = (-1 * (new Date(element.enteredDate).getTime() - new Date(element.exitDate).getTime()) / (1000 * 60 * 60 * 24));

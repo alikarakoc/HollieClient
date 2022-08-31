@@ -1,6 +1,6 @@
 .card-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background-image: url("../../../assets/images/background-1.jpg");
@@ -11,14 +11,17 @@
 
   .logo {
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    position: relative;
+    block-size: inherit;
+
   }
   
   .card {
     background-color: rgba(255, 255, 255, 0.7);
-    width: 30vw;
+    width: 25vw;
+    display: block;
   }
   
   

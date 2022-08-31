@@ -93,7 +93,6 @@ export class ContractDetailsComponent implements OnInit {
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
       case 'room':
-        debugger
         const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
         return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
 

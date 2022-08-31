@@ -188,12 +188,12 @@ export class SearchAccommodationComponent implements OnInit {
 
 
   applyFilter() {
-    this.result =[];
-    
+    this.result = [];
+
     const element = {
       beginDate: this.startDate,
       endDate: this.endDate,
-      adult : this.adult,
+      adult: this.adult,
       numberOfChild: this.numberOfChild,
       child1Age: this.child1,
       child2Age: this.child2,
@@ -202,7 +202,7 @@ export class SearchAccommodationComponent implements OnInit {
 
 
     this.contractService.searchContract(element).subscribe((res) => {
-      if(res.data != null){
+      if (res.data != null) {
         this.result = res.data;
       }
     });
@@ -262,7 +262,7 @@ export class SearchAccommodationComponent implements OnInit {
     //   this.contChildAges.push(this.child3);
     // }
 
-  
+
 
     // for(let i=0; i < this.contChildAges.length; i++){
     //   console.log("child array"+this.contChildAges[i]);
@@ -272,7 +272,7 @@ export class SearchAccommodationComponent implements OnInit {
   }
 
   getCurrentTotalPrice(contract: Contract) {
-    this.totalPrice = this.adult * contract.adp ;
+    this.totalPrice = this.adult * contract.adp;
     let s = this.hotels.find(c => c.id === contract.hotelId);
     this.contBabyTop = this.features.find(c => c.id === s?.hotelFeatureId)?.babyTop;
     this.contChildTop = this.features.find(c => c.id === s?.hotelFeatureId)?.childTop;
@@ -289,7 +289,7 @@ export class SearchAccommodationComponent implements OnInit {
       else if (this.contChildAges[c] <= this.contTeenTop) {
         this.totalPrice = this.totalPrice + contract.cH3;
       }
-      else{
+      else {
         this.totalPrice = this.totalPrice + contract.adp;
       }
 
@@ -303,13 +303,12 @@ export class SearchAccommodationComponent implements OnInit {
   }
 
   seeDetails(element: Contract) {
-
     this.dialog.open(ContractDetailsComponent, {
       data: {
         contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
         markets: this.markets, agencies: this.agencies, currencies: this.currencies,
         boards: this.boards, cAgencies: this.cAgencies, cBoards: this.cBoards,
-        cMarkets: this.cMarkets, cRooms: this.cRooms, rooms: this.rooms
+        cMarkets: this.cMarkets, cRoomTypes: this.cRoomTypes
       }
     });
 
