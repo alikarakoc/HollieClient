@@ -1,4 +1,4 @@
-<div  role="alert" aria-live="assertive" aria-atomic="true" >
+<!-- <div  role="alert" aria-live="assertive" aria-atomic="true" >
     <div class="toast-header">
       <strong class="me-auto">Contract Details <small>({{contract.name}})</small> </strong>
       
@@ -15,43 +15,36 @@
         {{ contract.code }}
     </mat-card-content>
 
-    <mat-divider></mat-divider>
 
     <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'Name' | transloco }} : </strong>
         {{ contract.name }}
     </mat-card-content>
 
-
-    <mat-divider></mat-divider>
-
     <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'start' | transloco }} : </strong>
         {{ toDate(contract.enteredDate) | localizedDate }}
     </mat-card-content>
 
-    <mat-divider></mat-divider>
 
     <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'end' | transloco }} : </strong>
         {{ toDate(contract.exitDate) | localizedDate }}
     </mat-card-content>
 
-    <mat-divider></mat-divider>
+ 
 
     <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'hotel' | transloco }} : </strong>
         {{ getItem('hotel') }}
     </mat-card-content>
-    <mat-divider></mat-divider>
+
 
     <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'adultPrice' | transloco }} : </strong>
         {{ contract.adp }}
     </mat-card-content>
 
-
-    <mat-divider></mat-divider>
 
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
@@ -60,15 +53,15 @@
     </mat-card-content>
 
 
-  <mat-divider></mat-divider>
+  
 
-    <mat-card-content class="user-select-all">
+    <mat-card-content class="user-select-all"> 
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong>{{ 'child' | transloco }} : </strong>
         {{ contract.cH2 }}
     </mat-card-content>
 
-    <mat-divider></mat-divider>
+    
 
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
@@ -76,53 +69,140 @@
         {{ contract.cH3 }}
     </mat-card-content>
 
-
-
-    <mat-divider></mat-divider>
-
-
     <mat-card-content class="user-select-all">
         <mat-icon mat-list-icon class="align-middle">navigate_next</mat-icon>
         <strong style="font-size:20px;">{{ 'Market' | transloco }} : </strong>
         {{ getItem('market') }}
     </mat-card-content>
 .
-
-    <mat-divider></mat-divider>
-
     <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'agency' | transloco }} : </strong>
         {{ getItem('agency') }}
     </mat-card-content>
 
-    <mat-divider></mat-divider>
-    
+
     <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'board' | transloco }} : </strong>
         {{ getItem('board') }}
     </mat-card-content>
 
-    <mat-divider></mat-divider>
 
  <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'room' | transloco }} : </strong>
         {{ getItem('room') }}
     </mat-card-content>
-    <mat-divider></mat-divider>
+
 
     <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'days' | transloco }} : </strong>
         {{ getItem('date') }}
     </mat-card-content>
-    <mat-divider></mat-divider>
+
 
     <mat-card-content class="user-select-all">
         <strong style="font-size:20px;">{{ 'room_type' | transloco }} : </strong>
         {{ getItem('room_type') }}
     </mat-card-content>
 
+    </div>
+</div> -->
+<div class="container">
+    <div class="card mb-1">
+        <div class="card-header">Contract Details</div>
+        <div class="card-body">
+            <form>
+                <div class="row gx-2 mb-1">
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="code">{{ 'Code' | transloco }}</label>
+                        <input disabled class="form-control" id="code" type="text" value="{{ contract.code }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="name">{{ 'Name' | transloco }}</label>
+                        <input disabled class="form-control" id="name" type="text" value="{{ contract.name }}">
+                    </div>
+                </div>
+                <div class="row gx-2 mb-1">
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="enteredDate">{{ 'start' | transloco }}</label>
+                        <input disabled class="form-control" id="enteredDate" type="text"
+                            value="{{ toDate(contract.enteredDate) | localizedDate }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="exitDate">{{ 'end' | transloco }}</label>
+                        <input disabled class="form-control" id="exitDate" type="text"
+                            value="{{ toDate(contract.exitDate) | localizedDate }}">
+                    </div>
+                </div>
+                <div class="row gx-2 mb-1">
+                    <div class="col-md-3">
+                        <label class="small mb-1" for="adultPrice">{{ 'adultPrice' | transloco }}</label>
+                        <input disabled class="form-control" id="adultPrice" type="text" value="{{ contract.adp }}">
+                    </div> 
+                    <div class="col-md-3">
+                        <label class="small mb-1" for="teenagerPrice">{{ 'teenager' | transloco }}</label>
+                        <input disabled class="form-control" id="teenagerPrice" type="text"
+                            value="{{ contract.cH3 }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small mb-1" for="childPrice">{{ 'child' | transloco }}</label>
+                        <input disabled class="form-control" id="childPrice" type="text"
+                            value="{{ contract.cH2 }}">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="small mb-1" for="babyPrice">{{ 'baby' | transloco }}</label>
+                        <input disabled class="form-control" id="babyPrice" type="text"
+                            value="{{ contract.cH1 }}">
+                    </div>
+                   
+                </div>
+                <div class="row gx-2 mb-1">
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="hotels">{{ 'hotel' | transloco }}</label>
+                        <input disabled class="form-control" type="text" id="hotels"
+                            value="{{ getItem('hotel') }}">
+                    </div>
 
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="room_type">{{ 'room_type' | transloco }}</label>
+                        <input disabled class="form-control" id="room_type" type="text"
+                            value="{{ getItem('room_type') }}">
+                    </div>
+                </div>
+                <div class="row gx-2 mb-1"> 
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="market">{{ 'Market' | transloco }}</label>
+                        <input disabled class="form-control" id="market" type="text"
+                            value="{{ getItem('market') }}">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="agency">{{ 'agency' | transloco }}</label>
+                        <input disabled class="form-control" id="agency" type="text"
+                            value="{{ getItem('agency') }}">
+                    </div>
+                </div>
+                <div class="row gx-2 mb-1">
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="board">{{ 'board' | transloco }}</label>
+                        <input disabled class="form-control" id="board" type="text"
+                            value="{{ getItem('board') }}">
+                    </div>
 
+                    <div class="col-md-6">
+                        <label class="small mb-1" for="days">{{ 'days' | transloco }}</label>
+                        <input disabled class="form-control" id="days" type="text"
+                            value="{{ getItem('date') }}">
+                    </div>
+                    <!-- <div class="col-md-6">
+                        <label class="small mb-1" for="rooms">{{ 'room' | transloco }}</label>
+                        <input disabled class="form-control" type="text" id="rooms"
+                            value="{{getItem('room')}}">
+                    </div> -->
+                </div>
 
+                <button mat-dialog-close type="button" class="btn btn-primary" data-bs-dismiss="toast"
+                    aria-label="Close" fill="none" stroke="none">Back</button>
+            </form>
+
+        </div>
     </div>
 </div>

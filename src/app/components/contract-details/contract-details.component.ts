@@ -79,7 +79,8 @@ export class ContractDetailsComponent implements OnInit {
         return idBoard.map(i => this.boards.find(b => b.id === i)?.name);
 
       case 'room_type':
-        const idRoomType = this.data.cRooms.filter(cRT => cRT.listId === element.id).map(cRT => cRT.roomTypeId);
+       
+        const idRoomType = this.data.cRoomTypes.filter(cRT => cRT.listId === element.id).map(cRT => cRT.roomTypeId);
         //idRoomType.map(this.data.rooms.filter(cR => cR.listId === element.id).map(cRT => cRT.roomId));
         return idRoomType.map(i => this.roomTypes.find(rt => rt.id === i)?.name);
 
@@ -92,6 +93,7 @@ export class ContractDetailsComponent implements OnInit {
         return idMarket.map(i => this.markets.find(m => m.id === i).name);
 
       case 'room':
+        debugger
         const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomTypeId);
         return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
 
