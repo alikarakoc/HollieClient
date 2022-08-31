@@ -2,6 +2,8 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { ReplaySubject } from 'rxjs';
 import { Agency, Contract } from "src/app/interfaces";
+import { TranslocoService } from '@ngneat/transloco';
+
 
 
 interface DialogData {
@@ -46,7 +48,8 @@ export class ContractDetailsComponent implements OnInit {
 
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    public translocoService: TranslocoService
   ) {
     this.contract = this.data.contract;
     this.markets = this.data.markets;
