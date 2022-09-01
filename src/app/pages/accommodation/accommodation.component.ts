@@ -12,6 +12,7 @@ import { HotelFeatureService } from 'src/app/services/hotel-feature';
 import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 import { MatPaginator } from '@angular/material/paginator';
 import { Accommodation } from 'src/app/interfaces/accommodation';
+import { PriceSearchDetail } from 'src/app/interfaces/price-search-detail';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { Accommodation } from 'src/app/interfaces/accommodation';
 })
 
 export class AccommodationComponent implements OnInit {
-  columns: string[] = [ "hotelId", "agencyId", "roomTypeId", "agencyName", "hotelName", "roomName", "totalPrice" ,"acil"];
+  columns: string[] = [ "agencyName", "hotelName", "roomName", "totalPrice" ,"detail"];
   dataSource: MatTableDataSource<Accommodation>;
   panelOpenState = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -39,6 +40,7 @@ export class AccommodationComponent implements OnInit {
   numberOfChild?: number;
   hotelIds: number[];
   totalPrice: number = 0;
+
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -82,6 +84,7 @@ export class AccommodationComponent implements OnInit {
   contChildTop: any;
   contTeenTop: any;
   contChildAges: any[] = [];
+  //writeDetail: string;
 
 
 
@@ -175,15 +178,12 @@ export class AccommodationComponent implements OnInit {
   }
 
   onChangeChild1(event: any) {
-    console.log("child1: " + event);
   }
 
   onChangeChild2(event: any) {
-    console.log("child2: " + event);
   }
 
   onChangeChild3(event: any) {
-    console.log("child3: " + event);
   }
 
 
@@ -197,131 +197,55 @@ export class AccommodationComponent implements OnInit {
       numberOfChild: this.numberOfChild,
       child1Age: this.child1,
       child2Age: this.child2,
-      child3Age: this.child3
+      child3Age: this.child3,
+      hotels: this.hotelIds
     };
    element.beginDate.setDate(element.beginDate.getDate()+1);
    element.endDate.setDate(element.endDate.getDate()+1);
    element.beginDate.setUTCHours(0,0,0,0);
-   element.endDate.setUTCHours(0, 0, 0, 0);
+   element.endDate.setUTCHours(0,0,0,0);
 
 
     this.contractService.detailAccommodation(element).subscribe((res) => {
       if (res.data != null) {
         this.result = res.data;
       }
+      this.see(this.result);
     });
 
     element.beginDate.setDate(element.beginDate.getDate()-1);
     element.endDate.setDate(element.endDate.getDate()-1);
-    this.table.renderRows();
 
     
-
-
-    // this.contChildAges=[];
-
-    // this.result = [];
-    // if (this.startDate! > this.endDate!) {
-    //   this.snackBar.open(this.translocoService.translate('dialogs.error_date'));
-    //   return;
-    // }
-
-
-    // for (const contract of this.contracts) {
-
-    //   const enterC: Date = this.toDate(contract.enteredDate);
-    //   const exitC: Date = this.toDate(contract.exitDate);
-
-    //   if (this.startDate !== undefined && this.endDate !== undefined) {
-    //     const start: Date = this.startDate;
-    //     const end: Date = this.endDate;
-    //     //if((start <= enterC && end >= exitC) || (enterC < start && exitC < end) || (enterC > start && exitC > end) || (enterC < start && exitC > end) ){
-    //     if (this.hotelIds != null && this.hotelIds.includes(contract.hotelId) || this.hotelIds == null) {
-    //       if (start <= enterC && end >= exitC) {
-    //         this.result.push(contract);
-    //       }
-    //       else if (enterC <= start && exitC <= end && !(exitC <= start)) {
-    //         this.result.push(contract);
-    //       }
-    //       else if (enterC >= start && exitC >= end && enterC <= end) {
-    //         this.result.push(contract);
-    //       }
-    //       else if (enterC <= start && exitC >= end) {
-    //         this.result.push(contract);
-    //       }
-    //       else {
-    //       }
-    //     }
-    //   };
-
-    //   if (this.result.length === 0) {
-    //     this.snackBar.open(this.translocoService.translate('contract_not_found'));
-    //   }
-
-    //   this.table.renderRows();
-    // }
-
-    // if (this.child1 != null) {
-    //   this.contChildAges.push(this.child1);
-    // }
-    // if (this.child2 != null) {
-    //   this.contChildAges.push(this.child2);
-    // }
-    // if (this.child3 != null) {
-    //   this.contChildAges.push(this.child3);
-    // }
-
-
-
-    // for(let i=0; i < this.contChildAges.length; i++){
-    //   console.log("child array"+this.contChildAges[i]);
-
-    // }
+  
+    this.table.renderRows();
 
   }
 
-  getCurrentTotalPrice(contract: Contract) {
-    this.totalPrice = this.adult * contract.adp;
-    let s = this.hotels.find(c => c.id === contract.hotelId);
-    this.contBabyTop = this.features.find(c => c.id === s?.hotelFeatureId)?.babyTop;
-    this.contChildTop = this.features.find(c => c.id === s?.hotelFeatureId)?.childTop;
-    this.contTeenTop = this.features.find(c => c.id === s?.hotelFeatureId)?.teenTop;
+  // getDetail(element: Accommodation){
+  //   this.writeDetail = "";
+  //   var detail: PriceSearchDetail[];
+  //   detail = element.priceDetails;
+  //   detail.forEach(priceDetail => {
+  //      this.writeDetail += "Contract Id: "+priceDetail.contractId + " Day Price " + priceDetail.netPrice + '\n';
+  //   });
+    
+  //   console.log(this.writeDetail);
+  //   return this.writeDetail;
+    
+  // }
 
-
-    for (let c = 0; c < this.contChildAges.length; c++) {
-      if (this.contChildAges[c] <= this.contBabyTop) {
-        this.totalPrice = this.totalPrice + contract.cH1;
-      }
-      else if (this.contChildAges[c] <= this.contChildTop) {
-        this.totalPrice = this.totalPrice + contract.cH2;
-      }
-      else if (this.contChildAges[c] <= this.contTeenTop) {
-        this.totalPrice = this.totalPrice + contract.cH3;
-      }
-      else {
-        this.totalPrice = this.totalPrice + contract.adp;
-      }
-
-    }
-    return this.totalPrice;
-  }
-
-
-
-  clearInputs() {
-  }
-
-  seeDetails(element: Contract) {
-    this.dialog.open(ContractDetailsComponent, {
-      data: {
-        contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
-        markets: this.markets, agencies: this.agencies, currencies: this.currencies,
-        boards: this.boards, cAgencies: this.cAgencies, cBoards: this.cBoards,
-        cMarkets: this.cMarkets, cRoomTypes: this.cRoomTypes
-      }
+  
+  
+  see(resu: any[]){
+    debugger;
+    resu.forEach(detail => {
+      console.log(detail);
+      
     });
-
   }
+
+
 
   toDate(v: Date | string) {
     return new Date(v);
@@ -351,11 +275,6 @@ export class AccommodationComponent implements OnInit {
       case 'date':
         this.gun = (-1 * (new Date(element.enteredDate).getTime() - new Date(element.exitDate).getTime()) / (1000 * 60 * 60 * 24));
         return this.gun
-
-
-      // case 'room':
-      // const idRoom = this.data.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.);
-      // return idRoom.map(i => this.rooms.find(r => r.id === i)?.name);
 
       case 'hotel':
         return this.hotels.find(h => h.id === element.hotelId)?.name;

@@ -73,7 +73,7 @@
         </div>
         <div class="mat-elevation-z8">
         <table mat-table [dataSource]="result">
-            <ng-container matColumnDef="hotelId">
+            <!-- <ng-container matColumnDef="hotelId">
                 <th mat-header-cell *matHeaderCellDef>{{ 'hotelId' | transloco }}</th>
                 <td mat-cell *matCellDef="let element">{{ element.hotelId }}</td>
             </ng-container>
@@ -86,7 +86,7 @@
             <ng-container matColumnDef="roomTypeId">
                 <th mat-header-cell *matHeaderCellDef>{{ 'roomTypeId' | transloco }}</th>
                 <td mat-cell *matCellDef="let element">{{ element.roomTypeId }}</td>
-            </ng-container>
+            </ng-container> -->
 
             <ng-container matColumnDef="agencyName">
 
@@ -110,25 +110,29 @@
                 <th mat-header-cell *matHeaderCellDef>{{ 'Total-price' | transloco }}</th>
                 <td width="100" mat-cell *matCellDef="let element" >
                    {{ element.totalPrice}}
-                    <!-- {{ getItem('date', element)*element.adp  }}&nbsp;&nbsp;&nbsp; -->
-                    <!-- {{ element.adp * adult! * element.contDay + element.ch07 * child! *element.contDay}}&nbsp;&nbsp;&nbsp; -->
-                    <!-- {{ element.childPrice * child! * element.contDay }}&nbsp;&nbsp;&nbsp; -->
-                    
                 </td>
             </ng-container>
 
-             <ng-container matColumnDef="acil">
+            <!-- <ng-container matColumnDef="detail">
+                <th mat-header-cell *matHeaderCellDef>{{ 'detail' | transloco }}</th>
+                <td width="100" mat-cell *matCellDef="let element" >
+                   {{ getDetail(element)}}
+                </td>
+            </ng-container> -->
+
+
+             <ng-container matColumnDef="detail">
                 <th mat-header-cell *matHeaderCellDef>{{ 'Total-price' | transloco }}</th>
                 <td width="100" mat-cell *matCellDef="let element" >
              <mat-accordion>
                 <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
-                      Hotel
+                      Detail
                     </mat-panel-title>
                   </mat-expansion-panel-header>
                   
-                    fölşgvmlbmşldgmblşg
+                  <!-- {{ getDetail(element)}} -->
                  
                 </mat-expansion-panel>
                 
