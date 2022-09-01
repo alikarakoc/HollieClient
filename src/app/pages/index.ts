@@ -17,4 +17,5 @@ export { HotelFeatureComponent } from './hotel-feature/hotel-feature.component';
 export { SearchAccommodationComponent } from './search-accommodation/search-accommodation.component';
 export { LoginComponent } from '../components/login/login.component';
 export { RegisterComponent } from 'src/app/components/register/register.component';
+export { AccommodationComponent } from './accommodation/accommodation.component';
 

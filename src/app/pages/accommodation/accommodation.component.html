@@ -1,0 +1,149 @@
+<app-navbar>
+    <div class="search-container">
+        <h1 class="title">{{ 'accommodation' | transloco }}</h1>
+        <mat-form-field class="mx-2 date">
+            <mat-label>{{ 'start' | transloco }}</mat-label>
+            <input [(ngModel)]="startDate" matInput [matDatepicker]="startPicker" onkeydown="return false">
+            <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+            <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="mx-2 date">
+            <mat-label>{{ 'end' | transloco }}</mat-label>
+            <input [(ngModel)]="endDate" matInput [matDatepicker]="endPicker" onkeydown="return false">
+            <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+            <mat-datepicker #endPicker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="mx-2 hotel">
+            <mat-label>{{ 'hotel' | transloco }}</mat-label>
+            <mat-select [(ngModel)]="hotelIds" multiple>
+                <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field class="mx-2 person">
+            <mat-label>{{ 'adult' | transloco }}</mat-label>
+            <input [(ngModel)]="adult" matInput type="number" value="1" min="0" onkeydown="return false">
+        </mat-form-field>
+
+        <mat-form-field class="mx-2 person">
+            <mat-label>{{ 'child' | transloco }}</mat-label>
+            <input [(ngModel)]="numberOfChild" matInput type="number" value="1" min="0" max="3" onkeydown="return false">
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field *ngIf="numberOfChild != null && numberOfChild != 0" class="mx-2 person">
+            <mat-label>{{ 'childAge' | transloco }}</mat-label>
+            <input matInput type="number" [(ngModel)]="child1" (ngModelChange)="onChangeChild1($event)" min="0" max="16" onkeydown="return false">
+        </mat-form-field>
+
+        <mat-form-field *ngIf="(numberOfChild != null) && (numberOfChild == 2) || (numberOfChild ==3)" class="mx-2 person">
+            <mat-label>{{ 'childAge' | transloco }}</mat-label>
+            <input matInput type="number" [(ngModel)]="child2" (ngModelChange)="onChangeChild2($event)" min="0" max="16" onkeydown="return false">
+        </mat-form-field>
+
+        <mat-form-field *ngIf="numberOfChild != null && numberOfChild == 3" class="mx-2 person">
+            <mat-label>{{ 'childAge' | transloco }}</mat-label>
+            <input matInput type="number" [(ngModel)]="child3" (ngModelChange)="onChangeChild3($event)" min="0" max="16" onkeydown="return false">
+        </mat-form-field>
+
+
+
+
+        <br>
+
+        <div class="search-button-bar">
+            <button class="search-button" mat-flat-button color="primary" (click)="applyFilter()">{{ 'search' |
+                transloco }}</button>
+            <!-- <button mat-flat-button color="accent" (click)="clearTable()">Clear</button> -->
+        </div>
+    </div>
+
+    <div class="results" [ngClass]="{'d-none': result.length === 0}">
+        <div class="d-flex">
+            <h2 class="results-title">{{ 'results' | transloco }}</h2>
+            <span class="spacer"></span>
+            <button class="export-button" mat-flat-button color="excel" (click)="exportAsXLSX()">
+                <mat-icon>file_download</mat-icon>
+            </button>
+        </div>
+        <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="result">
+            <ng-container matColumnDef="hotelId">
+                <th mat-header-cell *matHeaderCellDef>{{ 'hotelId' | transloco }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.hotelId }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="agencyId">
+                <th mat-header-cell *matHeaderCellDef>{{ 'agencyId' | transloco }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.agencyId }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="roomTypeId">
+                <th mat-header-cell *matHeaderCellDef>{{ 'roomTypeId' | transloco }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.roomTypeId }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="agencyName">
+
+                <th mat-header-cell *matHeaderCellDef>{{ 'agencyName' | transloco }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.agencyName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="hotelName">
+
+                <th mat-header-cell *matHeaderCellDef>{{ 'hotelName' | transloco }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.hotelName }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="roomName">
+                <th mat-header-cell *matHeaderCellDef>{{ 'roomName' | transloco }}</th>
+                <td mat-cell *matCellDef="let element">{{ element.roomName }}</td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="totalPrice">
+                <th mat-header-cell *matHeaderCellDef>{{ 'Total-price' | transloco }}</th>
+                <td width="100" mat-cell *matCellDef="let element" >
+                   {{ element.totalPrice}}
+                    <!-- {{ getItem('date', element)*element.adp  }}&nbsp;&nbsp;&nbsp; -->
+                    <!-- {{ element.adp * adult! * element.contDay + element.ch07 * child! *element.contDay}}&nbsp;&nbsp;&nbsp; -->
+                    <!-- {{ element.childPrice * child! * element.contDay }}&nbsp;&nbsp;&nbsp; -->
+                    
+                </td>
+            </ng-container>
+
+             <ng-container matColumnDef="acil">
+                <th mat-header-cell *matHeaderCellDef>{{ 'Total-price' | transloco }}</th>
+                <td width="100" mat-cell *matCellDef="let element" >
+             <mat-accordion>
+                <mat-expansion-panel hideToggle (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      Hotel
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  
+                    fölşgvmlbmşldgmblşg
+                 
+                </mat-expansion-panel>
+                
+              </mat-accordion> 
+            </td>
+       
+            </ng-container> 
+
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+      </div>
+    </div>
+</app-navbar>
