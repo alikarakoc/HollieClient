@@ -11,6 +11,7 @@ import { CMarket } from 'src/app/interfaces/cmarket';
 import { CBoard } from 'src/app/interfaces/cboard';
 import { AMarketService } from 'src/app/services/amarket.service';
 import { MarketService } from 'src/app/services';
+import { FormGroup,FormControl, Validators, ValidationErrors } from '@angular/forms';
 
 
 interface DialogData {
@@ -61,6 +62,23 @@ export class ContractAddDialogComponent implements OnInit {
   ch1: number;
   ch2: number;
   ch3: number;
+
+  controls = new FormGroup({
+    codeControl : new FormControl('', [Validators.required]),
+    nameControl : new FormControl('',[Validators.required]),
+    startDateControl : new FormControl('',[Validators.required]),
+    endDateControl :  new FormControl('',[Validators.required]),
+    adultPriceControl :  new FormControl('',[Validators.required]),
+    teenPriceControl :  new FormControl('',[Validators.required]),
+    childPriceControl :  new FormControl('',[Validators.required]),
+    babyPriceControl :  new FormControl('',[Validators.required]),
+    hotelControl :   new FormControl('',[Validators.required]),
+    roomControl :  new FormControl('',[Validators.required]),
+    currencyControl :  new FormControl('',[Validators.required]),
+    boardControl :  new FormControl('',[Validators.required]),
+    marketControl :  new FormControl('',[Validators.required]),
+    agencyControl :  new FormControl('',[Validators.required])
+  });
 
   constructor(
     public translocoService: TranslocoService,
