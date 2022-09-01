@@ -179,7 +179,7 @@ export class SearchContractComponent implements OnInit {
 
   applyFilter() {
     this.result =[];
-    
+
     const element = {
       beginDate: this.startDate,
       endDate: this.endDate,
@@ -195,18 +195,18 @@ export class SearchContractComponent implements OnInit {
 
   }
 
-  
-  
+
+
     seeDetails(element: Contract) {
       this.dialog.open(ContractDetailsComponent, { data: {
         contract: element, roomTypes: this.roomTypes, hotels: this.hotels,
         markets: this.markets, agencies: this.agencies, currencies:this.currencies,
         boards: this.boards, cAgencies:this.cAgencies, cBoards: this.cBoards,
         cMarkets:this.cMarkets, cRoomTypes:this.cRoomTypes } });
-  
+
     }
 
-  
+
 
   toDate(v: Date | string) {
     return new Date(v);

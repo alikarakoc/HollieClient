@@ -4,7 +4,7 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { TranslocoService } from "@ngneat/transloco";
 import { ContractDetailsComponent } from 'src/app/components';
-import { Contract, Hotel } from "src/app/interfaces";
+import { Contract, Hotel ,Price } from "src/app/interfaces";
 import { CRoomTypeService } from 'src/app/services/croomtype.service';
 import { RoomService } from 'src/app/services/room.service';
 import { ContractService, HotelService, ExcelService, CBoardService, CAgencyService, CMarketService, RoomTypeService, AgencyService, BoardService, CurrencyService, MarketService } from "src/app/services";
@@ -12,14 +12,16 @@ import { HotelFeatureService } from 'src/app/services/hotel-feature';
 import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 import { MatPaginator } from '@angular/material/paginator';
 
+
+
 @Component({
   selector: 'app-search-accommodation',
   templateUrl: './search-accommodation.component.html',
   styleUrls: ['./search-accommodation.component.scss']
 })
 export class SearchAccommodationComponent implements OnInit {
-  columns: string[] = ["code", "name", "hotel", "adp", "cH1", "cH2", "cH3", "start", "end", "Total-Price", "seeDetails"];
-  dataSource: MatTableDataSource<Contract>;
+  columns: string[] = [ "hotel", "start", "end", "Total-Price"];
+  dataSource: MatTableDataSource<Price>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatTable) table: MatTable<SearchAccommodationComponent>;
@@ -61,7 +63,7 @@ export class SearchAccommodationComponent implements OnInit {
   contract: Contract;
   hotels: Hotel[] = [];
   contracts: Contract[] = [];
-  result: Contract[] = [];
+  result: Price[] = [];
   rooms: any[] = [];
   cRooms: any[] = [];
   cAgencies: any[] = [];
@@ -92,22 +94,7 @@ export class SearchAccommodationComponent implements OnInit {
     this.ngOnInit();
   }
 
-  exportAsXLSX(): void {
-    const arrayToExport = this.result.map(c => {
-      return {
-        code: c.code,
-        name: c.name,
-        currency: this.getItem('currency', c),
-        hotels: this.getItem('hotel', c),
-        markets: this.getItem('market', c).toString(),
-        agencies: this.getItem('agency', c).toString(),
-        boards: this.getItem('board', c).toString(),
-        startDate: c.enteredDate,
-        endDate: c.exitDate
-      }
-    });
-    this.excelService.exportAsExcelFile(arrayToExport, 'Contracts_Filtered');
-  }
+
 
   ngOnInit(): void {
 
@@ -193,20 +180,22 @@ export class SearchAccommodationComponent implements OnInit {
     const element = {
       beginDate: this.startDate,
       endDate: this.endDate,
-      adult: this.adult,
-      numberOfChild: this.numberOfChild,
-      child1Age: this.child1,
-      child2Age: this.child2,
-      child3Age: this.child3
+      totalPrice:this.totalPrice
     };
 
+    element.beginDate.setUTCHours(0,0,0,0);
+    element.endDate.setUTCHours(0, 0, 0, 0);
+  //   element.beginDate.setDate(element.beginDate.getDate()+1);
+  //  element.endDate.setDate(element.endDate.getDate()+1);
 
-    this.contractService.searchContract(element).subscribe((res) => {
+    this.contractService.searchAccommodation(element).subscribe((res) => {
       if (res.data != null) {
         this.result = res.data;
       }
     });
     this.table.renderRows();
+    // element.beginDate.setDate(element.beginDate.getDate()-1);
+    // element.endDate.setDate(element.endDate.getDate()-1);
 
 
     // this.contChildAges=[];
@@ -272,28 +261,28 @@ export class SearchAccommodationComponent implements OnInit {
   }
 
   getCurrentTotalPrice(contract: Contract) {
-    this.totalPrice = this.adult * contract.adp;
-    let s = this.hotels.find(c => c.id === contract.hotelId);
-    this.contBabyTop = this.features.find(c => c.id === s?.hotelFeatureId)?.babyTop;
-    this.contChildTop = this.features.find(c => c.id === s?.hotelFeatureId)?.childTop;
-    this.contTeenTop = this.features.find(c => c.id === s?.hotelFeatureId)?.teenTop;
+    // this.totalPrice = this.adult * contract.adp;
+    // let s = this.hotels.find(c => c.id === contract.hotelId);
+    // this.contBabyTop = this.features.find(c => c.id === s?.hotelFeatureId)?.babyTop;
+    // this.contChildTop = this.features.find(c => c.id === s?.hotelFeatureId)?.childTop;
+    // this.contTeenTop = this.features.find(c => c.id === s?.hotelFeatureId)?.teenTop;
 
 
-    for (let c = 0; c < this.contChildAges.length; c++) {
-      if (this.contChildAges[c] <= this.contBabyTop) {
-        this.totalPrice = this.totalPrice + contract.cH1;
-      }
-      else if (this.contChildAges[c] <= this.contChildTop) {
-        this.totalPrice = this.totalPrice + contract.cH2;
-      }
-      else if (this.contChildAges[c] <= this.contTeenTop) {
-        this.totalPrice = this.totalPrice + contract.cH3;
-      }
-      else {
-        this.totalPrice = this.totalPrice + contract.adp;
-      }
+    // for (let c = 0; c < this.contChildAges.length; c++) {
+    //   if (this.contChildAges[c] <= this.contBabyTop) {
+    //     this.totalPrice = this.totalPrice + contract.cH1;
+    //   }
+    //   else if (this.contChildAges[c] <= this.contChildTop) {
+    //     this.totalPrice = this.totalPrice + contract.cH2;
+    //   }
+    //   else if (this.contChildAges[c] <= this.contTeenTop) {
+    //     this.totalPrice = this.totalPrice + contract.cH3;
+    //   }
+    //   else {
+    //     this.totalPrice = this.totalPrice + contract.adp;
+    //   }
 
-    }
+    // }
     return this.totalPrice;
   }
 
@@ -339,9 +328,9 @@ export class SearchAccommodationComponent implements OnInit {
         const idRoom = this.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
         return idRoom.map(i => this.rooms.find(r => r.id === i).name);
 
-      case 'date':
-        this.gun = (-1 * (new Date(element.enteredDate).getTime() - new Date(element.exitDate).getTime()) / (1000 * 60 * 60 * 24));
-        return this.gun
+      // case 'date':
+      //   this.gun = (-1 * (new Date(element.enteredDate).getTime() - new Date(element.exitDate).getTime()) / (1000 * 60 * 60 * 24));
+      //   return this.gun
 
 
       // case 'room':

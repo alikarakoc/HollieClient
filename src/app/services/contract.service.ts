@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Contract, SearchContract } from "../interfaces";
+import { Contract, SearchContract, Price } from "../interfaces";
 import { Observable } from 'rxjs';
 import { environment } from "src/environments/environment";
 import { ListResponseModel } from '../interfaces/listResponseModel';
@@ -33,7 +33,7 @@ export class ContractService {
   }
 
   searchAccommodation(searchAccommodation:  Partial<SearchContract>){
-    return this.http.post<ListResponseModel<Contract>>(`${this.baseUrl}/searchAccommodation`, searchAccommodation);
+    return this.http.post<ListResponseModel<Price>>(`${this.baseUrl}/searchAccommodation`, searchAccommodation);
   }
 
   detailAccommodation(detailAccommodation:  Partial<SearchContract>){
