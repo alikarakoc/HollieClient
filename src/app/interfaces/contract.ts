@@ -10,6 +10,7 @@ export interface Contract extends Base{
     code: string;
     hotelId: number;
     //contDay? : number;
+    totalPrice: number;
     currencyId: number;
     enteredDate: Date;
     exitDate: Date;
