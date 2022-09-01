@@ -17,7 +17,9 @@ import { FormsModule } from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
   showPassword: boolean = false;
-  model: any = {}
+  model: any = {
+
+  }
   successful: boolean = false;
 
   constructor(
@@ -31,6 +33,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+
     this.authService.register(this.model).subscribe(() => {
       if (localStorage.getItem("isSuccessful") === "true") {
         alert("Registration Successful!")
