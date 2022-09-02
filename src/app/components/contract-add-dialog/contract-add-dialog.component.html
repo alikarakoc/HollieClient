@@ -3,33 +3,30 @@
     "Kontrat" }) }}
 </h1>
 
-<div mat-dialog-content class="row" [formGroup]="controls">
+<div mat-dialog-content class="row">
     <div class="row">
         <mat-form-field class="col-6">
             <mat-label>{{ 'code' | transloco }}</mat-label>
-            <input matInput maxlength="20" [(ngModel)]="contractCode" (keyup.enter)="add()"
-                formControlName="codeControl">
-            <!-- <mat-error *ngIf="codeControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            <input matInput maxlength="20" [(ngModel)]="contractCode" (keyup.enter)="add()">
         </mat-form-field>
 
         <mat-form-field class="col-6">
             <mat-label>{{ 'name' | transloco }}</mat-label>
-            <input matInput maxlength="50" [(ngModel)]="name" (keyup.enter)="add()" formControlName="nameControl">
-            <!-- <mat-error *ngIf="nameControl.invalid">{{getErrorMessage()}}</mat-error> -->
+            <input matInput maxlength="50" [(ngModel)]="name" (keyup.enter)="add()">
         </mat-form-field>
     </div>
 
     <div class="row" >
         <mat-form-field class="col-6">
             <mat-label>{{ 'start' | transloco }}</mat-label>
-            <input matInput [matDatepickerFilter]="myFilter" [(ngModel)]="start" [matDatepicker]="startPicker" formControlName="startDateControl">
+            <input matInput [matDatepickerFilter]="myFilter" [(ngModel)]="start" [matDatepicker]="startPicker">
             <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
             <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field class="col-6">
             <mat-label>{{ 'end' | transloco }}</mat-label>
-            <input matInput [matDatepickerFilter]="myFilter" [(ngModel)]="end" [matDatepicker]="endPicker" formControlName="endDateControl">
+            <input matInput [matDatepickerFilter]="myFilter" [(ngModel)]="end" [matDatepicker]="endPicker">
             <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
             <mat-datepicker #endPicker></mat-datepicker>
         </mat-form-field>
@@ -38,36 +35,36 @@
     <div class="row">
         <mat-form-field floatLabel="always" class="col-3">
             <mat-label>{{ 'adultPrice' | transloco }}</mat-label>
-            <input matInput [(ngModel)]="adp" type="number" class="price-input" placeholder="0" formControlName="adultPriceControl">
+            <input matInput [(ngModel)]="adp" type="number" class="price-input" placeholder="0" >
         </mat-form-field>
 
         <mat-form-field floatLabel="always" class="col-3">
             <mat-label>{{ 'babyPrice' | transloco }}</mat-label>
-            <input matInput [(ngModel)]=" ch1" type="number" class="price-input" placeholder="0" formControlName="teenPriceControl">
+            <input matInput [(ngModel)]=" ch1" type="number" class="price-input" placeholder="0" >
         </mat-form-field>
 
         <mat-form-field floatLabel="always" class="col-3">
             <mat-label>{{ 'childPrice' | transloco }}</mat-label>
-            <input matInput [(ngModel)]=" ch2" type="number" class="price-input" placeholder="0" formControlName="childPriceControl">
+            <input matInput [(ngModel)]=" ch2" type="number" class="price-input" placeholder="0" >
         </mat-form-field>
 
         <mat-form-field floatLabel="always" class="col-3">
             <mat-label>{{ 'teenPrice' | transloco }}</mat-label>
-            <input matInput [(ngModel)]=" ch3" type="number" class="price-input" placeholder="0" formControlName="babyPriceControl">
+            <input matInput [(ngModel)]=" ch3" type="number" class="price-input" placeholder="0" >
         </mat-form-field>
     </div>
 
     <div class="row">
         <mat-form-field class="col-6">
             <mat-label>{{ 'hotel' | transloco }}</mat-label>
-            <mat-select [(ngModel)]="hotel" (ngModelChange)="onChangeHotel($event)" formControlName="hotelControl">
+            <mat-select [(ngModel)]="hotel" (ngModelChange)="onChangeHotel($event)" >
                 <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-6">
             <mat-label>{{ 'room' | transloco }}</mat-label>
-            <mat-select [(ngModel)]="selectedRoomTypes" multiple formControlName="roomControl">
+            <mat-select [(ngModel)]="selectedRoomTypes" multiple>
                 <mat-option *ngFor="let r of hotelRoomTypes" [value]="{roomTypeId: r.id}">{{ r.name }}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -76,14 +73,14 @@
     <div class="row">
         <mat-form-field class="col-6">
             <mat-label>{{ 'currency' | transloco }}</mat-label>
-            <mat-select [(ngModel)]="currency" formControlName="currenyControl">
+            <mat-select [(ngModel)]="currency">
                 <mat-option *ngFor="let c of currencies" [value]="c.id">{{ c.code }}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-6">
             <mat-label>{{ 'board' | transloco }}</mat-label>
-            <mat-select [(ngModel)]="selectedBoards" multiple formControlName="boardControl">
+            <mat-select [(ngModel)]="selectedBoards" multiple>
                 <mat-option *ngFor="let b of boards" [value]="{boardId: b.id}">{{ b.name }}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -92,14 +89,14 @@
     <div class="row">
         <mat-form-field class="col-6">
             <mat-label>{{ 'market' | transloco }}</mat-label>
-            <mat-select [(ngModel)]="selectedMarkets" (ngModelChange)="onChangeMarket($event)" multiple formControlName="marketControl">
+            <mat-select [(ngModel)]="selectedMarkets" (ngModelChange)="onChangeMarket($event)" multiple>
                 <mat-option *ngFor="let m of markets" [value]="{marketId: m.id}">{{ m.name }}</mat-option>
             </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-6">
             <mat-label>{{ 'agency' | transloco }}</mat-label>
-            <mat-select [(ngModel)]="selectedAgencies" multiple formControlName="agencyControl">
+            <mat-select [(ngModel)]="selectedAgencies" multiple>
                 <mat-option *ngFor="let a of commonAgencies" [value]="{agencyId: a.id}">{{ a.name }}</mat-option>
                 <!-- {agencyId: a.id} -->
             </mat-select>

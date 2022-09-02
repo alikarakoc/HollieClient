@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit {
 
   showPassword: boolean = false;
   model: any = {
-
   }
   successful: boolean = false;
 
@@ -33,7 +32,6 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-
     this.authService.register(this.model).subscribe(() => {
       if (localStorage.getItem("isSuccessful") === "true") {
         alert("Registration Successful!")

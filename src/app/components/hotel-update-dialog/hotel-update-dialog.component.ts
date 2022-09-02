@@ -45,7 +45,7 @@ export class HotelUpdateDialogComponent implements OnInit {
     private hotelFeatureService: HotelFeatureService
   ) { }
 
-  emailControl = new FormControl('', [Validators.required,Validators.email]);
+  emailControl = new FormControl(this.newHotelEmail, [Validators.required,Validators.email]);
 
   hotelCategories: HotelCategory[] = []
   hotelFeatures: HotelFeature[] = [];
