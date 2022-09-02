@@ -20,7 +20,15 @@ export class RegisterComponent implements OnInit {
   model: any = {
 
   }
+  miniLetters : boolean =false;
+  hugeLetters : boolean =false;
+  digits: boolean=false;
+  long : number = 0;
   successful: boolean = false;
+  littleLetters: string = "abcdefghijklmnopqrstuvwxyz";
+  bigLetters: string = "ABCDEFGHIKLMNOPQRSTVXYZ";
+  numbers: string="0987654321";
+
 
   constructor(
     private authService: AuthService,
@@ -29,21 +37,89 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+  filterPassword(event: Event) {
+    var filterValue = (event.target as HTMLInputElement).value;
+    console.log(filterValue);
+    let fpassword =filterValue.charAt(filterValue.length-1);
+    if(fpassword!=""){
+        if(this.long >filterValue.length){
+          this.miniLetters=false;
+          this.hugeLetters=false;
+          this.digits=false;
 
+          for(let i=0; i<filterValue.length ; i++){
+
+            if(this.littleLetters.includes(filterValue.charAt(i)))    {
+              this.miniLetters=true;
+              console.log("Karakter sildik, hala küçük harf var.");
+              
+            }
+            else if(this.bigLetters.includes(filterValue.charAt(i)))    {
+              this.hugeLetters = true;
+              console.log("Karakter sildik, hala büyük harf var");
+              
+            }
+            else if(this.numbers.includes(filterValue.charAt(i)))    {
+              this.digits=true;
+              console.log("Karakter sildik, hala sayı var.");
+              
+            }
+          }
+          this.long = filterValue.length;
+
+          return;
+
+        }
+      if(this.littleLetters.includes(fpassword))    {
+        this.miniLetters=true;
+        console.log("Küçük harf var.");
+        
+      }
+      else if(this.bigLetters.includes(fpassword))    {
+        this.hugeLetters = true;
+        console.log("Büyük harf var");
+        
+      }
+      else if(this.numbers.includes(fpassword))    {
+        this.digits=true;
+        console.log("Sayı var.");
+        
+      }
+  
+      this.long = filterValue.length;
+    }
   }
 
   register() {
-
+    if(!this.miniLetters){
+      alert("Şifrenizde küçük harf bulunmamaktadır.")
+      return;
+    }
+    if(!this.hugeLetters){
+      alert("Şifrenizde büyük harf bulunmamaktadır.")
+      return;
+    }
+    if(!this.digits){
+      alert("Şifrenizde sayı bulunmamaktadır.")
+      return;
+    }
+    
+    if(this.model.password.length<=8){
+      alert("Şifreniz yeterli karaktere sahip değildir.")
+      return;
+    }
+  
     this.authService.register(this.model).subscribe(() => {
       if (localStorage.getItem("isSuccessful") === "true") {
-        alert("Registration Successful!")
+        alert("Giriş başarılı!")
       }
       else if (localStorage.getItem("isSuccessful") === "false") {
-        alert("Registration Failed!")
+        alert("Giriş başarısız!")
       }
     }, error => {
       console.log(error);
-      alert("Registration Failed!")
+      alert("Giriş başarısız!")
     });
 
   }
