@@ -335,7 +335,5 @@ export class ContractComponent implements OnInit {
   }
 
 }
-function ContractCopyComponent(ContractCopyComponent: any, arg1: { data: { element: Contract; roomTypes: any[]; hotels: any[]; markets: any[]; agencies: any[]; currencies: any[]; boards: any[]; cAgencies: any[]; cBoards: any[]; cRoomTypes: any[]; cMarkets: any[]; marketAgency: any[]; }; }) {
-  throw new Error('Function not implemented.');
-}
+
 

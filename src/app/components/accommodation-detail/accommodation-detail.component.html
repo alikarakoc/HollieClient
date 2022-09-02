@@ -1,0 +1,59 @@
+<div mat-dialog-title class="card-header">
+    {{'accommodation_details' | transloco}}
+ </div>
+ <div class="container mr-0 pr-0">
+    <div class="row gx-2 mb-1 ">
+        <div class="col-md-6">
+            <label class="small" for="agencyId">{{ 'agencyId' | transloco }}</label>
+            <input disabled class="form-control" id="agencyId" type="text" value="{{ accommodationDetail.agencyId }}">
+        </div>
+        <div class="col-md-6">
+            <label class="small" for="agencyName">{{ 'agencyName' | transloco }}</label>
+            <input disabled class="form-control" id="agencyName" type="text" value="{{ accommodationDetail.agencyName }}">
+        </div>
+    </div>
+    <div class="row gx-2 mb-1">
+        <div class="col-md-6">
+            <label class="small" for="hotelId">{{ 'hotelId' | transloco }}</label>
+            <input disabled class="form-control" id="hotelId" type="text" value="{{ accommodationDetail.hotelId }}">
+        </div>
+        <div class="col-md-6">
+            <label class="small" for="hotelName">{{ 'hotelName' | transloco }}</label>
+            <input disabled class="form-control" id="hotelName" type="text" value="{{ accommodationDetail.hotelName }}">
+        </div>
+    </div>
+    <div class="row gx-2 mb-1">
+        <div class="col-md-6">
+            <label class="small" for="roomTypeId">{{ 'roomTypeId' | transloco }}</label>
+            <input disabled class="form-control" id="roomTypeId" type="text" value="{{ accommodationDetail.roomTypeId }}">
+        </div>
+        <div class="col-md-6">
+            <label class="small" for="roomName">{{ 'roomName' | transloco }}</label>
+            <input disabled class="form-control" id="roomName" type="text" value="{{ accommodationDetail.roomName }}">
+        </div>
+    </div>
+    
+    <div class="row gx-2 mb-1">
+        <div class="col-md-12">
+            <label class="small" for="totalPrice">{{ 'totalPrice' | transloco }}</label>
+            <input disabled class="form-control" type="text" id="totalPrice" value= "{{ accommodationDetail.totalPrice }}">
+        </div>
+
+       
+    </div>
+
+    <div class="row gx-2 mb-1">
+        <div class="col-md-12">
+            <label class="small" for="detail">{{ 'detail' | transloco }}</label>
+            <input disabled class="form-control" id="detail" type="text" value="{{ getDetail(accommodationDetail) }}">
+       
+        </div>
+    </div>
+    
+</div>
+
+<div mat-dialog-actions>
+
+<button mat-dialog-close type="button" class="btn btn-primary" data-bs-dismiss="toast" aria-label="Close"
+fill="none" stroke="none">Back</button>
+</div>

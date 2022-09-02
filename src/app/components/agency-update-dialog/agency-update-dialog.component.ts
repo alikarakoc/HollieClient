@@ -54,7 +54,7 @@ export class AgencyUpdateDialogComponent implements OnInit {
    markets: any[] = [];
    selectedValue: any[] = [];
 
-  emailControl = new FormControl('', [Validators.required,Validators.email]);
+  emailControl = new FormControl(this.newAgencyEmail, [Validators.required,Validators.email]);
 
   agencies: any[] = [];
 

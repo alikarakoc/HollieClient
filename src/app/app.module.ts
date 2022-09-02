@@ -60,6 +60,7 @@ import {
   HotelFeatureDeleteDialogComponent,
 
   ContractDetailsComponent,
+  AccommodationDetailComponent
 
 } from './components';
 
@@ -108,6 +109,7 @@ registerLocaleData(localeTR);
     NavbarComponent,
     SearchContractComponent,
     SearchAccommodationComponent,
+    AccommodationDetailComponent,
     AccommodationComponent,
     ContractDetailsComponent,
     ContractGranttComponent,

@@ -41,7 +41,7 @@ interface DialogData {
 })
 export class ContractAddDialogComponent implements OnInit {
   // NgModels :)
-  contractCode: string;
+  contractCode: string ;
   name: string;
   price: number;
   adp: number;
@@ -63,22 +63,6 @@ export class ContractAddDialogComponent implements OnInit {
   ch2: number;
   ch3: number;
 
-  controls = new FormGroup({
-    codeControl : new FormControl('', [Validators.required]),
-    nameControl : new FormControl('',[Validators.required]),
-    startDateControl : new FormControl('',[Validators.required]),
-    endDateControl :  new FormControl('',[Validators.required]),
-    adultPriceControl :  new FormControl('',[Validators.required]),
-    teenPriceControl :  new FormControl('',[Validators.required]),
-    childPriceControl :  new FormControl('',[Validators.required]),
-    babyPriceControl :  new FormControl('',[Validators.required]),
-    hotelControl :   new FormControl('',[Validators.required]),
-    roomControl :  new FormControl('',[Validators.required]),
-    currencyControl :  new FormControl('',[Validators.required]),
-    boardControl :  new FormControl('',[Validators.required]),
-    marketControl :  new FormControl('',[Validators.required]),
-    agencyControl :  new FormControl('',[Validators.required])
-  });
 
   constructor(
     public translocoService: TranslocoService,
@@ -188,7 +172,7 @@ export class ContractAddDialogComponent implements OnInit {
       }
     });
 
-    if (!this.contractCode || !this.name|| !this.adp ||  this.start === new Date(1 / 1 / 1) ||
+    if (!this.contractCode || !this.name || !this.adp ||  this.start === new Date(1 / 1 / 1) ||
       this.end === new Date(1 / 1 / 1) || !this.ch1 || !this.ch2  || !this.ch3  || !this.hotel || !this.currency ||
       this.selectedAgencies == undefined || this.selectedBoards == undefined || this.selectedMarkets == undefined || this.selectedRoomTypes == undefined) {
 

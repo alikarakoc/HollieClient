@@ -3,4 +3,5 @@ export interface PriceSearchDetail{
     basePrice: number;
     netPrice: number;
     contractId: number;
+    contractName: string;
 }

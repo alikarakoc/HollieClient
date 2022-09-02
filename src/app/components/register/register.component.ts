@@ -18,7 +18,6 @@ export class RegisterComponent implements OnInit {
 
   showPassword: boolean = false;
   model: any = {
-
   }
   miniLetters : boolean =false;
   hugeLetters : boolean =false;
@@ -92,6 +91,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+
     if(!this.miniLetters){
       alert("Şifrenizde küçük harf bulunmamaktadır.")
       return;
