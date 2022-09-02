@@ -8,7 +8,7 @@
             <input disabled class="form-control" id="agencyId" type="text" value="{{ accommodationDetail.agencyId }}">
         </div>
         <div class="col-md-6">
-            <label class="small" for="agencyName">{{ 'agencyName' | transloco }}</label>
+            <label class="small" for="agencyName">{{ 'agency' | transloco }}</label>
             <input disabled class="form-control" id="agencyName" type="text" value="{{ accommodationDetail.agencyName }}">
         </div>
     </div>
@@ -18,17 +18,17 @@
             <input disabled class="form-control" id="hotelId" type="text" value="{{ accommodationDetail.hotelId }}">
         </div>
         <div class="col-md-6">
-            <label class="small" for="hotelName">{{ 'hotelName' | transloco }}</label>
+            <label class="small" for="hotelName">{{ 'hotel' | transloco }}</label>
             <input disabled class="form-control" id="hotelName" type="text" value="{{ accommodationDetail.hotelName }}">
         </div>
     </div>
     <div class="row gx-2 mb-1">
         <div class="col-md-6">
-            <label class="small" for="roomTypeId">{{ 'roomTypeId' | transloco }}</label>
+            <label class="small" for="roomTypeId">{{ 'room_typeId' | transloco }}</label>
             <input disabled class="form-control" id="roomTypeId" type="text" value="{{ accommodationDetail.roomTypeId }}">
         </div>
         <div class="col-md-6">
-            <label class="small" for="roomName">{{ 'roomName' | transloco }}</label>
+            <label class="small" for="roomName">{{ 'room_type' | transloco }}</label>
             <input disabled class="form-control" id="roomName" type="text" value="{{ accommodationDetail.roomName }}">
         </div>
     </div>
@@ -42,10 +42,10 @@
        
     </div>
 
-    <div class="row gx-2 mb-1">
+    <div class="row gx-2 mb-1 textareaD">
         <div class="col-md-12">
             <label class="small" for="detail">{{ 'detail' | transloco }}</label>
-            <input disabled class="form-control" id="detail" type="text" value="{{ getDetail(accommodationDetail) }}">
+            <textarea disabled class="form-control  " id="detail" type="text" value="{{ getDetail(accommodationDetail) }}"></textarea>
        
         </div>
     </div>

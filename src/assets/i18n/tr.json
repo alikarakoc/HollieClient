@@ -25,6 +25,7 @@
     "search_market" : "Market Ara",
     "search_agency" : "Acenta Ara",
     "search_currency" : "Kur Ara",
+    "accommodation_details": "Konaklama Detayı",
     "accommodation": "Konaklama Detay",
     "hotel_feature":  "Otel Özellikleri",
     "search": "Ara",
@@ -109,6 +110,11 @@
     "babyTop": "Bebek Yaş Aralığı",
     "childTop": "Çocuk Yaş Aralığı",
     "teenTop": "Genç Yaş Aralığı",
-    "feature": "Özellik"
+    "feature": "Özellik",
+    "room_typeId": "Oda Tipi ID",
+    "agencyId": "Acenta ID",
+    "hotelId": "Otel ID",
+    "totalPrice": "Toplam Fiyat",
+    "detail": "Detay"
 
 }
