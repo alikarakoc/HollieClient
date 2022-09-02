@@ -20,7 +20,7 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./search-accommodation.component.scss']
 })
 export class SearchAccommodationComponent implements OnInit {
-  columns: string[] = [ "hotel", "start", "end", "Total-Price"];
+  columns: string[] = [ "start", "end", "Total-Price"];
   dataSource: MatTableDataSource<Price>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -81,7 +81,10 @@ export class SearchAccommodationComponent implements OnInit {
   contChildTop: any;
   contTeenTop: any;
   contChildAges: any[] = [];
-
+  adultCont:number;
+  ch1:number;
+  ch2:number;
+  ch3:number;
 
 
   clearTable() {
@@ -180,7 +183,13 @@ export class SearchAccommodationComponent implements OnInit {
     const element = {
       beginDate: this.startDate,
       endDate: this.endDate,
-      totalPrice:this.totalPrice
+      totalPrice:this.totalPrice,
+      adult:this.adult,
+      hotels:this.hotelIds,
+      hotelId: this.hotelIds[0],
+      child1Age:this.child1,
+      child2Age:this.child2,
+      child3Age:this.child3,
     };
 
     element.beginDate.setUTCHours(0,0,0,0);
@@ -193,9 +202,10 @@ export class SearchAccommodationComponent implements OnInit {
         this.result = res.data;
       }
     });
-    this.table.renderRows();
+
     // element.beginDate.setDate(element.beginDate.getDate()-1);
     // element.endDate.setDate(element.endDate.getDate()-1);
+    this.table.renderRows();
 
 
     // this.contChildAges=[];
