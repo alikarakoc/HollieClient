@@ -50,19 +50,13 @@ export class RegisterComponent implements OnInit {
           for(let i=0; i<filterValue.length ; i++){
 
             if(this.littleLetters.includes(filterValue.charAt(i)))    {
-              this.miniLetters=true;
-              console.log("Karakter sildik, hala küçük harf var.");
-              
+              this.miniLetters=true; 
             }
             else if(this.bigLetters.includes(filterValue.charAt(i)))    {
               this.hugeLetters = true;
-              console.log("Karakter sildik, hala büyük harf var");
-              
             }
             else if(this.numbers.includes(filterValue.charAt(i)))    {
-              this.digits=true;
-              console.log("Karakter sildik, hala sayı var.");
-              
+              this.digits=true; 
             }
           }
           this.long = filterValue.length;
@@ -72,18 +66,12 @@ export class RegisterComponent implements OnInit {
         }
       if(this.littleLetters.includes(fpassword))    {
         this.miniLetters=true;
-        console.log("Küçük harf var.");
-        
       }
       else if(this.bigLetters.includes(fpassword))    {
         this.hugeLetters = true;
-        console.log("Büyük harf var");
-        
       }
       else if(this.numbers.includes(fpassword))    {
         this.digits=true;
-        console.log("Sayı var.");
-        
       }
   
       this.long = filterValue.length;
