@@ -4,7 +4,7 @@ export interface Price {
   startDate:Date,
   endDate:Date,
   totalPrice:number,
-  hotelId: number;
+  hotelIds:number;
   adult:number,
   childPrice1:number,
   childPrice2:number,

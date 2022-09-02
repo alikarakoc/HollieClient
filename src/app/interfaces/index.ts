@@ -13,3 +13,4 @@ export { Contract } from './contract';
 export { Room } from './room';
 export { SearchContract } from './search-contract';
 export { Price } from './price';
+export { SearchContractAko } from './search-contract-ako';

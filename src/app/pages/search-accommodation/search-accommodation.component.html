@@ -17,8 +17,8 @@
 
         <mat-form-field class="mx-2 hotel">
             <mat-label>{{ 'hotel' | transloco }}</mat-label>
-            <mat-select [(ngModel)]="hotelIds" multiple required="*">
-                <mat-option *ngFor="let h of hotels"  [value]="h.id">{{ h.name }}</mat-option>
+            <mat-select [(ngModel)]="hotelIds" required="*">
+                <mat-option *ngFor="let h of hotels" [value]="h.id">{{ h.name }}</mat-option>
             </mat-select>
         </mat-form-field>
 

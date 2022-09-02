@@ -36,7 +36,8 @@ export class SearchAccommodationComponent implements OnInit {
   child2?: number;
   child3?: number;
   numberOfChild?: number;
-  hotelIds: number[];
+  hotelIds: number;
+  hotel: number[];
   totalPrice: number = 0;
 
   constructor(
@@ -179,18 +180,20 @@ export class SearchAccommodationComponent implements OnInit {
 
   applyFilter() {
     this.result = [];
-
     const element = {
       beginDate: this.startDate,
       endDate: this.endDate,
       totalPrice:this.totalPrice,
       adult:this.adult,
-      hotels:this.hotelIds,
-      hotelId: this.hotelIds[0],
+      hotels: this.hotel,
+      hotelId: this.hotelIds,
       child1Age:this.child1,
       child2Age:this.child2,
       child3Age:this.child3,
     };
+
+    console.log(this.hotelIds);
+
 
     element.beginDate.setUTCHours(0,0,0,0);
     element.endDate.setUTCHours(0, 0, 0, 0);
@@ -198,6 +201,7 @@ export class SearchAccommodationComponent implements OnInit {
   //  element.endDate.setDate(element.endDate.getDate()+1);
 
     this.contractService.searchAccommodation(element).subscribe((res) => {
+
       if (res.data != null) {
         this.result = res.data;
       }
