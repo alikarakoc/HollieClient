@@ -47,3 +47,5 @@ export { RoomUpdateDialogComponent } from './room-update-dialog/room-update-dial
 export { HotelFeatureAddDialogComponent } from './hotel-feature-add-dialog/hotel-feature-add-dialog.component';
 export { HotelFeatureUpdateDialogComponent } from './hotel-feature-update-dialog/hotel-feature-update-dialog.component';
 export { HotelFeatureDeleteDialogComponent } from './hotel-feature-delete-dialog/hotel-feature-delete-dialog.component';
+
+export { AccommodationDetailComponent } from './accommodation-detail/accommodation-detail.component';

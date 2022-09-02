@@ -13,6 +13,7 @@ import { HotelFeature } from 'src/app/interfaces/hotel-feature';
 import { MatPaginator } from '@angular/material/paginator';
 import { Accommodation } from 'src/app/interfaces/accommodation';
 import { PriceSearchDetail } from 'src/app/interfaces/price-search-detail';
+import { AccommodationDetailComponent } from 'src/app/components/accommodation-detail/accommodation-detail.component';
 
 
 @Component({
@@ -126,55 +127,6 @@ export class AccommodationComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
 
-    this.marketService.getAllMarkets().subscribe(res => {
-      this.markets = res.data;
-    });
-
-    this.agencyService.getAllAgencies().subscribe(res => {
-      this.agencies = res.data;
-    });
-
-    this.roomTypeService.getAllRoomTypes().subscribe(res => {
-      this.roomTypes = res.data;
-    });
-
-    this.currencyService.getAllCurrency().subscribe(res => {
-      this.currencies = res.data;
-    });
-
-    this.boardService.getAllBoards().subscribe(res => {
-      this.boards = res.data;
-    });
-
-    this.cAgencyService.getAllCAgencies().subscribe(res => {
-      this.cAgencies = res.data;
-    });
-
-    this.cBoardService.getAllCBoards().subscribe(res => {
-      this.cBoards = res.data;
-    });
-
-    this.cMarketService.getAllCMarkets().subscribe(res => {
-      this.cMarkets = res.data;
-    });
-
-    this.croomTypeService.getAllCRoomTypes().subscribe(res => {
-      if (res.data != null) {
-        this.cRoomTypes = res.data;
-      }
-    });
-
-    this.hotelFeatureService.getAllFeatures().subscribe(res => {
-      if (res.data != null) {
-        this.features = res.data;
-      }
-    })
-
-    this.roomService.getAllRooms().subscribe(res => {
-      if (res.data != null) {
-        this.rooms = res.data;
-      }
-    });
   }
 
   onChangeChild1(event: any) {
@@ -222,6 +174,12 @@ export class AccommodationComponent implements OnInit {
 
   }
 
+  seeDetails(element: Accommodation) {
+    this.dialog.open(AccommodationDetailComponent, { data: {
+      accommodation: element} });
+
+  }
+
   // getDetail(element: Accommodation){
   //   this.writeDetail = "";
   //   var detail: PriceSearchDetail[];
@@ -238,49 +196,14 @@ export class AccommodationComponent implements OnInit {
   
   
   see(resu: any[]){
-    debugger;
     resu.forEach(detail => {
       console.log(detail);
       
     });
   }
 
-
-
   toDate(v: Date | string) {
     return new Date(v);
   }
 
-  getItem(type: "agency" | "board" | "market" | "date" | "room" | "hotel" | "currency", element: Contract): any[] | any {
-    switch (type) {
-      case 'agency':
-        // return element.agencyIds.map(i => this.agencies.find(a => a.id === i));
-        const idAgency = this.cAgencies.filter(cA => cA.listId === element.id).map(cA => cA.agencyId);
-        return idAgency.map(i => this.agencies.find(a => a.id === i).name);
-
-      case 'board':
-        // return element.boardIds.map(i => this.boards.find(b => b.id === i));
-        const idBoard = this.cBoards.filter(cB => cB.listId === element.id).map(cB => cB.boardId);
-        return idBoard.map(i => this.boards.find(b => b.id === i).name);
-
-      case 'market':
-        // return element.marketIds.map(i => this.markets.find(m => m.id === i));
-        const idMarket = this.cMarkets.filter(cM => cM.listId === element.id).map(cM => cM.marketId);
-        return idMarket.map(i => this.markets.find(m => m.id === i).name);
-
-      case 'room':
-        const idRoom = this.cRooms.filter(cR => cR.listId === element.id).map(cR => cR.roomId);
-        return idRoom.map(i => this.rooms.find(r => r.id === i).name);
-
-      case 'date':
-        this.gun = (-1 * (new Date(element.enteredDate).getTime() - new Date(element.exitDate).getTime()) / (1000 * 60 * 60 * 24));
-        return this.gun
-
-      case 'hotel':
-        return this.hotels.find(h => h.id === element.hotelId)?.name;
-
-      case 'currency':
-        return this.currencies.find(c => c.id === element.currencyId)?.name;
-    }
-  }
 }
