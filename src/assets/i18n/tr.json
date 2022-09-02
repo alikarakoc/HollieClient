@@ -17,6 +17,7 @@
     "contract_not_found":"Kontrat bulunamadı",
     "search_contract": "Kontrat Ara",
     "search_accommodation": "Konaklama Ara",
+    "accommodation_details": "Konaklama Detayı",
     "accommodation": "Konaklama Detay",
     "hotel_feature":  "Otel Özellikleri",
     "search": "Ara",
@@ -98,6 +99,11 @@
     "babyTop": "Bebek Yaş Aralığı",
     "childTop": "Çocuk Yaş Aralığı",
     "teenTop": "Genç Yaş Aralığı",
-    "feature": "Özellik"
+    "feature": "Özellik",
+    "room_typeId": "Oda Tipi ID",
+    "agencyId": "Acenta ID",
+    "hotelId": "Otel ID",
+    "totalPrice": "Toplam Fiyat",
+    "detail": "Detay"
 
 }

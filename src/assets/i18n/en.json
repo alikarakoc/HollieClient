@@ -20,6 +20,7 @@
     "search_accommodation": "Search Accommodation",
     "accommodation": "Accommodation Detail",
     "hotel_feature":   "Hotel Features",
+    "accommodation_details": "Accommodation Details",
     "search": "Search",
     "results": "Results",
     "Total-price": "Total price",
@@ -100,6 +101,11 @@
     "babyTop": "Baby Age Range",
     "childTop": "Child Age Range",
     "teenTop": "Teenager Age Range",
-    "feature": "Features"
+    "feature": "Features",   
+    "room_typeId": "Room Type ID",
+    "agencyId": "Agency ID",
+    "hotelId": "Hotel ID",
+    "totalPrice": "Total Price",
+    "detail": "Detail"
 
 }

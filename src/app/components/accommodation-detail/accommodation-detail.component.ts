@@ -40,11 +40,12 @@ export class AccommodationDetailComponent implements OnInit {
     var detail: PriceSearchDetail[];
     detail = element.priceDetails;
     detail.forEach(priceDetail => {
-       this.writeDetail += "Contract Id: "+priceDetail.contractId + " Day Price " + priceDetail.netPrice + '\n';
+       this.writeDetail += "--Contract Id: "+ priceDetail.contractId + 
+       "    Contract Code: "+ priceDetail.contractCode +
+       "    Day Price: " + priceDetail.netPrice + '\n';
     });
-    console.log(this.writeDetail);
     return this.writeDetail;
-    
+
   }
 
   getContractId(element: Accommodation){
