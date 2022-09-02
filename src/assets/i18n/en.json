@@ -18,6 +18,14 @@
     "currency_title": "Currencies",
     "search_contract": "Search Contract",
     "search_accommodation": "Search Accommodation",
+    "search_hotel_category" : "Search Hotel Category",
+    "search_hotel" : "Search Hotel",
+    "search_hotel_feature" : "Search Hotel Feature",
+    "search_room_type" : "Search Room Type",
+    "search_room" : "Search Room",
+    "search_market" : "Search Market",
+    "search_agency" : "Search Agency",
+    "search_currency" : "Search Currency",
     "accommodation": "Accommodation Detail",
     "hotel_feature":   "Hotel Features",
     "search": "Search",
@@ -60,7 +68,9 @@
         "update_success": "{{ elementName }} successfully updated.",
         "add_success": "{{ elementName }} successfully added to your table.",
         "delete_success": "{{ elementName }} successfully deleted.",
-        "update_currency": "Update Currency"
+        "update_currency": "Update Currency",
+        "enter_email" : "Enter your email"
+       
     },
     "name": "Name",
     "bed": "Yatak",

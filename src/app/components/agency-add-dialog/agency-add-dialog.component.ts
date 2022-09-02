@@ -49,9 +49,9 @@ export class AgencyAddDialogComponent implements OnInit {
 
   getErrorMessage() {
     if (this.emailControl.hasError('required')) {
-      return 'You must enter a value';
+      return this.translocoService.translate('dialogs.error_email');
     }
-    return this.emailControl.hasError('email') ? 'Not a valid email' : '';
+    return this.emailControl.hasError('email') ? this.translocoService.translate('dialogs.error_email') : '';
   }
 
   ngOnInit(): void {

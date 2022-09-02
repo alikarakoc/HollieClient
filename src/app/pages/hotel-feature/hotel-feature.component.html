@@ -13,7 +13,7 @@
     <mat-form-field appearance="standard">
         <mat-label>{{ 'Filter' | transloco }}</mat-label>
         <input maxlength="50" matInput [(ngModel)]="value" (keyup)="filterCategories($event)"
-            placeholder="Search Hotel Feature" #input>
+            placeholder="{{ 'search_hotel_feature' | transloco }}" #input>
         <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''" (click)="clear()">
             <mat-icon>close</mat-icon>
         </button>
@@ -22,12 +22,12 @@
     <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
         <ng-container matColumnDef="code">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Code</th>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'code' | transloco }}</th>
             <td mat-cell *matCellDef="let element">{{ element.code }}</td>
         </ng-container>
 
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'name' | transloco }}</th>
             <td mat-cell *matCellDef="let element">{{ element.name }}</td>
         </ng-container>
 
